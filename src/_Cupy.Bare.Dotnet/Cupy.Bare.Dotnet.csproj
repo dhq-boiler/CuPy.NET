@@ -1,0 +1,215 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8E1BD94E-6AE4-46D9-B0BA-6AC0515AF0D0}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Cupy.Bare.Dotnet</RootNamespace>
+    <AssemblyName>Cupy.Bare.Dotnet</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.ValueTuple.4.5.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\Cupy\Manual\ctypes.module.cs">
+      <Link>Manual\ctypes.module.cs</Link>
+    </Compile>
+    <Compile Include="..\Cupy\Manual\cp.aliases.cs">
+      <Link>Manual\cp.aliases.cs</Link>
+    </Compile>
+    <Compile Include="..\Cupy\Manual\cp.array.cs">
+      <Link>Manual\cp.array.cs</Link>
+    </Compile>
+    <Compile Include="..\Cupy\Manual\cp.column_stack.cs">
+      <Link>Manual\cp.column_stack.cs</Link>
+    </Compile>
+    <Compile Include="..\Cupy\Manual\cp.concatenate.cs">
+      <Link>Manual\cp.concatenate.cs</Link>
+    </Compile>
+    <Compile Include="..\Cupy\Manual\cp.constants.cs">
+      <Link>Manual\cp.constants.cs</Link>
+    </Compile>
+    <Compile Include="..\Cupy\Manual\cp.delete.cs">
+      <Link>Manual\cp.delete.cs</Link>
+    </Compile>
+    <Compile Include="..\Cupy\Manual\cp.einsum.cs">
+      <Link>Manual\cp.einsum.cs</Link>
+    </Compile>
+    <Compile Include="..\Cupy\Manual\cp.insert.cs">
+      <Link>Manual\cp.insert.cs</Link>
+    </Compile>
+    <Compile Include="..\Cupy\Manual\cp.linalg.norm.cs">
+      <Link>Manual\cp.linalg.norm.cs</Link>
+    </Compile>
+    <Compile Include="..\Cupy\Manual\cp.linspace.cs">
+      <Link>Manual\cp.linspace.cs</Link>
+    </Compile>
+    <Compile Include="..\Cupy\Manual\cp.math.cs">
+      <Link>Manual\cp.math.cs</Link>
+    </Compile>
+    <Compile Include="..\Cupy\Manual\cp.meshgrid.cs">
+      <Link>Manual\cp.meshgrid.cs</Link>
+    </Compile>
+    <Compile Include="..\Cupy\Manual\cp.random.cs">
+      <Link>Manual\cp.random.cs</Link>
+    </Compile>
+    <Compile Include="..\Cupy\Manual\cp.resize.cs">
+      <Link>Manual\cp.resize.cs</Link>
+    </Compile>
+    <Compile Include="..\Cupy\Manual\cp.save.cs">
+      <Link>Manual\cp.save.cs</Link>
+    </Compile>
+    <Compile Include="..\Cupy\Models\Axis.cs">
+      <Link>Models\Axis.cs</Link>
+    </Compile>
+    <Compile Include="..\Cupy\Models\Constants.cs">
+      <Link>Models\Constants.cs</Link>
+    </Compile>
+    <Compile Include="..\Cupy\Models\Dtype.cs">
+      <Link>Models\Dtype.cs</Link>
+    </Compile>
+    <Compile Include="..\Cupy\Models\Flags.cs">
+      <Link>Models\Flags.cs</Link>
+    </Compile>
+    <Compile Include="..\Cupy\Models\Matrix.cs">
+      <Link>Models\Matrix.cs</Link>
+    </Compile>
+    <Compile Include="..\Cupy\Models\MemMapMode.cs">
+      <Link>Models\MemMapMode.cs</Link>
+    </Compile>
+    <Compile Include="..\Cupy\Models\NDarray.aliases.cs">
+      <Link>Models\NDarray.aliases.cs</Link>
+    </Compile>
+    <Compile Include="..\Cupy\Models\NDarray.CastOperators.cs">
+      <Link>Models\NDarray.CastOperators.cs</Link>
+    </Compile>
+    <Compile Include="..\Cupy\Models\NDarray.cs">
+      <Link>Models\NDarray.cs</Link>
+    </Compile>
+    <Compile Include="..\Cupy\Models\NDarray.gen.cs">
+      <Link>Models\NDarray.gen.cs</Link>
+    </Compile>
+    <Compile Include="..\Cupy\Models\NDarray.Operators.cs">
+      <Link>Models\NDarray.Operators.cs</Link>
+    </Compile>
+    <Compile Include="..\Cupy\Models\PythonObject.cs">
+      <Link>Models\PythonObject.cs</Link>
+    </Compile>
+    <Compile Include="..\Cupy\Models\PythonObject.gen.cs">
+      <Link>Models\PythonObject.gen.cs</Link>
+    </Compile>
+    <Compile Include="..\Cupy\Models\Shape.cs">
+      <Link>Models\Shape.cs</Link>
+    </Compile>
+    <Compile Include="..\Cupy\Models\Slice.cs">
+      <Link>Models\Slice.cs</Link>
+    </Compile>
+    <Compile Include="..\Cupy\cp.array_creation.gen.cs">
+      <Link>cp.array_creation.gen.cs</Link>
+    </Compile>
+    <Compile Include="..\Cupy\cp.array_manipulation.gen.cs">
+      <Link>cp.array_manipulation.gen.cs</Link>
+    </Compile>
+    <Compile Include="..\Cupy\cp.bitwise.gen.cs">
+      <Link>cp.bitwise.gen.cs</Link>
+    </Compile>
+    <Compile Include="..\Cupy\cp.datetime.gen.cs">
+      <Link>cp.datetime.gen.cs</Link>
+    </Compile>
+    <Compile Include="..\Cupy\cp.dtype.gen.cs">
+      <Link>cp.dtype.gen.cs</Link>
+    </Compile>
+    <Compile Include="..\Cupy\cp.dtype.routines.gen.cs">
+      <Link>cp.dtype.routines.gen.cs</Link>
+    </Compile>
+    <Compile Include="..\Cupy\cp.fft.gen.cs">
+      <Link>cp.fft.gen.cs</Link>
+    </Compile>
+    <Compile Include="..\Cupy\cp.financial.gen.cs">
+      <Link>cp.financial.gen.cs</Link>
+    </Compile>
+    <Compile Include="..\Cupy\cp.indexing.gen.cs">
+      <Link>cp.indexing.gen.cs</Link>
+    </Compile>
+    <Compile Include="..\Cupy\cp.io.gen.cs">
+      <Link>cp.io.gen.cs</Link>
+    </Compile>
+    <Compile Include="..\Cupy\cp.linalg.gen.cs">
+      <Link>cp.linalg.gen.cs</Link>
+    </Compile>
+    <Compile Include="..\Cupy\cp.linalg_fft.gen.cs">
+      <Link>cp.linalg_fft.gen.cs</Link>
+    </Compile>
+    <Compile Include="..\Cupy\cp.logic.gen.cs">
+      <Link>cp.logic.gen.cs</Link>
+    </Compile>
+    <Compile Include="..\Cupy\cp.math.gen.cs">
+      <Link>cp.math.gen.cs</Link>
+    </Compile>
+    <Compile Include="..\Cupy\cp.module.gen.cs">
+      <Link>cp.module.gen.cs</Link>
+    </Compile>
+    <Compile Include="..\Cupy\cp.padding.gen.cs">
+      <Link>cp.padding.gen.cs</Link>
+    </Compile>
+    <Compile Include="..\Cupy\cp.random.gen.cs">
+      <Link>cp.random.gen.cs</Link>
+    </Compile>
+    <Compile Include="..\Cupy\cp.set.gen.cs">
+      <Link>cp.set.gen.cs</Link>
+    </Compile>
+    <Compile Include="..\Cupy\cp.sorting.gen.cs">
+      <Link>cp.sorting.gen.cs</Link>
+    </Compile>
+    <Compile Include="..\Cupy\cp.staticstics.gen.cs">
+      <Link>cp.staticstics.gen.cs</Link>
+    </Compile>
+    <Compile Include="..\Cupy\cp.string.gen.cs">
+      <Link>cp.string.gen.cs</Link>
+    </Compile>
+    <Compile Include="..\Cupy\cp.window.gen.cs">
+      <Link>cp.window.gen.cs</Link>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Cupy.Bare.Dotnet.nuspec" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

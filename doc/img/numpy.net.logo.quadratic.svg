@@ -14,8 +14,8 @@
    viewBox="0 0 35.279577 35.279577"
    version="1.1"
    id="svg8"
-   sodipodi:docname="numpy.net.logo.quadratic.svg"
-   inkscape:export-filename="numpy.net.logo.quadratic512.png"
+   sodipodi:docname="Cupy.net.logo.quadratic.svg"
+   inkscape:export-filename="Cupy.net.logo.quadratic512.png"
    inkscape:export-xdpi="368.62119"
    inkscape:export-ydpi="368.62119"
    inkscape:version="0.92.3 (2405546, 2018-03-11)">
@@ -91,7 +91,7 @@
            y="292.42719"
            x="15.707438"
            id="tspan6561-9"
-           sodipodi:role="line">Numpy.NET</tspan></text>
+           sodipodi:role="line">Cupy.NET</tspan></text>
       <g
          id="g6243"
          transform="matrix(1.5189637,0,0,1.5189637,20.288767,-165.49707)">
@@ -529,7 +529,7 @@
            y="326.11462"
            x="39.494816"
            id="tspan6561-9-3"
-           sodipodi:role="line">Numpy.NET</tspan></text>
+           sodipodi:role="line">Cupy.NET</tspan></text>
       <g
          inkscape:export-ydpi="368"
          inkscape:export-xdpi="368"
@@ -760,7 +760,7 @@
            y="325.98099"
            x="-34.763142"
            id="tspan6561-9-3-0"
-           sodipodi:role="line">Numpy</tspan></text>
+           sodipodi:role="line">Cupy</tspan></text>
       <g
          inkscape:export-ydpi="368"
          inkscape:export-xdpi="368"

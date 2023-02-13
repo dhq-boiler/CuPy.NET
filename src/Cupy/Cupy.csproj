@@ -1,0 +1,53 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net6</TargetFramework>
+		<RootNamespace>Cupy</RootNamespace>
+		<AssemblyName>Cupy</AssemblyName>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<Authors>Meinrad Recheis</Authors>
+		<Product>Cupy.NET</Product>
+		<PackageId>Cupy</PackageId>
+		<Description>C# bindings for Cupy - a fundamental library for scientific computing, machine learning and AI. Does not require a local Python installation!</Description>
+		<Copyright>copyright ©2023 dhq_boiler</Copyright>
+		<PackageProjectUrl>https://github.com/dhq-boiler/Cupy.NET</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/dhq-boiler/Cupy.NET</RepositoryUrl>
+		<PackageTags>Data science, Machine Learning, ML, AI, Scientific Computing, Cupy, Linear Algebra, FFT, SVD, Matrix, Python</PackageTags>
+		<PackageLicenseUrl>https://github.com/SciSharp/Cupy.NET/blob/master/LICENSE</PackageLicenseUrl>
+		<Version>3.11.1.33</Version>
+		<PackageIconUrl>https://github.com/SciSharp/Cupy.NET/blob/master/doc/img/Cupy.net.icon128.png?raw=true</PackageIconUrl>
+		<AssemblyVersion>3.10.0.0</AssemblyVersion>
+		<FileVersion>3.10.0.0</FileVersion>
+		<Platforms>AnyCPU;x64</Platforms>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<DefineConstants>TRACE;PYTHON_INCLUDED</DefineConstants>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+	  <DefineConstants>TRACE;PYTHON_INCLUDED</DefineConstants>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<DefineConstants>TRACE;PYTHON_INCLUDED</DefineConstants>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+	  <DefineConstants>TRACE;PYTHON_INCLUDED</DefineConstants>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <None Remove="Resources\cupy_cuda12x-11.5.0-cp311-cp311-win_amd64.whl" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Include="Resources\cupy_cuda12x-11.5.0-cp311-cp311-win_amd64.whl" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.CSharp" Version="4.7.0"></PackageReference>
+		<PackageReference Include="Python.Included" Version="3.11.1"></PackageReference>
+	</ItemGroup>
+
+</Project>

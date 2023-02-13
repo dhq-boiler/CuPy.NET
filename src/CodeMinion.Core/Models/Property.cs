@@ -17,12 +17,11 @@
             set
             {
                 if (Returns.Count == 0)
-                    Returns.Add(new Argument(){Type = value});
-                Returns[0].Type=value;
+                    Returns.Add(new Argument { Type = value });
+                Returns[0].Type = value;
             }
         }
 
         public string DefaultValue { get; set; }
-
     }
 }

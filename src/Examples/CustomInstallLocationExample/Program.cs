@@ -1,6 +1,6 @@
 ﻿using System;
 using System.IO;
-using Numpy;
+using Cupy;
 
 namespace CustomInstallLocationExample
 {
@@ -9,9 +9,9 @@ namespace CustomInstallLocationExample
         static void Main(string[] args)
         {
             // ================================================
-            // This example demonstrates how to install Python and Numpy from the assembly's resources
+            // This example demonstrates how to install Python and Cupy from the assembly's resources
             // (build action 'Embedded resource') into a custom location (here the local execution directory ".")
-            // and then use Numpy.Bare with that installation.
+            // and then use Cupy.Bare with that installation.
             // ================================================
 
             // set the installation source to be the embedded python zip from our resources
@@ -31,12 +31,12 @@ namespace CustomInstallLocationExample
             Python.Deployment.Installer.SetupPython(force: false).Wait();
 
             Python.Deployment.Installer.InstallWheel(typeof(Program).Assembly,
-                "numpy-1.16.3-cp37-cp37m-win_amd64.whl").Wait();
+                "Cupy-1.16.3-cp37-cp37m-win_amd64.whl").Wait();
 
             // if the installation is local, you don't even need to set the path
             //Environment.SetEnvironmentVariable("PATH", Path.GetFullPath(@"./python-3.7.3-embed-amd64"), EnvironmentVariableTarget.Process);
 
-            // Now use Numpy.Bare
+            // Now use Cupy.Bare
             var a = np.arange(10);
             Console.WriteLine("a: "+ a.repr);
             var b = np.arange(10)["::-1"];

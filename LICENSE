@@ -9,7 +9,7 @@ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 copies of the Software, and to permit persons to whom the Software is
 furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice (as well as those of NumPy) shall be included in all
+The above copyright notice and this permission notice (as well as those of Cupy) shall be included in all
 copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
@@ -23,10 +23,10 @@ SOFTWARE.
 
 Additional Notes: 
 The C# wrapper is licensed under MIT License (see below)
-The redistributed NumPy binaries, the embedded CPython distribution, the pythonnet runtime, are all licensed under their respective licenses. 
+The redistributed Cupy binaries, the embedded CPython distribution, the pythonnet runtime, are all licensed under their respective licenses. 
 
 * Python: PSF License https://docs.python.org/3/license.html
 * Python for .NET: MIT License http://pythonnet.github.io/LICENSE
-* NumPy: BSD License https://www.numpy.org/license.html#license
+* Cupy: BSD License https://www.Cupy.org/license.html#license
 
 

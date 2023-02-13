@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
-using Numpy;
+using Cupy;
 using Python.Runtime;
 
 namespace MatmulExample
@@ -10,8 +10,8 @@ namespace MatmulExample
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Efficient matrix multiplication with NumPy:");
-            // before starting the measurement, let us call numpy once to get the setup checks done. 
+            Console.WriteLine("Efficient matrix multiplication with Cupy:");
+            // before starting the measurement, let us call Cupy once to get the setup checks done. 
             np.arange(1);
             var stopwatch = Stopwatch.StartNew();
 
@@ -21,7 +21,7 @@ namespace MatmulExample
             var result = np.matmul(a1, a2);
             stopwatch.Stop();
 
-            Console.WriteLine($"execution time with NumPy: {stopwatch.Elapsed.TotalMilliseconds}ms\n");
+            Console.WriteLine($"execution time with Cupy: {stopwatch.Elapsed.TotalMilliseconds}ms\n");
             Console.WriteLine("Result:\n" + result.repr);
 
 

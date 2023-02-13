@@ -13,7 +13,7 @@ namespace CodeMinion.Core.Models
         public string Description { get; set; }
 
         /// <summary>
-        /// Before sending to Python convert to the given C# Type, only then convert to Python type
+        ///     Before sending to Python convert to the given C# Type, only then convert to Python type
         /// </summary>
         public string ConvertToSharpType { get; set; }
 
@@ -22,8 +22,8 @@ namespace CodeMinion.Core.Models
         public string Tag { get; set; }
 
         /// <summary>
-        /// This default value is not a compile time constant, so it can not be used as a C# default value in
-        /// the function declaration. So if the parameter is passed as null it will be initialized with the given value.
+        ///     This default value is not a compile time constant, so it can not be used as a C# default value in
+        ///     the function declaration. So if the parameter is passed as null it will be initialized with the given value.
         /// </summary>
         public string DefaultIfNull { get; set; }
 
@@ -43,7 +43,7 @@ namespace CodeMinion.Core.Models
             DefaultValue = @default;
         }
 
-        public void SetType(string type, string @default=null)
+        public void SetType(string type, string @default = null)
         {
             Type = type;
             DefaultValue = @default;

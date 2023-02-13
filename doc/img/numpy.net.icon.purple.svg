@@ -14,8 +14,8 @@
    viewBox="0 0 35.279577 35.279577"
    version="1.1"
    id="svg8"
-   sodipodi:docname="numpy.net.icon.purple.svg"
-   inkscape:export-filename="numpy.net.icon.purple.png"
+   sodipodi:docname="Cupy.net.icon.purple.svg"
+   inkscape:export-filename="Cupy.net.icon.purple.png"
    inkscape:export-xdpi="368.62119"
    inkscape:export-ydpi="368.62119"
    inkscape:version="0.92.3 (2405546, 2018-03-11)">
@@ -306,7 +306,7 @@
          id="tspan6561-9-3"
          x="39.494816"
          y="325.92566"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Calibri;-inkscape-font-specification:Calibri;fill:#ffffff;stroke-width:0.25412035">Numpy.NET</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Calibri;-inkscape-font-specification:Calibri;fill:#ffffff;stroke-width:0.25412035">Cupy.NET</tspan></text>
     <g
        transform="matrix(1.5189637,0,0,1.5189637,16.557166,-118.72767)"
        id="g6243-6"
@@ -533,7 +533,7 @@
          id="tspan6561-9-3-0"
          x="40.072327"
          y="361.52783"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Calibri;-inkscape-font-specification:Calibri;fill:#ffffff;stroke-width:0.25412035">Numpy</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Calibri;-inkscape-font-specification:Calibri;fill:#ffffff;stroke-width:0.25412035">Cupy</tspan></text>
     <g
        transform="matrix(1.5189637,0,0,1.5189637,17.729315,-83.314458)"
        id="g6243-6-8"

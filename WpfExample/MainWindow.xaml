@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfExample"
         mc:Ignorable="d"
-        Title="Numpy WPF Example" Height="450" Width="800">
+        Title="Cupy WPF Example" Height="450" Width="800">
     <DockPanel>
         <Button Name="Button1" DockPanel.Dock="Top" HorizontalAlignment="Left" Padding="10,4" Margin="4" Click="OnBlockingClick">Multiply on GUI thread (blocking)</Button>
         <Button Name="Button2" DockPanel.Dock="Top" HorizontalAlignment="Left" Padding="10,4" Margin="4" Click="OnNonBlockingClick" IsEnabled="False">Multiply on background thread (non-blocking)</Button>

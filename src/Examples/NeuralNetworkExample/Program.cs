@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
-using Numpy;
+using Cupy;
 
 namespace NeuralNetworkExample
 {

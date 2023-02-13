@@ -3,11 +3,11 @@ using Torch.ApiGenerator;
 
 namespace CodeMinion.ApiGenerator
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-            ICodeGenerator generator = new NumPy.ApiGenerator();
+            ICodeGenerator generator = new Cupy.ApiGenerator();
             var result = generator.Generate();
 
             Console.WriteLine(result);

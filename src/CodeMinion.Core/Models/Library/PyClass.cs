@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace CodeMinion.Core.Models
 {
     /// <summary>
-    /// Information about python class
+    ///     Information about python class
     /// </summary>
     public class PyClass
     {
@@ -15,50 +13,50 @@ namespace CodeMinion.Core.Models
         }
 
         /// <summary>
-        /// Gets or sets the name.
+        ///     Gets or sets the name.
         /// </summary>
         /// <value>
-        /// The name.
+        ///     The name.
         /// </value>
         public string Name { get; set; }
 
         /// <summary>
-        /// Gets or sets the functions.
+        ///     Gets or sets the functions.
         /// </summary>
         /// <value>
-        /// The functions.
+        ///     The functions.
         /// </value>
         public PyFunction[] Functions { get; set; }
 
         /// <summary>
-        /// Gets or sets the document string.
+        ///     Gets or sets the document string.
         /// </summary>
         /// <value>
-        /// The document string.
+        ///     The document string.
         /// </value>
         public string DocStr { get; set; }
 
         /// <summary>
-        /// Gets or sets the arguments.
+        ///     Gets or sets the arguments.
         /// </summary>
         /// <value>
-        /// The arguments.
+        ///     The arguments.
         /// </value>
         public string[] Args { get; set; }
 
         /// <summary>
-        /// Gets or sets the defaults.
+        ///     Gets or sets the defaults.
         /// </summary>
         /// <value>
-        /// The defaults.
+        ///     The defaults.
         /// </value>
         public string[] Defaults { get; set; }
 
         /// <summary>
-        /// Gets or sets the parameters.
+        ///     Gets or sets the parameters.
         /// </summary>
         /// <value>
-        /// The parameters.
+        ///     The parameters.
         /// </value>
         public List<PyFuncArg> Parameters { get; set; }
     }

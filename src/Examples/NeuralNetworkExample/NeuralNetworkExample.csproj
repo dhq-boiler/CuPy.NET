@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Numpy.Bare" Version="3.7.1.22" />
+    <PackageReference Include="Cupy.Bare" Version="3.7.1.22" />
   </ItemGroup>
 
 </Project>

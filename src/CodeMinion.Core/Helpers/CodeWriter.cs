@@ -1,13 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Text;
 
 namespace CodeMinion.Core.Helpers
 {
     public class CodeWriter
     {
+        private int _level;
 
-        public CodeWriter() { }
+        public CodeWriter()
+        {
+        }
 
         public CodeWriter(StringBuilder s)
         {
@@ -16,31 +18,30 @@ namespace CodeMinion.Core.Helpers
 
         public StringBuilder StringBuilder { get; set; } = new StringBuilder();
         public int IndentSpaces { get; set; } = 4;
-        private int _level = 0;
 
         /// <summary>
-        /// Write a line (with automatic indentation), line break is appended
+        ///     Write a line (with automatic indentation), line break is appended
         /// </summary>
-        public void Out(string line, Action block=null)
+        public void Out(string line, Action block = null)
         {
             if (_level > 0)
-                StringBuilder.Append(new String(' ', IndentSpaces * _level));
+                StringBuilder.Append(new string(' ', IndentSpaces * _level));
             StringBuilder.AppendLine(line);
-            if (block==null)
+            if (block == null)
                 return;
             Block(block);
         }
 
         /// <summary>
-        /// Alias of Out
+        ///     Alias of Out
         /// </summary>
-        public void AppendLine(string s="")
+        public void AppendLine(string s = "")
         {
             Out(s);
         }
 
         /// <summary>
-        /// Insert an empty line
+        ///     Insert an empty line
         /// </summary>
         public void Break()
         {
@@ -48,15 +49,15 @@ namespace CodeMinion.Core.Helpers
         }
 
         /// <summary>
-        /// Increase the level of indentation
+        ///     Increase the level of indentation
         /// </summary>
         public void Indent()
         {
-             _level++;
+            _level++;
         }
 
         /// <summary>
-        /// Decrease the level of indentation
+        ///     Decrease the level of indentation
         /// </summary>
         public void Outdent()
         {
@@ -64,7 +65,7 @@ namespace CodeMinion.Core.Helpers
         }
 
         /// <summary>
-        /// Increase the level of indentation for the generator action, then outdent
+        ///     Increase the level of indentation for the generator action, then outdent
         /// </summary>
         public void Indent(Action a)
         {
@@ -80,7 +81,7 @@ namespace CodeMinion.Core.Helpers
         }
 
         /// <summary>
-        /// Generate an indented code block
+        ///     Generate an indented code block
         /// </summary>
         /// <param name="a"></param>
         /// <param name="opening_brace"></param>

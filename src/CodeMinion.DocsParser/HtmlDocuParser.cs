@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace CodeMinion.DocsParser
+﻿namespace CodeMinion.DocsParser
 {
     public class HtmlDocuParser
     {

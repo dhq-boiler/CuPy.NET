@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Numpy\Numpy.csproj" />
+    <ProjectReference Include="..\..\Cupy\Cupy.csproj" />
   </ItemGroup>
 
 </Project>

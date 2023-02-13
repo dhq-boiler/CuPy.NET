@@ -13,7 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Numpy;
+using Cupy;
 using Python.Runtime;
 
 namespace WpfExample
@@ -36,8 +36,8 @@ namespace WpfExample
 
         private void OnBlockingClick(object sender, RoutedEventArgs e)
         {
-            WriteLine("Example 1: Matrix multiplication with NumPy on the GUI thread (blocking):");
-            // before starting the measurement, let us call numpy once to get the setup checks done. 
+            WriteLine("Example 1: Matrix multiplication with Cupy on the GUI thread (blocking):");
+            // before starting the measurement, let us call Cupy once to get the setup checks done. 
             np.arange(1);
             var stopwatch = Stopwatch.StartNew();
 
@@ -47,7 +47,7 @@ namespace WpfExample
             var result = np.matmul(a1, a2);
             stopwatch.Stop();
 
-            WriteLine($"execution time with NumPy: {stopwatch.Elapsed.TotalMilliseconds}ms\n");
+            WriteLine($"execution time with Cupy: {stopwatch.Elapsed.TotalMilliseconds}ms\n");
             WriteLine("Result:\n" + result.repr);
             WriteLine("\nNote: blocking usage is not recommended. ");
             WriteLine("\nIf you close the program without runnning example 2 it will hang indefinitely. ");
@@ -57,7 +57,7 @@ namespace WpfExample
 
         private async void OnNonBlockingClick(object sender, RoutedEventArgs e)
         {
-            WriteLine("Example 2: Matrix multiplication with NumPy on a background thread (non-blocking):");
+            WriteLine("Example 2: Matrix multiplication with Cupy on a background thread (non-blocking):");
 
             if (!_allowThreads) {
                 // https://github.com/pythonnet/pythonnet/issues/109
@@ -79,7 +79,7 @@ namespace WpfExample
                 }
             });
             await this.Dispatcher.BeginInvoke(() => {
-                WriteLine($"execution time with NumPy: {stopwatch.Elapsed.TotalMilliseconds}ms\n");
+                WriteLine($"execution time with Cupy: {stopwatch.Elapsed.TotalMilliseconds}ms\n");
                 WriteLine("Result:\n" + resultString);
             });
             WriteLine("\nNote: if you close the program now it will not hang because of PythonEngine.BeginAllowThreads();\nWe only have to make sure to enclose all calculations in using(Py.GIL()) { }");

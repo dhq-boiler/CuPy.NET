@@ -7,7 +7,7 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using Numpy;
+using Cupy;
 
 namespace WebApiExample
 {
@@ -15,7 +15,7 @@ namespace WebApiExample
     {
         public static void Main(string[] args)
         {
-            // this call initializes numpy. it is necessary to do that before PythonEngine.BeginAllowThreads()
+            // this call initializes Cupy. it is necessary to do that before PythonEngine.BeginAllowThreads()
             np.arange(1);
             Python.Runtime.PythonEngine.BeginAllowThreads(); // <--- this is very important for a web server since all requests are on different threads
             CreateWebHostBuilder(args).Build().Run();

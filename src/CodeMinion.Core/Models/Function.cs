@@ -12,23 +12,38 @@ namespace CodeMinion.Core.Models
         public bool IsConstructor { get; set; }
 
         /// <summary>
-        /// Generate only the static function which also serves as an extension function
+        ///     Generate only the static function which also serves as an extension function
         /// </summary>
         public bool IsExtensionFunction { get; set; } = false;
 
         /// <summary>
-        /// Generic type parameters of the function
+        ///     Generic type parameters of the function
         /// </summary>
-        public string[] Generics { get; set; } = null;
+        public string[] Generics { get; set; }
+
+        public Argument this[string name] => Arguments.FirstOrDefault(x => x.Name == name);
+
+        [JsonIgnore]
+        public string ReturnType
+        {
+            get => Returns.FirstOrDefault()?.Type;
+            set
+            {
+                if (Returns.Count > 0)
+                    Returns[0].Type = value;
+                else
+                    Returns.Add(new Argument { Type = value });
+            }
+        }
 
         public virtual Function Clone(Action<Function> a)
         {
-            var clone= Clone<Function>();
+            var clone = Clone<Function>();
             a(clone);
             return clone;
         }
 
-        public void ChangeArg(string name, string Type=null, string DefaultValue = null, bool? IsNullable = null)
+        public void ChangeArg(string name, string Type = null, string DefaultValue = null, bool? IsNullable = null)
         {
             var arg = Arguments.First(a => a.Name == name);
             if (Type != null) arg.Type = Type;
@@ -56,7 +71,6 @@ namespace CodeMinion.Core.Models
                 if (arg.Name == "self")
                     arg.Name = "self_";
                 if (arg.DefaultValue == "null" && !arg.IsNullable)
-                {
                     switch (arg.Type)
                     {
                         case "int":
@@ -67,14 +81,14 @@ namespace CodeMinion.Core.Models
                             arg.IsNullable = true;
                             break;
                     }
-                }
 
-                if (arg.Type == "float" && !string.IsNullOrWhiteSpace(arg.DefaultValue) && 
-                                 arg.DefaultValue.Contains('.') && !arg.DefaultValue.EndsWith("f"))
+                if (arg.Type == "float" && !string.IsNullOrWhiteSpace(arg.DefaultValue) &&
+                    arg.DefaultValue.Contains('.') && !arg.DefaultValue.EndsWith("f"))
                     arg.DefaultValue += "f";
                 if (arg.DefaultValue != null && arg.DefaultValue.StartsWith("\""))
                     arg.Type = "string";
             }
+
             if (Arguments.Count == 1)
             {
                 var arg = Arguments[0];
@@ -87,24 +101,9 @@ namespace CodeMinion.Core.Models
             }
         }
 
-        public Argument this[string name] => Arguments.FirstOrDefault(x => x.Name == name);
-
         public void MakeGeneric(string type_param)
         {
-            Generics = new[] {type_param};
-        }
-
-        [JsonIgnore]
-        public string ReturnType
-        {
-            get { return Returns.FirstOrDefault()?.Type; }
-            set
-            {
-                if (Returns.Count > 0)
-                    Returns[0].Type = value;
-                else 
-                    Returns.Add(new Argument() { Type = value });
-            }
+            Generics = new[] { type_param };
         }
     }
 }

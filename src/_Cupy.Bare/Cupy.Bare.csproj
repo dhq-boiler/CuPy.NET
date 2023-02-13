@@ -1,0 +1,98 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>netstandard2.1</TargetFramework>
+		<RootNamespace>Cupy</RootNamespace>
+		<AssemblyName>Cupy.Bare</AssemblyName>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<Authors>Meinrad Recheis</Authors>
+		<Product>Cupy.NET</Product>
+		<PackageId>Cupy.Bare</PackageId>
+		<Description>C# bindings for Cupy on Win64 - a fundamental library for scientific computing, machine learning and AI. Does require Python 3.7 with Cupy 1.16 installed!</Description>
+		<Copyright>2019 - Meinrad Recheis</Copyright>
+		<PackageProjectUrl>https://github.com/SciSharp/Cupy.NET</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/SciSharp/Cupy.NET</RepositoryUrl>
+		<PackageTags>Data science, Machine Learning, AI, Scientific Computing, Cupy, Linear Algebra, FFT, SVD, Matrix, Python</PackageTags>
+		<PackageLicenseUrl>https://github.com/SciSharp/Cupy.NET/blob/master/LICENSE</PackageLicenseUrl>
+		<Version>3.7.1.28</Version>
+		<PackageIconUrl>https://github.com/SciSharp/Cupy.NET/blob/master/doc/img/Cupy.net.icon128.png?raw=true</PackageIconUrl>
+		<AssemblyVersion>3.7.1.4</AssemblyVersion>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<PlatformTarget>x64</PlatformTarget>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Compile Remove="Resources\**"></Compile>
+		<EmbeddedResource Remove="Resources\**"></EmbeddedResource>
+		<None Remove="Resources\**"></None>
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Include="..\Cupy\Manual\ctypes.module.cs" Link="Manual\ctypes.module.cs"></Compile>
+		<Compile Include="..\Cupy\Manual\cp.aliases.cs" Link="Manual\cp.aliases.cs"></Compile>
+		<Compile Include="..\Cupy\Manual\cp.array.cs" Link="Manual\cp.array.cs"></Compile>
+		<Compile Include="..\Cupy\Manual\cp.column_stack.cs" Link="Manual\cp.column_stack.cs"></Compile>
+		<Compile Include="..\Cupy\Manual\cp.concatenate.cs" Link="Manual\cp.concatenate.cs"></Compile>
+		<Compile Include="..\Cupy\Manual\cp.constants.cs" Link="Manual\cp.constants.cs"></Compile>
+		<Compile Include="..\Cupy\Manual\cp.delete.cs" Link="Manual\cp.delete.cs"></Compile>
+		<Compile Include="..\Cupy\Manual\cp.einsum.cs" Link="Manual\cp.einsum.cs"></Compile>
+		<Compile Include="..\Cupy\Manual\cp.insert.cs" Link="Manual\cp.insert.cs"></Compile>
+		<Compile Include="..\Cupy\Manual\cp.linalg.norm.cs" Link="Manual\cp.linalg.norm.cs"></Compile>
+		<Compile Include="..\Cupy\Manual\cp.linspace.cs" Link="Manual\cp.linspace.cs"></Compile>
+		<Compile Include="..\Cupy\Manual\cp.math.cs" Link="Manual\cp.math.cs" />
+		<Compile Include="..\Cupy\Manual\cp.meshgrid.cs" Link="Manual\cp.meshgrid.cs"></Compile>
+		<Compile Include="..\Cupy\Manual\cp.random.cs" Link="Manual\cp.random.cs"></Compile>
+		<Compile Include="..\Cupy\Manual\cp.resize.cs" Link="Manual\cp.resize.cs"></Compile>
+		<Compile Include="..\Cupy\Manual\cp.save.cs" Link="Manual\cp.save.cs"></Compile>
+		<Compile Include="..\Cupy\Models\Axis.cs" Link="Models\Axis.cs"></Compile>
+		<Compile Include="..\Cupy\Models\Constants.cs" Link="Models\Constants.cs"></Compile>
+		<Compile Include="..\Cupy\Models\Dtype.cs" Link="Models\Dtype.cs"></Compile>
+		<Compile Include="..\Cupy\Models\Flags.cs" Link="Models\Flags.cs"></Compile>
+		<Compile Include="..\Cupy\Models\Matrix.cs" Link="Models\Matrix.cs"></Compile>
+		<Compile Include="..\Cupy\Models\MemMapMode.cs" Link="Models\MemMapMode.cs"></Compile>
+		<Compile Include="..\Cupy\Models\NDarray.aliases.cs" Link="Models\NDarray.aliases.cs"></Compile>
+		<Compile Include="..\Cupy\Models\NDarray.CastOperators.cs" Link="Models\NDarray.CastOperators.cs"></Compile>
+		<Compile Include="..\Cupy\Models\NDarray.cs" Link="Models\NDarray.cs"></Compile>
+		<Compile Include="..\Cupy\Models\NDarray.gen.cs" Link="Models\NDarray.gen.cs"></Compile>
+		<Compile Include="..\Cupy\Models\NDarray.Operators.cs" Link="Models\NDarray.Operators.cs"></Compile>
+		<Compile Include="..\Cupy\Models\PythonObject.cs" Link="Models\PythonObject.cs"></Compile>
+		<Compile Include="..\Cupy\Models\PythonObject.gen.cs" Link="Models\PythonObject.gen.cs"></Compile>
+		<Compile Include="..\Cupy\Models\Shape.cs" Link="Models\Shape.cs"></Compile>
+		<Compile Include="..\Cupy\Models\Slice.cs" Link="Models\Slice.cs"></Compile>
+		<Compile Include="..\Cupy\cp.array_creation.gen.cs" Link="cp.array_creation.gen.cs"></Compile>
+		<Compile Include="..\Cupy\cp.array_manipulation.gen.cs" Link="cp.array_manipulation.gen.cs"></Compile>
+		<Compile Include="..\Cupy\cp.bitwise.gen.cs" Link="cp.bitwise.gen.cs"></Compile>
+		<Compile Include="..\Cupy\cp.datetime.gen.cs" Link="cp.datetime.gen.cs"></Compile>
+		<Compile Include="..\Cupy\cp.dtype.gen.cs" Link="cp.dtype.gen.cs"></Compile>
+		<Compile Include="..\Cupy\cp.dtype.routines.gen.cs" Link="cp.dtype.routines.gen.cs"></Compile>
+		<Compile Include="..\Cupy\cp.fft.gen.cs" Link="cp.fft.gen.cs"></Compile>
+		<Compile Include="..\Cupy\cp.financial.gen.cs" Link="cp.financial.gen.cs"></Compile>
+		<Compile Include="..\Cupy\cp.indexing.gen.cs" Link="cp.indexing.gen.cs"></Compile>
+		<Compile Include="..\Cupy\cp.io.gen.cs" Link="cp.io.gen.cs"></Compile>
+		<Compile Include="..\Cupy\cp.linalg.gen.cs" Link="cp.linalg.gen.cs"></Compile>
+		<Compile Include="..\Cupy\cp.linalg_fft.gen.cs" Link="cp.linalg_fft.gen.cs"></Compile>
+		<Compile Include="..\Cupy\cp.logic.gen.cs" Link="cp.logic.gen.cs"></Compile>
+		<Compile Include="..\Cupy\cp.math.gen.cs" Link="cp.math.gen.cs"></Compile>
+		<Compile Include="..\Cupy\cp.module.gen.cs" Link="cp.module.gen.cs"></Compile>
+		<Compile Include="..\Cupy\cp.padding.gen.cs" Link="cp.padding.gen.cs"></Compile>
+		<Compile Include="..\Cupy\cp.random.gen.cs" Link="cp.random.gen.cs"></Compile>
+		<Compile Include="..\Cupy\cp.set.gen.cs" Link="cp.set.gen.cs"></Compile>
+		<Compile Include="..\Cupy\cp.sorting.gen.cs" Link="cp.sorting.gen.cs"></Compile>
+		<Compile Include="..\Cupy\cp.staticstics.gen.cs" Link="cp.staticstics.gen.cs"></Compile>
+		<Compile Include="..\Cupy\cp.string.gen.cs" Link="cp.string.gen.cs"></Compile>
+		<Compile Include="..\Cupy\cp.window.gen.cs" Link="cp.window.gen.cs"></Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.CSharp" Version="4.5.0"></PackageReference>
+		<PackageReference Include="pythonnet_netstandard_py37_win" Version="2.5.1"></PackageReference>
+	</ItemGroup>
+
+	<ItemGroup>
+		<Folder Include="Manual\"></Folder>
+		<Folder Include="Models\"></Folder>
+	</ItemGroup>
+
+</Project>

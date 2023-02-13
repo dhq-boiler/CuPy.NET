@@ -6,15 +6,16 @@ namespace CodeMinion.Core.Models
     public class Declaration
     {
         /// <summary>
-        /// Function name
+        ///     Function name
         /// </summary>
         public string Name { get; set; }
 
         /// <summary>
-        /// Class name is the name of the containing API class (i.e. "numpy").
-        /// If it is a nested class the class name contains all nesting levels (i.e. "numpy.core.records")
+        ///     Class name is the name of the containing API class (i.e. "Cupy").
+        ///     If it is a nested class the class name contains all nesting levels (i.e. "Cupy.core.records")
         /// </summary>
         public string ClassName { get; set; }
+
         public string GeneratedClassName { get; set; }
 
         public List<Argument> Returns { get; set; } = new List<Argument>();
@@ -24,16 +25,18 @@ namespace CodeMinion.Core.Models
         public string SharpOnlyPostfix { get; set; }
 
         /// <summary>
-        /// Do not generate if true
+        ///     Do not generate if true
         /// </summary>
         public bool Ignore { get; set; }
 
         /// <summary>
-        /// Break into the Debugger when generating this declaration
+        ///     Break into the Debugger when generating this declaration
         /// </summary>
         public bool DebuggerBreak { get; set; }
 
         public string Description { get; set; }
+
+        public string Tag { get; set; }
 
         public virtual Declaration Clone()
         {
@@ -45,11 +48,8 @@ namespace CodeMinion.Core.Models
             return JObject.FromObject(this).ToObject<T>();
         }
 
-        public string Tag { get; set; }
-
         public virtual void Sanitize()
         {
-            
         }
     }
 }

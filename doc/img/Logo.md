@@ -1,1 +1,1 @@
-Numpy.NET logo (c) 2019 by Meinrad Recheis. 
+Cupy.NET logo (c) 2019 by Meinrad Recheis. 
