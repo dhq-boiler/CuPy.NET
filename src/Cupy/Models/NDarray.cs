@@ -1,7 +1,9 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Numerics;
 using System.Runtime.InteropServices;
+using System.Runtime.Serialization.Formatters.Binary;
 using Cupy.Models;
 using Python.Runtime;
 
@@ -19,6 +21,30 @@ namespace Cupy
         public NDarray(PyObject pyobj) : base(pyobj)
         {
         }
+
+        public NDarray(byte obj) : this(new PyInt(obj))
+        {
+        }
+
+        public NDarray(int obj) : this(new PyInt(obj))
+        {
+        }
+
+        public NDarray(long obj) : this(new PyInt(obj))
+        {
+        }
+
+        public NDarray(float obj) : this(new PyFloat(obj))
+        {
+        }
+
+        public NDarray(double obj) : this(new PyFloat(obj))
+        {
+        }
+
+        //public NDarray(bool obj) : this(new PyInt(obj))
+        //{
+        //}
 
         public NDarray(NDarray t) : base((PyObject)t.PyObject)
         {
@@ -120,7 +146,8 @@ namespace Cupy
         /// <summary>
         ///     An object to simplify the interaction of the array with the ctypes module.
         /// </summary>
-        public PyObject ctypes => self.GetAttr("ctypes"); // TODO: wrap ctypes
+        //public PyObject ctypes => self.GetAttr("ctypes"); // TODO: wrap ctypes
+        public PyObject ctypes => Cupy.ctypes.self;//.GetAttr("ctypes");
 
 
         /// <summary>
@@ -244,14 +271,58 @@ namespace Cupy
             set => self.SetAttr("imag", value.PyObject);
         }
 
+        //unsafe void PinVoidPointer(object voidPtr, int length)
+        //{
+        //    fixed (void* ptr = (void*)&voidPtr)
+        //    {
+        //        // ここで、ptrがピンされます。
+        //        // ポインターを介して扱うメモリーブロックは、GCによって移動されなくなります。
+        //        // したがって、ポインターを介してアクセスするメモリー領域のアドレスを計算することができます。
+        //        byte* bytePtr = (byte*)ptr;
+        //        for (int i = 0; i < length; i++)
+        //        {
+        //            bytePtr[i] = 0;
+        //        }
+        //    }
+        //}
+
+        //[DllImport("numpy.core._multiarray_umath", CallingConvention = CallingConvention.Cdecl)]
+        //private static extern IntPtr PyArray_DATA(IntPtr arr);
+
+        public unsafe static byte[] SerializeObject(dynamic obj)
+        {
+            int size = (int)obj.nbytes;
+            byte[] ret = new byte[size];
+            IntPtr ptr = (IntPtr)obj.data.Handle;
+            byte* p = (byte*)ptr.ToPointer();
+            for (int i = 0; i < size; i++)
+            {
+                ret[i] = *(p + i);
+            }
+            return ret;
+            //BinaryFormatter formatter = new BinaryFormatter();
+            //using (MemoryStream stream = new MemoryStream())
+            //{
+            //    formatter.Serialize(stream, obj);
+            //    return stream.ToArray();
+            //}
+        }
+
         /// <summary>
         ///     Returns a copy of the array data
         /// </summary>
-        public T[] GetData<T>()
+        public unsafe T[] GetData<T>()
         {
             if (!PyObject.flags.c_contiguous)
                 return cp.ascontiguousarray(this).GetData<T>();
-            long ptr = PyObject.ctypes.data;
+            byte[] arr = SerializeObject(Convert.ChangeType(PyObject, PyObject.__class__.GetType()));
+            var handler = GCHandle.Alloc(arr, GCHandleType.Pinned);
+            long ptr = handler.AddrOfPinnedObject().ToInt64();
+            //TypedReference typedRef = __makeref(PyObject.data);
+            //byte* p = *(byte**)(&typedRef);
+            //fixed (p)
+            //{
+            //long ptr = (long)PyObject.data;
             int size = PyObject.size;
             object array = null;
             if (typeof(T) == typeof(byte)) array = new byte[size];
@@ -292,6 +363,7 @@ namespace Cupy
                         a[i] = new Complex(real[i], imag[i]);
                     break;
             }
+            //}
 
             // special handling for types that are not supported by Marshal.Copy: must be converted i.e. 1 => true, 0 => false
             if (typeof(T) == typeof(bool)) return (T[])(object)((byte[])array).Select(x => x > 0).ToArray();

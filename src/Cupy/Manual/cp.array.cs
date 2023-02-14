@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Numerics;
 using System.Runtime.InteropServices;
+using System.Runtime.Serialization.Formatters.Binary;
 using Cupy.Models;
 using Python.Runtime;
 
@@ -43,6 +46,152 @@ namespace Cupy
             return ToCsharp<NDarray>(py);
         }
 
+        private static unsafe byte[] ObjectToByteArray(byte obj)
+        {
+            const int unitsize = 1;
+            byte[] ret = new byte[unitsize];
+            for (int i = 0; i < unitsize; i++)
+            {
+                ret[i] = (byte)((obj & (0xF << i)) >> i);
+            }
+            return ret;
+        }
+
+        private static unsafe byte[] ObjectToByteArray(int obj)
+        {
+            const int unitsize = 4;
+            byte[] ret = new byte[unitsize];
+            for (int i = 0; i < unitsize; i++)
+            {
+                ret[i] = (byte)((obj & (0xF << i)) >> i);
+            }
+            return ret;
+        }
+
+        private static unsafe byte[] ObjectToByteArray(long obj)
+        {
+            int unitsize = 8;
+            byte[] ret = new byte[unitsize];
+            for (int i = 0; i < unitsize; i++)
+            {
+                ret[i] = (byte)((obj & (0xF << i)) >> i);
+            }
+            return ret;
+        }
+
+        private static byte[] ObjectToByteArray<T>(T t)
+        {
+            switch (t)
+            {
+                case byte b:
+                    return ObjectToByteArray(b);
+                case int i:
+                    return ObjectToByteArray(i);
+                case long l:
+                    return ObjectToByteArray(l);
+                default:
+                    throw new NotImplementedException();
+            }
+        }
+
+        private unsafe static void Copy(byte[] src, NDarray dest)
+        {
+            int size = src.Length * sizeof(byte);
+            IntPtr ptr_dest = (IntPtr)dest.data.Handle;
+            byte* p_dest = (byte*)ptr_dest.ToPointer();
+
+            for (int i = 0; i < src.Length; i++)
+            {
+                dest[i] = new NDarray(src[i]);
+            }
+        }
+
+        private unsafe static void Copy(char[] src, NDarray dest)
+        {
+            int size = src.Length * sizeof(char);
+            IntPtr ptr_dest = (IntPtr)dest.data.Handle;
+            byte* p_dest = (byte*)ptr_dest.ToPointer();
+
+            for (int i = 0; i < src.Length; i++)
+            {
+                dest[i] = new NDarray(src[i]);
+            }
+        }
+
+        private unsafe static void Copy(short[] src, NDarray dest)
+        {
+            int size = src.Length * sizeof(short);
+            IntPtr ptr_dest = (IntPtr)dest.data.Handle;
+            byte* p_dest = (byte*)ptr_dest.ToPointer();
+
+            for (int i = 0; i < src.Length; i++)
+            {
+                dest[i] = new NDarray(src[i]);
+            }
+        }
+
+        private unsafe static void Copy(int[] src, NDarray dest)
+        {
+            int size = src.Length * sizeof(int);
+            IntPtr ptr_dest = (IntPtr)dest.data.Handle;
+            byte* p_dest = (byte*)ptr_dest.ToPointer();
+
+            for (int i = 0; i < src.Length; i++)
+            {
+                dest[i] = new NDarray(src[i]);
+            }
+        }
+
+        private unsafe static void Copy(long[] src, NDarray dest)
+        {
+            int size = src.Length * sizeof(long);
+            IntPtr ptr_dest = (IntPtr)dest.data.Handle;
+            byte* p_dest = (byte*)ptr_dest.ToPointer();
+
+            for (int i = 0; i < src.Length; i++)
+            {
+                dest[i] = new NDarray(src[i]);
+            }
+        }
+
+        private unsafe static void Copy(float[] src, NDarray dest)
+        {
+            int size = src.Length * sizeof(float);
+            IntPtr ptr_dest = (IntPtr)dest.data.Handle;
+            byte* p_dest = (byte*)ptr_dest.ToPointer();
+
+            for (int i = 0; i < src.Length; i++)
+            {
+                dest[i] = new NDarray(src[i]);
+            }
+        }
+
+        private unsafe static void Copy(double[] src, NDarray dest)
+        {
+            int size = src.Length * sizeof(double);
+            IntPtr ptr_dest = (IntPtr)dest.data.Handle;
+            byte* p_dest = (byte*)ptr_dest.ToPointer();
+
+            for (int i = 0; i < src.Length; i++)
+            {
+                dest[i] = new NDarray(src[i]);
+            }
+        }
+
+        //private unsafe static void Copy(bool[] src, NDarray dest)
+        //{
+        //    int size = src.Length * sizeof(bool);
+        //    IntPtr ptr_dest = (IntPtr)dest.data.Handle;
+        //    byte* p_dest = (byte*)ptr_dest.ToPointer();
+
+        //    for (int i = 0; i < src.Length; i++)
+        //    {
+        //        //byte[] arr_src = ObjectToByteArray(src[i]);
+        //        //dest[i] = new NDarray(arr_src);
+        //        dest[i] = new NDarray(src[i]);
+        //    }
+        //}
+
         public static NDarray<T> array<T>(T[] @object, Dtype dtype = null, bool? copy = null, string order = null,
             bool? subok = null, int? ndmin = null) where T : struct
         {
@@ -51,35 +200,34 @@ namespace Cupy
             var ndarray = empty(new Shape(@object.Length), type, order);
             if (@object.Length == 0)
                 return new NDarray<T>(ndarray);
-            var ctypes = ndarray.PyObject.ctypes;
-            long ptr = ctypes.data;
+            long ptr = 0;
             switch (@object)
             {
                 case char[] a:
-                    Marshal.Copy(a, 0, new IntPtr(ptr), a.Length);
+                    Copy(a, ndarray);
                     break;
                 case byte[] a:
-                    Marshal.Copy(a, 0, new IntPtr(ptr), a.Length);
+                    Copy(a, ndarray);
                     break;
                 case short[] a:
-                    Marshal.Copy(a, 0, new IntPtr(ptr), a.Length);
+                    Copy(a, ndarray);
                     break;
                 case int[] a:
-                    Marshal.Copy(a, 0, new IntPtr(ptr), a.Length);
+                    Copy(a, ndarray);
                     break;
                 case long[] a:
-                    Marshal.Copy(a, 0, new IntPtr(ptr), a.Length);
+                    Copy(a, ndarray);
                     break;
                 case float[] a:
-                    Marshal.Copy(a, 0, new IntPtr(ptr), a.Length);
+                    Copy(a, ndarray);
                     break;
                 case double[] a:
-                    Marshal.Copy(a, 0, new IntPtr(ptr), a.Length);
+                    Copy(a, ndarray);
                     break;
                 case bool[] a:
-                    var bytes = a.Select(x => (byte)(x ? 1 : 0)).ToArray();
-                    Marshal.Copy(bytes, 0, new IntPtr(ptr), a.Length);
-                    break;
+                    //Copy(a, ndarray);
+                    //break;
+                    throw new NotImplementedException();
                 case Complex[] a:
                     var real = new double[@object.Length];
                     var imag = new double[@object.Length];
@@ -96,7 +244,6 @@ namespace Cupy
                     break;
             }
 
-            ctypes.Dispose();
             if (dtype != null || subok != null || ndmin != null)
             {
                 var converted = array(ndarray, dtype, false, subok: subok, ndmin: ndmin);

@@ -25,6 +25,13 @@ namespace Cupy
 
         public IntPtr Handle => self.Handle;
 
+
+        /// <summary>
+        ///     An object to simplify the interaction of the array with the ctypes module.
+        /// </summary>
+        //public PyObject ctypes => self.GetAttr("ctypes"); // TODO: wrap ctypes
+        public PyObject ctypes => Cupy.ctypes.self;//.GetAttr("ctypes");
+
         public void Dispose()
         {
             self?.Dispose();

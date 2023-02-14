@@ -7,7 +7,7 @@ using Python.Runtime;
 
 namespace Cupy
 {
-    public static class ctypes
+    public static partial class ctypes
     {
         private static readonly Lazy<PyObject> _lazy_self = new Lazy<PyObject>(() =>
         {
@@ -20,6 +20,8 @@ namespace Cupy
 
         public static dynamic dynamic_self => self;
         private static bool IsInitialized => self != null;
+
+        public static PyObject data => self.GetAttr("data");
 
         public static void Dispose()
         {

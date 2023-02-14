@@ -6,6 +6,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Cupy.Models;
 using Python.Runtime;
+using System.IO;
+using System.Diagnostics;
+using System.Threading.Tasks;
 #if PYTHON_INCLUDED
 using Python.Included;
 #endif
@@ -49,11 +52,17 @@ namespace Cupy
             Installer.SetupPython(force).Wait();
 #endif
 #if PYTHON_INCLUDED
-            Installer.InstallWheel(typeof(cp).Assembly, "cupy_cuda12x-11.5.0-cp311-cp311-win_amd64.whl", force).Wait();
+            PythonEngine.Initialize();
+
+            Installer.PipInstallModule("numpy", "1.24.2", true).Wait();
+            Installer.PipInstallModule("cupy_cuda102", "11.3.0", true).Wait();
+
+            Debug.Assert(Installer.IsModuleInstalled("cupy"));
 #endif
             PythonEngine.AddShutdownHandler(() => ReInitializeLazySelf());
             PythonEngine.Initialize();
-            var mod = Py.Import("Cupy");
+            var ctypes = Py.Import("ctypes");
+            var mod = Py.Import("cupy");
             return mod;
         }
 
