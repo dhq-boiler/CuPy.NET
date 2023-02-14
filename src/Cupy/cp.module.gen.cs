@@ -61,7 +61,6 @@ namespace Cupy
 #endif
             PythonEngine.AddShutdownHandler(() => ReInitializeLazySelf());
             PythonEngine.Initialize();
-            var ctypes = Py.Import("ctypes");
             var mod = Py.Import("cupy");
             return mod;
         }
