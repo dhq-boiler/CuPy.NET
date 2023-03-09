@@ -356,7 +356,10 @@ namespace Cupy
                 myarray
             });
             var kwargs = new PyDict();
-            if (axis != null) kwargs["axis"] = ToPython(axis);
+            if (axis != null)
+            {
+                throw new NotSupportedException("axis is not supported yet.");
+            }
             dynamic py = __self__.InvokeMethod("unpackbits", pyargs, kwargs);
             return ToCsharp<NDarray>(py);
         }

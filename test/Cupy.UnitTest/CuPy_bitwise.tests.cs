@@ -403,6 +403,7 @@ namespace Cupy.UnitTest
         }
 #endif
 
+#if NOT_SUPPORTED
         [Test]
         public void unpackbitsTest()
         {
@@ -433,6 +434,7 @@ namespace Cupy.UnitTest
                 "       [0, 0, 0, 1, 0, 1, 1, 1]], dtype=uint8)";
             Assert.AreEqual(expected, given.repr);
         }
+#endif
 
         [Test]
         public void binary_reprTest()
