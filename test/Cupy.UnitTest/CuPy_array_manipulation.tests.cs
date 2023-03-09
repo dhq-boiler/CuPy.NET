@@ -1553,7 +1553,7 @@ namespace Cupy.UnitTest
 #endif
         }
 
-
+#if NOT_IMPLEMENTED
         [Test]
         public void deleteTest()
         {
@@ -1600,6 +1600,7 @@ namespace Cupy.UnitTest
                 "array([ 1,  3,  5,  7,  8,  9, 10, 11, 12])";
             Assert.AreEqual(expected, given.repr);
         }
+#endif
 
 
         [Test]

@@ -7,6 +7,7 @@ namespace Cupy
     /// </summary>
     public static partial class cp
     {
+#if NOT_IMPLEMENTED
         /// <summary>
         ///     Return a new array with sub-arrays along an axis deleted.<br></br>
         ///     For a one
@@ -49,6 +50,7 @@ namespace Cupy
             dynamic py = __self__.InvokeMethod("delete", pyargs, kwargs);
             return ToCsharp<NDarray>(py);
         }
+#endif
 
         /// <summary>
         ///     Return a new array with sub-arrays along an axis deleted.<br></br>
