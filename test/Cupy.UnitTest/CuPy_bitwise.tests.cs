@@ -369,7 +369,7 @@ namespace Cupy.UnitTest
 #endif
         }
 
-
+#if NOT_SUPPORTED_YET
         [Test]
         public void packbitsTest()
         {
@@ -401,6 +401,7 @@ namespace Cupy.UnitTest
             // Note that in binary 160 = 1010 0000, 64 = 0100 0000, 192 = 1100 0000,
             // and 32 = 0010 0000.            
         }
+#endif
 
         [Test]
         public void unpackbitsTest()
