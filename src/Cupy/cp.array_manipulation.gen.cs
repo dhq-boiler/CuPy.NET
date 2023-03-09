@@ -3,6 +3,7 @@
 
 using Cupy.Models;
 using Python.Runtime;
+using System;
 #if PYTHON_INCLUDED
 #endif
 
@@ -1350,7 +1351,10 @@ namespace Cupy
                 ar
             });
             var kwargs = new PyDict();
-            if (axis != null) kwargs["axis"] = ToPython(axis);
+            if (axis != null)
+            {
+                throw new NotSupportedException("axis is not supported yet.");
+            }
             dynamic py = __self__.InvokeMethod("unique", pyargs, kwargs);
             return ToCsharp<NDarray>(py);
         }

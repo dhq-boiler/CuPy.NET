@@ -1839,11 +1839,13 @@ namespace Cupy.UnitTest
             // 
 
 
+#if NOT_SUPPORTED_YET
             a = cp.array(new[,] { { 1, 0, 0 }, { 1, 0, 0 }, { 2, 3, 4 } });
             given = cp.unique(a, 0);
             expected =
                 "array([[1, 0, 0],\n       [2, 3, 4]])";
             Assert.AreEqual(expected, given.repr);
+#endif
 
             // Return the indices of the original array that give the unique values:
 
