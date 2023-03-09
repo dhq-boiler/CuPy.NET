@@ -3,6 +3,7 @@ using Python.Runtime;
 
 namespace Cupy
 {
+#if NOT_IMPLEMENTED
     /// <summary>
     ///     Manual type conversions
     /// </summary>
@@ -216,4 +217,5 @@ namespace Cupy
             return ToCsharp<NDarray>(py);
         }
     }
+#endif
 }

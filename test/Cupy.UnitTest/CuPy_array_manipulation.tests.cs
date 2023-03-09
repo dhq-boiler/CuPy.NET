@@ -1602,7 +1602,7 @@ namespace Cupy.UnitTest
         }
 #endif
 
-
+#if NOT_IMPLEMENTED
         [Test]
         public void insertTest()
         {
@@ -1710,7 +1710,7 @@ namespace Cupy.UnitTest
                 "       [  4, 999,   5,   6, 999,   7]])";
             Assert.AreEqual(expected, given.repr);
         }
-
+#endif
 
         [Test]
         public void appendTest()

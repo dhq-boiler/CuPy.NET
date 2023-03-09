@@ -879,6 +879,7 @@ namespace Cupy.UnitTest
             Assert.AreEqual("array([[ 0,  2],\n       [ 9, 11]])", b.repr);
         }
 
+#if NOT_IMPLEMENTED
         [Test]
         public void IssueByAmpangboy()
         {
@@ -886,6 +887,7 @@ namespace Cupy.UnitTest
             var result = cp.insert(arr, 0, 1.0);
             Assert.AreEqual("array([1., 1.])", result.repr);
         }
+#endif
 
         [Test]
         public void IssueByBigpo()
