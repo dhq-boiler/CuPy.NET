@@ -144,6 +144,7 @@ namespace Cupy
                     var pyClass = $"{pyobj.__class__}";
                     if (pyClass == "<class 'str'>") return (T)(object)pyobj.ToString();
                     if (pyClass.StartsWith("<class 'Cupy")) return (pyobj.item() as PyObject).As<T>();
+                    if (pyClass.StartsWith("<class 'cupy")) return (pyobj.item() as PyObject).As<T>();
                     try
                     {
                         return pyobj.As<T>();
