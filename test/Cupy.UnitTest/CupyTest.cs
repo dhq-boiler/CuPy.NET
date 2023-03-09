@@ -7,21 +7,21 @@ using System.Numerics;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using Cupy.Models;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using Python.Runtime;
 
 namespace Cupy.UnitTest
 {
-    [TestClass]
+    [TestFixture]
     public class CupyTest
     {
-        [AssemblyCleanup]
+        [OneTimeTearDown]
         public static void AssemblyCleanup()
         {
             PythonEngine.BeginAllowThreads();
         }
 
-        [TestMethod]
+        [Test]
         public void empty()
         {
             // initialize an array with random integers
@@ -33,7 +33,7 @@ namespace Cupy.UnitTest
                 Console.WriteLine(x);
         }
 
-        [TestMethod]
+        [Test]
         public unsafe void create_from_pointer_without_copying()
         {
             var pointer = IntPtr.Zero;
@@ -61,7 +61,7 @@ namespace Cupy.UnitTest
             }
         }
 
-        [TestMethod]
+        [Test]
         public void efficient_array_copy()
         {
             var a = cp.empty(new Shape(2, 3), cp.int32);
@@ -74,7 +74,7 @@ namespace Cupy.UnitTest
             Console.WriteLine(a.ToString());
         }
 
-        [TestMethod]
+        [Test]
         public void array()
         {
             var array = new[] { 1, 2, 3, 4, 5, 6 };
@@ -83,7 +83,7 @@ namespace Cupy.UnitTest
             Assert.AreEqual(array, a.GetData());
         }
 
-        [TestMethod]
+        [Test]
         public void ndarray_shape()
         {
             var array = new[] { 1, 2, 3, 4, 5, 6 };
@@ -92,49 +92,49 @@ namespace Cupy.UnitTest
             Assert.AreEqual(new Shape(100), cp.arange(100).shape);
         }
 
-        [TestMethod]
+        [Test]
         public void ndarray_strides()
         {
             Assert.AreEqual(new[] { 4 }, cp.array(1, 2, 3, 4, 5, 6).strides);
             Assert.AreEqual(new[] { 8 }, cp.arange(10, dtype: cp.longlong).strides);
         }
 
-        [TestMethod]
+        [Test]
         public void ndarray_ndim()
         {
             Assert.AreEqual(1, cp.array(1, 2, 3, 4, 5, 6).ndim);
             Assert.AreEqual(1, cp.arange(10, dtype: cp.longlong).ndim);
         }
 
-        [TestMethod]
+        [Test]
         public void ndarray_size()
         {
             Assert.AreEqual(6, cp.array(1, 2, 3, 4, 5, 6).size);
             Assert.AreEqual(10, cp.arange(10, dtype: cp.longlong).size);
         }
 
-        [TestMethod]
+        [Test]
         public void ndarray_len()
         {
             Assert.AreEqual(6, cp.array(1, 2, 3, 4, 5, 6).len);
             Assert.AreEqual(10, cp.arange(10, dtype: cp.longlong).len);
         }
 
-        [TestMethod]
+        [Test]
         public void ndarray_itemsize()
         {
             Assert.AreEqual(4, cp.array(1, 2, 3, 4, 5, 6).itemsize);
             Assert.AreEqual(8, cp.arange(10, dtype: cp.longlong).itemsize);
         }
 
-        [TestMethod]
+        [Test]
         public void ndarray_nbytes()
         {
             Assert.AreEqual(24, cp.array(1, 2, 3, 4, 5, 6).nbytes);
             Assert.AreEqual(80, cp.arange(10, dtype: cp.longlong).nbytes);
         }
 
-        [TestMethod]
+        [Test]
         public void ndarray_base()
         {
             var a = cp.array(1, 2, 3, 4, 5, 6);
@@ -143,7 +143,7 @@ namespace Cupy.UnitTest
             Assert.AreEqual(a, b.@base);
         }
 
-        [TestMethod]
+        [Test]
         public void ndarray_dtype()
         {
             Assert.AreEqual(cp.int32, cp.array(new[] { 1, 2, 3, 4, 5, 6 }, cp.int32).dtype);
@@ -152,7 +152,7 @@ namespace Cupy.UnitTest
             Assert.AreEqual(cp.@double, cp.arange(10, dtype: cp.float64).dtype);
         }
 
-        [TestMethod]
+        [Test]
         public void ndarray_multidim_source_array()
         {
             var a = cp.array(new[,] { { 1f, 2f }, { 3f, 4f }, { 3f, 4f } });
@@ -161,7 +161,7 @@ namespace Cupy.UnitTest
             Assert.AreEqual(cp.float32, a.dtype);
         }
 
-        [TestMethod]
+        [Test]
         public void ndarray_T()
         {
             var x = cp.array(new[,] { { 1f, 2f }, { 3f, 4f } });
@@ -173,7 +173,7 @@ namespace Cupy.UnitTest
             Assert.AreEqual(new[] { 1f, 3f, 2f, 4f }, t.GetData<float>());
         }
 
-        [TestMethod]
+        [Test]
         public void ndarray_flatten()
         {
             var x = cp.array(new[,] { { 1f, 2f }, { 3f, 4f } });
@@ -183,7 +183,7 @@ namespace Cupy.UnitTest
             Assert.AreEqual(new[] { 1f, 3f, 2f, 4f }, t.flatten().GetData<float>());
         }
 
-        [TestMethod]
+        [Test]
         public void ndarray_reshape()
         {
             var a = cp.array(1, 2, 3, 4, 5, 6);
@@ -194,7 +194,7 @@ namespace Cupy.UnitTest
             Assert.AreEqual(a, b.@base);
         }
 
-        [TestMethod]
+        [Test]
         public void ndarray_indexing()
         {
             // using string indices
@@ -209,7 +209,7 @@ namespace Cupy.UnitTest
             Assert.AreEqual("2", y["0"]["2"].str);
         }
 
-        [TestMethod]
+        [Test]
         public void ndarray_indexing1()
         {
             // using int indices
@@ -223,7 +223,7 @@ namespace Cupy.UnitTest
             Assert.AreEqual("2", y[0][2].str);
         }
 
-        [TestMethod]
+        [Test]
         public void ndarray_indexing2()
         {
             var x = cp.arange(10, 1, -1);
@@ -233,7 +233,7 @@ namespace Cupy.UnitTest
             Assert.AreEqual("array([[9, 9],\n       [8, 7]])", x[cp.array(new[,] { { 1, 1 }, { 2, 3 } })].repr);
         }
 
-        [TestMethod]
+        [Test]
         public void ndarray_indexing3()
         {
             var y = cp.arange(35).reshape(5, 7);
@@ -244,7 +244,7 @@ namespace Cupy.UnitTest
                 y[cp.array(0, 2, 4)].repr);
         }
 
-        [TestMethod]
+        [Test]
         public void ndarray_indexing_setter1()
         {
             // using int indices
@@ -265,7 +265,7 @@ namespace Cupy.UnitTest
             Assert.AreEqual("222", y[0][2].str);
         }
 
-        [TestMethod]
+        [Test]
         public void ndarray_indexing_setter2()
         {
             // using string indices
@@ -286,7 +286,7 @@ namespace Cupy.UnitTest
             Assert.AreEqual("222", y[0][2].str);
         }
 
-        [TestMethod]
+        [Test]
         public void ndarray_indexing_setter3()
         {
             var a = cp.array(1, 2, 3, 4, 5, 6).reshape(new Shape(2, 3));
@@ -295,7 +295,7 @@ namespace Cupy.UnitTest
             Assert.AreEqual("[[ 1  4  3]\n [ 4 10  6]]", a.str);
         }
 
-        [TestMethod]
+        [Test]
         public void ndarray_indexing_setter4()
         {
             var x = cp.arange(10, 1, -1);
@@ -305,7 +305,7 @@ namespace Cupy.UnitTest
             Assert.AreEqual("array([10,  2,  8,  1,  6,  5,  4,  3,  3])", x.repr);
         }
 
-        [TestMethod]
+        [Test]
         public void ndarray_slice()
         {
             var x = cp.arange(10);
@@ -316,7 +316,7 @@ namespace Cupy.UnitTest
             Assert.AreEqual("array([[ 7, 10, 13],\n       [21, 24, 27]])", y["1:5:2,::3"].repr);
         }
 
-        [TestMethod]
+        [Test]
         public void ndarray_slice1()
         {
             var y = cp.arange(35).reshape(5, 7);
@@ -329,7 +329,7 @@ namespace Cupy.UnitTest
             Assert.AreEqual("array([[22, 23],\n       [29, 30]])", y[b[":", 5], "1:3"].repr);
         }
 
-        [TestMethod]
+        [Test]
         public void ndarray_masking()
         {
             var y = cp.arange(35).reshape(5, 7);
@@ -341,7 +341,7 @@ namespace Cupy.UnitTest
                 y[b[":", 5]].repr);
         }
 
-        [TestMethod]
+        [Test]
         public void ndarray_masking1()
         {
             var x = cp.arange(30).reshape(2, 3, 5);
@@ -362,7 +362,7 @@ namespace Cupy.UnitTest
                 x[b].repr);
         }
 
-        [TestMethod]
+        [Test]
         public void ndarray_comparison_operators()
         {
             var a = cp.array(1, 2, 3);
@@ -383,7 +383,7 @@ namespace Cupy.UnitTest
             Assert.AreEqual(new[] { true, false, true }, a.not_equals(b).GetData());
         }
 
-        [TestMethod]
+        [Test]
         public void ndarray_unary_operators()
         {
             // unary operations
@@ -393,7 +393,7 @@ namespace Cupy.UnitTest
             // todo: test operator ~
         }
 
-        [TestMethod]
+        [Test]
         public void ndarray_arithmetic_operators()
         {
             // arithmetic operators
@@ -406,13 +406,13 @@ namespace Cupy.UnitTest
             Assert.AreEqual(new[] { 10, 20, 30 }, (a * 10).GetData<int>());
             Assert.AreEqual(new[] { 2, 4, 6 }, (a * b).GetData<int>());
             a = cp.array(2, 4, 16);
-            Assert.AreEqual<double[]>(new[] { 1d, 2d, 8d }, (a / 2).GetData<double>());
-            Assert.AreEqual<double[]>(new[] { 1d, 2d, 8d }, (a / b).GetData<double>());
+            Assert.AreEqual(new[] { 1d, 2d, 8d }, (a / 2).GetData<double>());
+            Assert.AreEqual(new[] { 1d, 2d, 8d }, (a / b).GetData<double>());
             Assert.AreEqual(new[] { 4, 2, .5 }, (8 / a).GetData<double>());
             Assert.AreEqual(new[] { 4, 2, -10 }, (6 - a).GetData<int>());
         }
 
-        [TestMethod]
+        [Test]
         public void ndarray_arithmetic_inplace_operators()
         {
             var a = cp.array(1, 2, 3);
@@ -427,7 +427,7 @@ namespace Cupy.UnitTest
             Assert.AreEqual(new[] { 1, 2, 3 }, a.GetData<int>());
         }
 
-        [TestMethod]
+        [Test]
         public void ndarray_value_div_ndarray()
         {
             // division operator
@@ -439,7 +439,7 @@ namespace Cupy.UnitTest
             Assert.AreEqual(new[] { 1.0, 0.0, -1.0 }, (2.0 - a).GetData<double>());
         }
 
-        [TestMethod]
+        [Test]
         public void np_where()
         {
             //>>> import Cupy as np
@@ -453,7 +453,7 @@ namespace Cupy.UnitTest
             Assert.AreEqual("array([4, 5], dtype=int64)", b[0].repr);
         }
 
-        [TestMethod]
+        [Test]
         public void GetData_noncontiguous()
         {
             var X = new int[3, 3];
@@ -483,7 +483,7 @@ namespace Cupy.UnitTest
             Assert.AreEqual("0 0 0 0 0 0 -1 0 0", string.Join(" ", cY));
         }
 
-        [TestMethod]
+        [Test]
         public void CopyDataInAndOutExample()
         {
             var a = cp.array(2, 4, 9, 25);
@@ -502,7 +502,7 @@ namespace Cupy.UnitTest
             Assert.AreEqual(new[] { 1.41, 2, 3, 5 }, roots.GetData<double>().Select(x => Math.Round(x, 2)).ToArray());
         }
 
-        [TestMethod]
+        [Test]
         public void QuestionByPiyushspss()
         {
             // cp.column_stack(cp.where(mat > 0))
@@ -543,7 +543,7 @@ namespace Cupy.UnitTest
             Assert.AreEqual(expected, cp.column_stack((a > 0).where()).repr);
         }
 
-        [TestMethod]
+        [Test]
         public void QuestionByGurelsoycaner()
         {
             //>>> import Cupy as np
@@ -558,7 +558,7 @@ namespace Cupy.UnitTest
             Assert.AreEqual("array([ 0.67082039,  0.2236068 , -0.2236068 , -0.67082039])", ex.repr);
         }
 
-        [TestMethod]
+        [Test]
         public void QuestionBySimonBuehler()
         {
             //import Cupy as np
@@ -578,7 +578,7 @@ namespace Cupy.UnitTest
             Assert.AreEqual("array([1, 2, 3, 4, 5], dtype=int64)", x.repr);
         }
 
-        [TestMethod]
+        [Test]
         public void StringArray()
         {
             //>>> a = Cupy.array(['apples', 'foobar', 'cowboy'])
@@ -605,7 +605,7 @@ namespace Cupy.UnitTest
             Assert.AreEqual("array(['apples', 'foobar', 'banana'], dtype=object)", a.repr);
         }
 
-        [TestMethod]
+        [Test]
         public void ComplexNumbers()
         {
             //>>> a = cp.array([1+2j, 3+4j, 5+6j])
@@ -638,7 +638,7 @@ namespace Cupy.UnitTest
             Assert.AreEqual(new Complex(1, 8), b[0].asscalar<Complex>());
         }
 
-        [TestMethod]
+        [Test]
         public void IssueByXlient()
         {
             var points = new[] { new Point(0, 0), new Point(17, 4), new Point(2, 22), new Point(10, 7) };
@@ -665,7 +665,7 @@ namespace Cupy.UnitTest
             rectangle[3] = pts[differnce.argmax()];
         }
 
-        [TestMethod]
+        [Test]
         public void IssueByVolgaone()
         {
             var n = cp.array(new float[,] { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } });
@@ -679,7 +679,7 @@ namespace Cupy.UnitTest
             Assert.AreEqual("2,5,8", string.Join(",", col1Data));
         }
 
-        [TestMethod]
+        [Test]
         public void IssueByNbustins()
         {
             var iarr = new int[3, 25, 25, 3];
@@ -687,7 +687,7 @@ namespace Cupy.UnitTest
             Assert.AreEqual(new Shape(3, 25, 25, 3), nd.shape);
         }
 
-        [TestMethod]
+        [Test]
         public void IssueByBanyc1()
         {
             //a = cp.array([[1, 2, 3], [4, 5, 6]])
@@ -714,7 +714,7 @@ namespace Cupy.UnitTest
             Assert.AreEqual(@"array([1, 2])", b1.repr);
         }
 
-        [TestMethod]
+        [Test]
         public void IssueByBanyc2()
         {
             var a = cp.array(new[,] { { 1, 2, 3 }, { 4, 5, 6 } });
@@ -731,7 +731,7 @@ namespace Cupy.UnitTest
             Assert.AreEqual(@"array([1, 2])", b1.repr);
         }
 
-        [TestMethod]
+        [Test]
         public void IssueByBanyc3()
         {
             //>>> a = cp.ones((1, 2, 3, 4))
@@ -786,7 +786,7 @@ namespace Cupy.UnitTest
             Assert.AreEqual(s, b.repr);
         }
 
-        [TestMethod]
+        [Test]
         public void IssueBybeanels01()
         {
             //sample = [cp.array([[1., 2., 3.]]),cp.array([[4., 5., 6.]]),cp.array([[7., 8., 9.]])]
@@ -808,7 +808,7 @@ namespace Cupy.UnitTest
             Assert.AreEqual("2, 2, 2", string.Join(", ", result));
         }
 
-        [TestMethod]
+        [Test]
         public void IssueBybeanels01a()
         {
             //sample = [cp.array([[1., 2., 3.]]),cp.array([[4., 5., 6.]]),cp.array([[7., 8., 9.]])]
@@ -830,7 +830,7 @@ namespace Cupy.UnitTest
             Assert.AreEqual("2, 2, 2", string.Join(", ", result));
         }
 
-        [TestMethod]
+        [Test]
         public void IssueByMatteo_0()
         {
             //>>> x = cp.array([0, 1, 2, 3])
@@ -854,7 +854,7 @@ namespace Cupy.UnitTest
             Assert.AreEqual("array([4.10003045, 1.09075677])", tuple.Item4.repr);
         }
 
-        [TestMethod]
+        [Test]
         public void IssueByDecemberDream()
         {
             //a = cp.array([1, 2, -2, -4, 0])
@@ -865,7 +865,7 @@ namespace Cupy.UnitTest
             Assert.AreEqual("array([ 1.41421356, -2.        , -1.41421356,  0.        ])", b.repr);
         }
 
-        [TestMethod]
+        [Test]
         public void IssueByDecemberDream2()
         {
             NDarray test = cp.array(new[,] { { 0, 1, 2 }, { 3, 4, 5 }, { 6, 7, 8 }, { 9, 10, 11 } });
@@ -879,7 +879,7 @@ namespace Cupy.UnitTest
             Assert.AreEqual("array([[ 0,  2],\n       [ 9, 11]])", b.repr);
         }
 
-        [TestMethod]
+        [Test]
         public void IssueByAmpangboy()
         {
             var arr = cp.array(1.0);
@@ -887,14 +887,14 @@ namespace Cupy.UnitTest
             Assert.AreEqual("array([1., 1.])", result.repr);
         }
 
-        [TestMethod]
+        [Test]
         public void IssueByBigpo()
         {
             var a = cp.random.randn(3, 3);
             var tmp = cp.linalg.qr(a);
         }
 
-        [TestMethod]
+        [Test]
         public void IssueByAllenP()
         {
             //>>> dx = 4.0
@@ -916,7 +916,7 @@ namespace Cupy.UnitTest
             Assert.AreEqual(expected, result.repr);
         }
 
-        [TestMethod]
+        [Test]
         public void PrimitiveConversion()
         {
             var np = cp.dynamic_self;
@@ -928,7 +928,7 @@ namespace Cupy.UnitTest
             Assert.AreEqual(1_000_000_000_000_000, (cp.Int64(1_000_000_000_000_000).item() as PyObject).As<long>());
         }
 
-        [TestMethod]
+        [Test]
         public void IssueByMegawattFs()
         {
             var arr = cp.array(1, 2, 3, 4, 5);
@@ -946,7 +946,7 @@ namespace Cupy.UnitTest
             Assert.AreEqual("array([1, 2, 3, 4])", arr3.repr);
         }
 
-        [TestMethod]
+        [Test]
         public async Task IssueByMrCOrrupted()
         {
             var arrays = new Dictionary<string, NDarray>();
@@ -965,7 +965,7 @@ namespace Cupy.UnitTest
             Assert.AreEqual(@"array([0, 1, 2])", b.repr);
         }
 
-        [TestMethod]
+        [Test]
         public async Task AsscalarRemovedInCupyV1_23()
         {
             Assert.AreEqual(143, new NDarray<int>(new[] { 143 }).asscalar<int>());
@@ -973,7 +973,7 @@ namespace Cupy.UnitTest
             Assert.AreEqual(143d, new NDarray<double>(new[] { 143d }).item());
         }
 
-        [TestMethod]
+        [Test]
         public async Task IssueByMaLichtenegger()
         {
             // byte array als uint32 array
@@ -997,7 +997,7 @@ namespace Cupy.UnitTest
             Assert.IsTrue(doubles[1].asscalar<double>() == 0);
         }
 
-        [TestMethod]
+        [Test]
         public async Task IssueByMartinDevans()
         {
             //>>> x = cp.arange(9)

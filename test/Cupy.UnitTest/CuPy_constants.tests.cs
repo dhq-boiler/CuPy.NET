@@ -1,13 +1,13 @@
 
+using NUnit.Framework;
 using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Cupy.UnitTest
 {
-    [TestClass]
+    [TestFixture]
     public class CuPyConstants
     {
-        [TestMethod]
+        [Test]
         public void infTest()
         {
             //>>> cp.inf
@@ -21,7 +21,7 @@ namespace Cupy.UnitTest
             Assert.AreEqual(float.PositiveInfinity, cp.inf);
         }
 
-        [TestMethod]
+        [Test]
         public void ninfTest()
         {
             //>>> cp.NINF
@@ -32,7 +32,7 @@ namespace Cupy.UnitTest
             Assert.AreEqual(-cp.inf, (float)((NDarray)0).log());
         }
 
-        [TestMethod]
+        [Test]
         public void NZERO_Test()
         {
             //>>> cp.NZERO
@@ -53,7 +53,7 @@ namespace Cupy.UnitTest
             Assert.IsFalse((bool)((NDarray)cp.NZERO).isinf());
         }
 
-        [TestMethod]
+        [Test]
         public void nanTest()
         {
             //>>> cp.nan
@@ -67,7 +67,7 @@ namespace Cupy.UnitTest
             Assert.AreEqual("array([       nan, 0.        , 0.69314718])", cp.log(new[] { -1, 1, 2 }).repr);
         }
 
-        [TestMethod]
+        [Test]
         public void newaxisTest()
         {
             //>>> newaxis is None
