@@ -156,11 +156,11 @@ namespace Cupy.UnitTest
             var y = cp.arange(3, dtype: cp.float_);
             given = y;
             expected =
-                "array([0., 1., 2.])";
+                "array([0., 1., 2.], dtype=float64)";
             Assert.AreEqual(expected, given.repr);
             given = cp.ones_like(y);
             expected =
-                "array([1., 1., 1.])";
+                "array([1., 1., 1.], dtype=float64)";
             Assert.AreEqual(expected, given.repr);
         }
 
