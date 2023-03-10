@@ -41,9 +41,9 @@ namespace Cupy
         {
         }
 
-        //public NDarray(bool obj) : this(new PyInt(obj))
-        //{
-        //}
+        public NDarray(bool obj) : this(obj.ToPython())
+        {
+        }
 
         public NDarray(NDarray t) : base((PyObject)t.PyObject)
         {
@@ -802,9 +802,17 @@ namespace Cupy
                 else if (regex.IsMatch(str))
                 {
                     var mcs = regex.Matches(str);
+                    int strlen = 0;
+                    //One pass
                     foreach (Match mc in mcs)
                     {
-                        str2 += OnePass(mc.Groups["arr"].ToString()).Item1;
+                        var op = OnePass(mc.Groups["arr"].ToString());
+                        strlen = Math.Max(strlen, op.Item2);
+                    }
+                    //Two pass
+                    foreach (Match mc in mcs)
+                    {
+                        str2 += TwoPass(mc.Groups["arr"].ToString(), strlen);
                         if (!Object.ReferenceEquals(mc, mcs.Last()))
                         {
                             str2 += ", ";
@@ -839,11 +847,24 @@ namespace Cupy
             var str = string.Empty;
             foreach (var element in elements)
             {
-                for (int i = 0; i < maxlen - element.Length; i++)
+                //小数点があるときは左詰め
+                if (element.Contains("."))
                 {
-                    str += " ";
+                    str += element;
+                    for (int i = 0; i < maxlen - element.Length; i++)
+                    {
+                        str += " ";
+                    }
                 }
-                str += element;
+                else //小数点がないときは右詰め
+                {
+                    for (int i = 0; i < maxlen - element.Length; i++)
+                    {
+                        str += " ";
+                    }
+                    str += element;
+                }
+
                 if (!Object.ReferenceEquals(element, elements.Last()))
                 {
                     str += ", ";
