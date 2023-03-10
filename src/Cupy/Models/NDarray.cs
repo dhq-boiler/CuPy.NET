@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using Cupy.Models;
+using Python.Runtime;
+using System;
 using System.Linq;
 using System.Numerics;
 using System.Runtime.InteropServices;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.Text.RegularExpressions;
-using Cupy.Models;
-using Python.Runtime;
 
 namespace Cupy
 {
@@ -679,9 +676,28 @@ namespace Cupy
 
                 var str2 = string.Empty;
 
-                Regex regex = new Regex("\\[{1}[^[.]+?\\]{1}");
+                Regex regex = new Regex("(?<arr>\\[[\\d\\.\\s]+\\])");
+                Regex regex2 = new Regex("^\\[\\[[\\s\\S]+?\\]\\]$");
 
-                if (regex.IsMatch(str))
+                if (regex2.IsMatch(str))
+                {
+                    var str3 = str.Replace("]\n [", "],\n       [");
+                    str3 = str3.Substring(1, str3.Length - 2);
+                    if (regex.IsMatch(str3))
+                    {
+                        var mcs = regex.Matches(str3);
+                        foreach (Match mc in mcs)
+                        {
+                            str2 += Part(mc.Groups["arr"].ToString());
+                            if (!Object.ReferenceEquals(mc, mcs.Last()))
+                            {
+                                str2 += ", ";
+                            }
+                        }
+                    }
+                    return $"[{str2}]".Replace("], [", "],\n       [");
+                }
+                else if (regex.IsMatch(str))
                 {
                     var mcs = regex.Matches(str);
                     foreach (Match mc in mcs)
@@ -718,7 +734,7 @@ namespace Cupy
                 {
                     str += " ";
                 }
-                if (element != elements.Last())
+                if (!Object.ReferenceEquals(element, elements.Last()))
                 {
                     str += ", ";
                 }
