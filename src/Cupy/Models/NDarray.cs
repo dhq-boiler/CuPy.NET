@@ -660,7 +660,7 @@ namespace Cupy
                     str += "array(";
                 }
                 str += Dig(ndim - 1, this);
-                if (ndim > 0 && !dtype.ToString().Equals("int32"))
+                if (ndim > 0 && !dtype.ToString().Equals("int32") && !dtype.ToString().Equals("bool"))
                 {
                     str += $", dtype={dtype}";
                 }
@@ -678,7 +678,7 @@ namespace Cupy
                     str += "array(";
                 }
                 str += this.ToString();
-                if (!Leaf(this).dtype.ToString().Equals("int32"))
+                if (!Leaf(this).dtype.ToString().Equals("int32") && !Leaf(this).dtype.ToString().Equals("bool"))
                 {
                     str += $", dtype={Leaf(this).dtype.ToString()}";
                 }
@@ -751,6 +751,7 @@ namespace Cupy
 
                 Regex regex = new Regex("(?<arr>\\[[\\d\\.\\s]+\\])");
                 Regex regex2 = new Regex("^\\[\\[[\\s\\S]+?\\]\\]$");
+                Regex regex3 = new Regex("\\[(?<elms>[\\s\\S]+?)\\]");
 
                 if (regex2.IsMatch(str))
                 {
@@ -761,7 +762,27 @@ namespace Cupy
                         var mcs = regex.Matches(str3);
                         foreach (Match mc in mcs)
                         {
-                            str2 += Part(mc.Groups["arr"].ToString());
+                            str2 += OnePass(mc.Groups["arr"].ToString()).Item1;
+                            if (!Object.ReferenceEquals(mc, mcs.Last()))
+                            {
+                                str2 += ", ";
+                            }
+                        }
+                    }
+                    else if (regex3.IsMatch(str3))
+                    {
+                        var mcs = regex3.Matches(str3);
+                        int strlen = 0;
+                        //One pass
+                        foreach (Match mc in mcs)
+                        {
+                            var op = OnePass(mc.Groups["elms"].ToString());
+                            strlen = Math.Max(strlen, op.Item2);
+                        }
+                        //Two pass
+                        foreach (Match mc in mcs)
+                        {
+                            str2 += TwoPass(mc.Groups["elms"].ToString(), strlen);
                             if (!Object.ReferenceEquals(mc, mcs.Last()))
                             {
                                 str2 += ", ";
@@ -775,7 +796,7 @@ namespace Cupy
                     var mcs = regex.Matches(str);
                     foreach (Match mc in mcs)
                     {
-                        str2 += Part(mc.Groups["arr"].ToString());
+                        str2 += OnePass(mc.Groups["arr"].ToString()).Item1;
                         if (!Object.ReferenceEquals(mc, mcs.Last()))
                         {
                             str2 += ", ";
@@ -792,13 +813,39 @@ namespace Cupy
                 }
                 else
                 {
-                    str2 += Part(str);
+                    str2 += OnePass(str).Item1;
                     return $"{str2}".Replace("], [", "],\n       [");
                 }
             }
         }
 
-        private string Part(string str)
+        private string TwoPass(string str, int strlen)
+        {
+            var elements = str.Split('[', ',', ' ', ']');
+            elements = elements.Where(x => !string.IsNullOrWhiteSpace(x)).ToArray();
+            int maxlen = strlen;
+            str = string.Empty;
+            foreach (var element in elements)
+            {
+                for (int i = 0; i < maxlen - element.Length; i++)
+                {
+                    str += " ";
+                }
+                str += element;
+                if (!Object.ReferenceEquals(element, elements.Last()))
+                {
+                    str += ", ";
+                }
+            }
+            if (str.Contains(','))
+            {
+                str = $"[{str}]";
+            }
+            str = str.Replace("\n, ", ",\n       ");
+            return str;
+        }
+
+        private (string, int) OnePass(string str)
         {
             var elements = str.Split('[', ',', ' ', ']');
             elements = elements.Where(x => !string.IsNullOrWhiteSpace(x)).ToArray();
@@ -821,7 +868,7 @@ namespace Cupy
                 str = $"[{str}]";
             }
             str = str.Replace("\n, ", ",\n       ");
-            return str;
+            return (str, elements.Max(x => x.Length));
         }
     }
 
