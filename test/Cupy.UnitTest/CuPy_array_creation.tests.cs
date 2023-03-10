@@ -173,7 +173,7 @@ namespace Cupy.UnitTest
 
             var given = cp.zeros(5);
             var expected =
-                "array([0., 0., 0., 0., 0.])";
+                "array([0., 0., 0., 0., 0.], dtype=float64)";
             Assert.AreEqual(expected, given.repr);
 
             // >>> cp.zeros((5,), dtype=int)
