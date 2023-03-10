@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Numerics;
@@ -158,7 +159,7 @@ namespace Cupy
         /// <summary>
         ///     returns the 'array([ .... ])'-representation known from the console
         /// </summary>
-        public string repr => self.InvokeMethod("__repr__").As<string>();
+        public string repr => ToString(1);
 
         /// <summary>
         ///     returns the '[ .... ]'-representation
@@ -193,8 +194,16 @@ namespace Cupy
         {
             get
             {
-                var tuple = ToTuple(coords);
-                return new NDarray(PyObject[tuple]);
+                if (coords.Length == 1)
+                {
+                    var pyint = new PyInt(coords[0]);
+                    return new NDarray(PyObject[pyint]);
+                }
+                else
+                {
+                    var tuple = ToTuple(coords);
+                    return new NDarray(PyObject[tuple]);
+                }
             }
             set
             {
@@ -601,6 +610,76 @@ namespace Cupy
             dynamic py = __self__.InvokeMethod("transpose", pyargs);
             return ToCsharp<NDarray>(py);
         }
+
+        
+        public string ToString(int depth)
+        {
+            if (self.HasAttr("ndim"))
+            {
+                var str = string.Empty;
+                if (depth == 1)
+                {
+                    str += "array(";
+                }
+                str += Dig(ndim - 1, this);
+                if (!dtype.ToString().Equals("int32"))
+                {
+                    str += $", dtype={dtype}";
+                }
+                if (depth == 1)
+                {
+                    str += ")";
+                }
+                return str;
+            }
+            else
+            {
+                var str = "[";
+                for (int i = 0; i < this.len; i++)
+                {
+                    str += this[i].ToString(depth + 1);
+                    if (i < this.len - 1)
+                    {
+                        str += ", ";
+                    }
+                }
+                str += "]";
+                return str;
+            }
+        }
+
+        private string Dig(int dim, NDarray arr)
+        {
+            if (dim > 1)
+            {
+                var str = "[";
+                for (int i = 0; i < arr.len; i++)
+                {
+                    str += Dig(dim - 1, arr[i]);
+                    if (i < arr.len - 1)
+                    {
+                        str += ",";
+                        if (dim > 0)
+                        {
+                            str += "\n       ";
+                        }
+                        else
+                        {
+                            str += " ";
+                        }
+                    }
+                }
+                str += "]";
+                return str;
+            }
+            else
+            {
+                var str = base.ToString();
+                str = string.Join(", ", str.Split(' '));
+                str = str.Replace("\n, ", ",\n       ");
+                return str;
+            }
+        }
     }
 
     public class NDarray<T> : NDarray
@@ -718,6 +797,47 @@ namespace Cupy
             if (typeof(T) == typeof(Complex))
                 return (T)(object)new Complex(real.asscalar<double>(), imag.asscalar<double>());
             return self.InvokeMethod("item").As<T>();
+        }
+
+        public override string ToString()
+        {
+            var str = $"array({Dig(ndim - 1, this)}";
+            if (!dtype.ToString().Equals("int32"))
+            {
+                str += $", dtype={dtype}";
+            }
+            str += ")";
+            return str;
+        }
+
+        private string Dig(int dim, NDarray arr)
+        {
+            if (dim == -1)
+            {
+                return arr.asscalar<T>().ToString();
+            }
+            else
+            {
+                var str = "[";
+                for (int i = 0; i < arr.len; i++)
+                {
+                    str += Dig(dim - 1, arr[i]);
+                    if (i < arr.len - 1)
+                    {
+                        str += ",";
+                        if (dim > 0)
+                        {
+                            str += "\n       ";
+                        }
+                        else
+                        {
+                            str += " ";
+                        }
+                    }
+                }
+                str += "]";
+                return str;
+            }
         }
     }
 }
