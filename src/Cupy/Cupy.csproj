@@ -32,7 +32,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.CSharp" Version="4.7.0"></PackageReference>
-		<PackageReference Include="Python.Included" Version="3.11.1"></PackageReference>
+		<PackageReference Include="Python.Included" Version="3.11.2"></PackageReference>
 		<PackageReference Include="pythonnet" Version="3.0.1" />
 	</ItemGroup>
 
