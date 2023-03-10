@@ -598,18 +598,54 @@ namespace Cupy
         /// </returns>
         public NDarray transpose(params int[] axes)
         {
-            //auto-generated code, do not change
-            var __self__ = self;
-            var pyargs = ToTuple(new object[]
-            {
-                ToPython(axes)
-            });
-            //if (axes != null) kwargs["axes"] = ToPython(axes);
-            dynamic py = __self__.InvokeMethod("transpose", pyargs);
-            return ToCsharp<NDarray>(py);
+            return cp.transpose(this, axes);
         }
 
-        
+        public override string ToString()
+        {
+            if (self.HasAttr("ndim"))
+            {
+                return Dig(ndim - 1, this);
+            }
+            else
+            {
+                return ToStringAsList();
+            }
+        }
+
+        private string ToStringAsList()
+        {
+            var this_0 = this[0];
+            var col = this_0.len;
+            var row = this.len;
+            var i = 0;
+            var str = string.Empty;
+            var tr = this.transpose();
+            str += "[";
+            while (i < row)
+            {
+                var j = 0;
+                str += "[";
+                while (j < col)
+                {
+                    str += ToCsharp<int>(tr[j][i]);
+                    if (j < col - 1)
+                    {
+                        str += ", ";
+                    }
+                    j += 1;
+                }
+                str += "]";
+                if (i < row - 1)
+                {
+                    str += ", ";
+                }
+                i += 1;
+            }
+            str += "]";
+            return str;
+        }
+
         public string ToString(int depth)
         {
             if (self.HasAttr("ndim"))
@@ -620,7 +656,7 @@ namespace Cupy
                     str += "array(";
                 }
                 str += Dig(ndim - 1, this);
-                if (!dtype.ToString().Equals("int32"))
+                if (ndim > 0 && !dtype.ToString().Equals("int32"))
                 {
                     str += $", dtype={dtype}";
                 }
@@ -628,6 +664,29 @@ namespace Cupy
                 {
                     str += ")";
                 }
+                return str;
+            }
+            else if (depth == 1)
+            {
+                var str = string.Empty;
+                if (depth == 1)
+                {
+                    str += "array(";
+                }
+                str += this.ToString();
+                if (!this[0][0].dtype.ToString().Equals("int32"))
+                {
+                    str += $", dtype={this[0][0].dtype.ToString()}";
+                }
+                if (depth == 1)
+                {
+                    str += ")";
+                }
+                return $"{str}".Replace("], [", "],\n       [");
+            }
+            else if (this.len == 1)
+            {
+                var str = this[0].ToString(depth + 1);
                 return str;
             }
             else
@@ -743,7 +802,10 @@ namespace Cupy
                     str += ", ";
                 }
             }
-            str = $"[{str}]";
+            if (str.Contains(','))
+            {
+                str = $"[{str}]";
+            }
             str = str.Replace("\n, ", ",\n       ");
             return str;
         }
@@ -793,8 +855,16 @@ namespace Cupy
         {
             get
             {
-                var tuple = ToTuple(coords);
-                return new NDarray<T>(PyObject[tuple]);
+                if (coords.Length == 1)
+                {
+                    var pyint = new PyInt(coords[0]);
+                    return new NDarray<T>(PyObject[pyint]);
+                }
+                else
+                {
+                    var tuple = ToTuple(coords);
+                    return new NDarray<T>(PyObject[tuple]);
+                }
             }
             set
             {

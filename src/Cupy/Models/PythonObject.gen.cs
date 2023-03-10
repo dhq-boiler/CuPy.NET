@@ -81,6 +81,7 @@ namespace Cupy
                         rv[i] = ToCsharp<NDarray>(po[i]);
                     return (T)(object)rv;
                 case "Matrix": return (T)(object)new Matrix(pyobj);
+                case "Int32": return Int32.Parse(pyobj.str);
                 default:
                     var pyClass = $"{pyobj.__class__}";
                     if (pyClass == "<class 'str'>") return (T)(object)pyobj.ToString();
