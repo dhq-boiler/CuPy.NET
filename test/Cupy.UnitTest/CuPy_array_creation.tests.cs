@@ -83,7 +83,7 @@ namespace Cupy.UnitTest
             // 
             var given = cp.ones(5);
             var expected =
-                "array([1., 1., 1., 1., 1.])";
+                "array([1., 1., 1., 1., 1.], dtype=float64)";
             Assert.AreEqual(expected, given.repr);
 
             // >>> cp.ones((5,), dtype=int)
@@ -103,7 +103,7 @@ namespace Cupy.UnitTest
             given = cp.ones(new Shape(2, 1));
             expected =
                 "array([[1.],\n" +
-                "       [1.]])";
+                "       [1.]], dtype=float64)";
             Assert.AreEqual(expected, given.repr);
 
             // >>> s = (2,2)
@@ -116,7 +116,7 @@ namespace Cupy.UnitTest
             given = cp.ones(s);
             expected =
                 "array([[1., 1.],\n" +
-                "       [1., 1.]])";
+                "       [1., 1.]], dtype=float64)";
             Assert.AreEqual(expected, given.repr);
         }
 
