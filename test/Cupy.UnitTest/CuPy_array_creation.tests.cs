@@ -55,7 +55,7 @@ namespace Cupy.UnitTest
             expected =
                 "array([[0., 1., 0.],\n" +
                 "       [0., 0., 1.],\n" +
-                "       [0., 0., 0.]])";
+                "       [0., 0., 0.]], dtype=float64)";
             Assert.AreEqual(expected, given.repr);
         }
 
@@ -71,7 +71,7 @@ namespace Cupy.UnitTest
             var expected =
                 "array([[1., 0., 0.],\n" +
                 "       [0., 1., 0.],\n" +
-                "       [0., 0., 1.]])";
+                "       [0., 0., 1.]], dtype=float64)";
             Assert.AreEqual(expected, given.repr);
         }
 
@@ -412,7 +412,7 @@ namespace Cupy.UnitTest
 
             given = cp.array(1, 2, 3.0);
             expected =
-                "array([1., 2., 3.])";
+                "array([1., 2., 3.], dtype=float64)";
             Assert.AreEqual(expected, given.repr);
             // More than one dimension:
 
@@ -446,7 +446,7 @@ namespace Cupy.UnitTest
 
             given = cp.array(new[] { 1, 2, 3 }, cp.complex_);
             expected =
-                "array([1.+0.j, 2.+0.j, 3.+0.j])";
+                "array([1.+0.j, 2.+0.j, 3.+0.j], dtype=complex128)";
             Assert.AreEqual(expected, given.repr);
 
             // Data-type consisting of more than one element:
@@ -1078,15 +1078,15 @@ namespace Cupy.UnitTest
 
             var given = cp.linspace(2.0, 3.0, 5);
             var expected =
-                "array([2.  , 2.25, 2.5 , 2.75, 3.  ])";
+                "array([2.  , 2.25, 2.5 , 2.75, 3.  ], dtype=float64)";
             Assert.AreEqual(expected, given.repr);
             given = cp.linspace(2.0, 3.0, 5, false);
             expected =
-                "array([2. , 2.2, 2.4, 2.6, 2.8])";
+                "array([2. , 2.2, 2.4, 2.6, 2.8], dtype=float64)";
             Assert.AreEqual(expected, given.repr);
             given = cp.linspace(2, 3, out var step, 5, true);
             expected =
-                "array([2.  , 2.25, 2.5 , 2.75, 3.  ])";
+                "array([2.  , 2.25, 2.5 , 2.75, 3.  ], dtype=float64)";
             Assert.AreEqual(expected, given.repr);
             Assert.AreEqual(step, 0.25);
         }
