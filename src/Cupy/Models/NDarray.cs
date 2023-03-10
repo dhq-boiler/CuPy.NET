@@ -607,6 +607,10 @@ namespace Cupy
             {
                 return Dig(ndim - 1, this);
             }
+            else if (!base.ToString().Contains("[[") && !base.ToString().Contains("]]"))
+            {
+                return base.ToString();
+            }
             else
             {
                 return ToStringAsList();
@@ -674,9 +678,9 @@ namespace Cupy
                     str += "array(";
                 }
                 str += this.ToString();
-                if (!this[0][0].dtype.ToString().Equals("int32"))
+                if (!Leaf(this).dtype.ToString().Equals("int32"))
                 {
-                    str += $", dtype={this[0][0].dtype.ToString()}";
+                    str += $", dtype={Leaf(this).dtype.ToString()}";
                 }
                 if (depth == 1)
                 {
@@ -703,6 +707,16 @@ namespace Cupy
                 str += "]";
                 return str;
             }
+        }
+
+        private NDarray Leaf(NDarray ndArray)
+        {
+            var target = ndArray;
+            while (target.ToString().Contains("["))
+            {
+                target = target[0];
+            }
+            return target;
         }
 
         private string Dig(int dim, NDarray arr)
