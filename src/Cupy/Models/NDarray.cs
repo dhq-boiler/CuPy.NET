@@ -702,16 +702,20 @@ namespace Cupy
                     var mcs = regex.Matches(str);
                     foreach (Match mc in mcs)
                     {
-                        foreach (Group group in mc.Groups)
-                        {
-                            str2 += Part(group.ToString());
-                        }
-                        if (mc != mcs.Last())
+                        str2 += Part(mc.Groups["arr"].ToString());
+                        if (!Object.ReferenceEquals(mc, mcs.Last()))
                         {
                             str2 += ", ";
                         }
                     }
-                    return $"[{str2}]".Replace("], [", "],\n       [");
+                    if (mcs.Count() > 1)
+                    {
+                        return $"[{str2}]".Replace("], [", "],\n       [");
+                    }
+                    else
+                    {
+                        return $"{str2}".Replace("], [", "],\n       [");
+                    }
                 }
                 else
                 {
