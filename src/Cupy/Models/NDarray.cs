@@ -760,9 +760,17 @@ namespace Cupy
                     if (regex.IsMatch(str3))
                     {
                         var mcs = regex.Matches(str3);
+                        int strlen = 0;
+                        //One pass
                         foreach (Match mc in mcs)
                         {
-                            str2 += OnePass(mc.Groups["arr"].ToString()).Item1;
+                            var op = OnePass(mc.Groups["arr"].ToString());
+                            strlen = Math.Max(strlen, op.Item2);
+                        }
+                        //Two pass
+                        foreach (Match mc in mcs)
+                        {
+                            str2 += TwoPass(mc.Groups["arr"].ToString(), strlen);
                             if (!Object.ReferenceEquals(mc, mcs.Last()))
                             {
                                 str2 += ", ";
@@ -819,12 +827,16 @@ namespace Cupy
             }
         }
 
-        private string TwoPass(string str, int strlen)
+        private string TwoPass(string input, int strlen)
         {
-            var elements = str.Split('[', ',', ' ', ']');
+            if (!input.Contains(',') && !input.Contains(' '))
+            {
+                return input;
+            }
+            var elements = input.Split('[', ',', ' ', ']');
             elements = elements.Where(x => !string.IsNullOrWhiteSpace(x)).ToArray();
             int maxlen = strlen;
-            str = string.Empty;
+            var str = string.Empty;
             foreach (var element in elements)
             {
                 for (int i = 0; i < maxlen - element.Length; i++)
