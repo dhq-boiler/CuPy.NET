@@ -5,6 +5,7 @@ using System.Linq;
 using System.Numerics;
 using System.Runtime.InteropServices;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Text.RegularExpressions;
 using Cupy.Models;
 using Python.Runtime;
 
@@ -675,10 +676,56 @@ namespace Cupy
             else
             {
                 var str = base.ToString();
-                str = string.Join(", ", str.Split(' '));
-                str = str.Replace("\n, ", ",\n       ");
-                return str;
+
+                var str2 = string.Empty;
+
+                Regex regex = new Regex("\\[{1}[^[.]+?\\]{1}");
+
+                if (regex.IsMatch(str))
+                {
+                    var mcs = regex.Matches(str);
+                    foreach (Match mc in mcs)
+                    {
+                        foreach (Group group in mc.Groups)
+                        {
+                            str2 += Part(group.ToString());
+                        }
+                        if (mc != mcs.Last())
+                        {
+                            str2 += ", ";
+                        }
+                    }
+                    return $"[{str2}]".Replace("], [", "],\n       [");
+                }
+                else
+                {
+                    str2 += Part(str);
+                    return $"{str2}".Replace("], [", "],\n       [");
+                }
             }
+        }
+
+        private string Part(string str)
+        {
+            var elements = str.Split('[', ',', ' ', ']');
+            elements = elements.Where(x => !string.IsNullOrWhiteSpace(x)).ToArray();
+            int maxlen = elements.Max(x => x.Length);
+            str = string.Empty;
+            foreach (var element in elements)
+            {
+                str += element;
+                for (int i = 0; i < maxlen - element.Length; i++)
+                {
+                    str += " ";
+                }
+                if (element != elements.Last())
+                {
+                    str += ", ";
+                }
+            }
+            str = $"[{str}]";
+            str = str.Replace("\n, ", ",\n       ");
+            return str;
         }
     }
 
