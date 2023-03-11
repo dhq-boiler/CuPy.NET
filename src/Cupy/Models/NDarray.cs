@@ -749,7 +749,7 @@ namespace Cupy
 
                 var str2 = string.Empty;
 
-                Regex regex = new Regex("(?<arr>\\[[\\d\\.\\s]+\\])");
+                Regex regex = new Regex("(?<arr>\\[[-\\d\\.\\s]+\\])");
                 Regex regex2 = new Regex("^\\[\\[[\\s\\S]+?\\]\\]$");
                 Regex regex3 = new Regex("\\[(?<elms>[\\s\\S]+?)\\]");
 
