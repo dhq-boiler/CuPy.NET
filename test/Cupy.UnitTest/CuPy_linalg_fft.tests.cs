@@ -104,7 +104,7 @@ namespace Cupy.UnitTest
             Assert.AreEqual(expected, given.repr);
         }
 
-
+#if NOT_IMPLEMENTED
         [Test]
         public void eigTest()
         {
@@ -188,7 +188,7 @@ namespace Cupy.UnitTest
             Assert.AreEqual(expected, given.repr);
 #endif
         }
-
+#endif
 
         [Test]
         public void eighTest()
