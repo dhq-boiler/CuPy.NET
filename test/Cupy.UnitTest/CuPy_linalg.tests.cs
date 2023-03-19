@@ -628,7 +628,7 @@ namespace Cupy.UnitTest
 
             var given = cp.einsum("ii", a);
             var expected =
-                "60";
+                "array(60)";
 #if TODO
             Assert.AreEqual(expected, given.repr);
             given = cp.einsum(new[] { a, (NDarray)cp.array(0, 0) });
@@ -638,7 +638,7 @@ namespace Cupy.UnitTest
 #endif
             given = a.trace();
             expected =
-                "60";
+                "array(60)";
             Assert.AreEqual(expected, given.repr);
 
             // Extract the diagonal (requires explicit form):
