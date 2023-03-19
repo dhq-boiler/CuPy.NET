@@ -555,7 +555,7 @@ namespace Cupy.UnitTest
             var P1 = cp.array(1, 2, 3, 4);
             var P2 = cp.array(4, 3, 2, 1);
             var ex = (P2 - P1) / cp.linalg.norm(P2 - P1);
-            Assert.AreEqual("array([ 0.67082039,  0.2236068 , -0.2236068 , -0.67082039])", ex.repr);
+            Assert.AreEqual("array([ 0.67082039,  0.2236068 , -0.2236068 , -0.67082039], dtype=float64)", ex.repr);
         }
 
         [Test]

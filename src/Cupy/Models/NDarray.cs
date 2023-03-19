@@ -707,16 +707,20 @@ namespace Cupy
                     {
                         var mcs = regex.Matches(str3);
                         int strlen = 0;
+                        int integerPartMaxLen = 0;
+                        int decimalPartMaxLen = 0;
                         //One pass
                         foreach (Match mc in mcs)
                         {
                             var op = OnePass(mc.Groups["arr"].ToString());
                             strlen = Math.Max(strlen, op.Item2);
+                            integerPartMaxLen = Math.Max(integerPartMaxLen, op.Item3);
+                            decimalPartMaxLen = Math.Max(decimalPartMaxLen, op.Item4);
                         }
                         //Two pass
                         foreach (Match mc in mcs)
                         {
-                            str2 += TwoPass(mc.Groups["arr"].ToString(), strlen);
+                            str2 += TwoPass(mc.Groups["arr"].ToString(), strlen, integerPartMaxLen, decimalPartMaxLen);
                             if (!Object.ReferenceEquals(mc, mcs.Last()))
                             {
                                 str2 += ", ";
@@ -727,16 +731,20 @@ namespace Cupy
                     {
                         var mcs = regex3.Matches(str3);
                         int strlen = 0;
+                        int integerPartMaxLen = 0;
+                        int decimalPartMaxLen = 0;
                         //One pass
                         foreach (Match mc in mcs)
                         {
                             var op = OnePass(mc.Groups["elms"].ToString());
                             strlen = Math.Max(strlen, op.Item2);
+                            integerPartMaxLen = Math.Max(integerPartMaxLen, op.Item3);
+                            decimalPartMaxLen = Math.Max(decimalPartMaxLen, op.Item4);
                         }
                         //Two pass
                         foreach (Match mc in mcs)
                         {
-                            str2 += TwoPass(mc.Groups["elms"].ToString(), strlen);
+                            str2 += TwoPass(mc.Groups["elms"].ToString(), strlen, integerPartMaxLen, decimalPartMaxLen);
                             if (!Object.ReferenceEquals(mc, mcs.Last()))
                             {
                                 str2 += ", ";
@@ -749,16 +757,20 @@ namespace Cupy
                 {
                     var mcs = regex.Matches(str);
                     int strlen = 0;
+                    int integerPartMaxLen = 0;
+                    int decimalPartMaxLen = 0;
                     //One pass
                     foreach (Match mc in mcs)
                     {
                         var op = OnePass(mc.Groups["arr"].ToString());
                         strlen = Math.Max(strlen, op.Item2);
+                        integerPartMaxLen = Math.Max(integerPartMaxLen, op.Item3);
+                        decimalPartMaxLen = Math.Max(decimalPartMaxLen, op.Item4);
                     }
                     //Two pass
                     foreach (Match mc in mcs)
                     {
-                        str2 += TwoPass(mc.Groups["arr"].ToString(), strlen);
+                        str2 += TwoPass(mc.Groups["arr"].ToString(), strlen, integerPartMaxLen, decimalPartMaxLen);
                         if (!Object.ReferenceEquals(mc, mcs.Last()))
                         {
                             str2 += ", ";
@@ -781,7 +793,7 @@ namespace Cupy
             }
         }
 
-        private string TwoPass(string input, int strlen)
+        private string TwoPass(string input, int strlen, int integerPartMaxLen, int decimalPartMaxLen)
         {
             if (!input.Contains(',') && !input.Contains(' '))
             {
@@ -791,13 +803,38 @@ namespace Cupy
             elements = elements.Where(x => !string.IsNullOrWhiteSpace(x)).ToArray();
             int maxlen = strlen;
             var str = string.Empty;
+            var regex = new Regex("(?<integerPart>-?\\d+?)\\.(?<decimalPart>\\d+?)");
             foreach (var element in elements)
             {
+
                 //小数点があるときは左詰め
                 if (element.Contains("."))
                 {
+                    int count = 0;
+                    if (regex.IsMatch(element))
+                    {
+                        var mc = regex.Match(element);
+                        var integerPartStr = mc.Groups["integerPart"].Value;
+                        var decimalPartStr = mc.Groups["decimalPart"].Value;
+                        for (int i = 0; i < integerPartMaxLen - integerPartStr.Length; i++)
+                        {
+                            str += " ";
+                            count++;
+                        }
+                    }
                     str += element;
-                    for (int i = 0; i < maxlen - element.Length; i++)
+                    if (regex.IsMatch(element))
+                    {
+                        var mc = regex.Match(element);
+                        var integerPartStr = mc.Groups["integerPart"].Value;
+                        var decimalPartStr = mc.Groups["decimalPart"].Value;
+                        for (int i = 0; i < decimalPartMaxLen - decimalPartStr.Length; i++)
+                        {
+                            str += " ";
+                            count++;
+                        }
+                    }
+                    for (int i = 0; i < maxlen - count - element.Length; i++)
                     {
                         str += " ";
                     }
@@ -824,14 +861,26 @@ namespace Cupy
             return str;
         }
 
-        private (string, int) OnePass(string str)
+        private (string, int, int, int) OnePass(string str)
         {
             var elements = str.Split('[', ',', ' ', ']');
             elements = elements.Where(x => !string.IsNullOrWhiteSpace(x)).ToArray();
             int maxlen = elements.Max(x => x.Length);
+            int integerPartMaxLen = 0;
+            int decimalPartMaxLen = 0;
             str = string.Empty;
+            var regex = new Regex("(?<integerPart>-?\\d+?)\\.(?<decimalPart>\\d+?)");
             foreach (var element in elements)
             {
+                if (regex.IsMatch(element))
+                {
+                    var mc = regex.Match(element);
+                    var integerPartStr = mc.Groups["integerPart"].Value;
+                    integerPartMaxLen = Math.Max(integerPartMaxLen, integerPartStr.Length);
+                    var decimalPartStr = mc.Groups["decimalPart"].Value;
+                    decimalPartMaxLen = Math.Max(decimalPartMaxLen, decimalPartStr.Length);
+                }
+
                 str += element;
                 for (int i = 0; i < maxlen - element.Length; i++)
                 {
@@ -847,7 +896,7 @@ namespace Cupy
                 str = $"[{str}]";
             }
             str = str.Replace("\n, ", ",\n       ");
-            return (str, elements.Max(x => x.Length));
+            return (str, elements.Max(x => x.Length), integerPartMaxLen, decimalPartMaxLen);
         }
     }
 
