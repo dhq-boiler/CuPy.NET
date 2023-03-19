@@ -492,7 +492,7 @@ namespace Cupy.UnitTest
             var roots = a.sqrt();
             Console.WriteLine(roots.repr);
             // array([1.41421356, 2.        , 3.        , 5.        ])
-            Assert.AreEqual("array([1.41421356, 2.        , 3.        , 5.        ])", roots.repr);
+            Assert.AreEqual("array([1.41421356, 2.        , 3.        , 5.        ], dtype=float64)", roots.repr);
             Console.WriteLine(string.Join(", ", roots.GetData<int>()));
             // 1719614413, 1073127582, 0, 1073741824
             Console.WriteLine("roots.dtype: " + roots.dtype);
@@ -612,19 +612,19 @@ namespace Cupy.UnitTest
             //>>> a.imag
             //array([2.,  4.,  6.])
             var a = cp.array(new Complex(1, 2), new Complex(3, 4), new Complex(5, 6));
-            Assert.AreEqual("array([1., 3., 5.])", a.real.repr);
-            Assert.AreEqual("array([2., 4., 6.])", a.imag.repr);
+            Assert.AreEqual("array([1., 3., 5.], dtype=float64)", a.real.repr);
+            Assert.AreEqual("array([2., 4., 6.], dtype=float64)", a.imag.repr);
             //>>> cp.imag(a)
             //array([2., 4., 6.])
             //>>> cp.real(a)
             //array([1., 3., 5.])
-            Assert.AreEqual("array([1., 3., 5.])", a.real().repr);
-            Assert.AreEqual("array([2., 4., 6.])", a.imag().repr);
+            Assert.AreEqual("array([1., 3., 5.], dtype=float64)", a.real().repr);
+            Assert.AreEqual("array([2., 4., 6.], dtype=float64)", a.imag().repr);
             //>>> a.imag = cp.array([8, 10, 12])
             //>>> a
             //array([1. +8.j,  3.+10.j,  5.+12.j])
             a.imag = cp.array(8, 10, 12);
-            Assert.AreEqual("array([1. +8.j, 3.+10.j, 5.+12.j])", a.repr);
+            Assert.AreEqual("array([1. +8.j, 3.+10.j, 5.+12.j], dtype=complex128)", a.repr);
             //>>> cp.imag(1 + 1j)
             //1.0
             Assert.AreEqual(1.0, cp.imag(new Complex(1, 1)).asscalar<double>());
