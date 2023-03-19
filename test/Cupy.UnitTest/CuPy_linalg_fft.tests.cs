@@ -1108,7 +1108,7 @@ namespace Cupy.UnitTest
                 "array([[1.+0.j, 0.+0.j, 0.+0.j, 0.+0.j],\n" +
                 "       [0.+0.j, 0.+0.j, 0.+0.j, 1.+0.j],\n" +
                 "       [0.+0.j, 0.+0.j, 1.+0.j, 0.+0.j],\n" +
-                "       [0.+0.j, 1.+0.j, 0.+0.j, 0.+0.j]])";
+                "       [0.+0.j, 1.+0.j, 0.+0.j, 0.+0.j]], dtype=complex128)";
             Assert.AreEqual(expected, given.repr);
         }
 
