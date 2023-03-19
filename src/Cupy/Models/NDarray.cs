@@ -320,61 +320,7 @@ namespace Cupy
         /// </summary>
         public unsafe T[] GetData<T>()
         {
-            if (!PyObject.flags.c_contiguous)
-                return cp.ascontiguousarray(this).GetData<T>();
-            byte[] arr = SerializeObject(Convert.ChangeType(PyObject, PyObject.__class__.GetType()));
-            var handler = GCHandle.Alloc(arr, GCHandleType.Pinned);
-            long ptr = handler.AddrOfPinnedObject().ToInt64();
-            //TypedReference typedRef = __makeref(PyObject.data);
-            //byte* p = *(byte**)(&typedRef);
-            //fixed (p)
-            //{
-            //long ptr = (long)PyObject.data;
-            int size = PyObject.size;
-            object array = null;
-            if (typeof(T) == typeof(byte)) array = new byte[size];
-            else if (typeof(T) == typeof(short)) array = new short[size];
-            else if (typeof(T) == typeof(int)) array = new int[size];
-            else if (typeof(T) == typeof(long)) array = new long[size];
-            else if (typeof(T) == typeof(float)) array = new float[size];
-            else if (typeof(T) == typeof(double)) array = new double[size];
-            else if (typeof(T) == typeof(bool)) array = new byte[size];
-            else if (typeof(T) == typeof(Complex)) array = new Complex[size];
-            else
-                throw new InvalidOperationException(
-                    "Can not copy the data with data type due to limitations of Marshal.Copy: " + typeof(T).Name);
-            switch (array)
-            {
-                case byte[] a:
-                    Marshal.Copy(new IntPtr(ptr), a, 0, a.Length);
-                    break;
-                case short[] a:
-                    Marshal.Copy(new IntPtr(ptr), a, 0, a.Length);
-                    break;
-                case int[] a:
-                    Marshal.Copy(new IntPtr(ptr), a, 0, a.Length);
-                    break;
-                case long[] a:
-                    Marshal.Copy(new IntPtr(ptr), a, 0, a.Length);
-                    break;
-                case float[] a:
-                    Marshal.Copy(new IntPtr(ptr), a, 0, a.Length);
-                    break;
-                case double[] a:
-                    Marshal.Copy(new IntPtr(ptr), a, 0, a.Length);
-                    break;
-                case Complex[] a:
-                    var real = this.real.GetData<double>();
-                    var imag = this.imag.GetData<double>();
-                    for (var i = 0; i < a.Length; i++)
-                        a[i] = new Complex(real[i], imag[i]);
-                    break;
-            }
-            //}
-
-            // special handling for types that are not supported by Marshal.Copy: must be converted i.e. 1 => true, 0 => false
-            if (typeof(T) == typeof(bool)) return (T[])(object)((byte[])array).Select(x => x > 0).ToArray();
-            return (T[])array;
+            return ToCsharp<T[]>(this);
         }
 
         /// <summary>

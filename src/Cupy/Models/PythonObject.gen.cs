@@ -81,7 +81,86 @@ namespace Cupy
                         rv[i] = ToCsharp<NDarray>(po[i]);
                     return (T)(object)rv;
                 case "Matrix": return (T)(object)new Matrix(pyobj);
-                case "Int32": return Int32.Parse(pyobj.str);
+                case "Int16": return Int16.Parse(pyobj.ToString());
+                case "Int32": return Int32.Parse(pyobj.ToString());
+                case "Int64": return Int64.Parse(pyobj.ToString());
+                case "UInt16": return UInt16.Parse(pyobj.ToString());
+                case "UInt32": return UInt32.Parse(pyobj.ToString());
+                case "UInt64": return UInt64.Parse(pyobj.ToString());
+                case "Float": return float.Parse(pyobj.ToString());
+                case "Double": return double.Parse(pyobj.ToString());
+                case "Int16[]":
+                    {
+                        var _po = (pyobj as PythonObject).PyObject;
+                        var _len = _po.Length();
+                        var _rv = new Int16[_len];
+                        for (var i = 0; i < _len; i++)
+                            _rv[i] = ToCsharp<Int16>(_po[i]);
+                        return (T)(object)_rv;
+                    }
+                case "Int32[]":
+                    {
+                        var _po = (pyobj as PythonObject).PyObject;
+                        var _len = _po.Length();
+                        var _rv = new int[_len];
+                        for (var i = 0; i < _len; i++)
+                            _rv[i] = ToCsharp<Int32>(_po[i]);
+                        return (T)(object)_rv;
+                    }
+                case "Int64[]":
+                    {
+                        var _po = (pyobj as PythonObject).PyObject;
+                        var _len = _po.Length();
+                        var _rv = new Int64[_len];
+                        for (var i = 0; i < _len; i++)
+                            _rv[i] = ToCsharp<Int64>(_po[i]);
+                        return (T)(object)_rv;
+                    }
+                case "UInt16[]":
+                    {
+                        var _po = (pyobj as PythonObject).PyObject;
+                        var _len = _po.Length();
+                        var _rv = new UInt16[_len];
+                        for (var i = 0; i < _len; i++)
+                            _rv[i] = ToCsharp<UInt16>(_po[i]);
+                        return (T)(object)_rv;
+                    }
+                case "UInt32[]":
+                    {
+                        var _po = (pyobj as PythonObject).PyObject;
+                        var _len = _po.Length();
+                        var _rv = new UInt32[_len];
+                        for (var i = 0; i < _len; i++)
+                            _rv[i] = ToCsharp<UInt32>(_po[i]);
+                        return (T)(object)_rv;
+                    }
+                case "UInt64[]":
+                    {
+                        var _po = (pyobj as PythonObject).PyObject;
+                        var _len = _po.Length();
+                        var _rv = new UInt64[_len];
+                        for (var i = 0; i < _len; i++)
+                            _rv[i] = ToCsharp<UInt64>(_po[i]);
+                        return (T)(object)_rv;
+                    }
+                case "Float[]":
+                    {
+                        var _po = (pyobj as PythonObject).PyObject;
+                        var _len = _po.Length();
+                        var _rv = new float[_len];
+                        for (var i = 0; i < _len; i++)
+                            _rv[i] = ToCsharp<float>(_po[i]);
+                        return (T)(object)_rv;
+                    }
+                case "Double[]":
+                    {
+                        var _po = (pyobj as PythonObject).PyObject;
+                        var _len = _po.Length();
+                        var _rv = new double[_len];
+                        for (var i = 0; i < _len; i++)
+                            _rv[i] = ToCsharp<double>(_po[i]);
+                        return (T)(object)_rv;
+                    }
                 default:
                     var pyClass = $"{pyobj.__class__}";
                     if (pyClass == "<class 'str'>") return (T)(object)pyobj.ToString();
