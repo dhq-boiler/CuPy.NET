@@ -862,15 +862,15 @@ namespace Cupy.UnitTest
 
             var given = cp.sum(new[] { 0.5, 1.5 });
             var expected =
-                "2.0";
+                "array(2.0)";
             Assert.AreEqual(expected, given.repr);
             given = cp.sum(new[] { 0.5, 0.7, 0.2, 1.5 }, dtype: cp.int32);
             expected =
-                "1";
+                "array(1)";
             Assert.AreEqual(expected, given.repr);
             given = cp.sum(new[,] { { 0, 1 }, { 0, 5 } });
             expected =
-                "6";
+                "array(6)";
             Assert.AreEqual(expected, given.repr);
             given = cp.sum(new[,] { { 0, 1 }, { 0, 5 } }, 0);
             expected =
