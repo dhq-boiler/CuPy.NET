@@ -607,13 +607,13 @@ namespace Cupy.UnitTest
             // 2.0
             // 
 
-            Assert.IsTrue(7.74596669f > (float)LA.norm(a));
-            Assert.IsTrue(7.74596669f > (float)LA.norm(b));
-            Assert.IsTrue(7.74596669f > LA.norm(b, "fro"));
-            Assert.AreEqual(4, LA.norm(a, Constants.inf));
-            Assert.AreEqual(9, LA.norm(b, Constants.inf));
-            Assert.AreEqual(0, LA.norm(a, Constants.neg_inf));
-            Assert.AreEqual(2, LA.norm(b, Constants.neg_inf));
+            Assert.That((float)LA.norm(a), Is.EqualTo(7.74596669f));
+            Assert.That((float)LA.norm(b), Is.EqualTo(7.74596669f));
+            Assert.That((float)LA.norm(b, "fro"), Is.EqualTo(7.74596669f));
+            Assert.That(LA.norm(a, Constants.inf), Is.EqualTo(4));
+            Assert.That(LA.norm(b, Constants.inf), Is.EqualTo(9));
+            Assert.That(LA.norm(a, Constants.neg_inf), Is.EqualTo(0));
+            Assert.That(LA.norm(b, Constants.neg_inf), Is.EqualTo(2));
 
             // >>> LA.norm(a, 1)
             // 20.0
@@ -629,12 +629,12 @@ namespace Cupy.UnitTest
             // 7.3484692283495345
             // 
 
-            Assert.AreEqual(20f, (float)LA.norm(a, 1));
-            Assert.AreEqual(7f, (float)LA.norm(b, 1));
-            Assert.IsTrue(0f > (float)LA.norm(a, -1));
-            Assert.IsTrue(6 > (float)LA.norm(b, -1));
-            Assert.IsTrue(7.74596669f > (float)LA.norm(a, 2));
-            Assert.IsTrue(7.34846922f > (float)LA.norm(b, 2));
+            Assert.That((float)LA.norm(a, 1), Is.EqualTo(20f));
+            Assert.That((float)LA.norm(b, 1), Is.EqualTo(7f));
+            Assert.That((float)LA.norm(a, -1), Is.EqualTo(0f));
+            Assert.That((float)LA.norm(b, -1), Is.EqualTo(6));
+            Assert.That((float)LA.norm(a, 2), Is.EqualTo(7.74596669f));
+            Assert.That((float)LA.norm(b, 2), Is.EqualTo(7.34846922f));
 
             // >>> LA.norm(a, -2)
             // 0.0
@@ -645,11 +645,11 @@ namespace Cupy.UnitTest
             // >>> LA.norm(a, -3)
             // 0.0
             // 
-            Assert.AreEqual(0f, (float)LA.norm(a, -2));
-            Assert.AreEqual(1.8570331885190563e-016f, (float)LA.norm(b, -2));
-            Assert.AreEqual(5.8480354764257312f, (float)LA.norm(a, 3));
-            Assert.AreEqual(0f, (float)LA.norm(a, -3));
 
+            Assert.That((float)LA.norm(a, -2), Is.EqualTo(0f));
+            Assert.That((float)LA.norm(b, -2), Is.EqualTo(4.69687703e-17f));
+            Assert.That((float)LA.norm(a, 3), Is.EqualTo(5.84803548f));
+            Assert.That((float)LA.norm(a, -3), Is.EqualTo(0f));
 
             // Using the axis argument to compute vector norms:
 
@@ -665,15 +665,15 @@ namespace Cupy.UnitTest
             var c = cp.array(new[,] { { 1, 2, 3 }, { -1, 1, 4 } });
             given = LA.norm(c, axis: 0);
             expected =
-                "array([1.41421356, 2.23606798, 5.        ])";
+                "array([1.41421356, 2.23606798, 5.        ], dtype=float64)";
             Assert.AreEqual(expected, given.repr);
             given = LA.norm(c, axis: 1);
             expected =
-                "array([3.74165739, 4.24264069])";
+                "array([3.74165739, 4.24264069], dtype=float64)";
             Assert.AreEqual(expected, given.repr);
             given = LA.norm(c, 1, 1);
             expected =
-                "array([6., 6.])";
+                "array([6., 6.], dtype=float64)";
             Assert.AreEqual(expected, given.repr);
 
 
@@ -688,7 +688,7 @@ namespace Cupy.UnitTest
             var m = cp.arange(8).reshape(2, 2, 2);
             given = LA.norm(m, new[] { 1, 2 });
             expected =
-                "array([ 3.74165739, 11.22497216])";
+                "array([ 3.74165739, 11.22497216], dtype=float64)";
             Assert.AreEqual(expected, given.repr);
             var given1 = new[] { LA.norm(m["0, :, :"]), LA.norm(m["1, :, :"]) };
             expected =
