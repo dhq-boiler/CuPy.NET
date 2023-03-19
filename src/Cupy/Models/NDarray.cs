@@ -318,9 +318,9 @@ namespace Cupy
         /// <summary>
         ///     Returns a copy of the array data
         /// </summary>
-        public unsafe T[] GetData<T>()
+        public unsafe T GetData<T>()
         {
-            return ToCsharp<T[]>(this);
+            return ToCsharp<T>(this);
         }
 
         /// <summary>
@@ -1013,7 +1013,7 @@ namespace Cupy
         /// <summary>
         ///     Returns a copy of the array data
         /// </summary>
-        public T[] GetData()
+        public T GetData()
         {
             return base.GetData<T>();
         }

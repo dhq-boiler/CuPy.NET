@@ -29,7 +29,7 @@ namespace Cupy.UnitTest
             Console.WriteLine(a.repr);
             Assert.IsNotNull(a.ToString());
             // this should print out the exact integers of the array
-            foreach (var x in a.GetData<int>())
+            foreach (var x in a.GetData<int[]>())
                 Console.WriteLine(x);
         }
 
@@ -165,12 +165,12 @@ namespace Cupy.UnitTest
         public void ndarray_T()
         {
             var x = cp.array(new[,] { { 1f, 2f }, { 3f, 4f } });
-            Assert.AreEqual("[[1. 2.]\n [3. 4.]]", x.ToString());
+            Assert.AreEqual("array([[1, 2],\n       [3, 4]], dtype=float32)", x.ToString());
             var t = x.T;
             Console.WriteLine(t.repr);
-            Assert.AreEqual("[[1. 3.]\n [2. 4.]]", t.ToString());
+            Assert.AreEqual("[[1., 3.],\n       [2., 4.]]", t.ToString());
             // getting data of transposed array returns transposed array!
-            Assert.AreEqual(new[] { 1f, 3f, 2f, 4f }, t.GetData<float>());
+            Assert.AreEqual(new[,] { { 1f, 3f}, { 2f, 4f} }, t.GetData<float[,]>());
         }
 
         [Test]
@@ -499,7 +499,7 @@ namespace Cupy.UnitTest
             // roots.dtype: float64
             Console.WriteLine(string.Join(", ", roots.GetData<double>()));
             // 1.4142135623731, 2, 3, 5
-            Assert.AreEqual(new[] { 1.41, 2, 3, 5 }, roots.GetData<double>().Select(x => Math.Round(x, 2)).ToArray());
+            Assert.AreEqual(new[] { 1.41, 2, 3, 5 }, roots.GetData<double[]>().Select(x => Math.Round(x, 2)).ToArray());
         }
 
         [Test]
@@ -630,7 +630,7 @@ namespace Cupy.UnitTest
             Assert.AreEqual(1.0, cp.imag(new Complex(1, 1)).asscalar<double>());
 
             // getting the complex numbers out again
-            var c = a.GetData<Complex>();
+            var c = a.GetData<Complex[]>();
             Assert.IsTrue(new[] { new Complex(1, 8), new Complex(3, 10), new Complex(5, 12) }.SequenceEqual(c));
 
             // accessing scalar values

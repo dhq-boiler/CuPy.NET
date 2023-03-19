@@ -87,11 +87,11 @@ namespace Cupy
                 case "UInt16": return UInt16.Parse(pyobj.ToString());
                 case "UInt32": return UInt32.Parse(pyobj.ToString());
                 case "UInt64": return UInt64.Parse(pyobj.ToString());
-                case "Float": return float.Parse(pyobj.ToString());
+                case "Single": return float.Parse(pyobj.ToString());
                 case "Double": return double.Parse(pyobj.ToString());
                 case "Int16[]":
                     {
-                        var _po = (pyobj as PythonObject).PyObject;
+                        var _po = GetPo(pyobj);
                         var _len = _po.Length();
                         var _rv = new Int16[_len];
                         for (var i = 0; i < _len; i++)
@@ -100,7 +100,7 @@ namespace Cupy
                     }
                 case "Int32[]":
                     {
-                        var _po = (pyobj as PythonObject).PyObject;
+                        var _po = GetPo(pyobj);
                         var _len = _po.Length();
                         var _rv = new int[_len];
                         for (var i = 0; i < _len; i++)
@@ -109,7 +109,7 @@ namespace Cupy
                     }
                 case "Int64[]":
                     {
-                        var _po = (pyobj as PythonObject).PyObject;
+                        var _po = GetPo(pyobj);
                         var _len = _po.Length();
                         var _rv = new Int64[_len];
                         for (var i = 0; i < _len; i++)
@@ -118,7 +118,7 @@ namespace Cupy
                     }
                 case "UInt16[]":
                     {
-                        var _po = (pyobj as PythonObject).PyObject;
+                        var _po = GetPo(pyobj);
                         var _len = _po.Length();
                         var _rv = new UInt16[_len];
                         for (var i = 0; i < _len; i++)
@@ -127,7 +127,7 @@ namespace Cupy
                     }
                 case "UInt32[]":
                     {
-                        var _po = (pyobj as PythonObject).PyObject;
+                        var _po = GetPo(pyobj);
                         var _len = _po.Length();
                         var _rv = new UInt32[_len];
                         for (var i = 0; i < _len; i++)
@@ -136,16 +136,16 @@ namespace Cupy
                     }
                 case "UInt64[]":
                     {
-                        var _po = (pyobj as PythonObject).PyObject;
+                        var _po = GetPo(pyobj);
                         var _len = _po.Length();
                         var _rv = new UInt64[_len];
                         for (var i = 0; i < _len; i++)
                             _rv[i] = ToCsharp<UInt64>(_po[i]);
                         return (T)(object)_rv;
                     }
-                case "Float[]":
+                case "Single[]":
                     {
-                        var _po = (pyobj as PythonObject).PyObject;
+                        var _po = GetPo(pyobj);
                         var _len = _po.Length();
                         var _rv = new float[_len];
                         for (var i = 0; i < _len; i++)
@@ -154,11 +154,33 @@ namespace Cupy
                     }
                 case "Double[]":
                     {
-                        var _po = (pyobj as PythonObject).PyObject;
+                        var _po = GetPo(pyobj);
                         var _len = _po.Length();
                         var _rv = new double[_len];
                         for (var i = 0; i < _len; i++)
                             _rv[i] = ToCsharp<double>(_po[i]);
+                        return (T)(object)_rv;
+                    }
+                case "Single[,]":
+                    {
+                        var _po = GetPo(pyobj);
+                        var _len = ToCsharp<int>(pyobj.len);
+                        var _rv = CreateInitialMultidimensionalArray<float>(_len, pyobj[0].len);
+                        for (var i = 0; i < _len; i++)
+                        {
+                            if (_len == 1)
+                            {
+                                _rv[i,0] = ToCsharp<float>(_po);
+                            }
+                            else
+                            {
+                                var elements = ToCsharp<float[]>(_po[i]);
+                                for (int j = 0; j < elements.Length; j++)
+                                {
+                                    _rv[i,j] = elements[j];
+                                }
+                            }
+                        }
                         return (T)(object)_rv;
                     }
                 default:
@@ -176,6 +198,24 @@ namespace Cupy
                         return default;
                     }
             }
+        }
+
+        private T[,] CreateInitialMultidimensionalArray<T>(int iCount, int jCount)
+        {
+            T[,] ret = new T[iCount, jCount];
+            for (int i = 0; i < iCount; i++)
+            {
+                for (int j = 0; j < jCount; j++)
+                {
+                    ret[i, j] = default(T);
+                }
+            }
+            return ret;
+        }
+
+        private static PyObject GetPo(dynamic pyobj)
+        {
+            return (pyobj is PythonObject) ? (pyobj as PythonObject).PyObject : (PyObject)pyobj;
         }
 
         //auto-generated
