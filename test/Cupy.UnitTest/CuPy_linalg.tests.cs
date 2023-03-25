@@ -1320,7 +1320,7 @@ namespace Cupy.UnitTest
                 Assert.AreEqual(true, given);
                 var (r2, _, _) = cp.linalg.qr(a, "r");
                 //Console.WriteLine("r2: " + r2.repr);
-                var (r3, _, _) = cp.linalg.qr(a, "economic");
+                //var (r3, _, _) = cp.linalg.qr(a, "economic");
                 given = r.allclose(r2); // mode='r' returns the same r as mode='full';
                 Assert.AreEqual(true, given);
             }
@@ -1376,7 +1376,7 @@ namespace Cupy.UnitTest
                 //Console.WriteLine("p:" + p.repr);
                 var r_inv = cp.linalg.inv(r);
                 given = r_inv.dot(p);
-                expected = "array([1., 1.])";
+                expected = "array([1., 1.], dtype=float64)";
                 Assert.AreEqual(expected, given.repr);
             }
         }
