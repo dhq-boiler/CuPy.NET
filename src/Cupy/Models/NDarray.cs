@@ -601,16 +601,16 @@ namespace Cupy
             if (self.HasAttr("ndim"))
             {
                 var str = string.Empty;
-                if (depth == 1)
+                if (this.size > 1 && depth == 1)
                 {
                     str += "array(";
                 }
                 str += Dig(ndim - 1, this);
-                if (ndim > 0 && !dtype.ToString().Equals("int32") && !dtype.ToString().Equals("bool"))
+                if (this.size > 1 && ndim > 0 && !dtype.ToString().Equals("int32") && !dtype.ToString().Equals("bool"))
                 {
                     str += $", dtype={dtype}";
                 }
-                if (depth == 1)
+                if (this.size > 1 && depth == 1)
                 {
                     str += ")";
                 }

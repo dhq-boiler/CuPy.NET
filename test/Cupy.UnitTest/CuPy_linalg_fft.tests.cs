@@ -100,7 +100,7 @@ namespace Cupy.UnitTest
             Assert.AreEqual(expected, shape.ToString());
             given = LA.det(a);
             expected =
-                "array([-2., -3., -8.])";
+                "array([-2., -3., -8.], dtype=float64)";
             Assert.AreEqual(expected, given.repr);
         }
 
