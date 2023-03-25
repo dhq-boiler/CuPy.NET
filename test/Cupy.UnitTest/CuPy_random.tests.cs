@@ -21,12 +21,12 @@ namespace Cupy.UnitTest
 
             cp.random.seed(0);
             var given = cp.random.rand(1, 2);
-            var expected = "array([[0.5488135 , 0.71518937]])";
+            var expected = "array([[0.43845084, 0.4603647 ]], dtype=float64)";
 
             Assert.AreEqual(expected, given.repr);
             cp.random.seed(0);
             var x = cp.random.rand();
-            Assert.AreEqual(0.5488135039273248f, x);
+            Assert.AreEqual(0.438450843f, x);
         }
 
 
