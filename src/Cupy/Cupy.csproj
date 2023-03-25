@@ -1,25 +1,33 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net6</TargetFramework>
+		<TargetFramework>net6.0</TargetFramework>
 		<RootNamespace>Cupy</RootNamespace>
-		<AssemblyName>Cupy</AssemblyName>
+		<AssemblyName>CuPy.NET</AssemblyName>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<Authors>Meinrad Recheis</Authors>
-		<Product>Cupy.NET</Product>
-		<PackageId>Cupy</PackageId>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+		<Authors>dhq-boiler</Authors>
+		<Product>CuPy.NET</Product>
+		<PackageId>CuPy.NET</PackageId>
 		<Description>C# bindings for Cupy - a fundamental library for scientific computing, machine learning and AI. Does not require a local Python installation!</Description>
 		<Copyright>copyright ©2023 dhq_boiler</Copyright>
-		<PackageProjectUrl>https://github.com/dhq-boiler/Cupy.NET</PackageProjectUrl>
-		<RepositoryUrl>https://github.com/dhq-boiler/Cupy.NET</RepositoryUrl>
+		<PackageProjectUrl>https://github.com/dhq-boiler/CuPy.NET</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/dhq-boiler/CuPy.NET</RepositoryUrl>
 		<PackageTags>Data science, Machine Learning, ML, AI, Scientific Computing, Cupy, Linear Algebra, FFT, SVD, Matrix, Python</PackageTags>
-		<PackageLicenseUrl>https://github.com/SciSharp/Cupy.NET/blob/master/LICENSE</PackageLicenseUrl>
-		<Version>3.11.1.33</Version>
-		<PackageIconUrl>https://github.com/SciSharp/Cupy.NET/blob/master/doc/img/Cupy.net.icon128.png?raw=true</PackageIconUrl>
-		<AssemblyVersion>3.10.0.0</AssemblyVersion>
-		<FileVersion>3.10.0.0</FileVersion>
+		<PackageLicenseUrl>https://github.com/dhq-boiler/Cupy.NET/blob/master/LICENSE</PackageLicenseUrl>
 		<Platforms>AnyCPU;x64</Platforms>
 		<AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+		<NuspecProperties>$(NuspecProperties);configuration=$(Configuration)</NuspecProperties>
+		<NuspecProperties>$(NuspecProperties);version=$(PackageVersion)</NuspecProperties>
+		<NuspecProperties>$(NuspecProperties);id=$(PackageId)</NuspecProperties>
+		<NuspecProperties>$(NuspecProperties);author=$(Authors)</NuspecProperties>
+		<NuspecProperties>$(NuspecProperties);PackageProjectUrl=$(PackageProjectUrl)</NuspecProperties>
+		<NuspecProperties>$(NuspecProperties);Description=$(Description)</NuspecProperties>
+		<NuspecProperties>$(NuspecProperties);PackageReleaseNotes=$(PackageReleaseNotes)</NuspecProperties>
+		<NuspecProperties>$(NuspecProperties);Copyright=$(Copyright)</NuspecProperties>
+		<NuspecProperties>$(NuspecProperties);PackageTags=$(PackageTags)</NuspecProperties>
+		<NuspecProperties>$(NuspecProperties);RepositoryType=$(RepositoryType)</NuspecProperties>
+		<NuspecProperties>$(NuspecProperties);RepositoryUrl=$(RepositoryUrl)</NuspecProperties>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -31,6 +39,10 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="GitInfo" Version="2.3.0">
+		  <PrivateAssets>all</PrivateAssets>
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
 		<PackageReference Include="Microsoft.CSharp" Version="4.7.0"></PackageReference>
 		<PackageReference Include="Python.Included" Version="3.11.2"></PackageReference>
 		<PackageReference Include="pythonnet" Version="3.0.1" />

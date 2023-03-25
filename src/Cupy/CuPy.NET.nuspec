@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>CuPy.NET</id>
+	<version>0.1.0</version>
+    <authors>dhq_boiler</authors>
+    <owners>dhq_boiler</owners>
+	<projectUrl>https://github.com/dhq-boiler/CuPy.NET</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+	<license type="expression">MIT</license>
+    <description>CuPy for .NET</description>
+    <releaseNotes>Summary of changes made in this release of the package.</releaseNotes>
+    <copyright>$copyright$</copyright>
+    <tags>dotnet CuPy</tags>
+  </metadata>
+  <files>
+	  <file src="bin\Release\net6.0\CuPy.NET.dll" target="lib\net6.0" />
+	  <file src="bin\Release\net6.0\CuPy.NET.pdb" target="lib\net6.0" />
+  </files>
+</package>
