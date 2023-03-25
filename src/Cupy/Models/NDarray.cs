@@ -787,7 +787,14 @@ namespace Cupy
                 }
                 else
                 {
-                    str2 += OnePass(str).Item1;
+                    int strlen = 0;
+                    int integerPartMaxLen = 0;
+                    int decimalPartMaxLen = 0;
+                    var op = OnePass(str);
+                    strlen = Math.Max(strlen, op.Item2);
+                    integerPartMaxLen = Math.Max(integerPartMaxLen, op.Item3);
+                    decimalPartMaxLen = Math.Max(decimalPartMaxLen, op.Item4);
+                    str2 += TwoPass(str, strlen, integerPartMaxLen, decimalPartMaxLen);
                     return $"{str2}".Replace("], [", "],\n       [");
                 }
             }
