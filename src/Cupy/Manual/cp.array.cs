@@ -178,19 +178,17 @@ namespace Cupy
             }
         }
 
-        //private unsafe static void Copy(bool[] src, NDarray dest)
-        //{
-        //    int size = src.Length * sizeof(bool);
-        //    IntPtr ptr_dest = (IntPtr)dest.data.Handle;
-        //    byte* p_dest = (byte*)ptr_dest.ToPointer();
+        private unsafe static void Copy(bool[] src, NDarray dest)
+        {
+            int size = src.Length * sizeof(bool);
+            IntPtr ptr_dest = (IntPtr)dest.data.Handle;
+            byte* p_dest = (byte*)ptr_dest.ToPointer();
 
-        //    for (int i = 0; i < src.Length; i++)
-        //    {
-        //        //byte[] arr_src = ObjectToByteArray(src[i]);
-        //        //dest[i] = new NDarray(arr_src);
-        //        dest[i] = new NDarray(src[i]);
-        //    }
-        //}
+            for (int i = 0; i < src.Length; i++)
+            {
+                dest[i] = new NDarray(src[i]);
+            }
+        }
 
         public static NDarray<T> array<T>(T[] @object, Dtype dtype = null, bool? copy = null, string order = null,
             bool? subok = null, int? ndmin = null) where T : struct
@@ -225,9 +223,8 @@ namespace Cupy
                     Copy(a, ndarray);
                     break;
                 case bool[] a:
-                    //Copy(a, ndarray);
-                    //break;
-                    throw new NotImplementedException();
+                    Copy(a, ndarray);
+                    break;
                 case Complex[] a:
                     var real = new double[@object.Length];
                     var imag = new double[@object.Length];

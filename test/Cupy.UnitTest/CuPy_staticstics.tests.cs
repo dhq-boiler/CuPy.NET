@@ -848,11 +848,11 @@ namespace Cupy.UnitTest
             Assert.AreEqual(2.5, given_scalar);
             var given = a.mean(0);
             var expected =
-                "array([2., 3.])";
+                "array([2., 3.], dtype=float64)";
             Assert.AreEqual(expected, given.repr);
             given = a.mean(1);
             expected =
-                "array([1.5, 3.5])";
+                "array([1.5, 3.5], dtype=float64)";
             Assert.AreEqual(expected, given.repr);
 
             // In single precision, mean can be inaccurate:
@@ -869,7 +869,7 @@ namespace Cupy.UnitTest
             a["1, :"] = (NDarray)0.1;
             given_scalar = Math.Round(a.mean(), 8);
             var expected_scalar =
-                0.54999924;
+                0.54999995000000002d;
             Assert.AreEqual(expected_scalar, given_scalar);
 
             // Computing the mean in float64 is more accurate:

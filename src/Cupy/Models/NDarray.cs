@@ -1,11 +1,10 @@
-﻿using System;
-using System.IO;
+﻿using Cupy.Models;
+using Python.Runtime;
+using System;
 using System.Linq;
 using System.Numerics;
 using System.Runtime.InteropServices;
-using System.Runtime.Serialization.Formatters.Binary;
-using Cupy.Models;
-using Python.Runtime;
+using System.Text.RegularExpressions;
 
 namespace Cupy
 {
@@ -42,9 +41,9 @@ namespace Cupy
         {
         }
 
-        //public NDarray(bool obj) : this(new PyInt(obj))
-        //{
-        //}
+        public NDarray(bool obj) : this(obj.ToPython())
+        {
+        }
 
         public NDarray(NDarray t) : base((PyObject)t.PyObject)
         {
@@ -158,7 +157,7 @@ namespace Cupy
         /// <summary>
         ///     returns the 'array([ .... ])'-representation known from the console
         /// </summary>
-        public string repr => self.InvokeMethod("__repr__").As<string>();
+        public string repr => ToString(1);
 
         /// <summary>
         ///     returns the '[ .... ]'-representation
@@ -193,8 +192,16 @@ namespace Cupy
         {
             get
             {
-                var tuple = ToTuple(coords);
-                return new NDarray(PyObject[tuple]);
+                if (coords.Length == 1)
+                {
+                    var pyint = new PyInt(coords[0]);
+                    return new NDarray(PyObject[pyint]);
+                }
+                else
+                {
+                    var tuple = ToTuple(coords);
+                    return new NDarray(PyObject[tuple]);
+                }
             }
             set
             {
@@ -311,63 +318,9 @@ namespace Cupy
         /// <summary>
         ///     Returns a copy of the array data
         /// </summary>
-        public unsafe T[] GetData<T>()
+        public unsafe T GetData<T>()
         {
-            if (!PyObject.flags.c_contiguous)
-                return cp.ascontiguousarray(this).GetData<T>();
-            byte[] arr = SerializeObject(Convert.ChangeType(PyObject, PyObject.__class__.GetType()));
-            var handler = GCHandle.Alloc(arr, GCHandleType.Pinned);
-            long ptr = handler.AddrOfPinnedObject().ToInt64();
-            //TypedReference typedRef = __makeref(PyObject.data);
-            //byte* p = *(byte**)(&typedRef);
-            //fixed (p)
-            //{
-            //long ptr = (long)PyObject.data;
-            int size = PyObject.size;
-            object array = null;
-            if (typeof(T) == typeof(byte)) array = new byte[size];
-            else if (typeof(T) == typeof(short)) array = new short[size];
-            else if (typeof(T) == typeof(int)) array = new int[size];
-            else if (typeof(T) == typeof(long)) array = new long[size];
-            else if (typeof(T) == typeof(float)) array = new float[size];
-            else if (typeof(T) == typeof(double)) array = new double[size];
-            else if (typeof(T) == typeof(bool)) array = new byte[size];
-            else if (typeof(T) == typeof(Complex)) array = new Complex[size];
-            else
-                throw new InvalidOperationException(
-                    "Can not copy the data with data type due to limitations of Marshal.Copy: " + typeof(T).Name);
-            switch (array)
-            {
-                case byte[] a:
-                    Marshal.Copy(new IntPtr(ptr), a, 0, a.Length);
-                    break;
-                case short[] a:
-                    Marshal.Copy(new IntPtr(ptr), a, 0, a.Length);
-                    break;
-                case int[] a:
-                    Marshal.Copy(new IntPtr(ptr), a, 0, a.Length);
-                    break;
-                case long[] a:
-                    Marshal.Copy(new IntPtr(ptr), a, 0, a.Length);
-                    break;
-                case float[] a:
-                    Marshal.Copy(new IntPtr(ptr), a, 0, a.Length);
-                    break;
-                case double[] a:
-                    Marshal.Copy(new IntPtr(ptr), a, 0, a.Length);
-                    break;
-                case Complex[] a:
-                    var real = this.real.GetData<double>();
-                    var imag = this.imag.GetData<double>();
-                    for (var i = 0; i < a.Length; i++)
-                        a[i] = new Complex(real[i], imag[i]);
-                    break;
-            }
-            //}
-
-            // special handling for types that are not supported by Marshal.Copy: must be converted i.e. 1 => true, 0 => false
-            if (typeof(T) == typeof(bool)) return (T[])(object)((byte[])array).Select(x => x > 0).ToArray();
-            return (T[])array;
+            return ToCsharp<T>(this);
         }
 
         /// <summary>
@@ -591,15 +544,367 @@ namespace Cupy
         /// </returns>
         public NDarray transpose(params int[] axes)
         {
-            //auto-generated code, do not change
-            var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            return cp.transpose(this, axes);
+        }
+
+        public override string ToString()
+        {
+            if (self.HasAttr("ndim"))
             {
-                ToPython(axes)
-            });
-            //if (axes != null) kwargs["axes"] = ToPython(axes);
-            dynamic py = __self__.InvokeMethod("transpose", pyargs);
-            return ToCsharp<NDarray>(py);
+                return Dig(ndim - 1, this);
+            }
+            else if (!base.ToString().Contains("[[") && !base.ToString().Contains("]]"))
+            {
+                return base.ToString();
+            }
+            else
+            {
+                return ToStringAsList();
+            }
+        }
+
+        private string ToStringAsList()
+        {
+            var this_0 = this[0];
+            var col = this_0.len;
+            var row = this.len;
+            var i = 0;
+            var str = string.Empty;
+            var tr = this.transpose();
+            str += "[";
+            while (i < row)
+            {
+                var j = 0;
+                str += "[";
+                while (j < col)
+                {
+                    str += ToCsharp<int>(tr[j][i]);
+                    if (j < col - 1)
+                    {
+                        str += ", ";
+                    }
+                    j += 1;
+                }
+                str += "]";
+                if (i < row - 1)
+                {
+                    str += ", ";
+                }
+                i += 1;
+            }
+            str += "]";
+            return str;
+        }
+
+        public string ToString(int depth)
+        {
+            if (self.HasAttr("ndim"))
+            {
+                var str = string.Empty;
+                var isArray = this.ToString().Substring(0, 1).IndexOf("[") > -1 || this.ToString().IndexOf("array") > -1;
+                if (isArray && depth == 1)
+                {
+                    str += "array(";
+                }
+                str += Dig(ndim - 1, this);
+                if (isArray && ndim > 0 && !dtype.ToString().Equals("int32") && !dtype.ToString().Equals("bool"))
+                {
+                    str += $", dtype={dtype}";
+                }
+                if (isArray && depth == 1)
+                {
+                    str += ")";
+                }
+                return str;
+            }
+            else if (depth == 1)
+            {
+                var str = string.Empty;
+                if (depth == 1)
+                {
+                    str += "array(";
+                }
+                str += this.ToString();
+                if (!Leaf(this).dtype.ToString().Equals("int32") && !Leaf(this).dtype.ToString().Equals("bool"))
+                {
+                    str += $", dtype={Leaf(this).dtype.ToString()}";
+                }
+                if (depth == 1)
+                {
+                    str += ")";
+                }
+                return $"{str}".Replace("], [", "],\n       [");
+            }
+            else if (this.len == 1)
+            {
+                var str = this[0].ToString(depth + 1);
+                return str;
+            }
+            else
+            {
+                var str = "[";
+                for (int i = 0; i < this.len; i++)
+                {
+                    str += this[i].ToString(depth + 1);
+                    if (i < this.len - 1)
+                    {
+                        str += ", ";
+                    }
+                }
+                str += "]";
+                return str;
+            }
+        }
+
+        private NDarray Leaf(NDarray ndArray)
+        {
+            var target = ndArray;
+            while (target.ToString().Contains("["))
+            {
+                target = target[0];
+            }
+            return target;
+        }
+
+        private string Dig(int dim, NDarray arr)
+        {
+            if (dim > 1)
+            {
+                var str = "[";
+                for (int i = 0; i < arr.len; i++)
+                {
+                    str += Dig(dim - 1, arr[i]);
+                    if (i < arr.len - 1)
+                    {
+                        str += ",";
+                        if (dim > 0)
+                        {
+                            str += "\n       ";
+                        }
+                        else
+                        {
+                            str += " ";
+                        }
+                    }
+                }
+                str += "]";
+                return str;
+            }
+            else
+            {
+                var str = base.ToString();
+
+                var str2 = string.Empty;
+
+                Regex regex = new Regex("(?<arr>\\[[-\\d\\.\\s]+\\])");
+                Regex regex2 = new Regex("^\\[\\[[\\s\\S]+?\\]\\]$");
+                Regex regex3 = new Regex("\\[(?<elms>[\\s\\S]+?)\\]");
+
+                if (regex2.IsMatch(str))
+                {
+                    var str3 = str.Replace("]\n [", "],\n       [");
+                    str3 = str3.Substring(1, str3.Length - 2);
+                    if (regex.IsMatch(str3))
+                    {
+                        var mcs = regex.Matches(str3);
+                        int strlen = 0;
+                        int integerPartMaxLen = 0;
+                        int decimalPartMaxLen = 0;
+                        //One pass
+                        foreach (Match mc in mcs)
+                        {
+                            var op = OnePass(mc.Groups["arr"].ToString());
+                            strlen = Math.Max(strlen, op.Item2);
+                            integerPartMaxLen = Math.Max(integerPartMaxLen, op.Item3);
+                            decimalPartMaxLen = Math.Max(decimalPartMaxLen, op.Item4);
+                        }
+                        //Two pass
+                        foreach (Match mc in mcs)
+                        {
+                            str2 += TwoPass(mc.Groups["arr"].ToString(), strlen, integerPartMaxLen, decimalPartMaxLen);
+                            if (!Object.ReferenceEquals(mc, mcs.Last()))
+                            {
+                                str2 += ", ";
+                            }
+                        }
+                    }
+                    else if (regex3.IsMatch(str3))
+                    {
+                        var mcs = regex3.Matches(str3);
+                        int strlen = 0;
+                        int integerPartMaxLen = 0;
+                        int decimalPartMaxLen = 0;
+                        //One pass
+                        foreach (Match mc in mcs)
+                        {
+                            var op = OnePass(mc.Groups["elms"].ToString());
+                            strlen = Math.Max(strlen, op.Item2);
+                            integerPartMaxLen = Math.Max(integerPartMaxLen, op.Item3);
+                            decimalPartMaxLen = Math.Max(decimalPartMaxLen, op.Item4);
+                        }
+                        //Two pass
+                        foreach (Match mc in mcs)
+                        {
+                            str2 += TwoPass(mc.Groups["elms"].ToString(), strlen, integerPartMaxLen, decimalPartMaxLen);
+                            if (!Object.ReferenceEquals(mc, mcs.Last()))
+                            {
+                                str2 += ", ";
+                            }
+                        }
+                    }
+                    return $"[{str2}]".Replace("], [", "],\n       [");
+                }
+                else if (regex.IsMatch(str))
+                {
+                    var mcs = regex.Matches(str);
+                    int strlen = 0;
+                    int integerPartMaxLen = 0;
+                    int decimalPartMaxLen = 0;
+                    //One pass
+                    foreach (Match mc in mcs)
+                    {
+                        var op = OnePass(mc.Groups["arr"].ToString());
+                        strlen = Math.Max(strlen, op.Item2);
+                        integerPartMaxLen = Math.Max(integerPartMaxLen, op.Item3);
+                        decimalPartMaxLen = Math.Max(decimalPartMaxLen, op.Item4);
+                    }
+                    //Two pass
+                    foreach (Match mc in mcs)
+                    {
+                        str2 += TwoPass(mc.Groups["arr"].ToString(), strlen, integerPartMaxLen, decimalPartMaxLen);
+                        if (!Object.ReferenceEquals(mc, mcs.Last()))
+                        {
+                            str2 += ", ";
+                        }
+                    }
+                    if (mcs.Count() > 1)
+                    {
+                        return $"[{str2}]".Replace("], [", "],\n       [");
+                    }
+                    else
+                    {
+                        return $"{str2}".Replace("], [", "],\n       [");
+                    }
+                }
+                else
+                {
+                    int strlen = 0;
+                    int integerPartMaxLen = 0;
+                    int decimalPartMaxLen = 0;
+                    var op = OnePass(str);
+                    strlen = Math.Max(strlen, op.Item2);
+                    integerPartMaxLen = Math.Max(integerPartMaxLen, op.Item3);
+                    decimalPartMaxLen = Math.Max(decimalPartMaxLen, op.Item4);
+                    str2 += TwoPass(str, strlen, integerPartMaxLen, decimalPartMaxLen);
+                    return $"{str2}".Replace("], [", "],\n       [");
+                }
+            }
+        }
+
+        private string TwoPass(string input, int strlen, int integerPartMaxLen, int decimalPartMaxLen)
+        {
+            if (!input.Contains(',') && !input.Contains(' '))
+            {
+                return input;
+            }
+            var elements = input.Split('[', ',', ' ', ']');
+            elements = elements.Where(x => !string.IsNullOrWhiteSpace(x)).ToArray();
+            int maxlen = strlen;
+            var str = string.Empty;
+            var regex = new Regex("(?<integerPart>-?\\d+?)\\.(?<decimalPart>\\d+?)");
+            foreach (var element in elements)
+            {
+
+                //小数点があるときは左詰め
+                if (element.Contains("."))
+                {
+                    int count = 0;
+                    if (regex.IsMatch(element))
+                    {
+                        var mc = regex.Match(element);
+                        var integerPartStr = mc.Groups["integerPart"].Value;
+                        var decimalPartStr = mc.Groups["decimalPart"].Value;
+                        for (int i = 0; i < integerPartMaxLen - integerPartStr.Length; i++)
+                        {
+                            str += " ";
+                            count++;
+                        }
+                    }
+                    str += element;
+                    if (regex.IsMatch(element))
+                    {
+                        var mc = regex.Match(element);
+                        var integerPartStr = mc.Groups["integerPart"].Value;
+                        var decimalPartStr = mc.Groups["decimalPart"].Value;
+                        for (int i = 0; i < decimalPartMaxLen - decimalPartStr.Length; i++)
+                        {
+                            str += " ";
+                            count++;
+                        }
+                    }
+                    for (int i = 0; i < maxlen - count - element.Length; i++)
+                    {
+                        str += " ";
+                    }
+                }
+                else //小数点がないときは右詰め
+                {
+                    for (int i = 0; i < maxlen - element.Length; i++)
+                    {
+                        str += " ";
+                    }
+                    str += element;
+                }
+
+                if (!Object.ReferenceEquals(element, elements.Last()))
+                {
+                    str += ", ";
+                }
+            }
+            if (str.Contains(','))
+            {
+                str = $"[{str}]";
+            }
+            str = str.Replace("\n, ", ",\n       ");
+            return str;
+        }
+
+        private (string, int, int, int) OnePass(string str)
+        {
+            var elements = str.Split('[', ',', ' ', ']');
+            elements = elements.Where(x => !string.IsNullOrWhiteSpace(x)).ToArray();
+            int maxlen = elements.Max(x => x.Length);
+            int integerPartMaxLen = 0;
+            int decimalPartMaxLen = 0;
+            str = string.Empty;
+            var regex = new Regex("(?<integerPart>-?\\d+?)\\.(?<decimalPart>\\d+?)");
+            foreach (var element in elements)
+            {
+                if (regex.IsMatch(element))
+                {
+                    var mc = regex.Match(element);
+                    var integerPartStr = mc.Groups["integerPart"].Value;
+                    integerPartMaxLen = Math.Max(integerPartMaxLen, integerPartStr.Length);
+                    var decimalPartStr = mc.Groups["decimalPart"].Value;
+                    decimalPartMaxLen = Math.Max(decimalPartMaxLen, decimalPartStr.Length);
+                }
+
+                str += element;
+                for (int i = 0; i < maxlen - element.Length; i++)
+                {
+                    str += " ";
+                }
+                if (!Object.ReferenceEquals(element, elements.Last()))
+                {
+                    str += ", ";
+                }
+            }
+            if (str.Contains(','))
+            {
+                str = $"[{str}]";
+            }
+            str = str.Replace("\n, ", ",\n       ");
+            return (str, elements.Max(x => x.Length), integerPartMaxLen, decimalPartMaxLen);
         }
     }
 
@@ -647,8 +952,16 @@ namespace Cupy
         {
             get
             {
-                var tuple = ToTuple(coords);
-                return new NDarray<T>(PyObject[tuple]);
+                if (coords.Length == 1)
+                {
+                    var pyint = new PyInt(coords[0]);
+                    return new NDarray<T>(PyObject[pyint]);
+                }
+                else
+                {
+                    var tuple = ToTuple(coords);
+                    return new NDarray<T>(PyObject[tuple]);
+                }
             }
             set
             {
@@ -708,7 +1021,7 @@ namespace Cupy
         /// <summary>
         ///     Returns a copy of the array data
         /// </summary>
-        public T[] GetData()
+        public T GetData()
         {
             return base.GetData<T>();
         }
@@ -718,6 +1031,61 @@ namespace Cupy
             if (typeof(T) == typeof(Complex))
                 return (T)(object)new Complex(real.asscalar<double>(), imag.asscalar<double>());
             return self.InvokeMethod("item").As<T>();
+        }
+
+        public override string ToString()
+        {
+            string str = string.Empty;
+            var dig = Dig(ndim - 1, this);
+            if (dig.IndexOf("[") > -1)
+            {
+                str = $"array({dig}";
+                if (!dtype.ToString().Equals("int32"))
+                {
+                    str += $", dtype={dtype}";
+                }
+                str += ")";
+            }
+            else
+            {
+                str += dig;
+            }
+            return str;
+        }
+
+        private string Dig(int dim, NDarray arr)
+        {
+            if (dim == -1)
+            {
+                var isComplex = arr.dtype.ToString().StartsWith("complex");
+                if (isComplex)
+                {
+                    return $"{arr.real.ToString()}+{arr.imag.ToString()}j";
+                }
+                return arr.asscalar<T>().ToString();
+            }
+            else
+            {
+                var str = "[";
+                for (int i = 0; i < arr.len; i++)
+                {
+                    str += Dig(dim - 1, arr[i]);
+                    if (i < arr.len - 1)
+                    {
+                        str += ",";
+                        if (dim > 0)
+                        {
+                            str += "\n       ";
+                        }
+                        else
+                        {
+                            str += " ";
+                        }
+                    }
+                }
+                str += "]";
+                return str;
+            }
         }
     }
 }

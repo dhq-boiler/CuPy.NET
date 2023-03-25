@@ -1232,7 +1232,7 @@ namespace Cupy
         ///     Returns a reference to out if specified.
         /// </returns>
         public static NDarray prod(this NDarray a, Axis axis = null, Dtype dtype = null, NDarray @out = null,
-            bool? keepdims = null, ValueType initial = null)
+            bool? keepdims = null)
         {
             //auto-generated code, do not change
             var __self__ = self;
@@ -1245,7 +1245,6 @@ namespace Cupy
             if (dtype != null) kwargs["dtype"] = ToPython(dtype);
             if (@out != null) kwargs["out"] = ToPython(@out);
             if (keepdims != null) kwargs["keepdims"] = ToPython(keepdims);
-            if (initial != null) kwargs["initial"] = ToPython(initial);
             dynamic py = __self__.InvokeMethod("prod", pyargs, kwargs);
             return ToCsharp<NDarray>(py);
         }

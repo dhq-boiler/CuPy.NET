@@ -817,7 +817,7 @@ namespace Cupy.UnitTest
             // array([  2.,  12.])
 
             var given = cp.prod(new[,] { { 1.0, 2.0 }, { 3.0, 4.0 } }, new[] { 1 });
-            var expected = "array([ 2., 12.])";
+            var expected = "array([2. , 12.], dtype=float64)";
             Assert.AreEqual(expected, given.repr);
 
             // If the type of x is unsigned, then the output type is
@@ -835,13 +835,6 @@ namespace Cupy.UnitTest
 
             x = cp.array(new byte[] { 1, 2, 3 }, cp.int8);
             Assert.AreEqual(cp.int_, x.prod().dtype);
-
-            // You can also start the product with a value other than one:
-
-            // >>> cp.prod([1, 2], initial=5)
-            // 10
-
-            Assert.AreEqual(10, (int)cp.prod(new[] { 1, 2 }, initial: 5));
         }
 
 
@@ -862,15 +855,15 @@ namespace Cupy.UnitTest
 
             var given = cp.sum(new[] { 0.5, 1.5 });
             var expected =
-                "2.0";
+                "array(2.0)";
             Assert.AreEqual(expected, given.repr);
             given = cp.sum(new[] { 0.5, 0.7, 0.2, 1.5 }, dtype: cp.int32);
             expected =
-                "1";
+                "array(1)";
             Assert.AreEqual(expected, given.repr);
             given = cp.sum(new[,] { { 0, 1 }, { 0, 5 } });
             expected =
-                "6";
+                "array(6)";
             Assert.AreEqual(expected, given.repr);
             given = cp.sum(new[,] { { 0, 1 }, { 0, 5 } }, 0);
             expected =

@@ -63,8 +63,7 @@ namespace Cupy
         ///     If axis is given, the result is an array of dimension
         ///     a.ndim - 1.
         /// </returns>
-        public static NDarray amin(this NDarray a, Axis axis = null, NDarray @out = null, bool? keepdims = null,
-            ValueType initial = null)
+        public static NDarray amin(this NDarray a, Axis axis = null, NDarray @out = null, bool? keepdims = null)
         {
             //auto-generated code, do not change
             var __self__ = self;
@@ -76,7 +75,6 @@ namespace Cupy
             if (axis != null) kwargs["axis"] = ToPython(axis);
             if (@out != null) kwargs["out"] = ToPython(@out);
             if (keepdims != null) kwargs["keepdims"] = ToPython(keepdims);
-            if (initial != null) kwargs["initial"] = ToPython(initial);
             dynamic py = __self__.InvokeMethod("amin", pyargs, kwargs);
             return ToCsharp<NDarray>(py);
         }

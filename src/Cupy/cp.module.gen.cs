@@ -54,9 +54,17 @@ namespace Cupy
 #if PYTHON_INCLUDED
             PythonEngine.Initialize();
 
-            Installer.PipInstallModule("numpy", "1.24.2", true).Wait();
-            Installer.PipInstallModule("cupy_cuda102", "11.3.0", true).Wait();
+            if (!Installer.IsModuleInstalled("numpy"))
+            {
+                Installer.PipInstallModule("numpy", "1.24.2", true).GetAwaiter().GetResult();
+            }
+            
+            if (!Installer.IsModuleInstalled("cupy"))
+            {
+                Installer.PipInstallModule("cupy_cuda12x", force: true).GetAwaiter().GetResult();
+            }
 
+            Debug.Assert(Installer.IsModuleInstalled("numpy"));
             Debug.Assert(Installer.IsModuleInstalled("cupy"));
 #endif
             PythonEngine.AddShutdownHandler(() => ReInitializeLazySelf());

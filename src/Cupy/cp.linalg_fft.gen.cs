@@ -119,6 +119,7 @@ namespace Cupy
 
         public static partial class linalg
         {
+#if NOT_IMPLEMENTED
             /// <summary>
             ///     Compute the eigenvalues and right eigenvectors of a square array.<br></br>
             ///     Notes
@@ -183,6 +184,7 @@ namespace Cupy
                 dynamic py = __self__.InvokeMethod("eig", pyargs, kwargs);
                 return (ToCsharp<NDarray>(py[0]), ToCsharp<NDarray>(py[1]));
             }
+#endif
         }
 
         public static partial class linalg

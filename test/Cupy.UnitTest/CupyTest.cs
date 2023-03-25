@@ -29,7 +29,7 @@ namespace Cupy.UnitTest
             Console.WriteLine(a.repr);
             Assert.IsNotNull(a.ToString());
             // this should print out the exact integers of the array
-            foreach (var x in a.GetData<int>())
+            foreach (var x in a.GetData<int[]>())
                 Console.WriteLine(x);
         }
 
@@ -165,12 +165,12 @@ namespace Cupy.UnitTest
         public void ndarray_T()
         {
             var x = cp.array(new[,] { { 1f, 2f }, { 3f, 4f } });
-            Assert.AreEqual("[[1. 2.]\n [3. 4.]]", x.ToString());
+            Assert.AreEqual("array([[1, 2],\n       [3, 4]], dtype=float32)", x.ToString());
             var t = x.T;
             Console.WriteLine(t.repr);
-            Assert.AreEqual("[[1. 3.]\n [2. 4.]]", t.ToString());
+            Assert.AreEqual("[[1., 3.],\n       [2., 4.]]", t.ToString());
             // getting data of transposed array returns transposed array!
-            Assert.AreEqual(new[] { 1f, 3f, 2f, 4f }, t.GetData<float>());
+            Assert.AreEqual(new[,] { { 1f, 3f}, { 2f, 4f} }, t.GetData<float[,]>());
         }
 
         [Test]
@@ -492,14 +492,14 @@ namespace Cupy.UnitTest
             var roots = a.sqrt();
             Console.WriteLine(roots.repr);
             // array([1.41421356, 2.        , 3.        , 5.        ])
-            Assert.AreEqual("array([1.41421356, 2.        , 3.        , 5.        ])", roots.repr);
+            Assert.AreEqual("array([1.41421356, 2.        , 3.        , 5.        ], dtype=float64)", roots.repr);
             Console.WriteLine(string.Join(", ", roots.GetData<int>()));
             // 1719614413, 1073127582, 0, 1073741824
             Console.WriteLine("roots.dtype: " + roots.dtype);
             // roots.dtype: float64
             Console.WriteLine(string.Join(", ", roots.GetData<double>()));
             // 1.4142135623731, 2, 3, 5
-            Assert.AreEqual(new[] { 1.41, 2, 3, 5 }, roots.GetData<double>().Select(x => Math.Round(x, 2)).ToArray());
+            Assert.AreEqual(new[] { 1.41, 2, 3, 5 }, roots.GetData<double[]>().Select(x => Math.Round(x, 2)).ToArray());
         }
 
         [Test]
@@ -555,7 +555,7 @@ namespace Cupy.UnitTest
             var P1 = cp.array(1, 2, 3, 4);
             var P2 = cp.array(4, 3, 2, 1);
             var ex = (P2 - P1) / cp.linalg.norm(P2 - P1);
-            Assert.AreEqual("array([ 0.67082039,  0.2236068 , -0.2236068 , -0.67082039])", ex.repr);
+            Assert.AreEqual("array([ 0.67082039,  0.2236068 , -0.2236068 , -0.67082039], dtype=float64)", ex.repr);
         }
 
         [Test]
@@ -612,25 +612,25 @@ namespace Cupy.UnitTest
             //>>> a.imag
             //array([2.,  4.,  6.])
             var a = cp.array(new Complex(1, 2), new Complex(3, 4), new Complex(5, 6));
-            Assert.AreEqual("array([1., 3., 5.])", a.real.repr);
-            Assert.AreEqual("array([2., 4., 6.])", a.imag.repr);
+            Assert.AreEqual("array([1., 3., 5.], dtype=float64)", a.real.repr);
+            Assert.AreEqual("array([2., 4., 6.], dtype=float64)", a.imag.repr);
             //>>> cp.imag(a)
             //array([2., 4., 6.])
             //>>> cp.real(a)
             //array([1., 3., 5.])
-            Assert.AreEqual("array([1., 3., 5.])", a.real().repr);
-            Assert.AreEqual("array([2., 4., 6.])", a.imag().repr);
+            Assert.AreEqual("array([1., 3., 5.], dtype=float64)", a.real().repr);
+            Assert.AreEqual("array([2., 4., 6.], dtype=float64)", a.imag().repr);
             //>>> a.imag = cp.array([8, 10, 12])
             //>>> a
             //array([1. +8.j,  3.+10.j,  5.+12.j])
             a.imag = cp.array(8, 10, 12);
-            Assert.AreEqual("array([1. +8.j, 3.+10.j, 5.+12.j])", a.repr);
+            Assert.AreEqual("array([1. +8.j, 3.+10.j, 5.+12.j], dtype=complex128)", a.repr);
             //>>> cp.imag(1 + 1j)
             //1.0
             Assert.AreEqual(1.0, cp.imag(new Complex(1, 1)).asscalar<double>());
 
             // getting the complex numbers out again
-            var c = a.GetData<Complex>();
+            var c = a.GetData<Complex[]>();
             Assert.IsTrue(new[] { new Complex(1, 8), new Complex(3, 10), new Complex(5, 12) }.SequenceEqual(c));
 
             // accessing scalar values

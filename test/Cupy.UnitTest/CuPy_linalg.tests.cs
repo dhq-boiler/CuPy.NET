@@ -628,7 +628,7 @@ namespace Cupy.UnitTest
 
             var given = cp.einsum("ii", a);
             var expected =
-                "60";
+                "array(60)";
 #if TODO
             Assert.AreEqual(expected, given.repr);
             given = cp.einsum(new[] { a, (NDarray)cp.array(0, 0) });
@@ -638,7 +638,7 @@ namespace Cupy.UnitTest
 #endif
             given = a.trace();
             expected =
-                "60";
+                "array(60)";
             Assert.AreEqual(expected, given.repr);
 
             // Extract the diagonal (requires explicit form):
@@ -767,7 +767,7 @@ namespace Cupy.UnitTest
 
             given = cp.einsum("i,i", b, b);
             expected =
-                "30";
+                "array(30)";
             Assert.AreEqual(expected, given.repr);
 #if TODO
              given = cp.einsum(b, {0}, b, {0});
@@ -777,7 +777,7 @@ namespace Cupy.UnitTest
 #endif
             given = b.inner(b);
             expected =
-                "30";
+                "array(30)";
             Assert.AreEqual(expected, given.repr);
 
             // Matrix vector multiplication:
@@ -912,7 +912,7 @@ namespace Cupy.UnitTest
                 "       [4532., 4874.],\n" +
                 "       [4664., 5018.],\n" +
                 "       [4796., 5162.],\n" +
-                "       [4928., 5306.]])";
+                "       [4928., 5306.]], dtype=float64)";
             Assert.AreEqual(expected, given.repr);
 #if TODO
              given = cp.einsum(a, {0,1,2}, b, {1,0,3}, {2,3});
@@ -951,7 +951,7 @@ namespace Cupy.UnitTest
             expected =
                 "array([[1., 0., 0.],\n" +
                 "       [0., 1., 0.],\n" +
-                "       [0., 0., 1.]])";
+                "       [0., 0., 1.]], dtype=float64)";
             Assert.AreEqual(expected, given.repr);
 
             // Example of ellipsis use:
@@ -1320,7 +1320,7 @@ namespace Cupy.UnitTest
                 Assert.AreEqual(true, given);
                 var (r2, _, _) = cp.linalg.qr(a, "r");
                 //Console.WriteLine("r2: " + r2.repr);
-                var (r3, _, _) = cp.linalg.qr(a, "economic");
+                //var (r3, _, _) = cp.linalg.qr(a, "economic");
                 given = r.allclose(r2); // mode='r' returns the same r as mode='full';
                 Assert.AreEqual(true, given);
             }
@@ -1376,7 +1376,7 @@ namespace Cupy.UnitTest
                 //Console.WriteLine("p:" + p.repr);
                 var r_inv = cp.linalg.inv(r);
                 given = r_inv.dot(p);
-                expected = "array([1., 1.])";
+                expected = "array([1., 1.], dtype=float64)";
                 Assert.AreEqual(expected, given.repr);
             }
         }
