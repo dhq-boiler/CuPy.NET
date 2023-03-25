@@ -767,7 +767,7 @@ namespace Cupy.UnitTest
 
             given = cp.einsum("i,i", b, b);
             expected =
-                "30";
+                "array(30)";
             Assert.AreEqual(expected, given.repr);
 #if TODO
              given = cp.einsum(b, {0}, b, {0});
@@ -777,7 +777,7 @@ namespace Cupy.UnitTest
 #endif
             given = b.inner(b);
             expected =
-                "30";
+                "array(30)";
             Assert.AreEqual(expected, given.repr);
 
             // Matrix vector multiplication:
@@ -912,7 +912,7 @@ namespace Cupy.UnitTest
                 "       [4532., 4874.],\n" +
                 "       [4664., 5018.],\n" +
                 "       [4796., 5162.],\n" +
-                "       [4928., 5306.]])";
+                "       [4928., 5306.]], dtype=float64)";
             Assert.AreEqual(expected, given.repr);
 #if TODO
              given = cp.einsum(a, {0,1,2}, b, {1,0,3}, {2,3});
@@ -951,7 +951,7 @@ namespace Cupy.UnitTest
             expected =
                 "array([[1., 0., 0.],\n" +
                 "       [0., 1., 0.],\n" +
-                "       [0., 0., 1.]])";
+                "       [0., 0., 1.]], dtype=float64)";
             Assert.AreEqual(expected, given.repr);
 
             // Example of ellipsis use:

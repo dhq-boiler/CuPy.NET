@@ -692,7 +692,7 @@ namespace Cupy.UnitTest
             Assert.AreEqual(expected, given.repr);
             var given1 = new[] { LA.norm(m["0, :, :"]), LA.norm(m["1, :, :"]) };
             expected =
-                "(3.7416573867739413, 11.224972160321824)";
+                "(array(3.7416573867739413), array(11.224972160321824))";
             Assert.AreEqual(expected, given1.repr());
         }
 
