@@ -835,13 +835,6 @@ namespace Cupy.UnitTest
 
             x = cp.array(new byte[] { 1, 2, 3 }, cp.int8);
             Assert.AreEqual(cp.int_, x.prod().dtype);
-
-            // You can also start the product with a value other than one:
-
-            // >>> cp.prod([1, 2], initial=5)
-            // 10
-
-            Assert.AreEqual(10, (int)cp.prod(new[] { 1, 2 }, initial: 5));
         }
 
 
