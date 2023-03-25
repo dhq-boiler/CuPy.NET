@@ -108,10 +108,9 @@ namespace Cupy
         ///     If axis is given, the result is an array of dimension
         ///     a.ndim - 1.
         /// </returns>
-        public static NDarray min(NDarray a, int[] axis = null, NDarray @out = null, bool? keepdims = null,
-            ValueType initial = null)
+        public static NDarray min(NDarray a, int[] axis = null, NDarray @out = null, bool? keepdims = null)
         {
-            return a.amin(axis, @out, keepdims, initial);
+            return a.amin(axis, @out, keepdims);
         }
 
         /// <summary>
