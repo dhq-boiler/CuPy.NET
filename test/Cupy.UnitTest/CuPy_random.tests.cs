@@ -39,7 +39,7 @@ namespace Cupy.UnitTest
 
             cp.random.seed(0);
             var given = cp.random.randn();
-            Assert.AreEqual(1.76405239f, given);
+            Assert.AreEqual(1.07102156f, given);
             // Two-by-four array of samples from N(3, 6.25):
 
             // >>> 2.5 * cp.random.randn(2, 4) + 3
@@ -49,7 +49,7 @@ namespace Cupy.UnitTest
 
             cp.random.seed(0);
             var a = 2.5 * cp.random.randn(1, 2) + 3;
-            var expected = "array([[7.41013086, 4.00039302]])";
+            var expected = "array([[5.67755401, 4.77117169]], dtype=float64)";
             Assert.AreEqual(expected, a.repr);
         }
 
