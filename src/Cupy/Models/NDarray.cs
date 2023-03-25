@@ -601,16 +601,17 @@ namespace Cupy
             if (self.HasAttr("ndim"))
             {
                 var str = string.Empty;
-                if (depth == 1)
+                var isArray = this.ToString().Substring(0, 1).IndexOf("[") > -1 || this.ToString().IndexOf("array") > -1;
+                if (isArray && depth == 1)
                 {
                     str += "array(";
                 }
                 str += Dig(ndim - 1, this);
-                if (ndim > 0 && !dtype.ToString().Equals("int32") && !dtype.ToString().Equals("bool"))
+                if (isArray && ndim > 0 && !dtype.ToString().Equals("int32") && !dtype.ToString().Equals("bool"))
                 {
                     str += $", dtype={dtype}";
                 }
-                if (depth == 1)
+                if (isArray && depth == 1)
                 {
                     str += ")";
                 }
@@ -1034,12 +1035,21 @@ namespace Cupy
 
         public override string ToString()
         {
-            var str = $"array({Dig(ndim - 1, this)}";
-            if (!dtype.ToString().Equals("int32"))
+            string str = string.Empty;
+            var dig = Dig(ndim - 1, this);
+            if (dig.IndexOf("[") > -1)
             {
-                str += $", dtype={dtype}";
+                str = $"array({dig}";
+                if (!dtype.ToString().Equals("int32"))
+                {
+                    str += $", dtype={dtype}";
+                }
+                str += ")";
             }
-            str += ")";
+            else
+            {
+                str += dig;
+            }
             return str;
         }
 
@@ -1047,6 +1057,11 @@ namespace Cupy
         {
             if (dim == -1)
             {
+                var isComplex = arr.dtype.ToString().StartsWith("complex");
+                if (isComplex)
+                {
+                    return $"{arr.real.ToString()}+{arr.imag.ToString()}j";
+                }
                 return arr.asscalar<T>().ToString();
             }
             else
