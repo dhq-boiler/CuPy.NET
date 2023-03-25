@@ -81,8 +81,8 @@ namespace Cupy.UnitTest
             var a = cp.array(new[,] { { 1, 2 }, { 3, 4 } });
             var given = LA.det(a);
             var expected =
-                "-2.0";
-            Assert.AreEqual(expected, given.repr.Substring(0, 4));
+                "array(-2.0)";
+            Assert.AreEqual(expected, given.repr);
 
             // Computing determinants for a stack of matrices:
 
