@@ -1,6 +1,7 @@
 ﻿using Cupy.Models;
 using Python.Runtime;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using System.Runtime.InteropServices;
@@ -814,51 +815,66 @@ namespace Cupy
             }
             var elements = input.Split('[', ',', ' ', ']');
             elements = elements.Where(x => !string.IsNullOrWhiteSpace(x)).ToArray();
+            elements = JoinComplex(elements);
             int maxlen = strlen;
             var str = string.Empty;
             var regex = new Regex("(?<integerPart>-?\\d+?)\\.(?<decimalPart>\\d+?)");
+            var regexComplex = new Regex("(?<real>\\d+?)\\.\\+(?<imag>\\d+?)\\.j");
             foreach (var element in elements)
             {
-
-                //小数点があるときは左詰め
-                if (element.Contains("."))
+                //複素数の時
+                if (regexComplex.IsMatch(element))
                 {
                     int count = 0;
-                    if (regex.IsMatch(element))
-                    {
-                        var mc = regex.Match(element);
-                        var integerPartStr = mc.Groups["integerPart"].Value;
-                        var decimalPartStr = mc.Groups["decimalPart"].Value;
-                        for (int i = 0; i < integerPartMaxLen - integerPartStr.Length; i++)
-                        {
-                            str += " ";
-                            count++;
-                        }
-                    }
-                    str += element;
-                    if (regex.IsMatch(element))
-                    {
-                        var mc = regex.Match(element);
-                        var integerPartStr = mc.Groups["integerPart"].Value;
-                        var decimalPartStr = mc.Groups["decimalPart"].Value;
-                        for (int i = 0; i < decimalPartMaxLen - decimalPartStr.Length; i++)
-                        {
-                            str += " ";
-                            count++;
-                        }
-                    }
+                    str += element.Insert(element.IndexOf("+"), Spaces(maxlen-element.Length));
+                    count = maxlen - element.Length;
                     for (int i = 0; i < maxlen - count - element.Length; i++)
                     {
                         str += " ";
                     }
                 }
-                else //小数点がないときは右詰め
+                else //整数、小数の時
                 {
-                    for (int i = 0; i < maxlen - element.Length; i++)
+                    //小数点があるときは左詰め
+                    if (element.Contains("."))
                     {
-                        str += " ";
+                        int count = 0;
+                        if (regex.IsMatch(element))
+                        {
+                            var mc = regex.Match(element);
+                            var integerPartStr = mc.Groups["integerPart"].Value;
+                            var decimalPartStr = mc.Groups["decimalPart"].Value;
+                            for (int i = 0; i < integerPartMaxLen - integerPartStr.Length; i++)
+                            {
+                                str += " ";
+                                count++;
+                            }
+                        }
+                        str += element;
+                        if (regex.IsMatch(element))
+                        {
+                            var mc = regex.Match(element);
+                            var integerPartStr = mc.Groups["integerPart"].Value;
+                            var decimalPartStr = mc.Groups["decimalPart"].Value;
+                            for (int i = 0; i < decimalPartMaxLen - decimalPartStr.Length; i++)
+                            {
+                                str += " ";
+                                count++;
+                            }
+                        }
+                        for (int i = 0; i < maxlen - count - element.Length; i++)
+                        {
+                            str += " ";
+                        }
                     }
-                    str += element;
+                    else //小数点がないときは右詰め
+                    {
+                        for (int i = 0; i < maxlen - element.Length; i++)
+                        {
+                            str += " ";
+                        }
+                        str += element;
+                    }
                 }
 
                 if (!Object.ReferenceEquals(element, elements.Last()))
@@ -872,6 +888,33 @@ namespace Cupy
             }
             str = str.Replace("\n, ", ",\n       ");
             return str;
+        }
+
+        private string Spaces(int count)
+        {
+            string ret = string.Empty;
+            for (int i = 0;i < count;i++)
+            {
+                ret += " ";
+            }
+            return ret;
+        }
+
+        private string[] JoinComplex(string[] elements)
+        {
+            var ret = new List<string>();
+            foreach (var element in elements)
+            {
+                if (element.StartsWith("+"))
+                {
+                    ret[ret.Count() - 1] = ret[ret.Count() - 1] + element;
+                }
+                else
+                {
+                    ret.Add(element);
+                }
+            }
+            return ret.ToArray();
         }
 
         private (string, int, int, int) OnePass(string str)

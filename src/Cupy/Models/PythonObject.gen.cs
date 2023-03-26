@@ -3,7 +3,10 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Numerics;
+using System.Text.RegularExpressions;
 using Cupy.Models;
 using Python.Runtime;
 #if PYTHON_INCLUDED
@@ -89,6 +92,7 @@ namespace Cupy
                 case "UInt64": return UInt64.Parse(pyobj.ToString());
                 case "Single": return float.Parse(pyobj.ToString());
                 case "Double": return double.Parse(pyobj.ToString());
+                case "Complex": return ParseComplex(pyobj.ToString());
                 case "Int16[]":
                     {
                         var _po = GetPo(pyobj);
@@ -161,6 +165,15 @@ namespace Cupy
                             _rv[i] = ToCsharp<double>(_po[i]);
                         return (T)(object)_rv;
                     }
+                case "Complex[]":
+                    {
+                        var _po = GetPo(pyobj);
+                        var _len = _po.Length();
+                        var _rv = new Complex[_len];
+                        for (var i = 0; i < _len; i++)
+                            _rv[i] = ToCsharp<Complex>(_po[i]);
+                        return (T)(object)_rv;
+                    }
                 case "Single[,]":
                     {
                         var _po = GetPo(pyobj);
@@ -197,6 +210,23 @@ namespace Cupy
                             $"conversion from {pyobj.__class__} to {typeof(T).Name} not implemented", e);
                         return default;
                     }
+            }
+        }
+
+        private Complex ParseComplex(string input)
+        {
+            Regex regex = new Regex(@"\s*([-+]?\d+\.?\d*)\s*([-+]\s*\d+\.?\d*)[ij]\s*", RegexOptions.IgnoreCase);
+            Match match = regex.Match(input);
+
+            if (match.Success)
+            {
+                double realPart = double.Parse(match.Groups[1].Value, CultureInfo.InvariantCulture);
+                double imaginaryPart = double.Parse(match.Groups[2].Value, CultureInfo.InvariantCulture);
+                return new Complex(realPart, imaginaryPart);
+            }
+            else
+            {
+                throw new FormatException("Invalid complex number format.");
             }
         }
 
