@@ -174,6 +174,28 @@ namespace Cupy
                             _rv[i] = ToCsharp<Complex>(_po[i]);
                         return (T)(object)_rv;
                     }
+                case "Int32[,]":
+                    {
+                        var _po = GetPo(pyobj);
+                        var _len = ToCsharp<int>(pyobj.len);
+                        var _rv = CreateInitialMultidimensionalArray<int>(_len, pyobj[0].len);
+                        for (var i = 0; i < _len; i++)
+                        {
+                            if (_len == 1)
+                            {
+                                _rv[i, 0] = ToCsharp<int>(_po);
+                            }
+                            else
+                            {
+                                var elements = ToCsharp<int[]>(_po[i]);
+                                for (int j = 0; j < elements.Length; j++)
+                                {
+                                    _rv[i, j] = elements[j];
+                                }
+                            }
+                        }
+                        return (T)(object)_rv;
+                    }
                 case "Single[,]":
                     {
                         var _po = GetPo(pyobj);

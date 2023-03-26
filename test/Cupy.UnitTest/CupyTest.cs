@@ -29,7 +29,7 @@ namespace Cupy.UnitTest
             Console.WriteLine(a.repr);
             Assert.IsNotNull(a.ToString());
             // this should print out the exact integers of the array
-            foreach (var x in a.GetData<int[]>())
+            foreach (var x in a.GetData<int[,]>())
                 Console.WriteLine(x);
         }
 
