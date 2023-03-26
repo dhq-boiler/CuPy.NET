@@ -21,7 +21,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\src\Cupy\Cupy.csproj" />
+	  <ProjectReference Include="..\..\src\Cupy\Cupy.csproj" />
 	</ItemGroup>
 
 </Project>
