@@ -493,11 +493,13 @@ namespace Cupy.UnitTest
             Console.WriteLine(roots.repr);
             // array([1.41421356, 2.        , 3.        , 5.        ])
             Assert.AreEqual("array([1.41421356, 2.        , 3.        , 5.        ], dtype=float64)", roots.repr);
-            Console.WriteLine(string.Join(", ", roots.GetData<int>()));
+#if TODO
+            Console.WriteLine(string.Join(", ", roots.GetData<int[]>()));
+#endif
             // 1719614413, 1073127582, 0, 1073741824
             Console.WriteLine("roots.dtype: " + roots.dtype);
             // roots.dtype: float64
-            Console.WriteLine(string.Join(", ", roots.GetData<double>()));
+            Console.WriteLine(string.Join(", ", roots.GetData<double[]>()));
             // 1.4142135623731, 2, 3, 5
             Assert.AreEqual(new[] { 1.41, 2, 3, 5 }, roots.GetData<double[]>().Select(x => Math.Round(x, 2)).ToArray());
         }
