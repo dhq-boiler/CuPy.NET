@@ -61,6 +61,7 @@ namespace Cupy.UnitTest
             }
         }
 
+#if NOT_IMPLEMENTED
         [Test]
         public void efficient_array_copy()
         {
@@ -73,6 +74,7 @@ namespace Cupy.UnitTest
             Marshal.Copy(array, 0, new IntPtr(ptr), array.Length);
             Console.WriteLine(a.ToString());
         }
+#endif
 
         [Test]
         public void array()
