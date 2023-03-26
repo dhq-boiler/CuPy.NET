@@ -476,13 +476,13 @@ namespace Cupy.UnitTest
             Console.WriteLine(npY);
 
             // get their data
-            var cX = npX.GetData<int>();
-            var cY = npY.GetData<int>();
+            var cX = npX.GetData<int[][]>();
+            var cY = npY.GetData<int[][]>();
 
-            Console.WriteLine("Control extracted back to C#:\n" + string.Join(" ", cX));
-            Assert.AreEqual("-1 0 0 0 0 0 0 0 0", string.Join(" ", cX));
-            Console.WriteLine("Test extracted back to C#:\n" + string.Join(" ", cY));
-            Assert.AreEqual("0 0 0 0 0 0 -1 0 0", string.Join(" ", cY));
+            Console.WriteLine("Control extracted back to C#:\n" + string.Join(" ", cX.SelectMany(x => x)));
+            Assert.AreEqual("-1 0 0 0 0 0 0 0 0", string.Join(" ", cX.SelectMany(x => x)));
+            Console.WriteLine("Test extracted back to C#:\n" + string.Join(" ", cY.SelectMany(x => x)));
+            Assert.AreEqual("0 0 0 0 0 0 -1 0 0", string.Join(" ", cY.SelectMany(x => x)));
         }
 
         [Test]
