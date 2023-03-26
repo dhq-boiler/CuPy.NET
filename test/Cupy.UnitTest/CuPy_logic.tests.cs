@@ -48,7 +48,7 @@ namespace Cupy.UnitTest
             var o = cp.array(false).reshape(new Shape());
             var z = cp.array(-1, 4, 5).all(null, o);
             given = z;
-            expected = "array(True)";
+            expected = "True";
             Assert.AreEqual(expected, given.repr);
             Assert.AreEqual(o.Handle, z.Handle);
         }
