@@ -547,6 +547,11 @@ namespace Cupy
             return cp.transpose(this, axes);
         }
 
+        public string ToStringAsPythonObject()
+        {
+            return base.ToString();
+        }
+
         public override string ToString()
         {
             if (self.HasAttr("ndim"))
@@ -1062,7 +1067,7 @@ namespace Cupy
                 {
                     return $"{arr.real.ToString()}+{arr.imag.ToString()}j";
                 }
-                return arr.asscalar<T>().ToString();
+                return arr.ToStringAsPythonObject();
             }
             else
             {
