@@ -584,7 +584,7 @@ namespace Cupy
                 str += "[";
                 while (j < col)
                 {
-                    str += ToCsharp<int>(tr[j][i]);
+                    str += ToCsharp(this_0.GetType(), tr[j][i]);
                     if (j < col - 1)
                     {
                         str += ", ";
