@@ -934,8 +934,8 @@ namespace Cupy.UnitTest
             Assert.AreEqual(1_000_000_000_000_000, new PyInt(1_000_000_000_000_000).As<long>());
             Console.WriteLine(((dynamic)new PyInt(1_000_000_000_000_000)).__class__); // => <class 'int'>
             Console.WriteLine(cp.Int64(1_000_000_000_000_000).__class__); // => <class 'Cupy.int64'>
-            Assert.AreEqual(3, (cp.Int32(3).item() as PyObject).As<int>());
-            Assert.AreEqual(1_000_000_000_000_000, (cp.Int64(1_000_000_000_000_000).item() as PyObject).As<long>());
+            Assert.AreEqual(3, (cp.Int32(3) as PyObject).As<int>());
+            Assert.AreEqual(1_000_000_000_000_000, (cp.Int64(1_000_000_000_000_000) as PyObject).As<long>());
         }
 
         [Test]
