@@ -178,7 +178,7 @@ namespace Cupy
                     {
                         var _po = GetPo(pyobj);
                         int _len = GetLen(_po);
-                        var __len = ToCsharp<Int32>(_po[0].len);
+                        var __len = ToCsharp<Int32>(pyobj[0].len);
                         var _rv = new int[_len][];
                         for (var i = 0; i < _len; i++)
                         {
