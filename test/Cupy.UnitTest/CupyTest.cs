@@ -167,7 +167,7 @@ namespace Cupy.UnitTest
         public void ndarray_T()
         {
             var x = cp.array(new[,] { { 1f, 2f }, { 3f, 4f } });
-            Assert.AreEqual("array([[1, 2],\n       [3, 4]], dtype=float32)", x.ToString());
+            Assert.AreEqual("array([[1.0, 2.0],\n       [3.0, 4.0]], dtype=float32)", x.ToString());
             var t = x.T;
             Console.WriteLine(t.repr);
             Assert.AreEqual("[[1., 3.],\n       [2., 4.]]", t.ToString());
