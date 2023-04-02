@@ -2,6 +2,7 @@
 using Python.Runtime;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Numerics;
 using System.Runtime.InteropServices;
@@ -196,7 +197,10 @@ namespace Cupy
                 if (coords.Length == 1)
                 {
                     var pyint = new PyInt(coords[0]);
-                    return new NDarray(PyObject[pyint]);
+                    using (Py.GIL())
+                    {
+                        return new NDarray(self.GetItem(pyint));
+                    }
                 }
                 else
                 {
@@ -576,7 +580,6 @@ namespace Cupy
             var row = this.len;
             var i = 0;
             var str = string.Empty;
-            var tr = this.transpose();
             str += "[";
             while (i < row)
             {
@@ -584,7 +587,7 @@ namespace Cupy
                 str += "[";
                 while (j < col)
                 {
-                    str += ToCsharp(this_0.GetType(), tr[j][i]);
+                    str += ToCsharp(this_0.GetType(), this[i][j]);
                     if (j < col - 1)
                     {
                         str += ", ";
@@ -665,9 +668,11 @@ namespace Cupy
         private NDarray Leaf(NDarray ndArray)
         {
             var target = ndArray;
-            while (target.ToString().Contains("["))
+            var str = target[0].str;
+            while (str.Contains("["))
             {
                 target = target[0];
+                str = target.str;
             }
             return target;
         }

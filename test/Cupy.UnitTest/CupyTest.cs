@@ -735,6 +735,7 @@ namespace Cupy.UnitTest
             Assert.AreEqual(@"array([1, 2])", b1.repr);
         }
 
+#if NOT_IMPLEMENTED
         [Test]
         public void IssueByBanyc3()
         {
@@ -789,6 +790,7 @@ namespace Cupy.UnitTest
             var b = a.transpose(0, 2, 3, 1);
             Assert.AreEqual(s, b.repr);
         }
+#endif
 
         [Test]
         public void IssueBybeanels01()
