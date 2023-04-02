@@ -390,8 +390,8 @@ namespace Cupy.UnitTest
         {
             // unary operations
             var a = cp.array(1, 2, 3);
-            Assert.AreEqual(new[] { -1, -2, -3 }, (-a).GetData<int>());
-            Assert.AreEqual(new[] { 1, 2, 3 }, (+a).GetData<int>());
+            Assert.AreEqual(new[] { -1, -2, -3 }, (-a).GetData<int[]>());
+            Assert.AreEqual(new[] { 1, 2, 3 }, (+a).GetData<int[]>());
             // todo: test operator ~
         }
 
