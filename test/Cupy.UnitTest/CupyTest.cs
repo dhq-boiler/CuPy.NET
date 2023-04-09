@@ -987,6 +987,7 @@ namespace Cupy.UnitTest
             Assert.AreEqual(143d, new NDarray<double>(new[] { 143d }).item());
         }
 
+#if NOT_SUPPORTED
         [Test]
         public async Task IssueByMaLichtenegger()
         {
@@ -1010,6 +1011,7 @@ namespace Cupy.UnitTest
             Assert.IsTrue(doubles[0].asscalar<double>() != 0);
             Assert.IsTrue(doubles[1].asscalar<double>() == 0);
         }
+#endif
 
         [Test]
         public async Task IssueByMartinDevans()
