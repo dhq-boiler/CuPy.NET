@@ -405,17 +405,17 @@ namespace Cupy.UnitTest
             // arithmetic operators
             var a = cp.array(1, 2, 3);
             var b = cp.ones(new Shape(3), cp.int32) * 2;
-            Assert.AreEqual(new[] { 11, 12, 13 }, (a + 10).GetData<int>());
-            Assert.AreEqual(new[] { 3, 4, 5 }, (a + b).GetData<int>());
-            Assert.AreEqual(new[] { -9, -8, -7 }, (a - 10).GetData<int>());
-            Assert.AreEqual(new[] { -1, 0, 1 }, (a - b).GetData<int>());
-            Assert.AreEqual(new[] { 10, 20, 30 }, (a * 10).GetData<int>());
-            Assert.AreEqual(new[] { 2, 4, 6 }, (a * b).GetData<int>());
+            Assert.AreEqual(new[] { 11, 12, 13 }, (a + 10).GetData<int[]>());
+            Assert.AreEqual(new[] { 3, 4, 5 }, (a + b).GetData<int[]>());
+            Assert.AreEqual(new[] { -9, -8, -7 }, (a - 10).GetData<int[]>());
+            Assert.AreEqual(new[] { -1, 0, 1 }, (a - b).GetData<int[]>());
+            Assert.AreEqual(new[] { 10, 20, 30 }, (a * 10).GetData<int[]>());
+            Assert.AreEqual(new[] { 2, 4, 6 }, (a * b).GetData<int[]>());
             a = cp.array(2, 4, 16);
-            Assert.AreEqual(new[] { 1d, 2d, 8d }, (a / 2).GetData<double>());
-            Assert.AreEqual(new[] { 1d, 2d, 8d }, (a / b).GetData<double>());
-            Assert.AreEqual(new[] { 4, 2, .5 }, (8 / a).GetData<double>());
-            Assert.AreEqual(new[] { 4, 2, -10 }, (6 - a).GetData<int>());
+            Assert.AreEqual(new[] { 1d, 2d, 8d }, (a / 2).GetData<double[]>());
+            Assert.AreEqual(new[] { 1d, 2d, 8d }, (a / b).GetData<double[]>());
+            Assert.AreEqual(new[] { 4, 2, .5 }, (8 / a).GetData<double[]>());
+            Assert.AreEqual(new[] { 4, 2, -10 }, (6 - a).GetData<int[]>());
         }
 
         [Test]
@@ -424,13 +424,13 @@ namespace Cupy.UnitTest
             var a = cp.array(1, 2, 3);
             var b = cp.ones(new Shape(3), cp.int32) * 2;
             a.iadd(10);
-            Assert.AreEqual(new[] { 11, 12, 13 }, a.GetData<int>());
+            Assert.AreEqual(new[] { 11, 12, 13 }, a.GetData<int[]>());
             a.isub(10);
-            Assert.AreEqual(new[] { 1, 2, 3 }, a.GetData<int>());
+            Assert.AreEqual(new[] { 1, 2, 3 }, a.GetData<int[]>());
             a.iadd(b);
-            Assert.AreEqual(new[] { 3, 4, 5 }, a.GetData<int>());
+            Assert.AreEqual(new[] { 3, 4, 5 }, a.GetData<int[]>());
             a.isub(b);
-            Assert.AreEqual(new[] { 1, 2, 3 }, a.GetData<int>());
+            Assert.AreEqual(new[] { 1, 2, 3 }, a.GetData<int[]>());
         }
 
         [Test]
