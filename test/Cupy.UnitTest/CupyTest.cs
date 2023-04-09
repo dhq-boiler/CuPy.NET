@@ -347,20 +347,24 @@ namespace Cupy.UnitTest
         public void ndarray_masking1()
         {
             var x = cp.arange(30).reshape(2, 3, 5);
-            Assert.AreEqual(
+            var expected =
                 "array([[[ 0,  1,  2,  3,  4],\n" +
                 "        [ 5,  6,  7,  8,  9],\n" +
                 "        [10, 11, 12, 13, 14]],\n\n" +
                 "       [[15, 16, 17, 18, 19],\n" +
                 "        [20, 21, 22, 23, 24],\n" +
-                "        [25, 26, 27, 28, 29]]])",
+                "        [25, 26, 27, 28, 29]]])";
+            Assert.AreEqual(
+                expected,
                 x.repr);
             var b = cp.array(new[,] { { true, true, false }, { false, true, true } });
-            Assert.AreEqual(
+            expected =
                 "array([[ 0,  1,  2,  3,  4],\n" +
                 "       [ 5,  6,  7,  8,  9],\n" +
                 "       [20, 21, 22, 23, 24],\n" +
-                "       [25, 26, 27, 28, 29]])",
+                "       [25, 26, 27, 28, 29]])";
+            Assert.AreEqual(
+                expected,
                 x[b].repr);
         }
 

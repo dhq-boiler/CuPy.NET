@@ -561,7 +561,7 @@ namespace Cupy
         {
             if (self.HasAttr("ndim"))
             {
-                return Dig(ndim - 1, this);
+                return Dig(ndim - 1, ndim, this);
             }
             else if (!base.ToString().Contains("[[") && !base.ToString().Contains("]]"))
             {
@@ -615,7 +615,7 @@ namespace Cupy
                 {
                     str += "array(";
                 }
-                str += Dig(ndim - 1, this);
+                str += Dig(ndim - 1, ndim, this);
                 if (isArray && ndim > 0 && !dtype.ToString().Equals("int32") && !dtype.ToString().Equals("bool"))
                 {
                     str += $", dtype={dtype}";
@@ -677,20 +677,21 @@ namespace Cupy
             return target;
         }
 
-        private string Dig(int dim, NDarray arr)
+        private string Dig(int dim, int depth, NDarray arr)
         {
             if (dim > 1)
             {
                 var str = "[";
                 for (int i = 0; i < arr.len; i++)
                 {
-                    str += Dig(dim - 1, arr[i]);
+                    var ndarray = arr[i];
+                    str += Dig(dim - 1, depth, ndarray);
                     if (i < arr.len - 1)
                     {
                         str += ",";
                         if (dim > 0)
                         {
-                            str += "\n       ";
+                            str += "\n\n       ";
                         }
                         else
                         {
@@ -703,19 +704,68 @@ namespace Cupy
             }
             else
             {
-                var str = base.ToString();
+                var str = arr.ToStringAsBase();
 
                 var str2 = string.Empty;
 
                 Regex regex = new Regex("(?<arr>\\[[-\\d\\.\\s]+\\])");
                 Regex regex2 = new Regex("^\\[\\[[\\s\\S]+?\\]\\]$");
                 Regex regex3 = new Regex("\\[(?<elms>[\\s\\S]+?)\\]");
+                Regex regex4 = new Regex("\\[(?<contents>\\[[\\s\\S]+?\\])\\]");
 
                 if (regex2.IsMatch(str))
                 {
                     var str3 = str.Replace("]\n [", "],\n       [");
                     str3 = str3.Substring(1, str3.Length - 2);
-                    if (regex.IsMatch(str3))
+                    if (regex4.IsMatch(str3))
+                    {
+                        var mcs = regex4.Matches(str3);
+                        int strlen = 0;
+                        int integerPartMaxLen = 0;
+                        int decimalPartMaxLen = 0;
+                        foreach (Match mc in mcs)
+                        {
+                            var str5 = mc.Groups["contents"].Value;
+                            if (regex.IsMatch(str5))
+                            {
+                                var mcs2 = regex.Matches(str5);
+                                foreach (Match mc2 in mcs2)
+                                {
+                                    var op = OnePass(mc2.Groups["arr"].ToString());
+                                    strlen = Math.Max(strlen, op.Item2);
+                                    integerPartMaxLen = Math.Max(integerPartMaxLen, op.Item3);
+                                    decimalPartMaxLen = Math.Max(decimalPartMaxLen, op.Item4);
+                                }
+                            }
+                        }
+
+                        foreach (Match mc in mcs)
+                        {
+                            var str5 = mc.Groups["contents"].Value.Replace("]\n  [", "],\n       [");
+
+                            if (regex.IsMatch(str5))
+                            {
+                                str2 += "[";
+                                var mcs2 = regex.Matches(str5);
+                                //Two pass
+                                foreach (Match mc2 in mcs2)
+                                {
+                                    str2 += TwoPass(mc2.Groups["arr"].ToString(), strlen, integerPartMaxLen, decimalPartMaxLen);
+                                    if (!Object.ReferenceEquals(mc2, mcs2.Last()))
+                                    {
+                                        str2 += ", ";
+                                    }
+                                }
+                                str2 += "]";
+                                if (!Object.ReferenceEquals(mc, mcs.Last()))
+                                {
+                                    str2 += ", ";
+                                }
+                            }
+                        }
+                        str2 = str2.Substring(1, str2.Length - 2);
+                    }
+                    else if (regex.IsMatch(str3))
                     {
                         var mcs = regex.Matches(str3);
                         int strlen = 0;
@@ -763,7 +813,10 @@ namespace Cupy
                             }
                         }
                     }
-                    return $"[{str2}]".Replace("], [", "],\n       [");
+                    str2 = $"[{str2}]";
+                    str2 = str2.Replace("]], [[", $"]],\n{Spaces("array(".Length + depth - 1)}[[");
+                    str2 = str2.Replace("], [", $"],\n{Spaces("array(".Length + depth - 1)}[");
+                    return str2;
                 }
                 else if (regex.IsMatch(str))
                 {
@@ -810,6 +863,11 @@ namespace Cupy
                     return $"{str2}".Replace("], [", "],\n       [");
                 }
             }
+        }
+
+        private string ToStringAsBase()
+        {
+            return base.ToString();
         }
 
         private string TwoPass(string input, int strlen, int integerPartMaxLen, int decimalPartMaxLen)
