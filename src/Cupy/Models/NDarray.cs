@@ -855,6 +855,10 @@ namespace Cupy
                 }
                 else
                 {
+                    if (str.Equals("[]"))
+                    {
+                        return str;
+                    }
                     int strlen = 0;
                     int integerPartMaxLen = 0;
                     int decimalPartMaxLen = 0;

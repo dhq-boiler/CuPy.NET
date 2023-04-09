@@ -1031,7 +1031,7 @@ namespace Cupy.UnitTest
             //array([], dtype = float64)]
             x = cp.arange(8);
             b = x.split(new[] { 3, 5, 6, 10 }).repr();
-            a = "(array([0, 1, 2]), array([3, 4]), array([5]), array([6, 7]), array([], dtype=int32))";
+            a = "(array([0, 1, 2]), array([3, 4]), array([5]), array([6, 7]), array([]))";
             Assert.AreEqual(a, b);
             Assert.AreEqual(a, x.split(new[] { 3, 5, 6, 10 }).repr());
         }
