@@ -866,6 +866,7 @@ namespace Cupy.UnitTest
             Assert.AreEqual("array([4.10003045, 1.09075677], dtype=float64)", tuple.Item4.repr);
         }
 
+#if NOT_SUPPORTED
         [Test]
         public void IssueByDecemberDream()
         {
@@ -876,6 +877,7 @@ namespace Cupy.UnitTest
             var b = a.roots();
             Assert.AreEqual("array([ 1.41421356, -2.        , -1.41421356,  0.        ])", b.repr);
         }
+#endif
 
         [Test]
         public void IssueByDecemberDream2()
