@@ -373,20 +373,20 @@ namespace Cupy.UnitTest
         {
             var a = cp.array(1, 2, 3);
             // comparison with a scalar
-            Assert.AreEqual(new[] { true, false, false }, (a < 2).GetData());
-            Assert.AreEqual(new[] { true, true, false }, (a <= 2).GetData());
-            Assert.AreEqual(new[] { false, false, true }, (a > 2).GetData());
-            Assert.AreEqual(new[] { false, true, true }, (a >= 2).GetData());
-            Assert.AreEqual(new[] { false, true, false }, a.equals(2).GetData());
-            Assert.AreEqual(new[] { true, false, true }, a.not_equals(2).GetData());
+            Assert.AreEqual(new[] { true, false, false }, (a < 2).GetData<bool[]>());
+            Assert.AreEqual(new[] { true, true, false }, (a <= 2).GetData<bool[]>());
+            Assert.AreEqual(new[] { false, false, true }, (a > 2).GetData<bool[]>());
+            Assert.AreEqual(new[] { false, true, true }, (a >= 2).GetData<bool[]>());
+            Assert.AreEqual(new[] { false, true, false }, a.equals(2).GetData<bool[]>());
+            Assert.AreEqual(new[] { true, false, true }, a.not_equals(2).GetData<bool[]>());
             // comparison with an array
             var b = cp.ones(new Shape(3), cp.int32) * 2;
-            Assert.AreEqual(new[] { true, false, false }, (a < b).GetData());
-            Assert.AreEqual(new[] { true, true, false }, (a <= b).GetData());
-            Assert.AreEqual(new[] { false, false, true }, (a > b).GetData());
-            Assert.AreEqual(new[] { false, true, true }, (a >= b).GetData());
-            Assert.AreEqual(new[] { false, true, false }, a.equals(b).GetData());
-            Assert.AreEqual(new[] { true, false, true }, a.not_equals(b).GetData());
+            Assert.AreEqual(new[] { true, false, false }, (a < b).GetData<bool[]>());
+            Assert.AreEqual(new[] { true, true, false }, (a <= b).GetData<bool[]>());
+            Assert.AreEqual(new[] { false, false, true }, (a > b).GetData<bool[]>());
+            Assert.AreEqual(new[] { false, true, true }, (a >= b).GetData<bool[]>());
+            Assert.AreEqual(new[] { false, true, false }, a.equals(b).GetData<bool[]>());
+            Assert.AreEqual(new[] { true, false, true }, a.not_equals(b).GetData<bool[]>());
         }
 
         [Test]

@@ -84,6 +84,7 @@ namespace Cupy
                         rv[i] = ToCsharp<NDarray>(po[i]);
                     return (T)(object)rv;
                 case "Matrix": return (T)(object)new Matrix(pyobj);
+                case "Boolean": return Boolean.Parse(pyobj.ToString());
                 case "Int16": return Int16.Parse(pyobj.ToString());
                 case "Int32": return Int32.Parse(pyobj.ToString());
                 case "Int64": return Int64.Parse(pyobj.ToString());
@@ -93,6 +94,15 @@ namespace Cupy
                 case "Single": return float.Parse(pyobj.ToString());
                 case "Double": return double.Parse(pyobj.ToString());
                 case "Complex": return ParseComplex(pyobj.ToString());
+                case "Boolean[]":
+                    {
+                        var _po = GetPo(pyobj);
+                        int _len = GetLen(_po);
+                        var _rv = new Boolean[_len];
+                        for (var i = 0; i < _len; i++)
+                            _rv[i] = ToCsharp<Boolean>(_po[i]);
+                        return (T)(object)_rv;
+                    }
                 case "Int16[]":
                     {
                         var _po = GetPo(pyobj);
