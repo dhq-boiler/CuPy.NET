@@ -884,7 +884,7 @@ namespace Cupy
             elements = JoinComplex(elements);
             int maxlen = strlen;
             var str = string.Empty;
-            var regex = new Regex("(?<integerPart>-?\\d+?)\\.(?<decimalPart>\\d+?)");
+            var regex = new Regex("(?<integerPart>-?\\d+?)\\.(?<decimalPart>\\d+?)?");
             var regexComplex = new Regex("(?<real>\\d+?)\\.\\+(?<imag>\\d+?)\\.j");
             foreach (var element in elements)
             {

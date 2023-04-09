@@ -858,12 +858,12 @@ namespace Cupy.UnitTest
             var x = cp.array(0, 1, 2, 3);
             var y = cp.array(-1, 0.2, 0.9, 2.1);
             var A = cp.vstack(x, cp.ones(x.len)).T;
-            Assert.AreEqual("array([[0., 1.],\n       [1., 1.],\n       [2., 1.],\n       [3., 1.]])", A.repr);
+            Assert.AreEqual("array([[0., 1.],\n       [1., 1.],\n       [2., 1.],\n       [3., 1.]], dtype=float64)", A.repr);
             var tuple = cp.linalg.lstsq(A, y);
-            Assert.AreEqual("array([ 1.  , -0.95])", tuple.Item1.repr);
-            Assert.AreEqual("array([0.05])", tuple.Item2.repr);
+            Assert.AreEqual("array([ 1.  , -0.95], dtype=float64)", tuple.Item1.repr);
+            Assert.AreEqual("array([0.05], dtype=float64)", tuple.Item2.repr);
             Assert.AreEqual(2, tuple.Item3);
-            Assert.AreEqual("array([4.10003045, 1.09075677])", tuple.Item4.repr);
+            Assert.AreEqual("array([4.10003045, 1.09075677], dtype=float64)", tuple.Item4.repr);
         }
 
         [Test]
