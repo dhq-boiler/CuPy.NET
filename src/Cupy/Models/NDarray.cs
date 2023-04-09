@@ -634,9 +634,12 @@ namespace Cupy
                     str += "array(";
                 }
                 str += this.ToString();
-                if (!Leaf(this).dtype.ToString().Equals("int32") && !Leaf(this).dtype.ToString().Equals("bool"))
+                if (!Leaf(this).ToString().Contains("NpzFile"))
                 {
-                    str += $", dtype={Leaf(this).dtype.ToString()}";
+                    if (!Leaf(this).dtype.ToString().Equals("int32") && !Leaf(this).dtype.ToString().Equals("bool"))
+                    {
+                        str += $", dtype={Leaf(this).dtype.ToString()}";
+                    }
                 }
                 if (depth == 1)
                 {
@@ -668,7 +671,7 @@ namespace Cupy
         private NDarray Leaf(NDarray ndArray)
         {
             var target = ndArray;
-            var str = target[0].str;
+            var str = target.str;
             while (str.Contains("["))
             {
                 target = target[0];
