@@ -179,10 +179,10 @@ namespace Cupy.UnitTest
         public void ndarray_flatten()
         {
             var x = cp.array(new[,] { { 1f, 2f }, { 3f, 4f } });
-            Assert.AreEqual("[1. 2. 3. 4.]", x.flatten().ToString());
+            Assert.AreEqual("[1., 2., 3., 4.]", x.flatten().ToString());
             var t = x.T;
-            Assert.AreEqual("[1. 3. 2. 4.]", t.flatten().ToString());
-            Assert.AreEqual(new[] { 1f, 3f, 2f, 4f }, t.flatten().GetData<float>());
+            Assert.AreEqual("[1., 3., 2., 4.]", t.flatten().ToString());
+            Assert.AreEqual(new[] { 1f, 3f, 2f, 4f }, t.flatten().GetData<float[]>());
         }
 
         [Test]
