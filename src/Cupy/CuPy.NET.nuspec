@@ -14,9 +14,9 @@
     <tags>dotnet CuPy</tags>
   </metadata>
   <files>
-	  <file src="bin\Release\net7.0\CuPy.NET.dll" target="lib\net7.0" />
-	  <file src="bin\Release\net7.0\CuPy.NET.pdb" target="lib\net7.0" />
-	  <file src="bin\Release\net8.0\CuPy.NET.dll" target="lib\net8.0" />
-	  <file src="bin\Release\net8.0\CuPy.NET.pdb" target="lib\net8.0" />
+	  <file src="bin\x64\Release\net7.0\CuPy.NET.dll" target="lib\net7.0" />
+	  <file src="bin\x64\Release\net7.0\CuPy.NET.pdb" target="lib\net7.0" />
+	  <file src="bin\x64\Release\net8.0\CuPy.NET.dll" target="lib\net8.0" />
+	  <file src="bin\x64\Release\net8.0\CuPy.NET.pdb" target="lib\net8.0" />
   </files>
 </package>

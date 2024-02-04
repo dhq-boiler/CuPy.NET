@@ -2,6 +2,7 @@
 
 	<PropertyGroup>
 		<TargetFrameworks>net7.0;net8.0</TargetFrameworks>
+		<RuntimeIdentifiers>win-x64;linux-x64;osx-x64</RuntimeIdentifiers>
 		<RootNamespace>Cupy</RootNamespace>
 		<AssemblyName>CuPy.NET</AssemblyName>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
