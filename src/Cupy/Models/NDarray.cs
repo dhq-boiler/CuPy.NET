@@ -693,14 +693,17 @@ namespace Cupy
             // 行を分割し、空行を除外
             var lines = input.Split(new[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
 
-            // 数値を抽出し、2次元リストに格納
-            var arrays = new List<List<string>>();
-            bool isMultidimensional = input.Trim().StartsWith("array([["); // 2次元配列かどうかを判断
+            // 数値を抽出し、多次元リストに格納
+            var arrays = new List<List<List<string>>>();
 
             // 整数部と小数部、複素数部の最大桁数を計算
             int maxIntegerDigits = 0;
             int maxDecimalDigits = 0;
             int maxComplexDigits = 0;
+            int ndim = 1;
+            var currentMatrix = new List<List<string>>();
+
+            ndim = lines.First().Count(x => x.Equals('[')) & lines.Last().Count(x => x.Equals(']'));
 
             foreach (var line in lines)
             {
@@ -714,14 +717,10 @@ namespace Cupy
                     var innerContent = innerContentMatch.Groups[1].Value;
 
                     // 内容から数字を抽出し、リストに追加
-                    //var values = Regex.Matches(innerContent, numberPattern)
-                    //                   .Cast<Match>()
-                    //                   .Select(m => m.Value)
-                    //                   .ToList();
                     var values = innerContent.Split(',', '[', ']').Select(x => x.Trim()).Where(x => x.Any()).ToList();
                     if (values.Count > 0)
                     {
-                        arrays.Add(values);
+                        currentMatrix.Add(values);
                     }
 
                     // 整数部と小数部の桁数を更新
@@ -759,27 +758,45 @@ namespace Cupy
                         }
                     }
                 }
+
+                // Check if it's the end of a 2D array
+                if (trimmedLine.Contains("]]"))
+                {
+                    arrays.Add(currentMatrix);
+                    currentMatrix = new List<List<string>>();
+                }
+            }
+
+            if (currentMatrix.Any())
+            {
+                arrays.Add(currentMatrix);
             }
 
             // 各列の最大幅を計算
             int overallMaxLength = 0;
             foreach (var array in arrays)
             {
-                foreach (var value in array)
+                foreach (var matrix in array)
                 {
-                    if (value.Contains("nan"))
-                        continue;
-                    overallMaxLength = Math.Max(overallMaxLength, value.Trim().Length);
+                    foreach (var value in matrix)
+                    {
+                        if (value.Contains("nan"))
+                            continue;
+                        overallMaxLength = Math.Max(overallMaxLength, value.Trim().Length);
+                    }
                 }
             }
 
             // 整形された文字列の出力
             builder.Append("array(");
-            builder.Append("[");
+            builder.Append(Repeat(ndim, "["));
 
-            for (int i = 0; i < arrays.Count; i++)
+            for (int matrixIndex = 0; matrixIndex < arrays.Count; matrixIndex++)
             {
-                var formattedRow = arrays[i]
+                var matrix = arrays[matrixIndex];
+                for (int i = 0; i < matrix.Count; i++)
+                {
+                    var formattedRow = matrix[i]
                     .Select((element, index) => {
                         // True の場合は右詰めにする
                         if (element.Contains("."))
@@ -815,25 +832,84 @@ namespace Cupy
                     })
                     .Aggregate((acc, next) => acc + ", " + next);
 
-                if (isMultidimensional)
-                {
                     if (i == 0)
                     {
-                        builder.Append("[" + formattedRow + "]");
+                        builder.Append(matrixIndex > 0 ? "       " : "");
                     }
                     else
                     {
-                        var indent = new string(' ', 7); // 行の先頭のスペース（"array(" と同じ幅）
-                        builder.Append(",\n" + indent + "[" + formattedRow + "]");
+                        builder.Append("       ");
                     }
-                }
-                else
-                {
-                    builder.Append(formattedRow);
+
+                    if ((arrays.Count == 1 && matrix.Count == 1))
+                    {
+                        if (ndim > 1)
+                        {
+                            builder.Append(formattedRow);
+                        }
+                        else
+                        {
+                            builder.Append(formattedRow);
+                        }
+                    }
+                    else
+                    {
+                        if (i == 0)
+                        {
+                            if (ndim == 3 && matrixIndex > 0)
+                            {
+                                builder.Append("[[" + formattedRow + "]");
+                            }
+                            else
+                            {
+                                builder.Append(formattedRow + "]");
+                            }
+                        }
+                        else if (i == matrix.Count - 1)
+                        {
+                            if (ndim == 3)
+                            {
+                                if (matrixIndex == arrays.Count - 1)
+                                {
+                                    builder.Append(Repeat(ndim - 2, " ") + "[" + formattedRow);
+                                }
+                                else
+                                {
+                                    builder.Append(Repeat(ndim - 2, " ") + "[" + formattedRow + "]]");
+                                }
+                            }
+                            else
+                            {
+                                builder.Append("[" + formattedRow);
+                            }
+                        }
+                        else
+                        {
+                            if (ndim == 3)
+                            {
+                                builder.Append(Repeat(ndim - 2, " ") + "[" + formattedRow + "]");
+                            }
+                            else
+                            {
+                                builder.Append("[" + formattedRow + "]");
+                            }
+                        }
+                    }
+
+                    if (ndim == 3 && i == matrix.Count - 1 && matrixIndex < arrays.Count - 1)
+                    {
+                        builder.Append(",\n\n");
+                    }
+                    else if (i < matrix.Count - 1)
+                    {
+                        builder.Append(",\n");
+                    }
+
+                    var r = builder.ToString();
                 }
             }
+            builder.Append(Repeat(ndim, "]"));
 
-            builder.Append("]");
             if (dtypeMatched)
             {
                 var m = dtypePattern.Match(input);
@@ -845,6 +921,15 @@ namespace Cupy
             return builder.ToString();
         }
 
+        private string Repeat(int ndim, string v)
+        {
+            var builder = new StringBuilder();
+            for (var i = 0; i < ndim; i++)
+            {
+                builder.Append(v);
+            }
+            return builder.ToString();
+        }
 
         private NDarray Leaf(NDarray ndArray)
         {

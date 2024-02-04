@@ -924,11 +924,14 @@ namespace Cupy.UnitTest
             //       [ 0.2, -0.8, -1.8]])]
             var zX = new NDarray(new[,] { { 1, 2, 3 }, { 4, 5, 6 }, { 8, 9, 0 } });
             var result = cp.gradient(zX, new List<double> { 4.0, 5.0 });
-            var expected = @"array([[[ 0.75 ,  0.75 ,  0.75 ],
-       [ 0.875,  0.875, -0.375],
-       [ 1.   ,  1.   , -1.5  ]]), array([[ 0.2,  0.2,  0.2],
-       [ 0.2,  0.2,  0.2],
-       [ 0.2, -0.8, -1.8]]])".Replace("\r", "");
+            var expected = 
+@"array([[[ 0.75 ,  0.75 ,  0.75 ],
+        [ 0.875,  0.875, -0.375],
+        [ 1.   ,  1.   , -1.5  ]],
+
+       [[ 0.2  ,  0.2  ,  0.2  ],
+        [ 0.2  ,  0.2  ,  0.2  ],
+        [ 0.2  , -0.8  , -1.8  ]]], dtype=float64)".Replace("\r", "");
             Assert.AreEqual(expected, result.repr);
         }
 
