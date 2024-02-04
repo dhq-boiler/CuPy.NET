@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Numerics;
 using System.Runtime.InteropServices;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace Cupy
@@ -588,7 +589,8 @@ namespace Cupy
                 str += "[";
                 while (j < col)
                 {
-                    str += ToCsharp(this_0.GetType(), this[i][j]);
+                    var obj = ToCsharp(this_0.GetType(), this[i][j]);
+                    str += obj.ToString();
                     if (j < col - 1)
                     {
                         str += ", ";
@@ -625,7 +627,7 @@ namespace Cupy
                 {
                     str += ")";
                 }
-                return str;
+                return Arrange(str);
             }
             else if (depth == 1)
             {
@@ -646,12 +648,12 @@ namespace Cupy
                 {
                     str += ")";
                 }
-                return $"{str}".Replace("], [", "],\n       [");
+                return Arrange($"{str}".Replace("], [", "],\n       ["));
             }
             else if (this.len == 1)
             {
                 var str = this[0].ToString(depth + 1);
-                return str;
+                return Arrange(str);
             }
             else
             {
@@ -665,9 +667,145 @@ namespace Cupy
                     }
                 }
                 str += "]";
-                return str;
+                return Arrange(str);
             }
         }
+
+        private string Arrange(string input)
+        {
+            var builder = new StringBuilder();
+
+            // 数値（整数、小数、複素数）、bool値にマッチする正規表現
+            string numberPattern = @"([-+]?\d+\.?\d*([eE][-+]?\d+)?([+-]\d*\.?\d*j)?)|(True|False)";
+            var dtypePattern = new Regex(@"dtype=(?<dtype>.+?)\)");
+            var dtypeMatched = dtypePattern.IsMatch(input);
+
+            // 単一の数値の場合の処理
+            if (!input.Trim().StartsWith("array("))
+            {
+                var match = Regex.Match(input, numberPattern);
+                if (match.Success)
+                {
+                    return match.Value; // 単一の数値をそのまま返す
+                }
+            }
+
+            // 行を分割し、空行を除外
+            var lines = input.Split(new[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
+
+            // 数値を抽出し、2次元リストに格納
+            var arrays = new List<List<string>>();
+            bool isMultidimensional = input.Trim().StartsWith("array([["); // 2次元配列かどうかを判断
+
+            // 整数部と小数部の最大桁数を計算
+            int maxIntegerDigits = 0;
+            int maxDecimalDigits = 0;
+
+            foreach (var line in lines)
+            {
+                var trimmedLine = line.Trim();
+                if (trimmedLine == "") continue;  // 空行をスキップ
+
+                // '[' と ']' の間の内容を抽出
+                var innerContentMatches = Regex.Matches(trimmedLine, @"\[([^]]+)\]");
+                foreach (Match innerContentMatch in innerContentMatches)
+                {
+                    var innerContent = innerContentMatch.Groups[1].Value;
+
+                    // 内容から数字を抽出し、リストに追加
+                    var values = Regex.Matches(innerContent, numberPattern)
+                                       .Cast<Match>()
+                                       .Select(m => m.Value)
+                                       .ToList();
+                    if (values.Count > 0)
+                    {
+                        arrays.Add(values);
+                    }
+
+                    // 整数部と小数部の桁数を更新
+                    foreach (var value in values)
+                    {
+                        if (double.TryParse(value, out double num))
+                        {
+                            var parts = value.Split('.');
+                            maxIntegerDigits = Math.Max(maxIntegerDigits, parts[0].TrimStart('-').Length);
+                            if (parts.Length > 1)
+                            {
+                                maxDecimalDigits = Math.Max(maxDecimalDigits, parts[1].Length);
+                            }
+                        }
+                    }
+                }
+            }
+
+            // 各列の最大幅を計算
+            int overallMaxLength = 0;
+            foreach (var array in arrays)
+            {
+                foreach (var value in array)
+                {
+                    overallMaxLength = Math.Max(overallMaxLength, value.Trim().Length);
+                }
+            }
+
+            // 整形された文字列の出力
+            builder.Append("array(");
+            builder.Append("[");
+
+            for (int i = 0; i < arrays.Count; i++)
+            {
+                var formattedRow = arrays[i]
+                    .Select((element, index) => {
+                        // True の場合は右詰めにする
+                        if (element.Contains("."))
+                        {
+                            if (double.TryParse(element, out double num))
+                            {
+                                // 数値の場合、整数部と小数部の桁数に合わせてパディング
+                                var parts = element.Split('.');
+                                var integerPart = parts[0].PadLeft(maxIntegerDigits);
+                                var decimalPart = parts.Length > 1 ? parts[1].PadRight(maxDecimalDigits, ' ') : "";
+                                return $"{integerPart}.{decimalPart}";
+                            }
+                            return element.PadRight(maxIntegerDigits + 1 + maxDecimalDigits);
+                        }
+                        else if (element == "True" || element.Length < overallMaxLength)
+                            return element.PadLeft(overallMaxLength);
+                        else
+                            return element.PadRight(overallMaxLength);
+                    })
+                    .Aggregate((acc, next) => acc + ", " + next);
+
+                if (isMultidimensional)
+                {
+                    if (i == 0)
+                    {
+                        builder.Append("[" + formattedRow + "]");
+                    }
+                    else
+                    {
+                        var indent = new string(' ', 7); // 行の先頭のスペース（"array(" と同じ幅）
+                        builder.Append(",\n" + indent + "[" + formattedRow + "]");
+                    }
+                }
+                else
+                {
+                    builder.Append(formattedRow);
+                }
+            }
+
+            builder.Append("]");
+            if (dtypeMatched)
+            {
+                var m = dtypePattern.Match(input);
+                var dtypeVal = m.Groups["dtype"].Value;
+                builder.Append($", dtype={dtypeVal}");
+            }
+            builder.Append(")"); // array の閉じ括弧（外側）
+
+            return builder.ToString();
+        }
+
 
         private NDarray Leaf(NDarray ndArray)
         {
@@ -847,11 +985,17 @@ namespace Cupy
                     }
                     if (mcs.Count() > 1)
                     {
-                        return $"[{str2}]".Replace("], [", "],\n       [");
+                        str2 = $"[{str2}]";
+                        str2 = str2.Replace("]], [[", $"]],\n{Spaces("array(".Length + depth - 1)}[[");
+                        str2 = str2.Replace("], [", $"],\n{Spaces("array(".Length + depth - 1)}[");
+                        return str2;
                     }
                     else
                     {
-                        return $"{str2}".Replace("], [", "],\n       [");
+                        //return $"{str2}".Replace("], [", "],\n       [");
+                        str2 = str2.Replace("]], [[", $"]],\n{Spaces("array(".Length + depth - 1)}[[");
+                        str2 = str2.Replace("], [", $"],\n{Spaces("array(".Length + depth - 1)}[");
+                        return str2;
                     }
                 }
                 else
