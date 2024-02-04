@@ -817,7 +817,7 @@ namespace Cupy.UnitTest
             // array([  2.,  12.])
 
             var given = cp.prod(new[,] { { 1.0, 2.0 }, { 3.0, 4.0 } }, new[] { 1 });
-            var expected = "array([2. , 12.], dtype=float64)";
+            var expected = "array([ 2., 12.], dtype=float64)";
             Assert.AreEqual(expected, given.repr);
 
             // If the type of x is unsigned, then the output type is
