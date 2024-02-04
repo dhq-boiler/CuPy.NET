@@ -744,7 +744,7 @@ namespace Cupy
                             var parts = value.Split('.');
                             if (!value.Equals("nan"))
                             {
-                                maxIntegerDigits = Math.Max(maxIntegerDigits, parts[0].TrimStart('-').Length);
+                                maxIntegerDigits = Math.Max(maxIntegerDigits, parts[0].Length);
                             }
 
                             if (parts.Length > 1)
