@@ -676,7 +676,7 @@ namespace Cupy
             var builder = new StringBuilder();
 
             // 数値（整数、小数、複素数）、bool値にマッチする正規表現
-            string numberPattern = @"([-+]?\d+\.?\d*([eE][-+]?\d+)?([+-]\d*\.?\d*j)?)|(True|False)";
+            string numberPattern = @"([-+]?\d+\.?\d*([eE][-+]?\d+)?([+-]\d*\.?\d*j)?)|(True|False)|(nan)";
             var dtypePattern = new Regex(@"dtype=(?<dtype>.+?)\)");
             var dtypeMatched = dtypePattern.IsMatch(input);
 
@@ -725,7 +725,12 @@ namespace Cupy
                     // 整数部と小数部の桁数を更新
                     foreach (var value in values)
                     {
-                        if (double.TryParse(value, out double num))
+                        if (value == "nan")
+                        {
+                            // 'nan' の場合は整数部の最大桁数に影響を与えない
+                            continue;
+                        }
+                        else if (double.TryParse(value, out double num))
                         {
                             var parts = value.Split('.');
                             maxIntegerDigits = Math.Max(maxIntegerDigits, parts[0].TrimStart('-').Length);
@@ -759,7 +764,12 @@ namespace Cupy
                         // True の場合は右詰めにする
                         if (element.Contains("."))
                         {
-                            if (double.TryParse(element, out double num))
+                            if (element == "nan")
+                            {
+                                // 'nan' の場合、適切なスペースを追加
+                                return element.PadLeft(maxIntegerDigits + maxDecimalDigits + 1);
+                            }
+                            else if (double.TryParse(element, out double num))
                             {
                                 // 数値の場合、整数部と小数部の桁数に合わせてパディング
                                 var parts = element.Split('.');
