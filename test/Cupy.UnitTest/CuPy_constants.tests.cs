@@ -64,7 +64,7 @@ namespace Cupy.UnitTest
             //array([NaN,  0.        ,  0.69314718])
             Assert.AreEqual(float.NaN, cp.nan);
             Assert.AreEqual(cp.nan, (float)((NDarray)(-1)).log());
-            Assert.AreEqual("array([       nan, 0.        , 0.69314718])", cp.log(new[] { -1, 1, 2 }).repr);
+            Assert.AreEqual("array([       nan, 0.        , 0.69314718], dtype=float64)", cp.log(new[] { -1, 1, 2 }).repr);
         }
 
         [Test]

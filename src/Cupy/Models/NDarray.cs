@@ -1,9 +1,12 @@
 ﻿using Cupy.Models;
 using Python.Runtime;
 using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Numerics;
 using System.Runtime.InteropServices;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace Cupy
@@ -142,12 +145,13 @@ namespace Cupy
         /// </summary>
         public PyObject flat => self.GetAttr("flat"); // todo: wrap and support usecases
 
+#if NOT_SUPPORTED
         /// <summary>
         ///     An object to simplify the interaction of the array with the ctypes module.
         /// </summary>
         //public PyObject ctypes => self.GetAttr("ctypes"); // TODO: wrap ctypes
         public PyObject ctypes => Cupy.ctypes.self;//.GetAttr("ctypes");
-
+#endif
 
         /// <summary>
         ///     Length of the array (same as size)
@@ -195,7 +199,10 @@ namespace Cupy
                 if (coords.Length == 1)
                 {
                     var pyint = new PyInt(coords[0]);
-                    return new NDarray(PyObject[pyint]);
+                    using (Py.GIL())
+                    {
+                        return new NDarray(self.GetItem(pyint));
+                    }
                 }
                 else
                 {
@@ -547,11 +554,16 @@ namespace Cupy
             return cp.transpose(this, axes);
         }
 
+        public string ToStringAsPythonObject()
+        {
+            return base.ToString();
+        }
+
         public override string ToString()
         {
             if (self.HasAttr("ndim"))
             {
-                return Dig(ndim - 1, this);
+                return Dig(ndim - 1, ndim, this);
             }
             else if (!base.ToString().Contains("[[") && !base.ToString().Contains("]]"))
             {
@@ -570,7 +582,6 @@ namespace Cupy
             var row = this.len;
             var i = 0;
             var str = string.Empty;
-            var tr = this.transpose();
             str += "[";
             while (i < row)
             {
@@ -578,7 +589,8 @@ namespace Cupy
                 str += "[";
                 while (j < col)
                 {
-                    str += ToCsharp<int>(tr[j][i]);
+                    var obj = ToCsharp(this_0.GetType(), this[i][j]);
+                    str += obj.ToString();
                     if (j < col - 1)
                     {
                         str += ", ";
@@ -606,7 +618,7 @@ namespace Cupy
                 {
                     str += "array(";
                 }
-                str += Dig(ndim - 1, this);
+                str += Dig(ndim - 1, ndim, this);
                 if (isArray && ndim > 0 && !dtype.ToString().Equals("int32") && !dtype.ToString().Equals("bool"))
                 {
                     str += $", dtype={dtype}";
@@ -615,7 +627,7 @@ namespace Cupy
                 {
                     str += ")";
                 }
-                return str;
+                return Arrange(str);
             }
             else if (depth == 1)
             {
@@ -625,20 +637,23 @@ namespace Cupy
                     str += "array(";
                 }
                 str += this.ToString();
-                if (!Leaf(this).dtype.ToString().Equals("int32") && !Leaf(this).dtype.ToString().Equals("bool"))
+                if (!Leaf(this).ToString().Contains("NpzFile"))
                 {
-                    str += $", dtype={Leaf(this).dtype.ToString()}";
+                    if (!Leaf(this).dtype.ToString().Equals("int32") && !Leaf(this).dtype.ToString().Equals("bool"))
+                    {
+                        str += $", dtype={Leaf(this).dtype.ToString()}";
+                    }
                 }
                 if (depth == 1)
                 {
                     str += ")";
                 }
-                return $"{str}".Replace("], [", "],\n       [");
+                return Arrange($"{str}".Replace("], [", "],\n       ["));
             }
             else if (this.len == 1)
             {
                 var str = this[0].ToString(depth + 1);
-                return str;
+                return Arrange(str);
             }
             else
             {
@@ -652,34 +667,297 @@ namespace Cupy
                     }
                 }
                 str += "]";
-                return str;
+                return Arrange(str);
             }
+        }
+
+        private string Arrange(string input)
+        {
+            var builder = new StringBuilder();
+
+            // 数値（整数、小数、複素数）、bool値にマッチする正規表現
+            string numberPattern = @"([-+]?\d+\.?\d*([eE][-+]?\d+)?)|(True|False)|(nan)|([-+]?\d*\.?\d*([eE][-+]?\d+)?[+-]\d*\.?\d*j)";
+            var dtypePattern = new Regex(@"dtype=(?<dtype>.+?)\)");
+            var dtypeMatched = dtypePattern.IsMatch(input);
+
+            // 単一の数値の場合の処理
+            if (!input.Trim().StartsWith("array("))
+            {
+                var match = Regex.Match(input, numberPattern);
+                if (match.Success)
+                {
+                    return match.Value; // 単一の数値をそのまま返す
+                }
+            }
+
+            // 行を分割し、空行を除外
+            var lines = input.Split(new[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
+
+            // 数値を抽出し、多次元リストに格納
+            var arrays = new List<List<List<string>>>();
+
+            // 整数部と小数部、複素数部の最大桁数を計算
+            int maxIntegerDigits = 0;
+            int maxDecimalDigits = 0;
+            int maxComplexDigits = 0;
+            int ndim = 1;
+            var currentMatrix = new List<List<string>>();
+
+            ndim = lines.First().Count(x => x.Equals('[')) & lines.Last().Count(x => x.Equals(']'));
+
+            foreach (var line in lines)
+            {
+                var trimmedLine = line.Trim();
+                if (trimmedLine == "") continue;  // 空行をスキップ
+
+                // '[' と ']' の間の内容を抽出
+                var innerContentMatches = Regex.Matches(trimmedLine, @"\[([^]]+)\]");
+                foreach (Match innerContentMatch in innerContentMatches)
+                {
+                    var innerContent = innerContentMatch.Groups[1].Value;
+
+                    // 内容から数字を抽出し、リストに追加
+                    var values = innerContent.Split(',', '[', ']').Select(x => x.Trim()).Where(x => x.Any()).ToList();
+                    if (values.Count > 0)
+                    {
+                        currentMatrix.Add(values);
+                    }
+
+                    // 整数部と小数部の桁数を更新
+                    foreach (var value in values)
+                    {
+                        var complexMatch = Regex.Match(value, @"([-+]?\d*\.?\d*([eE][-+]?\d+)?)[+-]\d*\.?\d*j");
+                        if (complexMatch.Success)
+                        {
+                            // 複素数の場合
+                            var complexParts = complexMatch.Groups[1].Value.Split('.');
+                            maxIntegerDigits = Math.Max(maxIntegerDigits, complexParts[0].TrimStart('-').Length);
+                            if (complexParts.Length > 1)
+                            {
+                                maxDecimalDigits = Math.Max(maxDecimalDigits, complexParts[1].Length);
+                            }
+                            maxComplexDigits = Math.Max(maxComplexDigits, value.Length - complexMatch.Groups[1].Value.Length);
+                        }
+                        else if (double.TryParse(value, out double num))
+                        {
+                            var parts = value.Split('.');
+                            if (!value.Equals("nan"))
+                            {
+                                maxIntegerDigits = Math.Max(maxIntegerDigits, parts[0].Length);
+                            }
+
+                            if (parts.Length > 1)
+                            {
+                                maxDecimalDigits = Math.Max(maxDecimalDigits, parts[1].Length);
+                            }
+                        }
+                        else if (value == "nan")
+                        {
+                            // 'nan' の場合は整数部の最大桁数に影響を与えない
+                            continue;
+                        }
+                    }
+                }
+
+                // Check if it's the end of a 2D array
+                if (trimmedLine.Contains("]]"))
+                {
+                    arrays.Add(currentMatrix);
+                    currentMatrix = new List<List<string>>();
+                }
+            }
+
+            if (currentMatrix.Any())
+            {
+                arrays.Add(currentMatrix);
+            }
+
+            // 各列の最大幅を計算
+            int overallMaxLength = 0;
+            foreach (var array in arrays)
+            {
+                foreach (var matrix in array)
+                {
+                    foreach (var value in matrix)
+                    {
+                        if (value.Contains("nan"))
+                            continue;
+                        overallMaxLength = Math.Max(overallMaxLength, value.Trim().Length);
+                    }
+                }
+            }
+
+            // 整形された文字列の出力
+            builder.Append("array(");
+            builder.Append(Repeat(ndim, "["));
+
+            for (int matrixIndex = 0; matrixIndex < arrays.Count; matrixIndex++)
+            {
+                var matrix = arrays[matrixIndex];
+                for (int i = 0; i < matrix.Count; i++)
+                {
+                    var formattedRow = matrix[i]
+                    .Select((element, index) => {
+                        // True の場合は右詰めにする
+                        if (element.Contains("."))
+                        {
+                            var complexMatch = Regex.Match(element, @"([-+]?\d*\.?\d*\s*([eE][-+]?\d+)?)[+-]\d*\.?\d*j");
+                            if (complexMatch.Success)
+                            {
+                                // 複素数の場合、整数部と小数部の桁数に合わせてパディングし、複素数部はそのまま
+                                var complexParts = complexMatch.Groups[1].Value.Split('.');
+                                var integerPart = complexParts[0].PadLeft(maxIntegerDigits);
+                                var decimalPart = complexParts.Length > 1 ? complexParts[1].PadRight(maxDecimalDigits, ' ') : new string(' ', maxDecimalDigits);
+                                return $"{integerPart}.{decimalPart}" + element.Substring(complexMatch.Groups[1].Value.Length);
+                            }
+                            else if (element == "nan")
+                            {
+                                // 'nan' の場合、適切なスペースを追加
+                                return element.PadLeft(maxIntegerDigits + maxDecimalDigits + 1);
+                            }
+                            else if (double.TryParse(element, out double num))
+                            {
+                                // 数値の場合、整数部と小数部の桁数に合わせてパディング
+                                var parts = element.Split('.');
+                                var integerPart = parts[0].PadLeft(maxIntegerDigits);
+                                var decimalPart = parts.Length > 1 ? parts[1].PadRight(maxDecimalDigits, ' ') : "";
+                                return $"{integerPart}.{decimalPart}";
+                            }
+                            return element.PadRight(overallMaxLength);
+                        }
+                        else if (element == "True" || element.Length < overallMaxLength)
+                            return element.PadLeft(overallMaxLength);
+                        else
+                            return element.PadRight(overallMaxLength);
+                    })
+                    .Aggregate((acc, next) => acc + ", " + next);
+
+                    if (i == 0)
+                    {
+                        builder.Append(matrixIndex > 0 ? "       " : "");
+                    }
+                    else
+                    {
+                        builder.Append("       ");
+                    }
+
+                    if ((arrays.Count == 1 && matrix.Count == 1))
+                    {
+                        if (ndim > 1)
+                        {
+                            builder.Append(formattedRow);
+                        }
+                        else
+                        {
+                            builder.Append(formattedRow);
+                        }
+                    }
+                    else
+                    {
+                        if (i == 0)
+                        {
+                            if (ndim == 3 && matrixIndex > 0)
+                            {
+                                builder.Append("[[" + formattedRow + "]");
+                            }
+                            else
+                            {
+                                builder.Append(formattedRow + "]");
+                            }
+                        }
+                        else if (i == matrix.Count - 1)
+                        {
+                            if (ndim == 3)
+                            {
+                                if (matrixIndex == arrays.Count - 1)
+                                {
+                                    builder.Append(Repeat(ndim - 2, " ") + "[" + formattedRow);
+                                }
+                                else
+                                {
+                                    builder.Append(Repeat(ndim - 2, " ") + "[" + formattedRow + "]]");
+                                }
+                            }
+                            else
+                            {
+                                builder.Append("[" + formattedRow);
+                            }
+                        }
+                        else
+                        {
+                            if (ndim == 3)
+                            {
+                                builder.Append(Repeat(ndim - 2, " ") + "[" + formattedRow + "]");
+                            }
+                            else
+                            {
+                                builder.Append("[" + formattedRow + "]");
+                            }
+                        }
+                    }
+
+                    if (ndim == 3 && i == matrix.Count - 1 && matrixIndex < arrays.Count - 1)
+                    {
+                        builder.Append(",\n\n");
+                    }
+                    else if (i < matrix.Count - 1)
+                    {
+                        builder.Append(",\n");
+                    }
+
+                    var r = builder.ToString();
+                }
+            }
+            builder.Append(Repeat(ndim, "]"));
+
+            if (dtypeMatched)
+            {
+                var m = dtypePattern.Match(input);
+                var dtypeVal = m.Groups["dtype"].Value;
+                builder.Append($", dtype={dtypeVal}");
+            }
+            builder.Append(")"); // array の閉じ括弧（外側）
+
+            return builder.ToString();
+        }
+
+        private string Repeat(int ndim, string v)
+        {
+            var builder = new StringBuilder();
+            for (var i = 0; i < ndim; i++)
+            {
+                builder.Append(v);
+            }
+            return builder.ToString();
         }
 
         private NDarray Leaf(NDarray ndArray)
         {
             var target = ndArray;
-            while (target.ToString().Contains("["))
+            var str = target.str;
+            while (str.Contains("["))
             {
                 target = target[0];
+                str = target.str;
             }
             return target;
         }
 
-        private string Dig(int dim, NDarray arr)
+        private string Dig(int dim, int depth, NDarray arr)
         {
             if (dim > 1)
             {
                 var str = "[";
                 for (int i = 0; i < arr.len; i++)
                 {
-                    str += Dig(dim - 1, arr[i]);
+                    var ndarray = arr[i];
+                    str += Dig(dim - 1, depth, ndarray);
                     if (i < arr.len - 1)
                     {
                         str += ",";
                         if (dim > 0)
                         {
-                            str += "\n       ";
+                            str += "\n\n       ";
                         }
                         else
                         {
@@ -692,19 +970,68 @@ namespace Cupy
             }
             else
             {
-                var str = base.ToString();
+                var str = arr.ToStringAsBase();
 
                 var str2 = string.Empty;
 
                 Regex regex = new Regex("(?<arr>\\[[-\\d\\.\\s]+\\])");
                 Regex regex2 = new Regex("^\\[\\[[\\s\\S]+?\\]\\]$");
                 Regex regex3 = new Regex("\\[(?<elms>[\\s\\S]+?)\\]");
+                Regex regex4 = new Regex("\\[(?<contents>\\[[\\s\\S]+?\\])\\]");
 
                 if (regex2.IsMatch(str))
                 {
                     var str3 = str.Replace("]\n [", "],\n       [");
                     str3 = str3.Substring(1, str3.Length - 2);
-                    if (regex.IsMatch(str3))
+                    if (regex4.IsMatch(str3))
+                    {
+                        var mcs = regex4.Matches(str3);
+                        int strlen = 0;
+                        int integerPartMaxLen = 0;
+                        int decimalPartMaxLen = 0;
+                        foreach (Match mc in mcs)
+                        {
+                            var str5 = mc.Groups["contents"].Value;
+                            if (regex.IsMatch(str5))
+                            {
+                                var mcs2 = regex.Matches(str5);
+                                foreach (Match mc2 in mcs2)
+                                {
+                                    var op = OnePass(mc2.Groups["arr"].ToString());
+                                    strlen = Math.Max(strlen, op.Item2);
+                                    integerPartMaxLen = Math.Max(integerPartMaxLen, op.Item3);
+                                    decimalPartMaxLen = Math.Max(decimalPartMaxLen, op.Item4);
+                                }
+                            }
+                        }
+
+                        foreach (Match mc in mcs)
+                        {
+                            var str5 = mc.Groups["contents"].Value.Replace("]\n  [", "],\n       [");
+
+                            if (regex.IsMatch(str5))
+                            {
+                                str2 += "[";
+                                var mcs2 = regex.Matches(str5);
+                                //Two pass
+                                foreach (Match mc2 in mcs2)
+                                {
+                                    str2 += TwoPass(mc2.Groups["arr"].ToString(), strlen, integerPartMaxLen, decimalPartMaxLen);
+                                    if (!Object.ReferenceEquals(mc2, mcs2.Last()))
+                                    {
+                                        str2 += ", ";
+                                    }
+                                }
+                                str2 += "]";
+                                if (!Object.ReferenceEquals(mc, mcs.Last()))
+                                {
+                                    str2 += ", ";
+                                }
+                            }
+                        }
+                        str2 = str2.Substring(1, str2.Length - 2);
+                    }
+                    else if (regex.IsMatch(str3))
                     {
                         var mcs = regex.Matches(str3);
                         int strlen = 0;
@@ -752,7 +1079,10 @@ namespace Cupy
                             }
                         }
                     }
-                    return $"[{str2}]".Replace("], [", "],\n       [");
+                    str2 = $"[{str2}]";
+                    str2 = str2.Replace("]], [[", $"]],\n{Spaces("array(".Length + depth - 1)}[[");
+                    str2 = str2.Replace("], [", $"],\n{Spaces("array(".Length + depth - 1)}[");
+                    return str2;
                 }
                 else if (regex.IsMatch(str))
                 {
@@ -779,15 +1109,25 @@ namespace Cupy
                     }
                     if (mcs.Count() > 1)
                     {
-                        return $"[{str2}]".Replace("], [", "],\n       [");
+                        str2 = $"[{str2}]";
+                        str2 = str2.Replace("]], [[", $"]],\n{Spaces("array(".Length + depth - 1)}[[");
+                        str2 = str2.Replace("], [", $"],\n{Spaces("array(".Length + depth - 1)}[");
+                        return str2;
                     }
                     else
                     {
-                        return $"{str2}".Replace("], [", "],\n       [");
+                        //return $"{str2}".Replace("], [", "],\n       [");
+                        str2 = str2.Replace("]], [[", $"]],\n{Spaces("array(".Length + depth - 1)}[[");
+                        str2 = str2.Replace("], [", $"],\n{Spaces("array(".Length + depth - 1)}[");
+                        return str2;
                     }
                 }
                 else
                 {
+                    if (str.Equals("[]"))
+                    {
+                        return str;
+                    }
                     int strlen = 0;
                     int integerPartMaxLen = 0;
                     int decimalPartMaxLen = 0;
@@ -801,6 +1141,11 @@ namespace Cupy
             }
         }
 
+        private string ToStringAsBase()
+        {
+            return base.ToString();
+        }
+
         private string TwoPass(string input, int strlen, int integerPartMaxLen, int decimalPartMaxLen)
         {
             if (!input.Contains(',') && !input.Contains(' '))
@@ -809,51 +1154,66 @@ namespace Cupy
             }
             var elements = input.Split('[', ',', ' ', ']');
             elements = elements.Where(x => !string.IsNullOrWhiteSpace(x)).ToArray();
+            elements = JoinComplex(elements);
             int maxlen = strlen;
             var str = string.Empty;
-            var regex = new Regex("(?<integerPart>-?\\d+?)\\.(?<decimalPart>\\d+?)");
+            var regex = new Regex("(?<integerPart>-?\\d+?)\\.(?<decimalPart>\\d+?)?");
+            var regexComplex = new Regex("(?<real>\\d+?)\\.\\+(?<imag>\\d+?)\\.j");
             foreach (var element in elements)
             {
-
-                //小数点があるときは左詰め
-                if (element.Contains("."))
+                //複素数の時
+                if (regexComplex.IsMatch(element))
                 {
                     int count = 0;
-                    if (regex.IsMatch(element))
-                    {
-                        var mc = regex.Match(element);
-                        var integerPartStr = mc.Groups["integerPart"].Value;
-                        var decimalPartStr = mc.Groups["decimalPart"].Value;
-                        for (int i = 0; i < integerPartMaxLen - integerPartStr.Length; i++)
-                        {
-                            str += " ";
-                            count++;
-                        }
-                    }
-                    str += element;
-                    if (regex.IsMatch(element))
-                    {
-                        var mc = regex.Match(element);
-                        var integerPartStr = mc.Groups["integerPart"].Value;
-                        var decimalPartStr = mc.Groups["decimalPart"].Value;
-                        for (int i = 0; i < decimalPartMaxLen - decimalPartStr.Length; i++)
-                        {
-                            str += " ";
-                            count++;
-                        }
-                    }
+                    str += element.Insert(element.IndexOf("+"), Spaces(maxlen-element.Length));
+                    count = maxlen - element.Length;
                     for (int i = 0; i < maxlen - count - element.Length; i++)
                     {
                         str += " ";
                     }
                 }
-                else //小数点がないときは右詰め
+                else //整数、小数の時
                 {
-                    for (int i = 0; i < maxlen - element.Length; i++)
+                    //小数点があるときは左詰め
+                    if (element.Contains("."))
                     {
-                        str += " ";
+                        int count = 0;
+                        if (regex.IsMatch(element))
+                        {
+                            var mc = regex.Match(element);
+                            var integerPartStr = mc.Groups["integerPart"].Value;
+                            var decimalPartStr = mc.Groups["decimalPart"].Value;
+                            for (int i = 0; i < integerPartMaxLen - integerPartStr.Length; i++)
+                            {
+                                str += " ";
+                                count++;
+                            }
+                        }
+                        str += element;
+                        if (regex.IsMatch(element))
+                        {
+                            var mc = regex.Match(element);
+                            var integerPartStr = mc.Groups["integerPart"].Value;
+                            var decimalPartStr = mc.Groups["decimalPart"].Value;
+                            for (int i = 0; i < decimalPartMaxLen - decimalPartStr.Length; i++)
+                            {
+                                str += " ";
+                                count++;
+                            }
+                        }
+                        for (int i = 0; i < maxlen - count - element.Length; i++)
+                        {
+                            str += " ";
+                        }
                     }
-                    str += element;
+                    else //小数点がないときは右詰め
+                    {
+                        for (int i = 0; i < maxlen - element.Length; i++)
+                        {
+                            str += " ";
+                        }
+                        str += element;
+                    }
                 }
 
                 if (!Object.ReferenceEquals(element, elements.Last()))
@@ -867,6 +1227,33 @@ namespace Cupy
             }
             str = str.Replace("\n, ", ",\n       ");
             return str;
+        }
+
+        private string Spaces(int count)
+        {
+            string ret = string.Empty;
+            for (int i = 0;i < count;i++)
+            {
+                ret += " ";
+            }
+            return ret;
+        }
+
+        private string[] JoinComplex(string[] elements)
+        {
+            var ret = new List<string>();
+            foreach (var element in elements)
+            {
+                if (element.StartsWith("+"))
+                {
+                    ret[ret.Count() - 1] = ret[ret.Count() - 1] + element;
+                }
+                else
+                {
+                    ret.Add(element);
+                }
+            }
+            return ret.ToArray();
         }
 
         private (string, int, int, int) OnePass(string str)
@@ -1062,7 +1449,7 @@ namespace Cupy
                 {
                     return $"{arr.real.ToString()}+{arr.imag.ToString()}j";
                 }
-                return arr.asscalar<T>().ToString();
+                return arr.ToStringAsPythonObject();
             }
             else
             {

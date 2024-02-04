@@ -370,23 +370,15 @@ namespace Cupy
         /// </returns>
         public static NDarray transpose(this NDarray a, int[] axes = null)
         {
-            var col = a[0].len;
-            var row = a.len;
-            var ans_list = new PyList();
-            var i = 0;
-            while (i < col)
+            var __self__ = self;
+            var pyargs = ToTuple(new object[]
             {
-                var tmp_list = new PyList();
-                var j = 0;
-                while (j < row)
-                {
-                    tmp_list.Append(a[j][i].ToPython());
-                    j += 1;
-                }
-                ans_list.Append(tmp_list);
-                i += 1;
-            }
-            return new NDarray(ans_list);
+                a,
+                axes,
+            });
+            var kwargs = new PyDict();
+            dynamic py = __self__.InvokeMethod("transpose", pyargs, kwargs);
+            return ToCsharp<NDarray>(py);
         }
 
         /// <summary>

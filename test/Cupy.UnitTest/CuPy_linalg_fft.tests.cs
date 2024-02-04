@@ -81,7 +81,7 @@ namespace Cupy.UnitTest
             var a = cp.array(new[,] { { 1, 2 }, { 3, 4 } });
             var given = LA.det(a);
             var expected =
-                "array(-2.0)";
+                "-2.0";
             Assert.AreEqual(expected, given.repr);
 
             // Computing determinants for a stack of matrices:
@@ -692,7 +692,7 @@ namespace Cupy.UnitTest
             Assert.AreEqual(expected, given.repr);
             var given1 = new[] { LA.norm(m["0, :, :"]), LA.norm(m["1, :, :"]) };
             expected =
-                "(array(3.7416573867739413), array(11.224972160321824))";
+                "(3.7416573867739413, 11.224972160321824)";
             Assert.AreEqual(expected, given1.repr());
         }
 
