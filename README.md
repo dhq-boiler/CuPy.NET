@@ -30,5 +30,5 @@ Cupy.NET packages and distributes `Python`, `pythonnet` as well as `Cupy`. All t
 
 * Python: [PSF License](https://docs.python.org/3/license.html)
 * Python for .NET (pythonnet): [MIT License](http://pythonnet.github.io/LICENSE)
-* Cupy: [BSD License](https://www.Cupy.org/license.html#license)
+* Cupy: [MIT License](https://github.com/cupy/cupy/blob/main/LICENSE)
 * Cupy.NET: [MIT License](./LICENSE)
