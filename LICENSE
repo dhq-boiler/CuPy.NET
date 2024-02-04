@@ -1,6 +1,6 @@
 MIT License
 
-Copyright © 2019 the SciSharp Team.
+Copyright © 2023-2024 dhq_boiler
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -23,10 +23,10 @@ SOFTWARE.
 
 Additional Notes: 
 The C# wrapper is licensed under MIT License (see below)
-The redistributed Cupy binaries, the embedded CPython distribution, the pythonnet runtime, are all licensed under their respective licenses. 
+The redistributed CuPy binaries, the embedded CPython distribution, the pythonnet runtime, are all licensed under their respective licenses. 
 
-* Python: PSF License https://docs.python.org/3/license.html
-* Python for .NET: MIT License http://pythonnet.github.io/LICENSE
-* Cupy: BSD License https://www.Cupy.org/license.html#license
-
-
+* Python: [PSF License](https://docs.python.org/3/license.html)
+* Python for .NET: [MIT License](http://pythonnet.github.io/LICENSE)
+* Numpy.NET: [MIT License](https://github.com/SciSharp/Numpy.NET/blob/main/LICENSE) 
+* CuPy: [MIT License](https://github.com/cupy/cupy/blob/main/LICENSE)
+* CuPy.NET: [MIT License](./LICENSE)
