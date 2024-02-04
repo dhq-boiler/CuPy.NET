@@ -742,7 +742,11 @@ namespace Cupy
                         else if (double.TryParse(value, out double num))
                         {
                             var parts = value.Split('.');
-                            maxIntegerDigits = Math.Max(maxIntegerDigits, parts[0].TrimStart('-').Length);
+                            if (!value.Equals("nan"))
+                            {
+                                maxIntegerDigits = Math.Max(maxIntegerDigits, parts[0].TrimStart('-').Length);
+                            }
+
                             if (parts.Length > 1)
                             {
                                 maxDecimalDigits = Math.Max(maxDecimalDigits, parts[1].Length);
@@ -763,6 +767,8 @@ namespace Cupy
             {
                 foreach (var value in array)
                 {
+                    if (value.Contains("nan"))
+                        continue;
                     overallMaxLength = Math.Max(overallMaxLength, value.Trim().Length);
                 }
             }
@@ -800,7 +806,7 @@ namespace Cupy
                                 var decimalPart = parts.Length > 1 ? parts[1].PadRight(maxDecimalDigits, ' ') : "";
                                 return $"{integerPart}.{decimalPart}";
                             }
-                            return element.PadRight(maxIntegerDigits + 1 + maxDecimalDigits);
+                            return element.PadRight(overallMaxLength);
                         }
                         else if (element == "True" || element.Length < overallMaxLength)
                             return element.PadLeft(overallMaxLength);
