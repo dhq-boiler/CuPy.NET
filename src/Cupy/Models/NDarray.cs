@@ -676,7 +676,7 @@ namespace Cupy
             var builder = new StringBuilder();
 
             // 数値（整数、小数、複素数）、bool値にマッチする正規表現
-            string numberPattern = @"([-+]?\d+\.?\d*([eE][-+]?\d+)?([+-]\d*\.?\d*j)?)|(True|False)|(nan)";
+            string numberPattern = @"([-+]?\d+\.?\d*([eE][-+]?\d+)?)|(True|False)|(nan)|([-+]?\d*\.?\d*([eE][-+]?\d+)?[+-]\d*\.?\d*j)";
             var dtypePattern = new Regex(@"dtype=(?<dtype>.+?)\)");
             var dtypeMatched = dtypePattern.IsMatch(input);
 
@@ -697,9 +697,10 @@ namespace Cupy
             var arrays = new List<List<string>>();
             bool isMultidimensional = input.Trim().StartsWith("array([["); // 2次元配列かどうかを判断
 
-            // 整数部と小数部の最大桁数を計算
+            // 整数部と小数部、複素数部の最大桁数を計算
             int maxIntegerDigits = 0;
             int maxDecimalDigits = 0;
+            int maxComplexDigits = 0;
 
             foreach (var line in lines)
             {
@@ -713,10 +714,11 @@ namespace Cupy
                     var innerContent = innerContentMatch.Groups[1].Value;
 
                     // 内容から数字を抽出し、リストに追加
-                    var values = Regex.Matches(innerContent, numberPattern)
-                                       .Cast<Match>()
-                                       .Select(m => m.Value)
-                                       .ToList();
+                    //var values = Regex.Matches(innerContent, numberPattern)
+                    //                   .Cast<Match>()
+                    //                   .Select(m => m.Value)
+                    //                   .ToList();
+                    var values = innerContent.Split(',', '[', ']').Select(x => x.Trim()).Where(x => x.Any()).ToList();
                     if (values.Count > 0)
                     {
                         arrays.Add(values);
@@ -725,10 +727,17 @@ namespace Cupy
                     // 整数部と小数部の桁数を更新
                     foreach (var value in values)
                     {
-                        if (value == "nan")
+                        var complexMatch = Regex.Match(value, @"([-+]?\d*\.?\d*([eE][-+]?\d+)?)[+-]\d*\.?\d*j");
+                        if (complexMatch.Success)
                         {
-                            // 'nan' の場合は整数部の最大桁数に影響を与えない
-                            continue;
+                            // 複素数の場合
+                            var complexParts = complexMatch.Groups[1].Value.Split('.');
+                            maxIntegerDigits = Math.Max(maxIntegerDigits, complexParts[0].TrimStart('-').Length);
+                            if (complexParts.Length > 1)
+                            {
+                                maxDecimalDigits = Math.Max(maxDecimalDigits, complexParts[1].Length);
+                            }
+                            maxComplexDigits = Math.Max(maxComplexDigits, value.Length - complexMatch.Groups[1].Value.Length);
                         }
                         else if (double.TryParse(value, out double num))
                         {
@@ -738,6 +747,11 @@ namespace Cupy
                             {
                                 maxDecimalDigits = Math.Max(maxDecimalDigits, parts[1].Length);
                             }
+                        }
+                        else if (value == "nan")
+                        {
+                            // 'nan' の場合は整数部の最大桁数に影響を与えない
+                            continue;
                         }
                     }
                 }
@@ -764,7 +778,16 @@ namespace Cupy
                         // True の場合は右詰めにする
                         if (element.Contains("."))
                         {
-                            if (element == "nan")
+                            var complexMatch = Regex.Match(element, @"([-+]?\d*\.?\d*\s*([eE][-+]?\d+)?)[+-]\d*\.?\d*j");
+                            if (complexMatch.Success)
+                            {
+                                // 複素数の場合、整数部と小数部の桁数に合わせてパディングし、複素数部はそのまま
+                                var complexParts = complexMatch.Groups[1].Value.Split('.');
+                                var integerPart = complexParts[0].PadLeft(maxIntegerDigits);
+                                var decimalPart = complexParts.Length > 1 ? complexParts[1].PadRight(maxDecimalDigits, ' ') : new string(' ', maxDecimalDigits);
+                                return $"{integerPart}.{decimalPart}" + element.Substring(complexMatch.Groups[1].Value.Length);
+                            }
+                            else if (element == "nan")
                             {
                                 // 'nan' の場合、適切なスペースを追加
                                 return element.PadLeft(maxIntegerDigits + maxDecimalDigits + 1);
