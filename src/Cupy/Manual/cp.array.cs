@@ -21,7 +21,7 @@ namespace Cupy
         ///     <returns>
         ///         An array object satisfying the specified requirements.
         ///     </returns>
-        public static NDarray<T> array<T>(params T[] data) where T : struct
+        public static NDarray<T[]> array<T>(params T[] data) where T : struct
         {
             var __self__ = self;
             return array(data, null);
@@ -190,14 +190,14 @@ namespace Cupy
             }
         }
 
-        public static NDarray<T> array<T>(T[] @object, Dtype dtype = null, bool? copy = null, string order = null,
+        public static NDarray<T[]> array<T>(T[] @object, Dtype dtype = null, bool? copy = null, string order = null,
             bool? subok = null, int? ndmin = null) where T : struct
         {
             var __self__ = self;
             var type = @object.GetDtype();
             var ndarray = empty(new Shape(@object.Length), type, order);
             if (@object.Length == 0)
-                return new NDarray<T>(ndarray);
+                return new NDarray<T[]>(ndarray);
             long ptr = 0;
             switch (@object)
             {
@@ -245,43 +245,43 @@ namespace Cupy
             {
                 var converted = array(ndarray, dtype, false, subok: subok, ndmin: ndmin);
                 ndarray.Dispose();
-                return new NDarray<T>(converted);
+                return new NDarray<T[]>(converted);
             }
 
-            return new NDarray<T>(ndarray);
+            return new NDarray<T[]>(ndarray);
         }
 
-        public static NDarray<T> array<T>(T[,] @object, Dtype dtype = null, bool? copy = null, string order = null,
+        public static NDarray<T[]> array<T>(T[,] @object, Dtype dtype = null, bool? copy = null, string order = null,
             bool? subok = null, int? ndmin = null) where T : struct
         {
             var __self__ = self;
             var d1_array = @object.Cast<T>().ToArray();
             var shape = new Shape(@object.GetLength(0), @object.GetLength(1));
             var ndarray = array(d1_array, dtype, copy, order, subok, ndmin);
-            return new NDarray<T>(ndarray.reshape(shape));
+            return new NDarray<T[]>(ndarray.reshape(shape));
         }
 
-        public static NDarray<T> array<T>(T[,,] data, Dtype dtype = null, bool? copy = null, string order = null,
+        public static NDarray<T[]> array<T>(T[,,] data, Dtype dtype = null, bool? copy = null, string order = null,
             bool? subok = null, int? ndmin = null) where T : struct
         {
             var __self__ = self;
             var d1_array = data.Cast<T>().ToArray();
             var shape = new Shape(data.GetLength(0), data.GetLength(1), data.GetLength(2));
             var ndarray = array(d1_array, dtype, copy, order, subok, ndmin);
-            return new NDarray<T>(ndarray.reshape(shape));
+            return new NDarray<T[]>(ndarray.reshape(shape));
         }
 
-        public static NDarray<T> array<T>(T[,,,] data, Dtype dtype = null, bool? copy = null, string order = null,
+        public static NDarray<T[]> array<T>(T[,,,] data, Dtype dtype = null, bool? copy = null, string order = null,
             bool? subok = null, int? ndmin = null) where T : struct
         {
             var __self__ = self;
             var d1_array = data.Cast<T>().ToArray();
             var shape = new Shape(data.GetLength(0), data.GetLength(1), data.GetLength(2), data.GetLength(3));
             var ndarray = array(d1_array, dtype, copy, order, subok, ndmin);
-            return new NDarray<T>(ndarray.reshape(shape));
+            return new NDarray<T[]>(ndarray.reshape(shape));
         }
 
-        public static NDarray<T> array<T>(T[,,,,] data, Dtype dtype = null, bool? copy = null, string order = null,
+        public static NDarray<T[]> array<T>(T[,,,,] data, Dtype dtype = null, bool? copy = null, string order = null,
             bool? subok = null, int? ndmin = null) where T : struct
         {
             var __self__ = self;
@@ -289,10 +289,10 @@ namespace Cupy
             var shape = new Shape(data.GetLength(0), data.GetLength(1), data.GetLength(2), data.GetLength(3),
                 data.GetLength(4));
             var ndarray = array(d1_array, dtype, copy, order, subok, ndmin);
-            return new NDarray<T>(ndarray.reshape(shape));
+            return new NDarray<T[]>(ndarray.reshape(shape));
         }
 
-        public static NDarray<T> array<T>(T[,,,,,] data, Dtype dtype = null, bool? copy = null, string order = null,
+        public static NDarray<T[]> array<T>(T[,,,,,] data, Dtype dtype = null, bool? copy = null, string order = null,
             bool? subok = null, int? ndmin = null) where T : struct
         {
             var __self__ = self;
@@ -300,7 +300,7 @@ namespace Cupy
             var shape = new Shape(data.GetLength(0), data.GetLength(1), data.GetLength(2), data.GetLength(3),
                 data.GetLength(4), data.GetLength(5));
             var ndarray = array(d1_array, dtype, copy, order, subok, ndmin);
-            return new NDarray<T>(ndarray.reshape(shape));
+            return new NDarray<T[]>(ndarray.reshape(shape));
         }
 
         public static NDarray array(string[] strings, int? itemsize = null, bool? copy = null, bool? unicode = null,
@@ -385,6 +385,18 @@ namespace Cupy
         public static T asscalar<T>(NDarray a)
         {
             return new NDarray<T>(a).item();
+            //switch (typeof(T).Name)
+            //{
+            //    case "Int16":   return new NDarray<short>(a).item();
+            //    case "Int32":   return new NDarray<int>(a).item();
+            //    case "Int64":   return new NDarray<long>(a).item();
+            //    case "UInt16":  return new NDarray<ushort>(a).item();
+            //    case "UInt32":  return new NDarray<uint>(a).item();
+            //    case "UInt64":  return new NDarray<ulong>(a).item();
+            //    case "Single":  return new NDarray<float>(a).item();
+            //    case "Double":  return new NDarray<double>(a).item();
+            //    default:        return new NDarray<T>(a).item();
+            //}
             // <--- asscalar has been removed as of Cupy 1.23
         }
     }

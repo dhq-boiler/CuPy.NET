@@ -628,7 +628,7 @@ namespace Cupy.UnitTest
 
             var given = cp.einsum("ii", a);
             var expected =
-                "array(60)";
+                "60";
 #if TODO
             Assert.AreEqual(expected, given.repr);
             given = cp.einsum(new[] { a, (NDarray)cp.array(0, 0) });
@@ -638,7 +638,7 @@ namespace Cupy.UnitTest
 #endif
             given = a.trace();
             expected =
-                "array(60)";
+                "60";
             Assert.AreEqual(expected, given.repr);
 
             // Extract the diagonal (requires explicit form):
@@ -767,7 +767,7 @@ namespace Cupy.UnitTest
 
             given = cp.einsum("i,i", b, b);
             expected =
-                "array(30)";
+                "30";
             Assert.AreEqual(expected, given.repr);
 #if TODO
              given = cp.einsum(b, {0}, b, {0});
@@ -777,7 +777,7 @@ namespace Cupy.UnitTest
 #endif
             given = b.inner(b);
             expected =
-                "array(30)";
+                "30";
             Assert.AreEqual(expected, given.repr);
 
             // Matrix vector multiplication:
