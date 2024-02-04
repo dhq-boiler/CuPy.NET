@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>CuPy.NET</id>
-	<version>0.1.0</version>
+	<version>2.0.0</version>
     <authors>dhq_boiler</authors>
     <owners>dhq_boiler</owners>
 	<projectUrl>https://github.com/dhq-boiler/CuPy.NET</projectUrl>
@@ -14,7 +14,9 @@
     <tags>dotnet CuPy</tags>
   </metadata>
   <files>
-	  <file src="bin\Release\net6.0\CuPy.NET.dll" target="lib\net6.0" />
-	  <file src="bin\Release\net6.0\CuPy.NET.pdb" target="lib\net6.0" />
+	  <file src="bin\x64\Release\net7.0\CuPy.NET.dll" target="lib\net7.0" />
+	  <file src="bin\x64\Release\net7.0\CuPy.NET.pdb" target="lib\net7.0" />
+	  <file src="bin\x64\Release\net8.0\CuPy.NET.dll" target="lib\net8.0" />
+	  <file src="bin\x64\Release\net8.0\CuPy.NET.pdb" target="lib\net8.0" />
   </files>
 </package>

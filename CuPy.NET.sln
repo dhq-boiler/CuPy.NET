@@ -31,6 +31,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SlicingExample", "src\Examp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfExample", "WpfExample\WpfExample.csproj", "{BF447620-877B-4000-BF75-527AEF94F347}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ソリューション項目", "ソリューション項目", "{AC3E670F-2887-4517-85D7-EBA2B33117E1}"
+	ProjectSection(SolutionItems) = preProject
+		HOWTOPACK.md = HOWTOPACK.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
