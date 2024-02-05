@@ -676,7 +676,7 @@ namespace Cupy
             var builder = new StringBuilder();
 
             // 数値（整数、小数、複素数）、bool値にマッチする正規表現
-            string numberPattern = @"([-+]?\d+\.?\d*([eE][-+]?\d+)?)|(True|False)|(nan)|([-+]?\d*\.?\d*([eE][-+]?\d+)?[+-]\d*\.?\d*j)";
+            string numberPattern = @"([-+]?\d+\.?\d*([eE][-+]?\d+)?)|(True|False)|(nan)|(\.\.\.)|([-+]?\d*\.?\d*([eE][-+]?\d+)?[+-]\d*\.?\d*j)";
             var dtypePattern = new Regex(@"dtype=(?<dtype>.+?)\)");
             var dtypeMatched = dtypePattern.IsMatch(input);
 
@@ -691,7 +691,11 @@ namespace Cupy
             }
 
             // 行を分割し、空行を除外
-            var lines = input.Split(new[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
+            var lines = input.Split(new[] { '\n' }, StringSplitOptions.RemoveEmptyEntries).ToList();
+            if (lines.Any(l => l.Contains("...")))
+            {
+                lines = FormatArray(lines.ToList());
+            }
 
             // 数値を抽出し、多次元リストに格納
             var arrays = new List<List<List<string>>>();
@@ -920,6 +924,57 @@ namespace Cupy
 
             return builder.ToString();
         }
+
+        private List<string> FormatArray(List<string> lines)
+        {
+            var result = new List<string>();
+
+            // 先頭行の処理
+            var firstLine = lines[0].Trim();
+            if (firstLine.StartsWith("array(["))
+            {
+                // 先頭行から "array([" を除去し、整形を開始
+                firstLine = firstLine.Substring("array([".Length).Trim('[', ']').Trim();
+                result.Add("array([[" + firstLine);
+            }
+            else
+            {
+                result.Add("[" + firstLine);
+            }
+
+            // 残りの行の処理
+            for (int i = 1; i < lines.Count; i++)
+            {
+                var line = lines[i].Trim();
+                var innerContent = line.Trim('[', ']').Trim();
+
+                if (!line.Contains("[") && line.Contains("]"))
+                {
+                    if (lines.Count - 1 != i)
+                    {
+                        result[result.Count - 1] += innerContent + "],\n";
+                    }
+                    else
+                    {
+                        result[result.Count - 1] += innerContent;
+                    }
+                }
+                else
+                {
+                    if (lines.Count - 1 != i)
+                    {
+                        result.Add("[" + innerContent);
+                    }
+                    else
+                    {
+                        result.Add("[" + innerContent + "]])");
+                    }
+                }
+            }
+
+            return result;
+        }
+
 
         private string Repeat(int ndim, string v)
         {

@@ -36,18 +36,18 @@ namespace WpfExample
 
         private void OnBlockingClick(object sender, RoutedEventArgs e)
         {
-            WriteLine("Example 1: Matrix multiplication with Cupy on the GUI thread (blocking):");
-            // before starting the measurement, let us call Cupy once to get the setup checks done. 
-            np.arange(1);
+            WriteLine("Example 1: Matrix multiplication with CuPy on the GUI thread (blocking):");
+            // before starting the measurement, let us call CuPy once to get the setup checks done. 
+            cp.arange(1);
             var stopwatch = Stopwatch.StartNew();
 
-            var a1 = np.arange(60000).reshape(300, 200);
-            var a2 = np.arange(80000).reshape(200, 400);
+            var a1 = cp.arange(60000).reshape(300, 200);
+            var a2 = cp.arange(80000).reshape(200, 400);
 
-            var result = np.matmul(a1, a2);
+            var result = cp.matmul(a1, a2);
             stopwatch.Stop();
 
-            WriteLine($"execution time with Cupy: {stopwatch.Elapsed.TotalMilliseconds}ms\n");
+            WriteLine($"execution time with CuPy: {stopwatch.Elapsed.TotalMilliseconds}ms\n");
             WriteLine("Result:\n" + result.repr);
             WriteLine("\nNote: blocking usage is not recommended. ");
             WriteLine("\nIf you close the program without runnning example 2 it will hang indefinitely. ");
@@ -57,7 +57,7 @@ namespace WpfExample
 
         private async void OnNonBlockingClick(object sender, RoutedEventArgs e)
         {
-            WriteLine("Example 2: Matrix multiplication with Cupy on a background thread (non-blocking):");
+            WriteLine("Example 2: Matrix multiplication with CuPy on a background thread (non-blocking):");
 
             if (!_allowThreads) {
                 // https://github.com/pythonnet/pythonnet/issues/109
@@ -70,16 +70,16 @@ namespace WpfExample
                 using (Py.GIL()) {
 
 
-                    var a1 = np.arange(60000).reshape(300, 200);
-                    var a2 = np.arange(80000).reshape(200, 400);
+                    var a1 = cp.arange(60000).reshape(300, 200);
+                    var a2 = cp.arange(80000).reshape(200, 400);
 
-                    var result = np.matmul(a1, a2);
+                    var result = cp.matmul(a1, a2);
                     stopwatch.Stop();
                     resultString = result.repr;
                 }
             });
             await this.Dispatcher.BeginInvoke(() => {
-                WriteLine($"execution time with Cupy: {stopwatch.Elapsed.TotalMilliseconds}ms\n");
+                WriteLine($"execution time with CuPy: {stopwatch.Elapsed.TotalMilliseconds}ms\n");
                 WriteLine("Result:\n" + resultString);
             });
             WriteLine("\nNote: if you close the program now it will not hang because of PythonEngine.BeginAllowThreads();\nWe only have to make sure to enclose all calculations in using(Py.GIL()) { }");
