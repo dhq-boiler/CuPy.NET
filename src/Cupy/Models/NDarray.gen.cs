@@ -416,5 +416,16 @@ namespace Cupy
             var kwargs = new PyDict();
             dynamic py = __self__.InvokeMethod("__setstate__", pyargs, kwargs);
         }
+
+        public PyList tolist()
+        {
+            var __self__ = self;
+            var pyargs = ToTuple(new object[]
+            {
+            });
+            var kwargs = new PyDict();
+            dynamic py = __self__.InvokeMethod("tolist", pyargs, kwargs);
+            return ToCsharp<PyList>(py);
+        }
     }
 }
