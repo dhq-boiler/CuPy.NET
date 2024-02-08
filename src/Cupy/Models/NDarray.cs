@@ -327,6 +327,11 @@ namespace Cupy
         /// </summary>
         public unsafe T GetData<T>()
         {
+            return (T)GetDataInternal<T>();
+        }
+
+        private object GetDataInternal<T>()
+        {
             return ToCsharp<T>(this);
         }
 

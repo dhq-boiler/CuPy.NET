@@ -53,13 +53,20 @@ namespace Cupy
         }
 
         //auto-generated
-        public T ToCsharp<T>(dynamic pyobj)
+        public object ToCsharp<T>(dynamic pyobj)
+        {
+            if (typeof(T).Name == "NDarray" || !pyobj.ToString().Contains(",") && !pyobj.ToString().Contains(". ") && !pyobj.ToString().Contains(" "))
+            {
+                return ToCsharpInternal<T>(pyobj);
+            }
+
+            return ToCsharpInternalArray<T>(pyobj);
+        }
+
+        private object ToCsharpInternalArray<T>(dynamic pyobj)
         {
             switch (typeof(T).Name)
             {
-                // types from 'ToCsharpConversions'
-                case "Dtype": return (T)(object)new Dtype(pyobj);
-                case "NDarray": return (T)(object)new NDarray(pyobj);
                 case "NDarray`1":
                     switch (typeof(T).GenericTypeArguments[0].Name)
                     {
@@ -74,174 +81,170 @@ namespace Cupy
                             throw new NotImplementedException(
                                 $"Type NDarray<{typeof(T).GenericTypeArguments[0].Name}> missing. Add it to 'ToCsharpConversions'");
                     }
-
-                    break;
                 case "NDarray[]":
                     var po = pyobj as PyObject;
                     var len = po.Length();
                     var rv = new NDarray[len];
                     for (var i = 0; i < len; i++)
-                        rv[i] = ToCsharp<NDarray>(po[i]);
-                    return (T)(object)rv;
-                case "Matrix": return (T)(object)new Matrix(pyobj);
-                case "Boolean": return Boolean.Parse(pyobj.ToString());
-                case "Int16": return Int16.Parse(pyobj.ToString());
-                case "Int32": return Int32.Parse(pyobj.ToString());
-                case "Int64": return Int64.Parse(pyobj.ToString());
-                case "UInt16": return UInt16.Parse(pyobj.ToString());
-                case "UInt32": return UInt32.Parse(pyobj.ToString());
-                case "UInt64": return UInt64.Parse(pyobj.ToString());
-                case "Single": return float.Parse(pyobj.ToString());
-                case "Double": return double.Parse(pyobj.ToString());
-                case "Complex": return ParseComplex(pyobj.ToString());
+                        rv[i] = (NDarray)ToCsharp<NDarray>(po[i]);
+                    return (object)rv;
                 case "Boolean[]":
-                    {
-                        var _po = GetPo(pyobj);
-                        int _len = GetLen(_po);
-                        var _rv = new Boolean[_len];
-                        for (var i = 0; i < _len; i++)
-                            _rv[i] = ToCsharp<Boolean>(_po[i]);
-                        return (T)(object)_rv;
-                    }
+                {
+                    var _po = GetPo(pyobj);
+                    int _len = GetLen(_po);
+                    var _rv = new Boolean[_len];
+                    for (var i = 0; i < _len; i++)
+                        _rv[i] = (bool)ToCsharp<Boolean>(_po[i]);
+                    return (object)_rv;
+                }
+                case "Int16":
                 case "Int16[]":
-                    {
-                        var _po = GetPo(pyobj);
-                        int _len = GetLen(_po);
-                        var _rv = new Int16[_len];
-                        for (var i = 0; i < _len; i++)
-                            _rv[i] = ToCsharp<Int16>(_po[i]);
-                        return (T)(object)_rv;
-                    }
+                {
+                    var _po = GetPo(pyobj);
+                    int _len = GetLen(_po);
+                    var _rv = new Int16[_len];
+                    for (var i = 0; i < _len; i++)
+                        _rv[i] = (Int16)ToCsharp<Int16>(_po[i]);
+                    return (object)_rv;
+                }
+                case "Int32":
                 case "Int32[]":
-                    {
-                        var _po = GetPo(pyobj);
-                        int _len = GetLen(_po);
-                        var _rv = new int[_len];
-                        for (var i = 0; i < _len; i++)
-                            _rv[i] = ToCsharp<Int32>(_po[i]);
-                        return (T)(object)_rv;
-                    }
+                {
+                    var _po = GetPo(pyobj);
+                    int _len = GetLen(_po);
+                    var _rv = new int[_len];
+                    for (var i = 0; i < _len; i++)
+                        _rv[i] = (Int32)ToCsharp<Int32>(_po[i]);
+                    return (object)_rv;
+                }
+                case "Int64":
                 case "Int64[]":
                     {
-                        var _po = GetPo(pyobj);
-                        int _len = GetLen(_po);
-                        var _rv = new Int64[_len];
-                        for (var i = 0; i < _len; i++)
-                            _rv[i] = ToCsharp<Int64>(_po[i]);
-                        return (T)(object)_rv;
+                    var _po = GetPo(pyobj);
+                    int _len = GetLen(_po);
+                    var _rv = new Int64[_len];
+                    for (var i = 0; i < _len; i++)
+                        _rv[i] = (Int64)ToCsharp<Int64>(_po[i]);
+                    return (object)_rv;
                     }
+                case "UInt16":
                 case "UInt16[]":
                     {
-                        var _po = GetPo(pyobj);
-                        int _len = GetLen(_po);
-                        var _rv = new UInt16[_len];
-                        for (var i = 0; i < _len; i++)
-                            _rv[i] = ToCsharp<UInt16>(_po[i]);
-                        return (T)(object)_rv;
+                    var _po = GetPo(pyobj);
+                    int _len = GetLen(_po);
+                    var _rv = new UInt16[_len];
+                    for (var i = 0; i < _len; i++)
+                        _rv[i] = (UInt16)ToCsharp<UInt16>(_po[i]);
+                    return (object)_rv;
                     }
+                case "UInt32":
                 case "UInt32[]":
                     {
-                        var _po = GetPo(pyobj);
-                        int _len = GetLen(_po);
-                        var _rv = new UInt32[_len];
-                        for (var i = 0; i < _len; i++)
-                            _rv[i] = ToCsharp<UInt32>(_po[i]);
-                        return (T)(object)_rv;
+                    var _po = GetPo(pyobj);
+                    int _len = GetLen(_po);
+                    var _rv = new UInt32[_len];
+                    for (var i = 0; i < _len; i++)
+                        _rv[i] = (UInt32)ToCsharp<UInt32>(_po[i]);
+                    return (object)_rv;
                     }
+                case "UInt64":
                 case "UInt64[]":
                     {
-                        var _po = GetPo(pyobj);
-                        int _len = GetLen(_po);
-                        var _rv = new UInt64[_len];
-                        for (var i = 0; i < _len; i++)
-                            _rv[i] = ToCsharp<UInt64>(_po[i]);
-                        return (T)(object)_rv;
+                    var _po = GetPo(pyobj);
+                    int _len = GetLen(_po);
+                    var _rv = new UInt64[_len];
+                    for (var i = 0; i < _len; i++)
+                        _rv[i] = (UInt64)ToCsharp<UInt64>(_po[i]);
+                    return (object)_rv;
                     }
+                case "Single":
                 case "Single[]":
                     {
-                        var _po = GetPo(pyobj);
-                        int _len = GetLen(_po);
-                        var _rv = new float[_len];
-                        for (var i = 0; i < _len; i++)
-                            _rv[i] = ToCsharp<float>(_po[i]);
-                        return (T)(object)_rv;
+                    var _po = GetPo(pyobj);
+                    int _len = GetLen(_po);
+                    var _rv = new float[_len];
+                    for (var i = 0; i < _len; i++)
+                        _rv[i] = (Single)ToCsharp<float>(_po[i]);
+                    return (object)_rv;
                     }
+                case "Double":
                 case "Double[]":
                     {
-                        var _po = GetPo(pyobj);
-                        int _len = GetLen(_po);
-                        var _rv = new double[_len];
-                        for (var i = 0; i < _len; i++)
-                            _rv[i] = ToCsharp<double>(_po[i]);
-                        return (T)(object)_rv;
+                    var _po = GetPo(pyobj);
+                    int _len = GetLen(_po);
+                    var _rv = new double[_len];
+                    for (var i = 0; i < _len; i++)
+                        _rv[i] = (Double)ToCsharp<double>(_po[i]);
+                    return (object)_rv;
                     }
+                case "Complex":
                 case "Complex[]":
                     {
-                        var _po = GetPo(pyobj);
-                        int _len = GetLen(_po);
-                        var _rv = new Complex[_len];
-                        for (var i = 0; i < _len; i++)
-                            _rv[i] = ToCsharp<Complex>(_po[i]);
-                        return (T)(object)_rv;
-                    }
+                    var _po = GetPo(pyobj);
+                    int _len = GetLen(_po);
+                    var _rv = new Complex[_len];
+                    for (var i = 0; i < _len; i++)
+                        _rv[i] = (Complex)ToCsharp<Complex>(_po[i]);
+                    return (object)_rv;
+                }
                 case "Int32[][]":
+                {
+                    var _po = GetPo(pyobj);
+                    int _len = GetLen(_po);
+                    var __len = ToCsharp<Int32>(pyobj[0].len);
+                    var _rv = new int[_len][];
+                    for (var i = 0; i < _len; i++)
                     {
-                        var _po = GetPo(pyobj);
-                        int _len = GetLen(_po);
-                        var __len = ToCsharp<Int32>(pyobj[0].len);
-                        var _rv = new int[_len][];
-                        for (var i = 0; i < _len; i++)
-                        {
-                            _rv[i] = new Int32[__len];
-                            for (var j = 0; j < __len; j++)
-                                _rv[i][j] = ToCsharp<Int32>(_po[i][j]);
-                        }
-                        return (T)(object)_rv;
+                        _rv[i] = new Int32[__len];
+                        for (var j = 0; j < __len; j++)
+                            _rv[i][j] = (Int32)ToCsharp<Int32>(_po[i][j]);
                     }
+                    return (object)_rv;
+                }
                 case "Int32[,]":
+                {
+                    var _po = GetPo(pyobj);
+                    var _len = ToCsharp<int>(pyobj.len);
+                    var _rv = CreateInitialMultidimensionalArray<int>(_len, pyobj[0].len);
+                    for (var i = 0; i < _len; i++)
                     {
-                        var _po = GetPo(pyobj);
-                        var _len = ToCsharp<int>(pyobj.len);
-                        var _rv = CreateInitialMultidimensionalArray<int>(_len, pyobj[0].len);
-                        for (var i = 0; i < _len; i++)
+                        if (_len == 1)
                         {
-                            if (_len == 1)
+                            _rv[i, 0] = (int)ToCsharp<int>(_po);
+                        }
+                        else
+                        {
+                            var elements = (int[])ToCsharp<int[]>(_po[i]);
+                            for (int j = 0; j < elements.Length; j++)
                             {
-                                _rv[i, 0] = ToCsharp<int>(_po);
-                            }
-                            else
-                            {
-                                var elements = ToCsharp<int[]>(_po[i]);
-                                for (int j = 0; j < elements.Length; j++)
-                                {
-                                    _rv[i, j] = elements[j];
-                                }
+                                _rv[i, j] = elements[j];
                             }
                         }
-                        return (T)(object)_rv;
                     }
+                    return (object)_rv;
+                }
                 case "Single[,]":
+                {
+                    var _po = GetPo(pyobj);
+                    var _len = ToCsharp<int>(pyobj.len);
+                    var _rv = CreateInitialMultidimensionalArray<float>(_len, pyobj[0].len);
+                    for (var i = 0; i < _len; i++)
                     {
-                        var _po = GetPo(pyobj);
-                        var _len = ToCsharp<int>(pyobj.len);
-                        var _rv = CreateInitialMultidimensionalArray<float>(_len, pyobj[0].len);
-                        for (var i = 0; i < _len; i++)
+                        if (_len == 1)
                         {
-                            if (_len == 1)
+                            _rv[i,0] = (float)ToCsharp<float>(_po);
+                        }
+                        else
+                        {
+                            var elements = (float[])ToCsharp<float[]>(_po[i]);
+                            for (int j = 0; j < elements.Length; j++)
                             {
-                                _rv[i,0] = ToCsharp<float>(_po);
-                            }
-                            else
-                            {
-                                var elements = ToCsharp<float[]>(_po[i]);
-                                for (int j = 0; j < elements.Length; j++)
-                                {
-                                    _rv[i,j] = elements[j];
-                                }
+                                _rv[i,j] = elements[j];
                             }
                         }
-                        return (T)(object)_rv;
                     }
+                    return (object)_rv;
+                }
                 default:
                     var pyClass = $"{pyobj.__class__}";
                     if (pyClass == "<class 'str'>") return (T)(object)pyobj.ToString();
@@ -257,6 +260,29 @@ namespace Cupy
                         return default;
                     }
             }
+        }
+
+        private T ToCsharpInternal<T>(dynamic pyobj)
+        {
+            switch (typeof(T).Name)
+            {
+                // types from 'ToCsharpConversions'
+                case "Dtype": return (T)(object)new Dtype(pyobj);
+                case "Matrix": return (T)(object)new Matrix(pyobj);
+                case "Boolean": return Boolean.Parse(pyobj.ToString());
+                case "Int16": return Int16.Parse(pyobj.ToString());
+                case "Int32": return Int32.Parse(pyobj.ToString());
+                case "Int64": return Int64.Parse(pyobj.ToString());
+                case "UInt16": return UInt16.Parse(pyobj.ToString());
+                case "UInt32": return UInt32.Parse(pyobj.ToString());
+                case "UInt64": return UInt64.Parse(pyobj.ToString());
+                case "Single": return float.Parse(pyobj.ToString());
+                case "Double": return double.Parse(pyobj.ToString());
+                case "Complex": return ParseComplex(pyobj.ToString());
+                case "NDarray": return (T)(object)new NDarray(pyobj);
+            }
+
+            throw new NotSupportedException();
         }
 
         public object ToCsharp(Type type, dynamic pyobj)
@@ -287,7 +313,7 @@ namespace Cupy
                     var len = po.Length();
                     var rv = new NDarray[len];
                     for (var i = 0; i < len; i++)
-                        rv[i] = ToCsharp<NDarray>(po[i]);
+                        rv[i] = (NDarray)ToCsharp<NDarray>(po[i]);
                     return (object)rv;
                 case "Matrix": return (object)new Matrix(pyobj);
                 case "Int16": return Int16.Parse(pyobj.ToString());
@@ -460,7 +486,8 @@ namespace Cupy
             int _len = 0;
             if ((_po as PyObject).HasAttr("__len__"))
             {
-                _len = ToCsharp<NDarray>(_po).len;
+                var a = ToCsharp<NDarray>(_po);
+                _len = a.len;
             }
             else
             {
