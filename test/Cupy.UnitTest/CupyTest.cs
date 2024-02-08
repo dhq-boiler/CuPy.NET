@@ -82,7 +82,7 @@ namespace Cupy.UnitTest
             var array = new[] { 1, 2, 3, 4, 5, 6 };
             var a = cp.array(array);
             Console.WriteLine(a.repr);
-            Assert.AreEqual(array, a.GetData());
+            Assert.AreEqual(array, a.GetData<int[]>());
         }
 
         [Test]
