@@ -611,8 +611,8 @@ namespace Cupy
             var __self__ = self;
             var pyargs = ToTuple(new object[]
             {
-                a,
-                indices
+                a[0],
+                indices[0]
             });
             var kwargs = new PyDict();
             if (axis != null) kwargs["axis"] = ToPython(axis);
