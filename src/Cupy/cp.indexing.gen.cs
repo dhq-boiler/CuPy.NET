@@ -605,8 +605,7 @@ namespace Cupy
         /// <returns>
         ///     The returned array has the same type as a.
         /// </returns>
-        public static NDarray take(NDarray[] a, NDarray[] indices, int? axis = null, NDarray @out = null,
-            string mode = "raise")
+        public static NDarray take(NDarray[] a, NDarray[] indices, int? axis = null, NDarray @out = null)
         {
             //auto-generated code, do not change
             var __self__ = self;
@@ -618,7 +617,6 @@ namespace Cupy
             var kwargs = new PyDict();
             if (axis != null) kwargs["axis"] = ToPython(axis);
             if (@out != null) kwargs["out"] = ToPython(@out);
-            if (mode != "raise") kwargs["mode"] = ToPython(mode);
             dynamic py = __self__.InvokeMethod("take", pyargs, kwargs);
             return ToCsharp<NDarray>(py);
         }
