@@ -839,15 +839,15 @@ namespace Cupy.UnitTest
             // >>> cp.take(a, indices)
             // array([4, 3, 6])
             // 
-
-#if TODO
-            var given = a = [4, 3, 5, 7, 6, 8];
-             given = indices = [0, 1, 4];
-             given = cp.take(a, indices);
+            NDarray given = cp.array([4, 3, 5, 7, 6, 8]);
+            var a = given;
+            given = cp.array([0, 1, 4]);
+            var indices = given;
+            given = cp.take([a], [indices]);
             var expected =
                 "array([4, 3, 6])";
             Assert.AreEqual(expected, given.repr);
-#endif
+
             // In this example if a is an ndarray, “fancy” indexing can be used.
 
             // >>> a = cp.array(a)
@@ -855,13 +855,12 @@ namespace Cupy.UnitTest
             // array([4, 3, 6])
             // 
 
-#if TODO
-             given = a = cp.array(a);
-             given = a[indices];
-             expected =
+            given = a = cp.array(a);
+            given = a[indices];
+            expected =
                 "array([4, 3, 6])";
             Assert.AreEqual(expected, given.repr);
-#endif
+
             // If indices is not one dimensional, the output also has these dimensions.
 
             // >>> cp.take(a, [[0, 1], [2, 3]])
@@ -869,13 +868,11 @@ namespace Cupy.UnitTest
             //        [5, 7]])
             // 
 
-#if TODO
-             given = cp.take(a, {{0, 1}, {2, 3}});
-             expected =
+            given = cp.take([a], [cp.array([[0, 1], [2, 3]])]);
+            expected =
                 "array([[4, 3],\n" +
                 "       [5, 7]])";
             Assert.AreEqual(expected, given.repr);
-#endif
         }
 
 

@@ -27,6 +27,13 @@ namespace Cupy
             return array(data, null);
         }
 
+        public static NDarray array<T>(params T[][] data) where T : struct
+        {
+            var arrays = data.Select(x => new NDarray(x)).ToArray();
+            return array(arrays);
+        }
+
+
         public static NDarray array(NDarray @object, Dtype dtype = null, bool? copy = null, string order = null,
             bool? subok = null, int? ndmin = null)
         {
