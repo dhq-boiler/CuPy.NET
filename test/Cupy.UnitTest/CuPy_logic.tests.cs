@@ -616,28 +616,26 @@ namespace Cupy.UnitTest
             // True
             // 
 
-#if TODO
             var given = cp.isscalar(3.1);
             var expected =
-                "True";
-            Assert.AreEqual(expected, given.repr);
+                true;
+            Assert.AreEqual(expected, given);
              given = cp.isscalar(cp.array(3.1));
              expected =
-                "False";
-            Assert.AreEqual(expected, given.repr);
-             given = cp.isscalar({3.1});
+                false;
+            Assert.AreEqual(expected, given);
+             given = cp.isscalar(new[]{3.1});
              expected =
-                "False";
-            Assert.AreEqual(expected, given.repr);
-             given = cp.isscalar(False);
+                false;
+            Assert.AreEqual(expected, given);
+             given = cp.isscalar(false);
              expected =
-                "True";
-            Assert.AreEqual(expected, given.repr);
-             given = cp.isscalar('Cupy');
+                true;
+            Assert.AreEqual(expected, given);
+             given = cp.isscalar("Cupy");
              expected =
-                "True";
-            Assert.AreEqual(expected, given.repr);
-#endif
+                true;
+            Assert.AreEqual(expected, given);
             // Cupy supports PEP 3141 numbers:
 
             // >>> from fractions import Fraction
@@ -647,6 +645,12 @@ namespace Cupy.UnitTest
             // >>> isscalar(Number())
             // True
             // 
+
+            var actual = cp.isscalar(cp.array(2.0));
+            Assert.That(actual, Is.False);
+
+            actual = cp.isscalar(cp.power(cp.array(2.0), cp.array(2)));
+            Assert.That(actual, Is.False);
 
 #if TODO
              given = from fractions import Fraction;
