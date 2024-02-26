@@ -1,3 +1,6 @@
+using Cupy.Models;
+using NUnit.Framework;
+using Python.Runtime;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -6,9 +9,6 @@ using System.Linq;
 using System.Numerics;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
-using Cupy.Models;
-using NUnit.Framework;
-using Python.Runtime;
 
 namespace Cupy.UnitTest
 {
@@ -1046,5 +1046,12 @@ namespace Cupy.UnitTest
         // TODO:  https://docs.scipy.org/doc/Cupy/user/basics.indexing.html?highlight=slice#structural-indexing-tools
         // TODO:  https://docs.scipy.org/doc/Cupy/user/basics.indexing.html?highlight=slice#assigning-values-to-indexed-arrays
         // TODO:  https://docs.scipy.org/doc/Cupy/user/basics.indexing.html?highlight=slice#dealing-with-variable-numbers-of-indices-within-programs
+
+        [Test]
+        public async Task DisposeTest()
+        {
+            var x = cp.array([1, 2, 3]);
+            x.Dispose();
+        }
     }
 }
