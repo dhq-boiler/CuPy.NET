@@ -1,5 +1,5 @@
-﻿using System;
-using Python.Runtime;
+﻿using Python.Runtime;
+using System;
 
 namespace Cupy
 {
@@ -54,11 +54,19 @@ namespace Cupy
 
         public override int GetHashCode()
         {
+            if (self.Handle == IntPtr.Zero)
+            {
+                return 0;
+            }
             return self.GetHashCode();
         }
 
         public override string ToString()
         {
+            if (self.Handle == IntPtr.Zero)
+            {
+                return "<<disposed>>";
+            }
             return self.ToString();
         }
 

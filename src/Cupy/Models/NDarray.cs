@@ -2,10 +2,8 @@
 using Python.Runtime;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Numerics;
-using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -69,42 +67,122 @@ namespace Cupy
         /// <summary>
         ///     Information about the memory layout of the array.
         /// </summary>
-        public Flags flags => new Flags(self.GetAttr("flags")); // TODO: implement Flags
+        public Flags flags
+        {
+            get
+            {
+                if (self.Handle == IntPtr.Zero)
+                {
+                    throw new InvalidOperationException();
+                }
+                return new Flags(self.GetAttr("flags")); // TODO: implement Flags
+            }
+        }
 
         /// <summary>
         ///     Tuple of array dimensions.
         /// </summary>
-        public Shape shape => new Shape(self.GetAttr("shape").As<int[]>());
+        public Shape shape
+        {
+            get
+            {
+                if (self.Handle == IntPtr.Zero)
+                {
+                    throw new InvalidOperationException();
+                }
+                return new Shape(self.GetAttr("shape").As<int[]>());
+            }
+        }
 
         /// <summary>
         ///     Tuple of bytes to step in each dimension when traversing an array.
         /// </summary>
-        public int[] strides => self.GetAttr("strides").As<int[]>();
+        public int[] strides
+        {
+            get
+            {
+                if (self.Handle == IntPtr.Zero)
+                {
+                    throw new InvalidOperationException();
+                }
+                return self.GetAttr("strides").As<int[]>();
+            }
+        }
 
         /// <summary>
         ///     Number of array dimensions.
         /// </summary>
-        public int ndim => self.GetAttr("ndim").As<int>();
+        public int ndim
+        {
+            get
+            {
+                if (self.Handle == IntPtr.Zero)
+                {
+                    throw new InvalidOperationException();
+                }
+                return self.GetAttr("ndim").As<int>();
+            }
+        }
 
         /// <summary>
         ///     Python buffer object pointing to the start of the array’s data.
         /// </summary>
-        public PyObject data => self.GetAttr("data");
+        public PyObject data
+        {
+            get
+            {
+                if (self.Handle == IntPtr.Zero)
+                {
+                    throw new InvalidOperationException();
+                }
+                return self.GetAttr("data");
+            }
+        }
 
         /// <summary>
         ///     Number of elements in the array.
         /// </summary>
-        public int size => self.GetAttr("size").As<int>();
+        public int size
+        {
+            get
+            {
+                if (self.Handle == IntPtr.Zero)
+                {
+                    throw new InvalidOperationException();
+                }
+                return self.GetAttr("size").As<int>();
+            }
+        }
 
         /// <summary>
         ///     Length of one array element in bytes.
         /// </summary>
-        public int itemsize => self.GetAttr("itemsize").As<int>();
+        public int itemsize
+        {
+            get
+            {
+                if (self.Handle == IntPtr.Zero)
+                {
+                    throw new InvalidOperationException();
+                }
+                return self.GetAttr("itemsize").As<int>();
+            }
+        }
 
         /// <summary>
         ///     Total bytes consumed by the elements of the array.
         /// </summary>
-        public int nbytes => self.GetAttr("nbytes").As<int>();
+        public int nbytes
+        {
+            get
+            {
+                if (self.Handle == IntPtr.Zero)
+                {
+                    throw new InvalidOperationException();
+                }
+                return self.GetAttr("nbytes").As<int>();
+            }
+        }
 
         /// <summary>
         ///     Base object if memory is from some other object.
@@ -113,6 +191,10 @@ namespace Cupy
         {
             get
             {
+                if (self.Handle == IntPtr.Zero)
+                {
+                    throw new InvalidOperationException();
+                }
                 var base_obj = self.GetAttr("base");
                 if (base_obj.IsNone())
                     return null;
@@ -123,12 +205,32 @@ namespace Cupy
         /// <summary>
         ///     Data-type of the array’s elements.
         /// </summary>
-        public Dtype dtype => new Dtype(self.GetAttr("dtype"));
+        public Dtype dtype
+        {
+            get
+            {
+                if (self.Handle == IntPtr.Zero)
+                {
+                    throw new InvalidOperationException();
+                }
+                return new Dtype(self.GetAttr("dtype"));
+            }
+        }
 
         /// <summary>
         ///     Same as self.transpose(), except that self is returned if self.ndim &lt; 2.
         /// </summary>
-        public NDarray T => new NDarray(self.GetAttr("T"));
+        public NDarray T
+        {
+            get
+            {
+                if (self.Handle == IntPtr.Zero)
+                {
+                    throw new InvalidOperationException();
+                }
+                return new NDarray(self.GetAttr("T"));
+            }
+        }
 
         ///// <summary>
         ///// The real part of the array.
@@ -143,7 +245,17 @@ namespace Cupy
         /// <summary>
         ///     A 1-D iterator over the array.
         /// </summary>
-        public PyObject flat => self.GetAttr("flat"); // todo: wrap and support usecases
+        public PyObject flat
+        {
+            get
+            {
+                if (self.Handle == IntPtr.Zero)
+                {
+                    throw new InvalidOperationException();
+                }
+                return self.GetAttr("flat"); // todo: wrap and support usecases
+            }
+        }
 
 #if NOT_SUPPORTED
         /// <summary>
@@ -156,22 +268,56 @@ namespace Cupy
         /// <summary>
         ///     Length of the array (same as size)
         /// </summary>
-        public int len => self.InvokeMethod("__len__").As<int>();
+        public int len
+        {
+            get
+            {
+                if (self.Handle == IntPtr.Zero)
+                {
+                    throw new InvalidOperationException();
+                }
+                return self.InvokeMethod("__len__").As<int>();
+            }
+        }
 
         /// <summary>
         ///     returns the 'array([ .... ])'-representation known from the console
         /// </summary>
-        public string repr => ToString(1);
+        public string repr
+        {
+            get
+            {
+                if (self.Handle == IntPtr.Zero)
+                {
+                    throw new InvalidOperationException();
+                }
+                return ToString(1);
+            }
+        }
 
         /// <summary>
         ///     returns the '[ .... ]'-representation
         /// </summary>
-        public string str => self.InvokeMethod("__str__").As<string>();
+        public string str
+        {
+            get
+            {
+                if (self.Handle == IntPtr.Zero)
+                {
+                    throw new InvalidOperationException();
+                }
+                return self.InvokeMethod("__str__").As<string>();
+            }
+        }
 
         public NDarray this[string slicing_notation]
         {
             get
             {
+                if (self.Handle == IntPtr.Zero)
+                {
+                    throw new InvalidOperationException();
+                }
                 var tuple = new PyTuple(Slice.ParseSlices(slicing_notation).Select(s =>
                 {
                     if (s.IsIndex)
@@ -196,6 +342,10 @@ namespace Cupy
         {
             get
             {
+                if (self.Handle == IntPtr.Zero)
+                {
+                    throw new InvalidOperationException();
+                }
                 if (coords.Length == 1)
                 {
                     var pyint = new PyInt(coords[0]);
@@ -221,6 +371,10 @@ namespace Cupy
         {
             get
             {
+                if (self.Handle == IntPtr.Zero)
+                {
+                    throw new InvalidOperationException();
+                }
                 var tuple = new PyTuple(indices.Select(a => (PyObject)a.PyObject).ToArray());
                 return new NDarray(PyObject[tuple]);
             }
@@ -235,6 +389,10 @@ namespace Cupy
         {
             get
             {
+                if (self.Handle == IntPtr.Zero)
+                {
+                    throw new InvalidOperationException();
+                }
                 var pyobjs = arrays_slices_or_indices.Select<object, PyObject>(x =>
                 {
                     switch (x)
@@ -269,6 +427,10 @@ namespace Cupy
         {
             get
             {
+                if (self.Handle == IntPtr.Zero)
+                {
+                    throw new InvalidOperationException();
+                }
                 dynamic py = self.GetAttr("real");
                 return ToCsharp<NDarray>(py);
             }
@@ -279,6 +441,10 @@ namespace Cupy
         {
             get
             {
+                if (self.Handle == IntPtr.Zero)
+                {
+                    throw new InvalidOperationException();
+                }
                 dynamic py = self.GetAttr("imag");
                 return ToCsharp<NDarray>(py);
             }
@@ -561,11 +727,20 @@ namespace Cupy
 
         public string ToStringAsPythonObject()
         {
+            if (self.Handle == IntPtr.Zero)
+            {
+                return "<<disposed>>";
+            }
             return base.ToString();
         }
 
         public override string ToString()
         {
+            if (self.Handle == IntPtr.Zero)
+            {
+                return "<<none>>";
+            }
+
             if (self.HasAttr("ndim"))
             {
                 return Dig(ndim - 1, ndim, this);
@@ -582,6 +757,11 @@ namespace Cupy
 
         private string ToStringAsList()
         {
+            if (self.Handle == IntPtr.Zero)
+            {
+                return "<<disposed>>";
+            }
+
             var this_0 = this[0];
             var col = this_0.len;
             var row = this.len;
@@ -615,6 +795,11 @@ namespace Cupy
 
         public string ToString(int depth)
         {
+            if (self.Handle == IntPtr.Zero)
+            {
+                return "<<disposed>>";
+            }
+
             if (self.HasAttr("ndim"))
             {
                 var str = string.Empty;
@@ -1203,6 +1388,10 @@ namespace Cupy
 
         private string ToStringAsBase()
         {
+            if (self.Handle == IntPtr.Zero)
+            {
+                return "<<disposed>>";
+            }
             return base.ToString();
         }
 
@@ -1375,6 +1564,10 @@ namespace Cupy
         {
             get
             {
+                if (self.Handle == IntPtr.Zero)
+                {
+                    throw new InvalidOperationException();
+                }
                 var tuple = new PyTuple(Slice.ParseSlices(slicing_notation).Select(s =>
                 {
                     if (s.IsIndex)
@@ -1385,6 +1578,10 @@ namespace Cupy
             }
             set
             {
+                if (self.Handle == IntPtr.Zero)
+                {
+                    throw new InvalidOperationException();
+                }
                 var tuple = new PyTuple(Slice.ParseSlices(slicing_notation).Select(s =>
                 {
                     if (s.IsIndex)
@@ -1399,6 +1596,10 @@ namespace Cupy
         {
             get
             {
+                if (self.Handle == IntPtr.Zero)
+                {
+                    throw new InvalidOperationException();
+                }
                 if (coords.Length == 1)
                 {
                     var pyint = new PyInt(coords[0]);
@@ -1412,6 +1613,10 @@ namespace Cupy
             }
             set
             {
+                if (self.Handle == IntPtr.Zero)
+                {
+                    throw new InvalidOperationException();
+                }
                 var tuple = ToTuple(coords);
                 self.SetItem(tuple, ToPython(value));
             }
@@ -1421,11 +1626,19 @@ namespace Cupy
         {
             get
             {
+                if (self.Handle == IntPtr.Zero)
+                {
+                    throw new InvalidOperationException();
+                }
                 var tuple = new PyTuple(indices.Select(a => (PyObject)a.PyObject).ToArray());
                 return new NDarray<T>(PyObject[tuple]);
             }
             set
             {
+                if (self.Handle == IntPtr.Zero)
+                {
+                    throw new InvalidOperationException();
+                }
                 var tuple = new PyTuple(indices.Select(a => (PyObject)a.PyObject).ToArray());
                 self.SetItem(tuple, ToPython(value));
             }
@@ -1435,6 +1648,10 @@ namespace Cupy
         {
             get
             {
+                if (self.Handle == IntPtr.Zero)
+                {
+                    throw new InvalidOperationException();
+                }
                 var pyobjs = arrays_slices_or_indices.Select<object, PyObject>(x =>
                 {
                     switch (x)
@@ -1450,6 +1667,10 @@ namespace Cupy
             }
             set
             {
+                if (self.Handle == IntPtr.Zero)
+                {
+                    throw new InvalidOperationException();
+                }
                 var pyobjs = arrays_slices_or_indices.Select<object, PyObject>(x =>
                 {
                     switch (x)
@@ -1470,11 +1691,19 @@ namespace Cupy
         /// </summary>
         public T GetData()
         {
+            if (self.Handle == IntPtr.Zero)
+            {
+                throw new InvalidOperationException();
+            }
             return base.GetData<T>();
         }
 
         public T item()
         {
+            if (self is null)
+            {
+                throw new InvalidOperationException();
+            }
             if (typeof(T) == typeof(Complex))
                 return (T)(object)new Complex(real.asscalar<double>(), imag.asscalar<double>());
             return self.InvokeMethod("item").As<T>();
@@ -1482,6 +1711,11 @@ namespace Cupy
 
         public override string ToString()
         {
+            if (self.Handle == IntPtr.Zero)
+            {
+                return "<<none>>";
+            }
+
             string str = string.Empty;
             var dig = Dig(ndim - 1, this);
             if (dig.IndexOf("[") > -1)
@@ -1500,7 +1734,7 @@ namespace Cupy
             return str;
         }
 
-        private string Dig(int dim, NDarray arr)
+        private static string Dig(int dim, NDarray arr)
         {
             if (dim == -1)
             {
