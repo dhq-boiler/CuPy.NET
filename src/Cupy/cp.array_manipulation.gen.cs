@@ -4,6 +4,7 @@
 using Cupy.Models;
 using Python.Runtime;
 using System;
+using System.Linq;
 #if PYTHON_INCLUDED
 #endif
 
@@ -373,10 +374,13 @@ namespace Cupy
             var __self__ = self;
             var pyargs = ToTuple(new object[]
             {
-                a,
-                axes,
+                a.PyObject,
             });
             var kwargs = new PyDict();
+            if (axes is not null)
+            {
+                kwargs["axes"] = new PyList(axes.Select(x => x.ToPython()).ToArray());
+            }
             dynamic py = __self__.InvokeMethod("transpose", pyargs, kwargs);
             return ToCsharp<NDarray>(py);
         }
