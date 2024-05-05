@@ -389,6 +389,18 @@ namespace Cupy
             return ToCsharp<NDarray>(py);
         }
 
+        public NDarray reduced_view(Dtype dtype = null)
+        {
+            var __self__ = self;
+            var pyargs = ToTuple(new object[]
+            {
+            });
+            var kwargs = new PyDict();
+            if (dtype != null) kwargs["dtype"] = ToPython(dtype);
+            dynamic py = __self__.InvokeMethod("reduced_view", pyargs, kwargs);
+            return ToCsharp<NDarray>(py);
+        }
+
         /// <summary>
         ///     For unpickling.<br></br>
         ///     The state argument must be a sequence that contains the following

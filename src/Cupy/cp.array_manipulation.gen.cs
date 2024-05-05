@@ -210,18 +210,6 @@ namespace Cupy
             return ToCsharp<NDarray>(py);
         }
 
-        public static NDarray reduced_view(Dtype dtype = null)
-        {
-            var __self__ = self;
-            var pyargs = ToTuple(new object[]
-            {
-            });
-            var kwargs = new PyDict();
-            if (dtype != null) kwargs["dtype"] = ToPython(dtype);
-            dynamic py = __self__.InvokeMethod("reduced_view", pyargs, kwargs);
-            return ToCsharp<NDarray>(py);
-        }
-
         /// <summary>
         ///     Return a copy of the array collapsed into one dimension.
         /// </summary>
