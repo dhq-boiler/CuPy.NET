@@ -1053,5 +1053,21 @@ namespace Cupy.UnitTest
             var x = cp.array([1, 2, 3]);
             x.Dispose();
         }
+
+        [Test]
+        public void array_FromByteArrayTest()
+        {
+            var bytes = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8 };
+            var a = cp.array(bytes);
+            Assert.AreEqual("array([1, 2, 3, 4, 5, 6, 7, 8], dtype=int8)", a.repr);
+        }
+
+        [Test]
+        public void frombufferTest()
+        {
+            var bytes = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8 };
+            var a = cp.frombuffer(bytes, cp.@byte);
+            Assert.AreEqual("array([1, 2, 3, 4, 5, 6, 7, 8], dtype=int8)", a.repr);
+        }
     }
 }
