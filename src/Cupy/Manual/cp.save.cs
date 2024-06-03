@@ -46,15 +46,15 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 file,
                 arr
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (allow_pickle != true) kwargs["allow_pickle"] = ToPython(allow_pickle);
             if (fix_imports != true) kwargs["fix_imports"] = ToPython(fix_imports);
-            dynamic py = __self__.InvokeMethod("save", pyargs, kwargs);
+            using dynamic py = __self__.InvokeMethod("save", pyargs, kwargs);
         }
 
         /// <summary>
@@ -100,12 +100,12 @@ namespace Cupy
         public static void savez(string file, NDarray[] args = null, Dictionary<string, NDarray> kwds = null)
         {
             var __self__ = self;
-            var pyargs = ToTuple(new object[] { file }.Concat(args ?? new NDarray[0]).ToArray());
-            var kwargs = new PyDict();
+            using var pyargs = ToTuple(new object[] { file }.Concat(args ?? new NDarray[0]).ToArray());
+            using var kwargs = new PyDict();
             if (kwds != null)
                 foreach (var pair in kwds)
                     kwargs[pair.Key] = ToPython(pair.Value);
-            dynamic py = __self__.InvokeMethod("savez", pyargs, kwargs);
+            using dynamic py = __self__.InvokeMethod("savez", pyargs, kwargs);
         }
 
         /// <summary>
@@ -150,12 +150,12 @@ namespace Cupy
         public static void savez_compressed(string file, NDarray[] args = null, Dictionary<string, NDarray> kwds = null)
         {
             var __self__ = self;
-            var pyargs = ToTuple(new object[] { file }.Concat(args ?? new NDarray[0]).ToArray());
-            var kwargs = new PyDict();
+            using var pyargs = ToTuple(new object[] { file }.Concat(args ?? new NDarray[0]).ToArray());
+            using var kwargs = new PyDict();
             if (kwds != null)
                 foreach (var pair in kwds)
                     kwargs[pair.Key] = ToPython(pair.Value);
-            dynamic py = __self__.InvokeMethod("savez_compressed", pyargs, kwargs);
+            using dynamic py = __self__.InvokeMethod("savez_compressed", pyargs, kwargs);
         }
     }
 }

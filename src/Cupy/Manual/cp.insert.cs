@@ -49,12 +49,12 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 arr,
                 ToPython(obj)
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (values != null) kwargs["values"] = ToPython(values);
             if (axis != null) kwargs["axis"] = ToPython(axis);
             dynamic py = __self__.InvokeMethod("insert", pyargs, kwargs);
@@ -101,12 +101,12 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 arr,
                 obj
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (values != null) kwargs["values"] = ToPython(values);
             if (axis != null) kwargs["axis"] = ToPython(axis);
             dynamic py = __self__.InvokeMethod("insert", pyargs, kwargs);
@@ -153,12 +153,12 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 arr,
                 obj.ToPython()
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (values != null) kwargs["values"] = ToPython(values);
             if (axis != null) kwargs["axis"] = ToPython(axis);
             dynamic py = __self__.InvokeMethod("insert", pyargs, kwargs);
@@ -205,12 +205,12 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 arr,
                 ToPython(obj)
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             kwargs["values"] = ToPython(values);
             if (axis != null) kwargs["axis"] = ToPython(axis);
             dynamic py = __self__.InvokeMethod("insert", pyargs, kwargs);

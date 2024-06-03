@@ -38,12 +38,12 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 arr,
                 unit
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (timezone != "naive") kwargs["timezone"] = ToPython(timezone);
             if (casting != "same_kind") kwargs["casting"] = ToPython(casting);
             dynamic py = __self__.InvokeMethod("datetime_as_string", pyargs, kwargs);
@@ -70,11 +70,11 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 dtype
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             dynamic py = __self__.InvokeMethod("datetime_data", pyargs, kwargs);
             return (ToCsharp<string>(py[0]), ToCsharp<int>(py[1]));
         }

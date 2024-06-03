@@ -40,12 +40,12 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 arr,
                 obj
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (axis != null) kwargs["axis"] = ToPython(axis);
             dynamic py = __self__.InvokeMethod("delete", pyargs, kwargs);
             return ToCsharp<NDarray>(py);
@@ -84,12 +84,12 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 arr,
                 obj
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (axis != null) kwargs["axis"] = ToPython(axis);
             dynamic py = __self__.InvokeMethod("delete", pyargs, kwargs);
             return ToCsharp<NDarray>(py);

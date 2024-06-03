@@ -44,14 +44,14 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 rate,
                 nper,
                 pmt,
                 pv
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (when != "end") kwargs["when"] = ToPython(when);
             dynamic py = __self__.InvokeMethod("fv", pyargs, kwargs);
             return ToCsharp<NDarray>(py);
@@ -87,13 +87,13 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 rate,
                 nper,
                 pmt
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (fv != null) kwargs["fv"] = ToPython(fv);
             if (when != "end") kwargs["when"] = ToPython(when);
             dynamic py = __self__.InvokeMethod("pv", pyargs, kwargs);
@@ -128,12 +128,12 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 rate,
                 values
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             dynamic py = __self__.InvokeMethod("npv", pyargs, kwargs);
             return ToCsharp<float>(py);
         }
@@ -181,13 +181,13 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 rate,
                 nper,
                 pv
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (fv != null) kwargs["fv"] = ToPython(fv);
             if (when != "end") kwargs["when"] = ToPython(when);
             dynamic py = __self__.InvokeMethod("pmt", pyargs, kwargs);
@@ -222,17 +222,17 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 rate,
                 per,
                 nper,
                 pv
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (fv != null) kwargs["fv"] = ToPython(fv);
             if (when != "end") kwargs["when"] = ToPython(when);
-            dynamic py = __self__.InvokeMethod("ppmt", pyargs, kwargs);
+            using dynamic py = __self__.InvokeMethod("ppmt", pyargs, kwargs);
         }
 
         /// <summary>
@@ -275,14 +275,14 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 rate,
                 per,
                 nper,
                 pv
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (fv != null) kwargs["fv"] = ToPython(fv);
             if (when != "end") kwargs["when"] = ToPython(when);
             dynamic py = __self__.InvokeMethod("ipmt", pyargs, kwargs);
@@ -324,11 +324,11 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 values
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             dynamic py = __self__.InvokeMethod("irr", pyargs, kwargs);
             return ToCsharp<float>(py);
         }
@@ -355,13 +355,13 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 values,
                 finance_rate,
                 reinvest_rate
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             dynamic py = __self__.InvokeMethod("mirr", pyargs, kwargs);
             return ToCsharp<float>(py);
         }
@@ -392,16 +392,16 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 rate,
                 pmt,
                 pv
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (fv != null) kwargs["fv"] = ToPython(fv);
             if (when != "end") kwargs["when"] = ToPython(when);
-            dynamic py = __self__.InvokeMethod("nper", pyargs, kwargs);
+            using dynamic py = __self__.InvokeMethod("nper", pyargs, kwargs);
         }
 
         /// <summary>
@@ -455,19 +455,19 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 nper,
                 pmt,
                 pv,
                 fv
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (when != "end") kwargs["when"] = ToPython(when);
             if (guess != null) kwargs["guess"] = ToPython(guess);
             if (tol != null) kwargs["tol"] = ToPython(tol);
             if (maxiter != 100) kwargs["maxiter"] = ToPython(maxiter);
-            dynamic py = __self__.InvokeMethod("rate", pyargs, kwargs);
+            using dynamic py = __self__.InvokeMethod("rate", pyargs, kwargs);
         }
     }
 }

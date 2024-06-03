@@ -28,11 +28,11 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 p
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             dynamic py = __self__.InvokeMethod("roots", pyargs, kwargs);
             return ToCsharp<NDarray>(py);
         }

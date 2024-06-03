@@ -49,12 +49,12 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 ar1,
                 ar2
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (assume_unique != false) kwargs["assume_unique"] = ToPython(assume_unique);
             if (invert != false) kwargs["invert"] = ToPython(invert);
             dynamic py = __self__.InvokeMethod("in1d", pyargs, kwargs);
@@ -101,12 +101,12 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 ar2,
                 ar1
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (assume_unique) kwargs["assume_unique"] = ToPython(assume_unique);
             if (return_indices) kwargs["return_indices"] = ToPython(return_indices);
             dynamic py = __self__.InvokeMethod("intersect1d", pyargs, kwargs);
@@ -160,12 +160,12 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 element,
                 test_elements
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (assume_unique != false) kwargs["assume_unique"] = ToPython(assume_unique);
             if (invert != false) kwargs["invert"] = ToPython(invert);
             dynamic py = __self__.InvokeMethod("isin", pyargs, kwargs);
@@ -196,12 +196,12 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 ar1,
                 ar2
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (assume_unique) kwargs["assume_unique"] = ToPython(assume_unique);
             dynamic py = __self__.InvokeMethod("setdiff1d", pyargs, kwargs);
             return ToCsharp<NDarray>(py);
@@ -231,12 +231,12 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 ar2,
                 ar1
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (assume_unique) kwargs["assume_unique"] = ToPython(assume_unique);
             dynamic py = __self__.InvokeMethod("setxor1d", pyargs, kwargs);
             return ToCsharp<NDarray>(py);
@@ -262,12 +262,12 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 ar2,
                 ar1
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             dynamic py = __self__.InvokeMethod("union1d", pyargs, kwargs);
             return ToCsharp<NDarray>(py);
         }

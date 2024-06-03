@@ -65,11 +65,11 @@ namespace Cupy
                 //auto-generated code, do not change
                 var fft = self.GetAttr("fft");
                 var __self__ = fft;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                     a
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 if (n != null) kwargs["n"] = ToPython(n);
                 if (axis != -1) kwargs["axis"] = ToPython(axis);
                 if (norm != null) kwargs["norm"] = ToPython(norm);
@@ -141,11 +141,11 @@ namespace Cupy
                 //auto-generated code, do not change
                 var fft = self.GetAttr("fft");
                 var __self__ = fft;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                     a
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 if (n != null) kwargs["n"] = ToPython(n);
                 if (axis != -1) kwargs["axis"] = ToPython(axis);
                 if (norm != null) kwargs["norm"] = ToPython(norm);
@@ -183,11 +183,11 @@ namespace Cupy
                 //auto-generated code, do not change
                 var fft = self.GetAttr("fft");
                 var __self__ = fft;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                     a
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 if (s != null) kwargs["s"] = ToPython(s);
                 if (axes != null) kwargs["axes"] = ToPython(axes);
                 if (norm != null) kwargs["norm"] = ToPython(norm);
@@ -226,11 +226,11 @@ namespace Cupy
                 //auto-generated code, do not change
                 var fft = self.GetAttr("fft");
                 var __self__ = fft;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                     a
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 if (s != null) kwargs["s"] = ToPython(s);
                 if (axes != null) kwargs["axes"] = ToPython(axes);
                 if (norm != null) kwargs["norm"] = ToPython(norm);
@@ -294,11 +294,11 @@ namespace Cupy
                 //auto-generated code, do not change
                 var fft = self.GetAttr("fft");
                 var __self__ = fft;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                     a
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 if (s != null) kwargs["s"] = ToPython(s);
                 if (axes != null) kwargs["axes"] = ToPython(axes);
                 if (norm != null) kwargs["norm"] = ToPython(norm);
@@ -372,11 +372,11 @@ namespace Cupy
                 //auto-generated code, do not change
                 var fft = self.GetAttr("fft");
                 var __self__ = fft;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                     a
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 if (s != null) kwargs["s"] = ToPython(s);
                 if (axes != null) kwargs["axes"] = ToPython(axes);
                 if (norm != null) kwargs["norm"] = ToPython(norm);
@@ -434,11 +434,11 @@ namespace Cupy
                 //auto-generated code, do not change
                 var fft = self.GetAttr("fft");
                 var __self__ = fft;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                     a
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 if (n != null) kwargs["n"] = ToPython(n);
                 if (axis != -1) kwargs["axis"] = ToPython(axis);
                 if (norm != null) kwargs["norm"] = ToPython(norm);
@@ -490,11 +490,11 @@ namespace Cupy
                 //auto-generated code, do not change
                 var fft = self.GetAttr("fft");
                 var __self__ = fft;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                     a
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 if (n != null) kwargs["n"] = ToPython(n);
                 if (axis != -1) kwargs["axis"] = ToPython(axis);
                 if (norm != null) kwargs["norm"] = ToPython(norm);
@@ -528,11 +528,11 @@ namespace Cupy
                 //auto-generated code, do not change
                 var fft = self.GetAttr("fft");
                 var __self__ = fft;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                     n
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 if (d != 1.0f) kwargs["d"] = ToPython(d);
                 dynamic py = __self__.InvokeMethod("fftfreq", pyargs, kwargs);
                 return ToCsharp<NDarray>(py);
@@ -567,11 +567,11 @@ namespace Cupy
                 //auto-generated code, do not change
                 var fft = self.GetAttr("fft");
                 var __self__ = fft;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                     n
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 if (d != 1.0f) kwargs["d"] = ToPython(d);
                 dynamic py = __self__.InvokeMethod("rfftfreq", pyargs, kwargs);
                 return ToCsharp<NDarray>(py);
@@ -600,11 +600,11 @@ namespace Cupy
                 //auto-generated code, do not change
                 var fft = self.GetAttr("fft");
                 var __self__ = fft;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                     x
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 if (axes != null) kwargs["axes"] = ToPython(axes);
                 dynamic py = __self__.InvokeMethod("fftshift", pyargs, kwargs);
                 return ToCsharp<NDarray>(py);
@@ -633,11 +633,11 @@ namespace Cupy
                 //auto-generated code, do not change
                 var fft = self.GetAttr("fft");
                 var __self__ = fft;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                     x
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 if (axes != null) kwargs["axes"] = ToPython(axes);
                 dynamic py = __self__.InvokeMethod("ifftshift", pyargs, kwargs);
                 return ToCsharp<NDarray>(py);

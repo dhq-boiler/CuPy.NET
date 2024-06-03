@@ -65,7 +65,7 @@ namespace Cupy
             var __self__ = self;
 
             var pyargs = new PyObject[] { f.PyObject };
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (edge_order != null) kwargs["edge_order"] = ToPython(edge_order);
             if (axis != null) kwargs["axis"] = ToPython(axis);
             dynamic py = __self__.InvokeMethod("gradient", pyargs, kwargs);
@@ -127,7 +127,7 @@ namespace Cupy
             var __self__ = self;
 
             var pyargs = new PyObject[] { f.PyObject }.Concat(varargs.Select(x => new PyFloat(x))).ToArray();
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (edge_order != null) kwargs["edge_order"] = ToPython(edge_order);
             if (axis != null) kwargs["axis"] = ToPython(axis);
             dynamic py = __self__.InvokeMethod("gradient", pyargs, kwargs);

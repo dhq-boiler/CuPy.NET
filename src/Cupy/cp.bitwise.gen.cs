@@ -44,12 +44,12 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 x2,
                 x1
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (@out != null) kwargs["out"] = ToPython(@out);
             if (where != null) kwargs["where"] = ToPython(where);
             dynamic py = __self__.InvokeMethod("bitwise_and", pyargs, kwargs);
@@ -90,12 +90,12 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 x2,
                 x1
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (@out != null) kwargs["out"] = ToPython(@out);
             if (where != null) kwargs["where"] = ToPython(where);
             dynamic py = __self__.InvokeMethod("bitwise_or", pyargs, kwargs);
@@ -136,12 +136,12 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 x2,
                 x1
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (@out != null) kwargs["out"] = ToPython(@out);
             if (where != null) kwargs["where"] = ToPython(where);
             dynamic py = __self__.InvokeMethod("bitwise_xor", pyargs, kwargs);
@@ -191,11 +191,11 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 x
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (@out != null) kwargs["out"] = ToPython(@out);
             if (where != null) kwargs["where"] = ToPython(where);
             dynamic py = __self__.InvokeMethod("invert", pyargs, kwargs);
@@ -236,12 +236,12 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 x1,
                 x2
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (@out != null) kwargs["out"] = ToPython(@out);
             if (where != null) kwargs["where"] = ToPython(where);
             dynamic py = __self__.InvokeMethod("left_shift", pyargs, kwargs);
@@ -281,12 +281,12 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 x1,
                 x2
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (@out != null) kwargs["out"] = ToPython(@out);
             if (where != null) kwargs["where"] = ToPython(where);
             dynamic py = __self__.InvokeMethod("right_shift", pyargs, kwargs);
@@ -316,11 +316,11 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 myarray
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (axis != null)
             {
                 throw new NotSupportedException("axis is not supported yet.");
@@ -351,11 +351,11 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 myarray
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (axis != null)
             {
                 throw new NotSupportedException("axis is not supported yet.");
@@ -404,11 +404,11 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 num
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (width != null) kwargs["width"] = ToPython(width);
             dynamic py = __self__.InvokeMethod("binary_repr", pyargs, kwargs);
             return ToCsharp<string>(py);

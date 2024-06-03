@@ -67,11 +67,11 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 a
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (axis != null) kwargs["axis"] = ToPython(axis);
             if (@out != null) kwargs["out"] = ToPython(@out);
             if (keepdims != null) kwargs["keepdims"] = ToPython(keepdims);
@@ -135,11 +135,11 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 a
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (axis != null) kwargs["axis"] = ToPython(axis);
             if (@out != null) kwargs["out"] = ToPython(@out);
             if (keepdims != null) kwargs["keepdims"] = ToPython(keepdims);
@@ -201,11 +201,11 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 a
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (axis != null) kwargs["axis"] = ToPython(axis);
             if (@out != null) kwargs["out"] = ToPython(@out);
             if (keepdims != null) kwargs["keepdims"] = ToPython(keepdims);
@@ -266,11 +266,11 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 a
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (axis != null) kwargs["axis"] = ToPython(axis);
             if (@out != null) kwargs["out"] = ToPython(@out);
             if (keepdims != null) kwargs["keepdims"] = ToPython(keepdims);
@@ -320,11 +320,11 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 a
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (axis != null) kwargs["axis"] = ToPython(axis);
             if (@out != null) kwargs["out"] = ToPython(@out);
             if (keepdims != null) kwargs["keepdims"] = ToPython(keepdims);
@@ -402,12 +402,12 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 a,
                 q
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (axis != null) kwargs["axis"] = ToPython(axis);
             if (@out != null) kwargs["out"] = ToPython(@out);
             if (overwrite_input != false) kwargs["overwrite_input"] = ToPython(overwrite_input);
@@ -475,12 +475,12 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 a,
                 q
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (@out != null) kwargs["out"] = ToPython(@out);
             if (overwrite_input != false) kwargs["overwrite_input"] = ToPython(overwrite_input);
             if (interpolation != "linear") kwargs["interpolation"] = ToPython(interpolation);
@@ -566,12 +566,12 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 a,
                 q
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (axis != null) kwargs["axis"] = ToPython(axis);
             if (@out != null) kwargs["out"] = ToPython(@out);
             if (overwrite_input != false) kwargs["overwrite_input"] = ToPython(overwrite_input);
@@ -641,12 +641,12 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 a,
                 q
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (@out != null) kwargs["out"] = ToPython(@out);
             if (overwrite_input != false) kwargs["overwrite_input"] = ToPython(overwrite_input);
             if (interpolation != "linear") kwargs["interpolation"] = ToPython(interpolation);
@@ -724,12 +724,12 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 a,
                 q
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (axis != null) kwargs["axis"] = ToPython(axis);
             if (@out != null) kwargs["out"] = ToPython(@out);
             if (overwrite_input != false) kwargs["overwrite_input"] = ToPython(overwrite_input);
@@ -797,12 +797,12 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 a,
                 q
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (@out != null) kwargs["out"] = ToPython(@out);
             if (overwrite_input != false) kwargs["overwrite_input"] = ToPython(overwrite_input);
             if (interpolation != "linear") kwargs["interpolation"] = ToPython(interpolation);
@@ -878,12 +878,12 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 a,
                 q
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (axis != null) kwargs["axis"] = ToPython(axis);
             if (@out != null) kwargs["out"] = ToPython(@out);
             if (overwrite_input != false) kwargs["overwrite_input"] = ToPython(overwrite_input);
@@ -943,12 +943,12 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 a,
                 q
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (@out != null) kwargs["out"] = ToPython(@out);
             if (overwrite_input != false) kwargs["overwrite_input"] = ToPython(overwrite_input);
             if (interpolation != "linear") kwargs["interpolation"] = ToPython(interpolation);
@@ -1014,11 +1014,11 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 a
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (axis != null) kwargs["axis"] = ToPython(axis);
             if (@out != null) kwargs["out"] = ToPython(@out);
             if (overwrite_input != false) kwargs["overwrite_input"] = ToPython(overwrite_input);
@@ -1072,11 +1072,11 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 a
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (@out != null) kwargs["out"] = ToPython(@out);
             if (overwrite_input != false) kwargs["overwrite_input"] = ToPython(overwrite_input);
             dynamic py = __self__.InvokeMethod("median", pyargs, kwargs);
@@ -1137,11 +1137,11 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 a
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (axis != null) kwargs["axis"] = ToPython(axis);
             if (weights != null) kwargs["weights"] = ToPython(weights);
             if (returned != false) kwargs["returned"] = ToPython(returned);
@@ -1194,11 +1194,11 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 a
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (weights != null) kwargs["weights"] = ToPython(weights);
             if (returned != false) kwargs["returned"] = ToPython(returned);
             dynamic py = __self__.InvokeMethod("average", pyargs, kwargs);
@@ -1270,11 +1270,11 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 a
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (axis != null) kwargs["axis"] = ToPython(axis);
             if (dtype != null) kwargs["dtype"] = ToPython(dtype);
             if (@out != null) kwargs["out"] = ToPython(@out);
@@ -1328,11 +1328,11 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 a
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (dtype != null) kwargs["dtype"] = ToPython(dtype);
             if (@out != null) kwargs["out"] = ToPython(@out);
             dynamic py = __self__.InvokeMethod("mean", pyargs, kwargs);
@@ -1419,11 +1419,11 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 a
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (axis != null) kwargs["axis"] = ToPython(axis);
             if (dtype != null) kwargs["dtype"] = ToPython(dtype);
             if (@out != null) kwargs["out"] = ToPython(@out);
@@ -1493,11 +1493,11 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 a
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (dtype != null) kwargs["dtype"] = ToPython(dtype);
             if (@out != null) kwargs["out"] = ToPython(@out);
             if (ddof != 0) kwargs["ddof"] = ToPython(ddof);
@@ -1582,11 +1582,11 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 a
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (axis != null) kwargs["axis"] = ToPython(axis);
             if (dtype != null) kwargs["dtype"] = ToPython(dtype);
             if (@out != null) kwargs["out"] = ToPython(@out);
@@ -1653,11 +1653,11 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 a
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (dtype != null) kwargs["dtype"] = ToPython(dtype);
             if (@out != null) kwargs["out"] = ToPython(@out);
             if (ddof != 0) kwargs["ddof"] = ToPython(ddof);
@@ -1729,11 +1729,11 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 a
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (axis != null) kwargs["axis"] = ToPython(axis);
             if (@out != null) kwargs["out"] = ToPython(@out);
             if (overwrite_input != false) kwargs["overwrite_input"] = ToPython(overwrite_input);
@@ -1787,11 +1787,11 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 a
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (@out != null) kwargs["out"] = ToPython(@out);
             if (overwrite_input != false) kwargs["overwrite_input"] = ToPython(overwrite_input);
             dynamic py = __self__.InvokeMethod("nanmedian", pyargs, kwargs);
@@ -1861,11 +1861,11 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 a
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (axis != null) kwargs["axis"] = ToPython(axis);
             if (dtype != null) kwargs["dtype"] = ToPython(dtype);
             if (@out != null) kwargs["out"] = ToPython(@out);
@@ -1920,11 +1920,11 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 a
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (dtype != null) kwargs["dtype"] = ToPython(dtype);
             if (@out != null) kwargs["out"] = ToPython(@out);
             dynamic py = __self__.InvokeMethod("nanmean", pyargs, kwargs);
@@ -2016,11 +2016,11 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 a
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (axis != null) kwargs["axis"] = ToPython(axis);
             if (dtype != null) kwargs["dtype"] = ToPython(dtype);
             if (@out != null) kwargs["out"] = ToPython(@out);
@@ -2098,11 +2098,11 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 a
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (dtype != null) kwargs["dtype"] = ToPython(dtype);
             if (@out != null) kwargs["out"] = ToPython(@out);
             if (ddof != 0) kwargs["ddof"] = ToPython(ddof);
@@ -2187,11 +2187,11 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 a
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (axis != null) kwargs["axis"] = ToPython(axis);
             if (dtype != null) kwargs["dtype"] = ToPython(dtype);
             if (@out != null) kwargs["out"] = ToPython(@out);
@@ -2266,11 +2266,11 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 a
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (dtype != null) kwargs["dtype"] = ToPython(dtype);
             if (@out != null) kwargs["out"] = ToPython(@out);
             if (ddof != 0) kwargs["ddof"] = ToPython(ddof);
@@ -2324,11 +2324,11 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 x
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (y != null) kwargs["y"] = ToPython(y);
             if (rowvar != true) kwargs["rowvar"] = ToPython(rowvar);
             dynamic py = __self__.InvokeMethod("corrcoef", pyargs, kwargs);
@@ -2365,12 +2365,12 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 v,
                 a
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (mode != "valid") kwargs["mode"] = ToPython(mode);
             dynamic py = __self__.InvokeMethod("correlate", pyargs, kwargs);
             return ToCsharp<NDarray>(py);
@@ -2447,11 +2447,11 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 m
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (y != null) kwargs["y"] = ToPython(y);
             if (rowvar != true) kwargs["rowvar"] = ToPython(rowvar);
             if (bias != false) kwargs["bias"] = ToPython(bias);
@@ -2538,11 +2538,11 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 a
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (bins != null) kwargs["bins"] = ToPython(bins);
             if (range != null) kwargs["range"] = ToPython(range);
             if (normed != null) kwargs["normed"] = ToPython(normed);
@@ -2628,11 +2628,11 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 a
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (bins != null) kwargs["bins"] = ToPython(bins);
             if (range != null) kwargs["range"] = ToPython(range);
             if (normed != null) kwargs["normed"] = ToPython(normed);
@@ -2718,11 +2718,11 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 a
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (bins != null) kwargs["bins"] = ToPython(bins);
             if (range != null) kwargs["range"] = ToPython(range);
             if (normed != null) kwargs["normed"] = ToPython(normed);
@@ -2798,12 +2798,12 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 x,
                 y
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (bins != null) kwargs["bins"] = ToPython(bins);
             if (range != null) kwargs["range"] = ToPython(range);
             if (density != null) kwargs["density"] = ToPython(density);
@@ -2879,12 +2879,12 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 x,
                 y
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (bins != null) kwargs["bins"] = ToPython(bins);
             if (range != null) kwargs["range"] = ToPython(range);
             if (density != null) kwargs["density"] = ToPython(density);
@@ -2960,12 +2960,12 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 x,
                 y
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (bins != null) kwargs["bins"] = ToPython(bins);
             if (range != null) kwargs["range"] = ToPython(range);
             if (density != null) kwargs["density"] = ToPython(density);
@@ -3025,11 +3025,11 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 sample
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (bins != null) kwargs["bins"] = ToPython(bins);
             if (range != null) kwargs["range"] = ToPython(range);
             if (density != null) kwargs["density"] = ToPython(density);
@@ -3089,11 +3089,11 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 sample
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (bins != null) kwargs["bins"] = ToPython(bins);
             if (range != null) kwargs["range"] = ToPython(range);
             if (density != null) kwargs["density"] = ToPython(density);
@@ -3153,11 +3153,11 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 sample
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (bins != null) kwargs["bins"] = ToPython(bins);
             if (range != null) kwargs["range"] = ToPython(range);
             if (density != null) kwargs["density"] = ToPython(density);
@@ -3197,11 +3197,11 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 x
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (weights != null) kwargs["weights"] = ToPython(weights);
             if (minlength != 0) kwargs["minlength"] = ToPython(minlength);
             dynamic py = __self__.InvokeMethod("bincount", pyargs, kwargs);
@@ -3280,11 +3280,11 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 a
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (bins != null) kwargs["bins"] = ToPython(bins);
             if (range != null) kwargs["range"] = ToPython(range);
             if (weights != null) kwargs["weights"] = ToPython(weights);
@@ -3364,11 +3364,11 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 a
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (bins != null) kwargs["bins"] = ToPython(bins);
             if (range != null) kwargs["range"] = ToPython(range);
             if (weights != null) kwargs["weights"] = ToPython(weights);
@@ -3448,11 +3448,11 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 a
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (bins != null) kwargs["bins"] = ToPython(bins);
             if (range != null) kwargs["range"] = ToPython(range);
             if (weights != null) kwargs["weights"] = ToPython(weights);
@@ -3505,12 +3505,12 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 x,
                 bins
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (right != false) kwargs["right"] = ToPython(right);
             dynamic py = __self__.InvokeMethod("digitize", pyargs, kwargs);
             return ToCsharp<NDarray>(py);

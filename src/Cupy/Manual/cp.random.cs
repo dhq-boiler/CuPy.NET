@@ -24,8 +24,8 @@ namespace Cupy
             {
                 var random = self.GetAttr("random");
                 var __self__ = random;
-                var pyargs = ToTuple(shape);
-                var kwargs = new PyDict();
+                using var pyargs = ToTuple(shape);
+                using var kwargs = new PyDict();
                 dynamic py = __self__.InvokeMethod("rand", pyargs, kwargs);
                 return ToCsharp<NDarray>(py);
             }
@@ -56,8 +56,8 @@ namespace Cupy
             {
                 var random = self.GetAttr("random");
                 var __self__ = random;
-                var pyargs = ToTuple(shape);
-                var kwargs = new PyDict();
+                using var pyargs = ToTuple(shape);
+                using var kwargs = new PyDict();
                 dynamic py = __self__.InvokeMethod("randn", pyargs, kwargs);
                 return ToCsharp<NDarray>(py);
             }
@@ -108,10 +108,10 @@ namespace Cupy
             {
                 var random = self.GetAttr("random");
                 var __self__ = random;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 if (loc != null) kwargs["loc"] = ToPython(loc);
                 if (scale != null) kwargs["scale"] = ToPython(scale);
                 if (size != null) kwargs["size"] = ToPython(size);
@@ -123,10 +123,10 @@ namespace Cupy
             {
                 var random = self.GetAttr("random");
                 var __self__ = random;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 if (loc != null) kwargs["loc"] = ToPython(loc);
                 if (scale != null) kwargs["scale"] = ToPython(scale);
                 if (size != null) kwargs["size"] = ToPython(size);
@@ -148,10 +148,10 @@ namespace Cupy
             {
                 var random = self.GetAttr("random");
                 var __self__ = random;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 kwargs["loc"] = ToPython(loc);
                 kwargs["scale"] = ToPython(scale);
                 kwargs["size"] = ToPython(size);

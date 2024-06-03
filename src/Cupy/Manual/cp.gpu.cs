@@ -10,13 +10,13 @@ namespace Cupy
             bool return_tuple = false)
         {
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 in_params,
                 out_params,
                 operation
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (name != "kernel") kwargs["name"] = ToPython(name);
             if (reduce_dims != true) kwargs["reduce_dims"] = ToPython(reduce_dims);
             if (preamble != "") kwargs["preamble"] = ToPython(preamble);
@@ -35,13 +35,13 @@ namespace Cupy
             bool return_tuple = false)
         {
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 in_params,
                 out_params,
                 operation
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (name != "kernel") kwargs["name"] = ToPython(name);
             if (reduce_dims != true) kwargs["reduce_dims"] = ToPython(reduce_dims);
             if (preamble != "") kwargs["preamble"] = ToPython(preamble);
@@ -60,13 +60,13 @@ namespace Cupy
             bool return_tuple = false)
         {
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 in_params,
                 out_params,
                 operation
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (name != "kernel") kwargs["name"] = ToPython(name);
             if (reduce_dims != true) kwargs["reduce_dims"] = ToPython(reduce_dims);
             if (preamble != "") kwargs["preamble"] = ToPython(preamble);
@@ -85,13 +85,13 @@ namespace Cupy
             bool return_tuple = false)
         {
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 in_params,
                 out_params,
                 operation
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (name != "kernel") kwargs["name"] = ToPython(name);
             if (reduce_dims != true) kwargs["reduce_dims"] = ToPython(reduce_dims);
             if (preamble != "") kwargs["preamble"] = ToPython(preamble);
@@ -110,13 +110,13 @@ namespace Cupy
             bool return_tuple = false)
         {
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 in_params,
                 out_params,
                 operation
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (name != "kernel") kwargs["name"] = ToPython(name);
             if (reduce_dims != true) kwargs["reduce_dims"] = ToPython(reduce_dims);
             if (preamble != "") kwargs["preamble"] = ToPython(preamble);
@@ -135,13 +135,13 @@ namespace Cupy
             bool return_tuple = false)
         {
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 in_params,
                 out_params,
                 operation
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (name != "kernel") kwargs["name"] = ToPython(name);
             if (reduce_dims != true) kwargs["reduce_dims"] = ToPython(reduce_dims);
             if (preamble != "") kwargs["preamble"] = ToPython(preamble);
@@ -160,13 +160,13 @@ namespace Cupy
             bool return_tuple = false)
         {
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 in_params,
                 out_params,
                 operation
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (name != "kernel") kwargs["name"] = ToPython(name);
             if (reduce_dims != true) kwargs["reduce_dims"] = ToPython(reduce_dims);
             if (preamble != "") kwargs["preamble"] = ToPython(preamble);
@@ -185,13 +185,13 @@ namespace Cupy
             bool return_tuple = false)
         {
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 in_params,
                 out_params,
                 operation
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (name != "kernel") kwargs["name"] = ToPython(name);
             if (reduce_dims != true) kwargs["reduce_dims"] = ToPython(reduce_dims);
             if (preamble != "") kwargs["preamble"] = ToPython(preamble);
@@ -210,13 +210,13 @@ namespace Cupy
             bool return_tuple = false)
         {
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 in_params,
                 out_params,
                 operation
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (name != "kernel") kwargs["name"] = ToPython(name);
             if (reduce_dims != true) kwargs["reduce_dims"] = ToPython(reduce_dims);
             if (preamble != "") kwargs["preamble"] = ToPython(preamble);
@@ -235,13 +235,13 @@ namespace Cupy
             bool return_tuple = false)
         {
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 in_params,
                 out_params,
                 operation
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (name != "kernel") kwargs["name"] = ToPython(name);
             if (reduce_dims != true) kwargs["reduce_dims"] = ToPython(reduce_dims);
             if (preamble != "") kwargs["preamble"] = ToPython(preamble);
@@ -260,13 +260,13 @@ namespace Cupy
             bool return_tuple = false)
         {
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 in_params,
                 out_params,
                 operation
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (name != "kernel") kwargs["name"] = ToPython(name);
             if (reduce_dims != true) kwargs["reduce_dims"] = ToPython(reduce_dims);
             if (preamble != "") kwargs["preamble"] = ToPython(preamble);
@@ -285,13 +285,13 @@ namespace Cupy
             bool return_tuple = false)
         {
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 in_params,
                 out_params,
                 operation
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (name != "kernel") kwargs["name"] = ToPython(name);
             if (reduce_dims != true) kwargs["reduce_dims"] = ToPython(reduce_dims);
             if (preamble != "") kwargs["preamble"] = ToPython(preamble);
@@ -310,13 +310,13 @@ namespace Cupy
             bool return_tuple = false)
         {
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 in_params,
                 out_params,
                 operation
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (name != "kernel") kwargs["name"] = ToPython(name);
             if (reduce_dims != true) kwargs["reduce_dims"] = ToPython(reduce_dims);
             if (preamble != "") kwargs["preamble"] = ToPython(preamble);
@@ -335,13 +335,13 @@ namespace Cupy
             bool return_tuple = false)
         {
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 in_params,
                 out_params,
                 operation
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (name != "kernel") kwargs["name"] = ToPython(name);
             if (reduce_dims != true) kwargs["reduce_dims"] = ToPython(reduce_dims);
             if (preamble != "") kwargs["preamble"] = ToPython(preamble);
@@ -360,13 +360,13 @@ namespace Cupy
             bool return_tuple = false)
         {
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 in_params,
                 out_params,
                 operation
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (name != "kernel") kwargs["name"] = ToPython(name);
             if (reduce_dims != true) kwargs["reduce_dims"] = ToPython(reduce_dims);
             if (preamble != "") kwargs["preamble"] = ToPython(preamble);
@@ -385,13 +385,13 @@ namespace Cupy
             bool return_tuple = false)
         {
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 in_params,
                 out_params,
                 operation
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (name != "kernel") kwargs["name"] = ToPython(name);
             if (reduce_dims != true) kwargs["reduce_dims"] = ToPython(reduce_dims);
             if (preamble != "") kwargs["preamble"] = ToPython(preamble);

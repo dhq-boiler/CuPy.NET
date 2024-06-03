@@ -55,12 +55,12 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 start,
                 stop
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (num != null) kwargs["num"] = ToPython(num);
             if (endpoint != null) kwargs["endpoint"] = ToPython(endpoint);
             kwargs["retstep"] = ToPython(true); // we want the step to be returned!
@@ -123,12 +123,12 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 start,
                 stop
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (num != 50) kwargs["num"] = ToPython(num);
             if (endpoint != true) kwargs["endpoint"] = ToPython(endpoint);
             kwargs["retstep"] = ToPython(true); // we want the step to be returned!

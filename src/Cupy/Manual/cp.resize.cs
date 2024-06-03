@@ -35,7 +35,7 @@ namespace Cupy
         /// </returns>
         public static NDarray resize(NDarray a, Shape new_shape)
         {
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 a,
                 new_shape

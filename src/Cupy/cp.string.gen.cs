@@ -34,12 +34,12 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         x1,
                         x2
                     });
-                    var kwargs = new PyDict();
+                    using var kwargs = new PyDict();
                     dynamic py = __self__.InvokeMethod("add", pyargs, kwargs);
                     return ToCsharp<NDarray>(py);
                 }
@@ -65,12 +65,12 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         a,
                         i
                     });
-                    var kwargs = new PyDict();
+                    using var kwargs = new PyDict();
                     dynamic py = __self__.InvokeMethod("multiply", pyargs, kwargs);
                     return ToCsharp<NDarray>(py);
                 }
@@ -98,12 +98,12 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         a,
                         values
                     });
-                    var kwargs = new PyDict();
+                    using var kwargs = new PyDict();
                     dynamic py = __self__.InvokeMethod("mod", pyargs, kwargs);
                     return ToCsharp<NDarray>(py);
                 }
@@ -133,11 +133,11 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         a
                     });
-                    var kwargs = new PyDict();
+                    using var kwargs = new PyDict();
                     dynamic py = __self__.InvokeMethod("capitalize", pyargs, kwargs);
                     return ToCsharp<NDarray>(py);
                 }
@@ -169,12 +169,12 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         a,
                         width
                     });
-                    var kwargs = new PyDict();
+                    using var kwargs = new PyDict();
                     if (fillchar != " ") kwargs["fillchar"] = ToPython(fillchar);
                     dynamic py = __self__.InvokeMethod("center", pyargs, kwargs);
                     return ToCsharp<NDarray>(py);
@@ -207,11 +207,11 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         a
                     });
-                    var kwargs = new PyDict();
+                    using var kwargs = new PyDict();
                     if (encoding != null) kwargs["encoding"] = ToPython(encoding);
                     if (errors != null) kwargs["errors"] = ToPython(errors);
                     dynamic py = __self__.InvokeMethod("decode", pyargs, kwargs);
@@ -245,11 +245,11 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         a
                     });
-                    var kwargs = new PyDict();
+                    using var kwargs = new PyDict();
                     if (encoding != null) kwargs["encoding"] = ToPython(encoding);
                     if (errors != null) kwargs["errors"] = ToPython(errors);
                     dynamic py = __self__.InvokeMethod("encode", pyargs, kwargs);
@@ -276,12 +276,12 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         sep,
                         seq
                     });
-                    var kwargs = new PyDict();
+                    using var kwargs = new PyDict();
                     dynamic py = __self__.InvokeMethod("join", pyargs, kwargs);
                     return ToCsharp<NDarray>(py);
                 }
@@ -312,12 +312,12 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         a,
                         width
                     });
-                    var kwargs = new PyDict();
+                    using var kwargs = new PyDict();
                     if (fillchar != " ") kwargs["fillchar"] = ToPython(fillchar);
                     dynamic py = __self__.InvokeMethod("ljust", pyargs, kwargs);
                     return ToCsharp<NDarray>(py);
@@ -346,11 +346,11 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         a
                     });
-                    var kwargs = new PyDict();
+                    using var kwargs = new PyDict();
                     dynamic py = __self__.InvokeMethod("lower", pyargs, kwargs);
                     return ToCsharp<NDarray>(py);
                 }
@@ -387,11 +387,11 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         a
                     });
-                    var kwargs = new PyDict();
+                    using var kwargs = new PyDict();
                     if (chars != null) kwargs["chars"] = ToPython(chars);
                     dynamic py = __self__.InvokeMethod("lstrip", pyargs, kwargs);
                     return ToCsharp<NDarray>(py);
@@ -430,12 +430,12 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         a,
                         sep
                     });
-                    var kwargs = new PyDict();
+                    using var kwargs = new PyDict();
                     dynamic py = __self__.InvokeMethod("partition", pyargs, kwargs);
                     return ToCsharp<NDarray>(py);
                 }
@@ -464,13 +464,13 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         a,
                         @new,
                         old
                     });
-                    var kwargs = new PyDict();
+                    using var kwargs = new PyDict();
                     if (count != null) kwargs["count"] = ToPython(count);
                     dynamic py = __self__.InvokeMethod("replace", pyargs, kwargs);
                     return ToCsharp<NDarray>(py);
@@ -502,12 +502,12 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         a,
                         width
                     });
-                    var kwargs = new PyDict();
+                    using var kwargs = new PyDict();
                     if (fillchar != " ") kwargs["fillchar"] = ToPython(fillchar);
                     dynamic py = __self__.InvokeMethod("rjust", pyargs, kwargs);
                     return ToCsharp<NDarray>(py);
@@ -547,12 +547,12 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         a,
                         sep
                     });
-                    var kwargs = new PyDict();
+                    using var kwargs = new PyDict();
                     dynamic py = __self__.InvokeMethod("rpartition", pyargs, kwargs);
                     return ToCsharp<NDarray>(py);
                 }
@@ -587,11 +587,11 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         a
                     });
-                    var kwargs = new PyDict();
+                    using var kwargs = new PyDict();
                     if (sep != null) kwargs["sep"] = ToPython(sep);
                     if (maxsplit != null) kwargs["maxsplit"] = ToPython(maxsplit);
                     dynamic py = __self__.InvokeMethod("rsplit", pyargs, kwargs);
@@ -627,11 +627,11 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         a
                     });
-                    var kwargs = new PyDict();
+                    using var kwargs = new PyDict();
                     if (chars != null) kwargs["chars"] = ToPython(chars);
                     dynamic py = __self__.InvokeMethod("rstrip", pyargs, kwargs);
                     return ToCsharp<NDarray>(py);
@@ -664,11 +664,11 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         a
                     });
-                    var kwargs = new PyDict();
+                    using var kwargs = new PyDict();
                     if (sep != null) kwargs["sep"] = ToPython(sep);
                     if (maxsplit != null) kwargs["maxsplit"] = ToPython(maxsplit);
                     dynamic py = __self__.InvokeMethod("split", pyargs, kwargs);
@@ -702,11 +702,11 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         a
                     });
-                    var kwargs = new PyDict();
+                    using var kwargs = new PyDict();
                     if (sep != null) kwargs["sep"] = ToPython(sep);
                     if (maxsplit != null) kwargs["maxsplit"] = ToPython(maxsplit);
                     dynamic py = __self__.InvokeMethod("split", pyargs, kwargs);
@@ -737,11 +737,11 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         a
                     });
-                    var kwargs = new PyDict();
+                    using var kwargs = new PyDict();
                     if (keepends != null) kwargs["keepends"] = ToPython(keepends);
                     dynamic py = __self__.InvokeMethod("splitlines", pyargs, kwargs);
                     return ToCsharp<NDarray>(py);
@@ -776,11 +776,11 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         a
                     });
-                    var kwargs = new PyDict();
+                    using var kwargs = new PyDict();
                     if (chars != null) kwargs["chars"] = ToPython(chars);
                     dynamic py = __self__.InvokeMethod("strip", pyargs, kwargs);
                     return ToCsharp<NDarray>(py);
@@ -810,11 +810,11 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         a
                     });
-                    var kwargs = new PyDict();
+                    using var kwargs = new PyDict();
                     dynamic py = __self__.InvokeMethod("swapcase", pyargs, kwargs);
                     return ToCsharp<NDarray>(py);
                 }
@@ -844,11 +844,11 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         a
                     });
-                    var kwargs = new PyDict();
+                    using var kwargs = new PyDict();
                     dynamic py = __self__.InvokeMethod("title", pyargs, kwargs);
                     return ToCsharp<NDarray>(py);
                 }
@@ -875,13 +875,13 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         a,
                         table,
                         deletechars
                     });
-                    var kwargs = new PyDict();
+                    using var kwargs = new PyDict();
                     dynamic py = __self__.InvokeMethod("translate", pyargs, kwargs);
                     return ToCsharp<NDarray>(py);
                 }
@@ -909,11 +909,11 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         a
                     });
-                    var kwargs = new PyDict();
+                    using var kwargs = new PyDict();
                     dynamic py = __self__.InvokeMethod("upper", pyargs, kwargs);
                     return ToCsharp<NDarray>(py);
                 }
@@ -943,12 +943,12 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         a,
                         width
                     });
-                    var kwargs = new PyDict();
+                    using var kwargs = new PyDict();
                     dynamic py = __self__.InvokeMethod("zfill", pyargs, kwargs);
                     return ToCsharp<NDarray>(py);
                 }
@@ -981,12 +981,12 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         x2,
                         x1
                     });
-                    var kwargs = new PyDict();
+                    using var kwargs = new PyDict();
                     dynamic py = __self__.InvokeMethod("equal", pyargs, kwargs);
                     return ToCsharp<NDarray>(py);
                 }
@@ -1019,12 +1019,12 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         x2,
                         x1
                     });
-                    var kwargs = new PyDict();
+                    using var kwargs = new PyDict();
                     dynamic py = __self__.InvokeMethod("not_equal", pyargs, kwargs);
                     return ToCsharp<NDarray>(py);
                 }
@@ -1057,12 +1057,12 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         x2,
                         x1
                     });
-                    var kwargs = new PyDict();
+                    using var kwargs = new PyDict();
                     dynamic py = __self__.InvokeMethod("greater_equal", pyargs, kwargs);
                     return ToCsharp<NDarray>(py);
                 }
@@ -1095,12 +1095,12 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         x2,
                         x1
                     });
-                    var kwargs = new PyDict();
+                    using var kwargs = new PyDict();
                     dynamic py = __self__.InvokeMethod("less_equal", pyargs, kwargs);
                     return ToCsharp<NDarray>(py);
                 }
@@ -1133,12 +1133,12 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         x2,
                         x1
                     });
-                    var kwargs = new PyDict();
+                    using var kwargs = new PyDict();
                     dynamic py = __self__.InvokeMethod("greater", pyargs, kwargs);
                     return ToCsharp<NDarray>(py);
                 }
@@ -1171,12 +1171,12 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         x2,
                         x1
                     });
-                    var kwargs = new PyDict();
+                    using var kwargs = new PyDict();
                     dynamic py = __self__.InvokeMethod("less", pyargs, kwargs);
                     return ToCsharp<NDarray>(py);
                 }
@@ -1212,12 +1212,12 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         a,
                         sub
                     });
-                    var kwargs = new PyDict();
+                    using var kwargs = new PyDict();
                     if (end != null) kwargs["end"] = ToPython(end);
                     if (start != null) kwargs["start"] = ToPython(start);
                     dynamic py = __self__.InvokeMethod("count", pyargs, kwargs);
@@ -1256,12 +1256,12 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         a,
                         sub
                     });
-                    var kwargs = new PyDict();
+                    using var kwargs = new PyDict();
                     if (end != null) kwargs["end"] = ToPython(end);
                     if (start != null) kwargs["start"] = ToPython(start);
                     dynamic py = __self__.InvokeMethod("find", pyargs, kwargs);
@@ -1288,12 +1288,12 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         a,
                         sub
                     });
-                    var kwargs = new PyDict();
+                    using var kwargs = new PyDict();
                     if (end != null) kwargs["end"] = ToPython(end);
                     if (start != null) kwargs["start"] = ToPython(start);
                     dynamic py = __self__.InvokeMethod("index", pyargs, kwargs);
@@ -1321,11 +1321,11 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         a
                     });
-                    var kwargs = new PyDict();
+                    using var kwargs = new PyDict();
                     dynamic py = __self__.InvokeMethod("isalpha", pyargs, kwargs);
                     return ToCsharp<NDarray>(py);
                 }
@@ -1357,11 +1357,11 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         a
                     });
-                    var kwargs = new PyDict();
+                    using var kwargs = new PyDict();
                     dynamic py = __self__.InvokeMethod("isdecimal", pyargs, kwargs);
                     return ToCsharp<NDarray>(py);
                 }
@@ -1387,11 +1387,11 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         a
                     });
-                    var kwargs = new PyDict();
+                    using var kwargs = new PyDict();
                     dynamic py = __self__.InvokeMethod("isdigit", pyargs, kwargs);
                     return ToCsharp<NDarray>(py);
                 }
@@ -1418,11 +1418,11 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         a
                     });
-                    var kwargs = new PyDict();
+                    using var kwargs = new PyDict();
                     dynamic py = __self__.InvokeMethod("islower", pyargs, kwargs);
                     return ToCsharp<NDarray>(py);
                 }
@@ -1454,11 +1454,11 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         a
                     });
-                    var kwargs = new PyDict();
+                    using var kwargs = new PyDict();
                     dynamic py = __self__.InvokeMethod("isnumeric", pyargs, kwargs);
                     return ToCsharp<NDarray>(py);
                 }
@@ -1485,11 +1485,11 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         a
                     });
-                    var kwargs = new PyDict();
+                    using var kwargs = new PyDict();
                     dynamic py = __self__.InvokeMethod("isspace", pyargs, kwargs);
                     return ToCsharp<NDarray>(py);
                 }
@@ -1515,11 +1515,11 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         a
                     });
-                    var kwargs = new PyDict();
+                    using var kwargs = new PyDict();
                     dynamic py = __self__.InvokeMethod("istitle", pyargs, kwargs);
                     return ToCsharp<NDarray>(py);
                 }
@@ -1546,11 +1546,11 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         a
                     });
-                    var kwargs = new PyDict();
+                    using var kwargs = new PyDict();
                     dynamic py = __self__.InvokeMethod("isupper", pyargs, kwargs);
                     return ToCsharp<NDarray>(py);
                 }
@@ -1585,12 +1585,12 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         a,
                         sub
                     });
-                    var kwargs = new PyDict();
+                    using var kwargs = new PyDict();
                     if (end != null) kwargs["end"] = ToPython(end);
                     if (start != null) kwargs["start"] = ToPython(start);
                     dynamic py = __self__.InvokeMethod("rfind", pyargs, kwargs);
@@ -1617,12 +1617,12 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         a,
                         sub
                     });
-                    var kwargs = new PyDict();
+                    using var kwargs = new PyDict();
                     if (end != null) kwargs["end"] = ToPython(end);
                     if (start != null) kwargs["start"] = ToPython(start);
                     dynamic py = __self__.InvokeMethod("rindex", pyargs, kwargs);
@@ -1659,12 +1659,12 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         a,
                         prefix
                     });
-                    var kwargs = new PyDict();
+                    using var kwargs = new PyDict();
                     if (end != null) kwargs["end"] = ToPython(end);
                     if (start != null) kwargs["start"] = ToPython(start);
                     dynamic py = __self__.InvokeMethod("startswith", pyargs, kwargs);
@@ -1727,18 +1727,18 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         shape
                     });
-                    var kwargs = new PyDict();
+                    using var kwargs = new PyDict();
                     if (itemsize != null) kwargs["itemsize"] = ToPython(itemsize);
                     if (unicode != null) kwargs["unicode"] = ToPython(unicode);
                     if (buffer != null) kwargs["buffer"] = ToPython(buffer);
                     if (offset != null) kwargs["offset"] = ToPython(offset);
                     if (strides != null) kwargs["strides"] = ToPython(strides);
                     if (order != null) kwargs["order"] = ToPython(order);
-                    dynamic py = __self__.InvokeMethod("chararray", pyargs, kwargs);
+                    using dynamic py = __self__.InvokeMethod("chararray", pyargs, kwargs);
                 }
             }
         }

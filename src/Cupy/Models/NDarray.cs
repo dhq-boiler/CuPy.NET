@@ -531,8 +531,8 @@ namespace Cupy
         /// </param>
         public void itemset(params object[] args)
         {
-            var pyargs = ToTuple(args);
-            var kwargs = new PyDict();
+            using var pyargs = ToTuple(args);
+            using var kwargs = new PyDict();
             using dynamic py = self.InvokeMethod("itemset", pyargs, kwargs);
         }
 
@@ -575,10 +575,10 @@ namespace Cupy
         public byte[] tobytes(string order = null)
         {
             throw new NotImplementedException("TODO: this needs to be implemented with Marshal.Copy");
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (order != null) kwargs["order"] = ToPython(order);
             dynamic py = self.InvokeMethod("tobytes", pyargs, kwargs);
             return ToCsharp<byte[]>(py);
@@ -619,10 +619,10 @@ namespace Cupy
         {
             throw new NotImplementedException(
                 "Get python type 'ndarray' and 'matrix' and substitute them for the given .NET type");
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (dtype != null) kwargs["dtype"] = ToPython(dtype);
             if (type != null) kwargs["type"] = ToPython(type);
             dynamic py = self.InvokeMethod("view", pyargs, kwargs);
@@ -649,11 +649,11 @@ namespace Cupy
         /// </param>
         public void resize(Shape new_shape, bool? refcheck = null)
         {
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 new_shape
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (refcheck != null) kwargs["refcheck"] = ToPython(refcheck);
             using dynamic py = self.InvokeMethod("resize", pyargs, kwargs);
         }

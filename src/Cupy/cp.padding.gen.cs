@@ -86,13 +86,13 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 array,
                 pad_width,
                 mode
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (stat_length != null) kwargs["stat_length"] = ToPython(stat_length);
             if (constant_values != null) kwargs["constant_values"] = ToPython(constant_values);
             if (end_values != null) kwargs["end_values"] = ToPython(end_values);
