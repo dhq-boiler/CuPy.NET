@@ -232,7 +232,7 @@ namespace Cupy
             using var kwargs = new PyDict();
             if (fv != null) kwargs["fv"] = ToPython(fv);
             if (when != "end") kwargs["when"] = ToPython(when);
-            dynamic py = __self__.InvokeMethod("ppmt", pyargs, kwargs);
+            using dynamic py = __self__.InvokeMethod("ppmt", pyargs, kwargs);
         }
 
         /// <summary>
@@ -401,7 +401,7 @@ namespace Cupy
             using var kwargs = new PyDict();
             if (fv != null) kwargs["fv"] = ToPython(fv);
             if (when != "end") kwargs["when"] = ToPython(when);
-            dynamic py = __self__.InvokeMethod("nper", pyargs, kwargs);
+            using dynamic py = __self__.InvokeMethod("nper", pyargs, kwargs);
         }
 
         /// <summary>
@@ -467,7 +467,7 @@ namespace Cupy
             if (guess != null) kwargs["guess"] = ToPython(guess);
             if (tol != null) kwargs["tol"] = ToPython(tol);
             if (maxiter != 100) kwargs["maxiter"] = ToPython(maxiter);
-            dynamic py = __self__.InvokeMethod("rate", pyargs, kwargs);
+            using dynamic py = __self__.InvokeMethod("rate", pyargs, kwargs);
         }
     }
 }

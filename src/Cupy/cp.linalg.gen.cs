@@ -743,7 +743,7 @@ namespace Cupy
                 //auto-generated code, do not change
                 var linalg = self.GetAttr("linalg");
                 var __self__ = linalg;
-                dynamic py = __self__.InvokeMethod("LinAlgError");
+                using dynamic py = __self__.InvokeMethod("LinAlgError");
             }
         }
     }

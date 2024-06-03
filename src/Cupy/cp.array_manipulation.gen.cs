@@ -43,7 +43,7 @@ namespace Cupy
             using var kwargs = new PyDict();
             if (casting != "same_kind") kwargs["casting"] = ToPython(casting);
             if (where != null) kwargs["where"] = ToPython(where);
-            dynamic py = __self__.InvokeMethod("copyto", pyargs, kwargs);
+            using dynamic py = __self__.InvokeMethod("copyto", pyargs, kwargs);
         }
 
         /// <summary>
@@ -77,7 +77,7 @@ namespace Cupy
             using var kwargs = new PyDict();
             if (casting != "same_kind") kwargs["casting"] = ToPython(casting);
             if (where != null) kwargs["where"] = ToPython(where);
-            dynamic py = __self__.InvokeMethod("copyto", pyargs, kwargs);
+            using dynamic py = __self__.InvokeMethod("copyto", pyargs, kwargs);
         }
 
         /// <summary>

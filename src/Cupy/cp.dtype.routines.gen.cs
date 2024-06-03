@@ -268,7 +268,7 @@ namespace Cupy
             using var kwargs = new PyDict();
             if (align != null) kwargs["align"] = ToPython(align);
             if (copy != null) kwargs["copy"] = ToPython(copy);
-            dynamic py = __self__.InvokeMethod("dtype", pyargs, kwargs);
+            using dynamic py = __self__.InvokeMethod("dtype", pyargs, kwargs);
         }
 
         /// <summary>
@@ -320,7 +320,7 @@ namespace Cupy
             using var kwargs = new PyDict();
             if (aligned != null) kwargs["aligned"] = ToPython(aligned);
             if (byteorder != null) kwargs["byteorder"] = ToPython(byteorder);
-            dynamic py = __self__.InvokeMethod("format_parser", pyargs, kwargs);
+            using dynamic py = __self__.InvokeMethod("format_parser", pyargs, kwargs);
         }
 
         /// <summary>
@@ -344,7 +344,7 @@ namespace Cupy
                 dtype
             });
             using var kwargs = new PyDict();
-            dynamic py = __self__.InvokeMethod("finfo", pyargs, kwargs);
+            using dynamic py = __self__.InvokeMethod("finfo", pyargs, kwargs);
         }
 
         /// <summary>
@@ -362,7 +362,7 @@ namespace Cupy
                 int_type
             });
             using var kwargs = new PyDict();
-            dynamic py = __self__.InvokeMethod("iinfo", pyargs, kwargs);
+            using dynamic py = __self__.InvokeMethod("iinfo", pyargs, kwargs);
         }
 
         /// <summary>
@@ -407,7 +407,7 @@ namespace Cupy
             if (float_to_float != null) kwargs["float_to_float"] = ToPython(float_to_float);
             if (float_to_str != null) kwargs["float_to_str"] = ToPython(float_to_str);
             if (title != null) kwargs["title"] = ToPython(title);
-            dynamic py = __self__.InvokeMethod("MachAr", pyargs, kwargs);
+            using dynamic py = __self__.InvokeMethod("MachAr", pyargs, kwargs);
         }
 
         /// <summary>

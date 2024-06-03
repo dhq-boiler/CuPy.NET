@@ -215,7 +215,7 @@ namespace Cupy
             if (axis != -1) kwargs["axis"] = ToPython(axis);
             if (kind != null) kwargs["kind"] = ToPython(kind);
             if (order != null) kwargs["order"] = ToPython(order);
-            dynamic py = __self__.InvokeMethod("sort", pyargs, kwargs);
+            using dynamic py = __self__.InvokeMethod("sort", pyargs, kwargs);
         }
 
         /// <summary>

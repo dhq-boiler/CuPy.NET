@@ -1667,7 +1667,7 @@ namespace Cupy
             if (offset != null) kwargs["offset"] = ToPython(offset);
             if (strides != null) kwargs["strides"] = ToPython(strides);
             if (order != null) kwargs["order"] = ToPython(order);
-            dynamic py = __self__.InvokeMethod("chararray", pyargs, kwargs);
+            using dynamic py = __self__.InvokeMethod("chararray", pyargs, kwargs);
         }
 
         /// <summary>
@@ -3178,7 +3178,7 @@ namespace Cupy
                     if (copy != true) kwargs["copy"] = ToPython(copy);
                     if (unicode != null) kwargs["unicode"] = ToPython(unicode);
                     if (order != null) kwargs["order"] = ToPython(order);
-                    dynamic py = __self__.InvokeMethod("array", pyargs, kwargs);
+                    using dynamic py = __self__.InvokeMethod("array", pyargs, kwargs);
                 }
             }
         }
@@ -3235,7 +3235,7 @@ namespace Cupy
                     if (itemsize != null) kwargs["itemsize"] = ToPython(itemsize);
                     if (unicode != null) kwargs["unicode"] = ToPython(unicode);
                     if (order != null) kwargs["order"] = ToPython(order);
-                    dynamic py = __self__.InvokeMethod("asarray", pyargs, kwargs);
+                    using dynamic py = __self__.InvokeMethod("asarray", pyargs, kwargs);
                 }
             }
         }

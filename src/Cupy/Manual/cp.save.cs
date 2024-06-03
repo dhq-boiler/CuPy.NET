@@ -54,7 +54,7 @@ namespace Cupy
             using var kwargs = new PyDict();
             if (allow_pickle != true) kwargs["allow_pickle"] = ToPython(allow_pickle);
             if (fix_imports != true) kwargs["fix_imports"] = ToPython(fix_imports);
-            dynamic py = __self__.InvokeMethod("save", pyargs, kwargs);
+            using dynamic py = __self__.InvokeMethod("save", pyargs, kwargs);
         }
 
         /// <summary>
@@ -105,7 +105,7 @@ namespace Cupy
             if (kwds != null)
                 foreach (var pair in kwds)
                     kwargs[pair.Key] = ToPython(pair.Value);
-            dynamic py = __self__.InvokeMethod("savez", pyargs, kwargs);
+            using dynamic py = __self__.InvokeMethod("savez", pyargs, kwargs);
         }
 
         /// <summary>
@@ -155,7 +155,7 @@ namespace Cupy
             if (kwds != null)
                 foreach (var pair in kwds)
                     kwargs[pair.Key] = ToPython(pair.Value);
-            dynamic py = __self__.InvokeMethod("savez_compressed", pyargs, kwargs);
+            using dynamic py = __self__.InvokeMethod("savez_compressed", pyargs, kwargs);
         }
     }
 }

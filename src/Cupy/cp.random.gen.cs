@@ -457,7 +457,7 @@ namespace Cupy
                     x
                 });
                 using var kwargs = new PyDict();
-                dynamic py = __self__.InvokeMethod("shuffle", pyargs, kwargs);
+                using dynamic py = __self__.InvokeMethod("shuffle", pyargs, kwargs);
             }
         }
 
@@ -2477,7 +2477,7 @@ namespace Cupy
                 });
                 using var kwargs = new PyDict();
                 if (seed != null) kwargs["seed"] = ToPython(seed);
-                dynamic py = __self__.InvokeMethod("RandomState", pyargs, kwargs);
+                using dynamic py = __self__.InvokeMethod("RandomState", pyargs, kwargs);
             }
         }
 
@@ -2535,7 +2535,7 @@ namespace Cupy
                 });
                 using var kwargs = new PyDict();
                 if (seed != null) kwargs["seed"] = ToPython(seed);
-                dynamic py = __self__.InvokeMethod("RandomState", pyargs, kwargs);
+                using dynamic py = __self__.InvokeMethod("RandomState", pyargs, kwargs);
             }
         }
 
@@ -2562,7 +2562,7 @@ namespace Cupy
                 });
                 using var kwargs = new PyDict();
                 if (seed != null) kwargs["seed"] = ToPython(seed);
-                dynamic py = __self__.InvokeMethod("seed", pyargs, kwargs);
+                using dynamic py = __self__.InvokeMethod("seed", pyargs, kwargs);
             }
         }
 
@@ -2589,7 +2589,7 @@ namespace Cupy
                 });
                 using var kwargs = new PyDict();
                 if (seed != null) kwargs["seed"] = ToPython(seed);
-                dynamic py = __self__.InvokeMethod("seed", pyargs, kwargs);
+                using dynamic py = __self__.InvokeMethod("seed", pyargs, kwargs);
             }
         }
 

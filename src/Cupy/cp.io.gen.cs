@@ -153,7 +153,7 @@ namespace Cupy
             if (footer != "") kwargs["footer"] = ToPython(footer);
             if (comments != null) kwargs["comments"] = ToPython(comments);
             if (encoding != null) kwargs["encoding"] = ToPython(encoding);
-            dynamic py = __self__.InvokeMethod("savetxt", pyargs, kwargs);
+            using dynamic py = __self__.InvokeMethod("savetxt", pyargs, kwargs);
         }
 
         /*
@@ -436,7 +436,7 @@ namespace Cupy
                 format
             });
             using var kwargs = new PyDict();
-            dynamic py = __self__.InvokeMethod("tofile", pyargs, kwargs);
+            using dynamic py = __self__.InvokeMethod("tofile", pyargs, kwargs);
         }
 
         /*
@@ -662,7 +662,7 @@ namespace Cupy
             if (max_line_width != null) kwargs["max_line_width"] = ToPython(max_line_width);
             if (precision != null) kwargs["precision"] = ToPython(precision);
             if (suppress_small != null) kwargs["suppress_small"] = ToPython(suppress_small);
-            dynamic py = __self__.InvokeMethod("array_str", pyargs, kwargs);
+            using dynamic py = __self__.InvokeMethod("array_str", pyargs, kwargs);
         }
 
         /*
@@ -888,7 +888,7 @@ namespace Cupy
             if (offset != null) kwargs["offset"] = ToPython(offset);
             if (shape != null) kwargs["shape"] = ToPython(shape);
             if (order != null) kwargs["order"] = ToPython(order);
-            dynamic py = __self__.InvokeMethod("memmap", pyargs, kwargs);
+            using dynamic py = __self__.InvokeMethod("memmap", pyargs, kwargs);
         }
 
         /*
@@ -1111,7 +1111,7 @@ namespace Cupy
             });
             using var kwargs = new PyDict();
             if (destpath != null) kwargs["destpath"] = ToPython(destpath);
-            dynamic py = __self__.InvokeMethod("DataSource", pyargs, kwargs);
+            using dynamic py = __self__.InvokeMethod("DataSource", pyargs, kwargs);
         }
     }
 }

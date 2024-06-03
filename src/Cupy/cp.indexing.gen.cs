@@ -62,7 +62,7 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            dynamic py = __self__.InvokeMethod("r_");
+            using dynamic py = __self__.InvokeMethod("r_");
         }
 
         /// <summary>
@@ -90,7 +90,7 @@ namespace Cupy
                 maketuple
             });
             using var kwargs = new PyDict();
-            dynamic py = __self__.InvokeMethod("s_", pyargs, kwargs);
+            using dynamic py = __self__.InvokeMethod("s_", pyargs, kwargs);
         }
 
         /// <summary>
@@ -370,7 +370,7 @@ namespace Cupy
             });
             using var kwargs = new PyDict();
             if (ndim != 2) kwargs["ndim"] = ToPython(ndim);
-            dynamic py = __self__.InvokeMethod("diag_indices", pyargs, kwargs);
+            using dynamic py = __self__.InvokeMethod("diag_indices", pyargs, kwargs);
         }
 
         /// <summary>
@@ -387,7 +387,7 @@ namespace Cupy
                 arr
             });
             using var kwargs = new PyDict();
-            dynamic py = __self__.InvokeMethod("diag_indices_from", pyargs, kwargs);
+            using dynamic py = __self__.InvokeMethod("diag_indices_from", pyargs, kwargs);
         }
 
         /// <summary>
@@ -491,7 +491,7 @@ namespace Cupy
             });
             using var kwargs = new PyDict();
             if (k != 0) kwargs["k"] = ToPython(k);
-            dynamic py = __self__.InvokeMethod("tril_indices_from", pyargs, kwargs);
+            using dynamic py = __self__.InvokeMethod("tril_indices_from", pyargs, kwargs);
         }
 
         /// <summary>
@@ -918,7 +918,7 @@ namespace Cupy
                 vals
             });
             using var kwargs = new PyDict();
-            dynamic py = __self__.InvokeMethod("place", pyargs, kwargs);
+            using dynamic py = __self__.InvokeMethod("place", pyargs, kwargs);
         }
 
         /// <summary>
@@ -957,7 +957,7 @@ namespace Cupy
             });
             using var kwargs = new PyDict();
             if (mode != "raise") kwargs["mode"] = ToPython(mode);
-            dynamic py = __self__.InvokeMethod("put", pyargs, kwargs);
+            using dynamic py = __self__.InvokeMethod("put", pyargs, kwargs);
         }
 
         /// <summary>
@@ -1004,7 +1004,7 @@ namespace Cupy
                 axis
             });
             using var kwargs = new PyDict();
-            dynamic py = __self__.InvokeMethod("put_along_axis", pyargs, kwargs);
+            using dynamic py = __self__.InvokeMethod("put_along_axis", pyargs, kwargs);
         }
 
         /// <summary>
@@ -1036,7 +1036,7 @@ namespace Cupy
                 values
             });
             using var kwargs = new PyDict();
-            dynamic py = __self__.InvokeMethod("putmask", pyargs, kwargs);
+            using dynamic py = __self__.InvokeMethod("putmask", pyargs, kwargs);
         }
 
         /// <summary>
@@ -1075,7 +1075,7 @@ namespace Cupy
             });
             using var kwargs = new PyDict();
             if (wrap) kwargs["wrap"] = ToPython(wrap);
-            dynamic py = __self__.InvokeMethod("fill_diagonal", pyargs, kwargs);
+            using dynamic py = __self__.InvokeMethod("fill_diagonal", pyargs, kwargs);
         }
 
         /*
@@ -1189,7 +1189,7 @@ namespace Cupy
                 arr
             });
             using var kwargs = new PyDict();
-            dynamic py = __self__.InvokeMethod("ndenumerate", pyargs, kwargs);
+            using dynamic py = __self__.InvokeMethod("ndenumerate", pyargs, kwargs);
         }
 
         /// <summary>
@@ -1211,7 +1211,7 @@ namespace Cupy
                 args
             });
             using var kwargs = new PyDict();
-            dynamic py = __self__.InvokeMethod("ndindex", pyargs, kwargs);
+            using dynamic py = __self__.InvokeMethod("ndindex", pyargs, kwargs);
         }
 
         /*
@@ -1266,7 +1266,7 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            dynamic py = __self__.InvokeMethod("flatiter");
+            using dynamic py = __self__.InvokeMethod("flatiter");
         }
 
         public static partial class lib
@@ -1386,7 +1386,7 @@ namespace Cupy
                 });
                 using var kwargs = new PyDict();
                 if (buf_size != null) kwargs["buf_size"] = ToPython(buf_size);
-                dynamic py = __self__.InvokeMethod("Arrayterator", pyargs, kwargs);
+                using dynamic py = __self__.InvokeMethod("Arrayterator", pyargs, kwargs);
             }
         }
     }

@@ -1738,7 +1738,7 @@ namespace Cupy
                     if (offset != null) kwargs["offset"] = ToPython(offset);
                     if (strides != null) kwargs["strides"] = ToPython(strides);
                     if (order != null) kwargs["order"] = ToPython(order);
-                    dynamic py = __self__.InvokeMethod("chararray", pyargs, kwargs);
+                    using dynamic py = __self__.InvokeMethod("chararray", pyargs, kwargs);
                 }
             }
         }
