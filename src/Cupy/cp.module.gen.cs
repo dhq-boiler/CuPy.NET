@@ -61,7 +61,7 @@ namespace Cupy
             
             if (!Installer.IsModuleInstalled("cupy"))
             {
-                Installer.PipInstallModule("cupy_cuda12x", force: true).GetAwaiter().GetResult();
+                Installer.PipInstallModule("cupy-cuda12x", force: true).GetAwaiter().GetResult();
             }
 
             Debug.Assert(Installer.IsModuleInstalled("numpy"));

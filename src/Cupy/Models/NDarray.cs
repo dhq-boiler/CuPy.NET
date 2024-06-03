@@ -105,7 +105,8 @@ namespace Cupy
                 {
                     throw new InvalidOperationException();
                 }
-                return self.GetAttr("strides").As<int[]>();
+                using var attr = self.GetAttr("strides");
+                return attr.As<int[]>();
             }
         }
 
@@ -120,7 +121,8 @@ namespace Cupy
                 {
                     throw new InvalidOperationException();
                 }
-                return self.GetAttr("ndim").As<int>();
+                using var attr = self.GetAttr("ndim");
+                return attr.As<int>();
             }
         }
 
@@ -150,7 +152,8 @@ namespace Cupy
                 {
                     throw new InvalidOperationException();
                 }
-                return self.GetAttr("size").As<int>();
+                using var attr = self.GetAttr("size");
+                return attr.As<int>();
             }
         }
 
@@ -165,7 +168,8 @@ namespace Cupy
                 {
                     throw new InvalidOperationException();
                 }
-                return self.GetAttr("itemsize").As<int>();
+                using var attr = self.GetAttr("itemsize");
+                return attr.As<int>();
             }
         }
 
@@ -180,7 +184,8 @@ namespace Cupy
                 {
                     throw new InvalidOperationException();
                 }
-                return self.GetAttr("nbytes").As<int>();
+                using var attr = self.GetAttr("nbytes");
+                return attr.As<int>();
             }
         }
 
@@ -276,7 +281,8 @@ namespace Cupy
                 {
                     throw new InvalidOperationException();
                 }
-                return self.InvokeMethod("__len__").As<int>();
+                using var ret = self.InvokeMethod("__len__");
+                return ret.As<int>();
             }
         }
 
@@ -306,7 +312,8 @@ namespace Cupy
                 {
                     throw new InvalidOperationException();
                 }
-                return self.InvokeMethod("__str__").As<string>();
+                using var ret = self.InvokeMethod("__str__");
+                return ret.As<string>();
             }
         }
 
@@ -328,7 +335,7 @@ namespace Cupy
             }
             set
             {
-                var tuple = new PyTuple(Slice.ParseSlices(slicing_notation).Select(s =>
+                using var tuple = new PyTuple(Slice.ParseSlices(slicing_notation).Select(s =>
                 {
                     if (s.IsIndex)
                         return new PyInt(s.Start.Value);
@@ -348,7 +355,7 @@ namespace Cupy
                 }
                 if (coords.Length == 1)
                 {
-                    var pyint = new PyInt(coords[0]);
+                    using var pyint = new PyInt(coords[0]);
                     using (Py.GIL())
                     {
                         return new NDarray(self.GetItem(pyint));
@@ -356,13 +363,13 @@ namespace Cupy
                 }
                 else
                 {
-                    var tuple = ToTuple(coords);
+                    using var tuple = ToTuple(coords);
                     return new NDarray(PyObject[tuple]);
                 }
             }
             set
             {
-                var tuple = ToTuple(coords);
+                using var tuple = ToTuple(coords);
                 self.SetItem(tuple, ToPython(value));
             }
         }
@@ -375,12 +382,12 @@ namespace Cupy
                 {
                     throw new InvalidOperationException();
                 }
-                var tuple = new PyTuple(indices.Select(a => (PyObject)a.PyObject).ToArray());
+                using var tuple = new PyTuple(indices.Select(a => (PyObject)a.PyObject).ToArray());
                 return new NDarray(PyObject[tuple]);
             }
             set
             {
-                var tuple = new PyTuple(indices.Select(a => (PyObject)a.PyObject).ToArray());
+                using var tuple = new PyTuple(indices.Select(a => (PyObject)a.PyObject).ToArray());
                 self.SetItem(tuple, ToPython(value));
             }
         }
@@ -403,7 +410,7 @@ namespace Cupy
                         default: return ToPython(x);
                     }
                 }).ToArray();
-                var tuple = new PyTuple(pyobjs);
+                using var tuple = new PyTuple(pyobjs);
                 return new NDarray(PyObject[tuple]);
             }
             set
@@ -418,7 +425,7 @@ namespace Cupy
                         default: return ToPython(x);
                     }
                 }).ToArray();
-                var tuple = new PyTuple(pyobjs);
+                using var tuple = new PyTuple(pyobjs);
                 self.SetItem(tuple, ToPython(value));
             }
         }
@@ -526,7 +533,7 @@ namespace Cupy
         {
             var pyargs = ToTuple(args);
             var kwargs = new PyDict();
-            dynamic py = self.InvokeMethod("itemset", pyargs, kwargs);
+            using dynamic py = self.InvokeMethod("itemset", pyargs, kwargs);
         }
 
         /// <summary>
@@ -648,7 +655,7 @@ namespace Cupy
             });
             var kwargs = new PyDict();
             if (refcheck != null) kwargs["refcheck"] = ToPython(refcheck);
-            dynamic py = self.InvokeMethod("resize", pyargs, kwargs);
+            using dynamic py = self.InvokeMethod("resize", pyargs, kwargs);
         }
 
         /// <summary>
