@@ -51,7 +51,7 @@ namespace Cupy
                 pmt,
                 pv
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (when != "end") kwargs["when"] = ToPython(when);
             dynamic py = __self__.InvokeMethod("fv", pyargs, kwargs);
             return ToCsharp<NDarray>(py);
@@ -93,7 +93,7 @@ namespace Cupy
                 nper,
                 pmt
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (fv != null) kwargs["fv"] = ToPython(fv);
             if (when != "end") kwargs["when"] = ToPython(when);
             dynamic py = __self__.InvokeMethod("pv", pyargs, kwargs);
@@ -133,7 +133,7 @@ namespace Cupy
                 rate,
                 values
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             dynamic py = __self__.InvokeMethod("npv", pyargs, kwargs);
             return ToCsharp<float>(py);
         }
@@ -187,7 +187,7 @@ namespace Cupy
                 nper,
                 pv
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (fv != null) kwargs["fv"] = ToPython(fv);
             if (when != "end") kwargs["when"] = ToPython(when);
             dynamic py = __self__.InvokeMethod("pmt", pyargs, kwargs);
@@ -229,7 +229,7 @@ namespace Cupy
                 nper,
                 pv
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (fv != null) kwargs["fv"] = ToPython(fv);
             if (when != "end") kwargs["when"] = ToPython(when);
             dynamic py = __self__.InvokeMethod("ppmt", pyargs, kwargs);
@@ -282,7 +282,7 @@ namespace Cupy
                 nper,
                 pv
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (fv != null) kwargs["fv"] = ToPython(fv);
             if (when != "end") kwargs["when"] = ToPython(when);
             dynamic py = __self__.InvokeMethod("ipmt", pyargs, kwargs);
@@ -328,7 +328,7 @@ namespace Cupy
             {
                 values
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             dynamic py = __self__.InvokeMethod("irr", pyargs, kwargs);
             return ToCsharp<float>(py);
         }
@@ -361,7 +361,7 @@ namespace Cupy
                 finance_rate,
                 reinvest_rate
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             dynamic py = __self__.InvokeMethod("mirr", pyargs, kwargs);
             return ToCsharp<float>(py);
         }
@@ -398,7 +398,7 @@ namespace Cupy
                 pmt,
                 pv
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (fv != null) kwargs["fv"] = ToPython(fv);
             if (when != "end") kwargs["when"] = ToPython(when);
             dynamic py = __self__.InvokeMethod("nper", pyargs, kwargs);
@@ -462,7 +462,7 @@ namespace Cupy
                 pv,
                 fv
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (when != "end") kwargs["when"] = ToPython(when);
             if (guess != null) kwargs["guess"] = ToPython(guess);
             if (tol != null) kwargs["tol"] = ToPython(tol);

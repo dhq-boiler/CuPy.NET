@@ -51,7 +51,7 @@ namespace Cupy
                 file,
                 arr
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (allow_pickle != true) kwargs["allow_pickle"] = ToPython(allow_pickle);
             if (fix_imports != true) kwargs["fix_imports"] = ToPython(fix_imports);
             dynamic py = __self__.InvokeMethod("save", pyargs, kwargs);
@@ -101,7 +101,7 @@ namespace Cupy
         {
             var __self__ = self;
             var pyargs = ToTuple(new object[] { file }.Concat(args ?? new NDarray[0]).ToArray());
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (kwds != null)
                 foreach (var pair in kwds)
                     kwargs[pair.Key] = ToPython(pair.Value);
@@ -151,7 +151,7 @@ namespace Cupy
         {
             var __self__ = self;
             var pyargs = ToTuple(new object[] { file }.Concat(args ?? new NDarray[0]).ToArray());
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (kwds != null)
                 foreach (var pair in kwds)
                     kwargs[pair.Key] = ToPython(pair.Value);

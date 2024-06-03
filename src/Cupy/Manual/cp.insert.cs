@@ -54,7 +54,7 @@ namespace Cupy
                 arr,
                 ToPython(obj)
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (values != null) kwargs["values"] = ToPython(values);
             if (axis != null) kwargs["axis"] = ToPython(axis);
             dynamic py = __self__.InvokeMethod("insert", pyargs, kwargs);
@@ -106,7 +106,7 @@ namespace Cupy
                 arr,
                 obj
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (values != null) kwargs["values"] = ToPython(values);
             if (axis != null) kwargs["axis"] = ToPython(axis);
             dynamic py = __self__.InvokeMethod("insert", pyargs, kwargs);
@@ -158,7 +158,7 @@ namespace Cupy
                 arr,
                 obj.ToPython()
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (values != null) kwargs["values"] = ToPython(values);
             if (axis != null) kwargs["axis"] = ToPython(axis);
             dynamic py = __self__.InvokeMethod("insert", pyargs, kwargs);
@@ -210,7 +210,7 @@ namespace Cupy
                 arr,
                 ToPython(obj)
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             kwargs["values"] = ToPython(values);
             if (axis != null) kwargs["axis"] = ToPython(axis);
             dynamic py = __self__.InvokeMethod("insert", pyargs, kwargs);

@@ -60,7 +60,7 @@ namespace Cupy
             {
                 a
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (axis != null) kwargs["axis"] = ToPython(axis);
             if (@out != null) kwargs["out"] = ToPython(@out);
             if (keepdims != null) kwargs["keepdims"] = ToPython(keepdims);
@@ -89,7 +89,7 @@ namespace Cupy
             {
                 a
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             dynamic py = __self__.InvokeMethod("all", pyargs, kwargs);
             return ToCsharp<bool>(py);
         }
@@ -145,7 +145,7 @@ namespace Cupy
             {
                 a
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (axis != null) kwargs["axis"] = ToPython(axis);
             if (@out != null) kwargs["out"] = ToPython(@out);
             if (keepdims != null) kwargs["keepdims"] = ToPython(keepdims);
@@ -175,7 +175,7 @@ namespace Cupy
             {
                 a
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             dynamic py = __self__.InvokeMethod("any", pyargs, kwargs);
             return ToCsharp<bool>(py);
         }
@@ -225,7 +225,7 @@ namespace Cupy
             {
                 x
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (@out != null) kwargs["out"] = ToPython(@out);
             if (where != null) kwargs["where"] = ToPython(where);
             dynamic py = __self__.InvokeMethod("isfinite", pyargs, kwargs);
@@ -271,7 +271,7 @@ namespace Cupy
             {
                 x
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (@out != null) kwargs["out"] = ToPython(@out);
             if (where != null) kwargs["where"] = ToPython(where);
             dynamic py = __self__.InvokeMethod("isinf", pyargs, kwargs);
@@ -313,7 +313,7 @@ namespace Cupy
             {
                 x
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (@out != null) kwargs["out"] = ToPython(@out);
             if (where != null) kwargs["where"] = ToPython(where);
             dynamic py = __self__.InvokeMethod("isnan", pyargs, kwargs);
@@ -351,7 +351,7 @@ namespace Cupy
             {
                 x
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (@out != null) kwargs["out"] = ToPython(@out);
             if (where != null) kwargs["where"] = ToPython(where);
             dynamic py = __self__.InvokeMethod("isnat", pyargs, kwargs);
@@ -395,7 +395,7 @@ namespace Cupy
             {
                 x
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (@out != null) kwargs["out"] = ToPython(@out);
             dynamic py = __self__.InvokeMethod("isneginf", pyargs, kwargs);
             return ToCsharp<NDarray>(py);
@@ -436,7 +436,7 @@ namespace Cupy
             {
                 x
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (y != null) kwargs["y"] = ToPython(y);
             dynamic py = __self__.InvokeMethod("isposinf", pyargs, kwargs);
             return ToCsharp<NDarray>(py);
@@ -461,7 +461,7 @@ namespace Cupy
             {
                 x
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             dynamic py = __self__.InvokeMethod("iscomplex", pyargs, kwargs);
             return ToCsharp<NDarray>(py);
         }
@@ -487,7 +487,7 @@ namespace Cupy
             {
                 x
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             dynamic py = __self__.InvokeMethod("iscomplexobj", pyargs, kwargs);
             return ToCsharp<bool>(py);
         }
@@ -511,7 +511,7 @@ namespace Cupy
             {
                 a
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             dynamic py = __self__.InvokeMethod("isfortran", pyargs, kwargs);
             return ToCsharp<bool>(py);
         }
@@ -535,7 +535,7 @@ namespace Cupy
             {
                 x
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             dynamic py = __self__.InvokeMethod("isreal", pyargs, kwargs);
             return ToCsharp<NDarray>(py);
         }
@@ -561,7 +561,7 @@ namespace Cupy
             {
                 x
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             dynamic py = __self__.InvokeMethod("isrealobj", pyargs, kwargs);
             return ToCsharp<bool>(py);
         }
@@ -590,7 +590,7 @@ namespace Cupy
             {
                 num
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             dynamic py = __self__.InvokeMethod("isscalar", pyargs, kwargs);
             return ToCsharp<bool>(py);
         }
@@ -633,7 +633,7 @@ namespace Cupy
                 x2,
                 x1
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (@out != null) kwargs["out"] = ToPython(@out);
             if (where != null) kwargs["where"] = ToPython(where);
             dynamic py = __self__.InvokeMethod("logical_and", pyargs, kwargs);
@@ -678,7 +678,7 @@ namespace Cupy
                 x2,
                 x1
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (@out != null) kwargs["out"] = ToPython(@out);
             if (where != null) kwargs["where"] = ToPython(where);
             dynamic py = __self__.InvokeMethod("logical_or", pyargs, kwargs);
@@ -717,7 +717,7 @@ namespace Cupy
             {
                 x
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (@out != null) kwargs["out"] = ToPython(@out);
             if (where != null) kwargs["where"] = ToPython(where);
             dynamic py = __self__.InvokeMethod("logical_not", pyargs, kwargs);
@@ -763,7 +763,7 @@ namespace Cupy
                 x2,
                 x1
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (@out != null) kwargs["out"] = ToPython(@out);
             if (where != null) kwargs["where"] = ToPython(where);
             dynamic py = __self__.InvokeMethod("logical_xor", pyargs, kwargs);
@@ -823,7 +823,7 @@ namespace Cupy
                 b,
                 a
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (rtol != 1e-05f) kwargs["rtol"] = ToPython(rtol);
             if (atol != 1e-08f) kwargs["atol"] = ToPython(atol);
             if (equal_nan) kwargs["equal_nan"] = ToPython(equal_nan);
@@ -888,7 +888,7 @@ namespace Cupy
                 b,
                 a
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (rtol != 1e-05f) kwargs["rtol"] = ToPython(rtol);
             if (atol != 1e-08f) kwargs["atol"] = ToPython(atol);
             if (equal_nan) kwargs["equal_nan"] = ToPython(equal_nan);
@@ -917,7 +917,7 @@ namespace Cupy
                 a2,
                 a1
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             dynamic py = __self__.InvokeMethod("array_equal", pyargs, kwargs);
             return ToCsharp<bool>(py);
         }
@@ -945,7 +945,7 @@ namespace Cupy
                 a2,
                 a1
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             dynamic py = __self__.InvokeMethod("array_equiv", pyargs, kwargs);
             return ToCsharp<bool>(py);
         }
@@ -992,7 +992,7 @@ namespace Cupy
                 x2,
                 x1
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (@out != null) kwargs["out"] = ToPython(@out);
             if (where != null) kwargs["where"] = ToPython(where);
             dynamic py = __self__.InvokeMethod("greater", pyargs, kwargs);
@@ -1042,7 +1042,7 @@ namespace Cupy
                 x2,
                 x1
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (@out != null) kwargs["out"] = ToPython(@out);
             if (where != null) kwargs["where"] = ToPython(where);
             dynamic py = __self__.InvokeMethod("greater_equal", pyargs, kwargs);
@@ -1091,7 +1091,7 @@ namespace Cupy
                 x2,
                 x1
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (@out != null) kwargs["out"] = ToPython(@out);
             if (where != null) kwargs["where"] = ToPython(where);
             dynamic py = __self__.InvokeMethod("less", pyargs, kwargs);
@@ -1140,7 +1140,7 @@ namespace Cupy
                 x2,
                 x1
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (@out != null) kwargs["out"] = ToPython(@out);
             if (where != null) kwargs["where"] = ToPython(where);
             dynamic py = __self__.InvokeMethod("less_equal", pyargs, kwargs);
@@ -1183,7 +1183,7 @@ namespace Cupy
                 x2,
                 x1
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (@out != null) kwargs["out"] = ToPython(@out);
             if (where != null) kwargs["where"] = ToPython(where);
             dynamic py = __self__.InvokeMethod("equal", pyargs, kwargs);
@@ -1226,7 +1226,7 @@ namespace Cupy
                 x2,
                 x1
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (@out != null) kwargs["out"] = ToPython(@out);
             if (where != null) kwargs["where"] = ToPython(where);
             dynamic py = __self__.InvokeMethod("not_equal", pyargs, kwargs);

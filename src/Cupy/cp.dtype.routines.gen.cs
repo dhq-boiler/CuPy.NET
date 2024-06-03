@@ -45,7 +45,7 @@ namespace Cupy
                 from_,
                 to
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (casting != "safe") kwargs["casting"] = ToPython(casting);
             dynamic py = __self__.InvokeMethod("can_cast", pyargs, kwargs);
             return ToCsharp<bool>(py);
@@ -82,7 +82,7 @@ namespace Cupy
                 type1,
                 type2
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             dynamic py = __self__.InvokeMethod("promote_types", pyargs, kwargs);
             return ToCsharp<Dtype>(py);
         }
@@ -110,7 +110,7 @@ namespace Cupy
             {
                 a
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             dynamic py = __self__.InvokeMethod("min_scalar_type", pyargs, kwargs);
             return ToCsharp<Dtype>(py);
         }
@@ -205,7 +205,7 @@ namespace Cupy
                 array2,
                 array1
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             dynamic py = __self__.InvokeMethod("common_type", pyargs, kwargs);
             return ToCsharp<Dtype>(py);
         }
@@ -232,7 +232,7 @@ namespace Cupy
             {
                 rep
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (@default != null) kwargs["default"] = ToPython(@default);
             dynamic py = __self__.InvokeMethod("obj2sctype", pyargs, kwargs);
             return ToCsharp<Dtype>(py);
@@ -265,7 +265,7 @@ namespace Cupy
             var pyargs = ToTuple(new object[]
             {
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (align != null) kwargs["align"] = ToPython(align);
             if (copy != null) kwargs["copy"] = ToPython(copy);
             dynamic py = __self__.InvokeMethod("dtype", pyargs, kwargs);
@@ -317,7 +317,7 @@ namespace Cupy
                 names,
                 titles
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (aligned != null) kwargs["aligned"] = ToPython(aligned);
             if (byteorder != null) kwargs["byteorder"] = ToPython(byteorder);
             dynamic py = __self__.InvokeMethod("format_parser", pyargs, kwargs);
@@ -343,7 +343,7 @@ namespace Cupy
             {
                 dtype
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             dynamic py = __self__.InvokeMethod("finfo", pyargs, kwargs);
         }
 
@@ -361,7 +361,7 @@ namespace Cupy
             {
                 int_type
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             dynamic py = __self__.InvokeMethod("iinfo", pyargs, kwargs);
         }
 
@@ -401,7 +401,7 @@ namespace Cupy
             var pyargs = ToTuple(new object[]
             {
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (float_conv != null) kwargs["float_conv"] = ToPython(float_conv);
             if (int_conv != null) kwargs["int_conv"] = ToPython(int_conv);
             if (float_to_float != null) kwargs["float_to_float"] = ToPython(float_to_float);
@@ -429,7 +429,7 @@ namespace Cupy
             {
                 rep
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             dynamic py = __self__.InvokeMethod("issctype", pyargs, kwargs);
             return ToCsharp<bool>(py);
         }
@@ -452,7 +452,7 @@ namespace Cupy
                 arg2,
                 arg1
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             dynamic py = __self__.InvokeMethod("issubdtype", pyargs, kwargs);
             return ToCsharp<bool>(py);
         }
@@ -478,7 +478,7 @@ namespace Cupy
                 arg2,
                 arg1
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             dynamic py = __self__.InvokeMethod("issubsctype", pyargs, kwargs);
             return ToCsharp<bool>(py);
         }
@@ -567,7 +567,7 @@ namespace Cupy
             {
                 @char
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             dynamic py = __self__.InvokeMethod("typename", pyargs, kwargs);
             return ToCsharp<string>(py);
         }
@@ -592,7 +592,7 @@ namespace Cupy
             {
                 sctype
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             dynamic py = __self__.InvokeMethod("sctype2char", pyargs, kwargs);
             return ToCsharp<string>(py);
         }
@@ -628,7 +628,7 @@ namespace Cupy
             {
                 typechars
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (typeset != null) kwargs["typeset"] = ToPython(typeset);
             if (@default != "d") kwargs["default"] = ToPython(@default);
             dynamic py = __self__.InvokeMethod("mintypecode", pyargs, kwargs);

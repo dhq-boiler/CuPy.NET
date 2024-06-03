@@ -92,7 +92,7 @@ namespace Cupy
                 pad_width,
                 mode
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (stat_length != null) kwargs["stat_length"] = ToPython(stat_length);
             if (constant_values != null) kwargs["constant_values"] = ToPython(constant_values);
             if (end_values != null) kwargs["end_values"] = ToPython(end_values);

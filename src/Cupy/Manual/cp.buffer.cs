@@ -12,7 +12,7 @@ namespace Cupy
                 buffer.ToPython()
 
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (dtype != null) kwargs["dtype"] = ToPython(dtype);
             kwargs["count"] = ToPython(count);
             kwargs["offset"] = ToPython(offset);

@@ -532,7 +532,7 @@ namespace Cupy
         public void itemset(params object[] args)
         {
             var pyargs = ToTuple(args);
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             using dynamic py = self.InvokeMethod("itemset", pyargs, kwargs);
         }
 
@@ -578,7 +578,7 @@ namespace Cupy
             var pyargs = ToTuple(new object[]
             {
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (order != null) kwargs["order"] = ToPython(order);
             dynamic py = self.InvokeMethod("tobytes", pyargs, kwargs);
             return ToCsharp<byte[]>(py);
@@ -622,7 +622,7 @@ namespace Cupy
             var pyargs = ToTuple(new object[]
             {
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (dtype != null) kwargs["dtype"] = ToPython(dtype);
             if (type != null) kwargs["type"] = ToPython(type);
             dynamic py = self.InvokeMethod("view", pyargs, kwargs);
@@ -653,7 +653,7 @@ namespace Cupy
             {
                 new_shape
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (refcheck != null) kwargs["refcheck"] = ToPython(refcheck);
             using dynamic py = self.InvokeMethod("resize", pyargs, kwargs);
         }

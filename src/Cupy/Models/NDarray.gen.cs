@@ -37,7 +37,7 @@ namespace Cupy
             {
                 args
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             dynamic py = __self__.InvokeMethod("item", pyargs, kwargs);
             return ToCsharp<T>(py);
         }
@@ -108,7 +108,7 @@ namespace Cupy
                 sep,
                 format
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             dynamic py = __self__.InvokeMethod("tofile", pyargs, kwargs);
         }
 
@@ -127,7 +127,7 @@ namespace Cupy
             {
                 file
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             dynamic py = __self__.InvokeMethod("dump", pyargs, kwargs);
         }
 
@@ -193,7 +193,7 @@ namespace Cupy
             {
                 dtype
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (order != null) kwargs["order"] = ToPython(order);
             if (casting != null) kwargs["casting"] = ToPython(casting);
             if (subok != null) kwargs["subok"] = ToPython(subok);
@@ -222,7 +222,7 @@ namespace Cupy
             var pyargs = ToTuple(new object[]
             {
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (inplace != null) kwargs["inplace"] = ToPython(inplace);
             dynamic py = __self__.InvokeMethod("byteswap", pyargs, kwargs);
             return ToCsharp<NDarray>(py);
@@ -249,7 +249,7 @@ namespace Cupy
             var pyargs = ToTuple(new object[]
             {
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (order != null) kwargs["order"] = ToPython(order);
             dynamic py = __self__.InvokeMethod("copy", pyargs, kwargs);
             return ToCsharp<NDarray>(py);
@@ -283,7 +283,7 @@ namespace Cupy
                 dtype,
                 offset
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             dynamic py = __self__.InvokeMethod("getfield", pyargs, kwargs);
         }
 
@@ -334,7 +334,7 @@ namespace Cupy
             var pyargs = ToTuple(new object[]
             {
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (write != null) kwargs["write"] = ToPython(write);
             if (align != null) kwargs["align"] = ToPython(align);
             if (uic != null) kwargs["uic"] = ToPython(uic);
@@ -355,7 +355,7 @@ namespace Cupy
             {
                 value
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             dynamic py = __self__.InvokeMethod("fill", pyargs, kwargs);
         }
 
@@ -383,7 +383,7 @@ namespace Cupy
             var pyargs = ToTuple(new object[]
             {
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (order != null) kwargs["order"] = ToPython(order);
             dynamic py = __self__.InvokeMethod("flatten", pyargs, kwargs);
             return ToCsharp<NDarray>(py);
@@ -395,7 +395,7 @@ namespace Cupy
             var pyargs = ToTuple(new object[]
             {
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (dtype != null) kwargs["dtype"] = ToPython(dtype);
             dynamic py = __self__.InvokeMethod("reduced_view", pyargs, kwargs);
             return ToCsharp<NDarray>(py);
@@ -425,7 +425,7 @@ namespace Cupy
                 isFortran,
                 rawdata
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             dynamic py = __self__.InvokeMethod("__setstate__", pyargs, kwargs);
         }
 
@@ -435,7 +435,7 @@ namespace Cupy
             var pyargs = ToTuple(new object[]
             {
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             dynamic py = __self__.InvokeMethod("tolist", pyargs, kwargs);
             return ToCsharp<PyList>(py);
         }

@@ -158,7 +158,7 @@ namespace Cupy
             {
                 subscripts
             }.Concat(operands.OfType<object>()).ToArray());
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (@out != null) kwargs["out"] = ToPython(@out);
             if (dtype != null) kwargs["dtype"] = ToPython(dtype);
             if (order != null) kwargs["order"] = ToPython(order);
@@ -316,7 +316,7 @@ namespace Cupy
             {
                 subscripts
             }.Concat(operands.OfType<object>()).ToArray());
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             dynamic py = __self__.InvokeMethod("einsum", pyargs, kwargs);
             return ToCsharp<NDarray>(py);
         }

@@ -49,7 +49,7 @@ namespace Cupy
                 x2,
                 x1
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (@out != null) kwargs["out"] = ToPython(@out);
             if (where != null) kwargs["where"] = ToPython(where);
             dynamic py = __self__.InvokeMethod("bitwise_and", pyargs, kwargs);
@@ -95,7 +95,7 @@ namespace Cupy
                 x2,
                 x1
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (@out != null) kwargs["out"] = ToPython(@out);
             if (where != null) kwargs["where"] = ToPython(where);
             dynamic py = __self__.InvokeMethod("bitwise_or", pyargs, kwargs);
@@ -141,7 +141,7 @@ namespace Cupy
                 x2,
                 x1
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (@out != null) kwargs["out"] = ToPython(@out);
             if (where != null) kwargs["where"] = ToPython(where);
             dynamic py = __self__.InvokeMethod("bitwise_xor", pyargs, kwargs);
@@ -195,7 +195,7 @@ namespace Cupy
             {
                 x
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (@out != null) kwargs["out"] = ToPython(@out);
             if (where != null) kwargs["where"] = ToPython(where);
             dynamic py = __self__.InvokeMethod("invert", pyargs, kwargs);
@@ -241,7 +241,7 @@ namespace Cupy
                 x1,
                 x2
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (@out != null) kwargs["out"] = ToPython(@out);
             if (where != null) kwargs["where"] = ToPython(where);
             dynamic py = __self__.InvokeMethod("left_shift", pyargs, kwargs);
@@ -286,7 +286,7 @@ namespace Cupy
                 x1,
                 x2
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (@out != null) kwargs["out"] = ToPython(@out);
             if (where != null) kwargs["where"] = ToPython(where);
             dynamic py = __self__.InvokeMethod("right_shift", pyargs, kwargs);
@@ -320,7 +320,7 @@ namespace Cupy
             {
                 myarray
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (axis != null)
             {
                 throw new NotSupportedException("axis is not supported yet.");
@@ -355,7 +355,7 @@ namespace Cupy
             {
                 myarray
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (axis != null)
             {
                 throw new NotSupportedException("axis is not supported yet.");
@@ -408,7 +408,7 @@ namespace Cupy
             {
                 num
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (width != null) kwargs["width"] = ToPython(width);
             dynamic py = __self__.InvokeMethod("binary_repr", pyargs, kwargs);
             return ToCsharp<string>(py);

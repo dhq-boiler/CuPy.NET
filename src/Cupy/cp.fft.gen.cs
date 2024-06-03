@@ -69,7 +69,7 @@ namespace Cupy
                 {
                     a
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 if (n != null) kwargs["n"] = ToPython(n);
                 if (axis != -1) kwargs["axis"] = ToPython(axis);
                 if (norm != null) kwargs["norm"] = ToPython(norm);
@@ -145,7 +145,7 @@ namespace Cupy
                 {
                     a
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 if (n != null) kwargs["n"] = ToPython(n);
                 if (axis != -1) kwargs["axis"] = ToPython(axis);
                 if (norm != null) kwargs["norm"] = ToPython(norm);
@@ -187,7 +187,7 @@ namespace Cupy
                 {
                     a
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 if (s != null) kwargs["s"] = ToPython(s);
                 if (axes != null) kwargs["axes"] = ToPython(axes);
                 if (norm != null) kwargs["norm"] = ToPython(norm);
@@ -230,7 +230,7 @@ namespace Cupy
                 {
                     a
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 if (s != null) kwargs["s"] = ToPython(s);
                 if (axes != null) kwargs["axes"] = ToPython(axes);
                 if (norm != null) kwargs["norm"] = ToPython(norm);
@@ -298,7 +298,7 @@ namespace Cupy
                 {
                     a
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 if (s != null) kwargs["s"] = ToPython(s);
                 if (axes != null) kwargs["axes"] = ToPython(axes);
                 if (norm != null) kwargs["norm"] = ToPython(norm);
@@ -376,7 +376,7 @@ namespace Cupy
                 {
                     a
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 if (s != null) kwargs["s"] = ToPython(s);
                 if (axes != null) kwargs["axes"] = ToPython(axes);
                 if (norm != null) kwargs["norm"] = ToPython(norm);
@@ -438,7 +438,7 @@ namespace Cupy
                 {
                     a
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 if (n != null) kwargs["n"] = ToPython(n);
                 if (axis != -1) kwargs["axis"] = ToPython(axis);
                 if (norm != null) kwargs["norm"] = ToPython(norm);
@@ -494,7 +494,7 @@ namespace Cupy
                 {
                     a
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 if (n != null) kwargs["n"] = ToPython(n);
                 if (axis != -1) kwargs["axis"] = ToPython(axis);
                 if (norm != null) kwargs["norm"] = ToPython(norm);
@@ -532,7 +532,7 @@ namespace Cupy
                 {
                     n
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 if (d != 1.0f) kwargs["d"] = ToPython(d);
                 dynamic py = __self__.InvokeMethod("fftfreq", pyargs, kwargs);
                 return ToCsharp<NDarray>(py);
@@ -571,7 +571,7 @@ namespace Cupy
                 {
                     n
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 if (d != 1.0f) kwargs["d"] = ToPython(d);
                 dynamic py = __self__.InvokeMethod("rfftfreq", pyargs, kwargs);
                 return ToCsharp<NDarray>(py);
@@ -604,7 +604,7 @@ namespace Cupy
                 {
                     x
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 if (axes != null) kwargs["axes"] = ToPython(axes);
                 dynamic py = __self__.InvokeMethod("fftshift", pyargs, kwargs);
                 return ToCsharp<NDarray>(py);
@@ -637,7 +637,7 @@ namespace Cupy
                 {
                     x
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 if (axes != null) kwargs["axes"] = ToPython(axes);
                 dynamic py = __self__.InvokeMethod("ifftshift", pyargs, kwargs);
                 return ToCsharp<NDarray>(py);

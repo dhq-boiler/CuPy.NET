@@ -51,7 +51,7 @@ namespace Cupy
             {
                 M
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             dynamic py = __self__.InvokeMethod("bartlett", pyargs, kwargs);
             return ToCsharp<NDarray>(py);
         }
@@ -103,7 +103,7 @@ namespace Cupy
             {
                 M
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             dynamic py = __self__.InvokeMethod("blackman", pyargs, kwargs);
             return ToCsharp<NDarray>(py);
         }
@@ -147,7 +147,7 @@ namespace Cupy
             {
                 M
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             dynamic py = __self__.InvokeMethod("hamming", pyargs, kwargs);
             return ToCsharp<NDarray>(py);
         }
@@ -188,7 +188,7 @@ namespace Cupy
             {
                 M
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             dynamic py = __self__.InvokeMethod("hanning", pyargs, kwargs);
             return ToCsharp<NDarray>(py);
         }
@@ -243,7 +243,7 @@ namespace Cupy
                 M,
                 beta
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             dynamic py = __self__.InvokeMethod("kaiser", pyargs, kwargs);
             return ToCsharp<NDarray>(py);
         }

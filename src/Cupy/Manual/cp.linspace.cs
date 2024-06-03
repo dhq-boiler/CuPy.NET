@@ -60,7 +60,7 @@ namespace Cupy
                 start,
                 stop
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (num != null) kwargs["num"] = ToPython(num);
             if (endpoint != null) kwargs["endpoint"] = ToPython(endpoint);
             kwargs["retstep"] = ToPython(true); // we want the step to be returned!
@@ -128,7 +128,7 @@ namespace Cupy
                 start,
                 stop
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (num != 50) kwargs["num"] = ToPython(num);
             if (endpoint != true) kwargs["endpoint"] = ToPython(endpoint);
             kwargs["retstep"] = ToPython(true); // we want the step to be returned!

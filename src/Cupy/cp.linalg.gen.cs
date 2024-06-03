@@ -47,7 +47,7 @@ namespace Cupy
                 a,
                 b
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (@out != null) kwargs["out"] = ToPython(@out);
             dynamic py = __self__.InvokeMethod("dot", pyargs, kwargs);
             return ToCsharp<NDarray>(py);
@@ -85,7 +85,7 @@ namespace Cupy
                 a,
                 b
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             dynamic py = __self__.InvokeMethod("vdot", pyargs, kwargs);
             return ToCsharp<NDarray>(py);
         }
@@ -118,7 +118,7 @@ namespace Cupy
                 b,
                 a
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             dynamic py = __self__.InvokeMethod("inner", pyargs, kwargs);
             return ToCsharp<NDarray>(py);
         }
@@ -155,7 +155,7 @@ namespace Cupy
                 a,
                 b
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (@out != null) kwargs["out"] = ToPython(@out);
             dynamic py = __self__.InvokeMethod("outer", pyargs, kwargs);
             return ToCsharp<NDarray>(py);
@@ -195,7 +195,7 @@ namespace Cupy
                 x2,
                 x1
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (@out != null) kwargs["out"] = ToPython(@out);
             dynamic py = __self__.InvokeMethod("matmul", pyargs, kwargs);
             return ToCsharp<NDarray>(py);
@@ -236,7 +236,7 @@ namespace Cupy
                 b,
                 a
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (axes != null) kwargs["axes"] = ToPython(axes);
             dynamic py = __self__.InvokeMethod("tensordot", pyargs, kwargs);
             return ToCsharp<NDarray>(py);
@@ -265,7 +265,7 @@ namespace Cupy
                 b,
                 a
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             dynamic py = __self__.InvokeMethod("kron", pyargs, kwargs);
             return ToCsharp<NDarray>(py);
         }
@@ -328,7 +328,7 @@ namespace Cupy
             {
                 a
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (offset != 0) kwargs["offset"] = ToPython(offset);
             if (axis2 != null) kwargs["axis2"] = ToPython(axis2);
             if (axis1 != null) kwargs["axis1"] = ToPython(axis1);
@@ -376,7 +376,7 @@ namespace Cupy
                 {
                     arrays
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 dynamic py = __self__.InvokeMethod("multi_dot", pyargs, kwargs);
                 return ToCsharp<NDarray>(py);
             }
@@ -469,7 +469,7 @@ namespace Cupy
                     a,
                     n
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 dynamic py = __self__.InvokeMethod("matrix_power", pyargs, kwargs);
                 return ToCsharp<NDarray>(py);
             }
@@ -601,7 +601,7 @@ namespace Cupy
                 {
                     M
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 if (tol != null) kwargs["tol"] = ToPython(tol);
                 if (hermitian != false) kwargs["hermitian"] = ToPython(hermitian);
                 dynamic py = __self__.InvokeMethod("matrix_rank", pyargs, kwargs);
@@ -645,7 +645,7 @@ namespace Cupy
                 {
                     a
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 dynamic py = __self__.InvokeMethod("slogdet", pyargs, kwargs);
                 return (ToCsharp<NDarray>(py[0]), ToCsharp<NDarray>(py[1]));
             }
@@ -684,7 +684,7 @@ namespace Cupy
                     a,
                     b
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 if (axes != null) kwargs["axes"] = ToPython(axes);
                 dynamic py = __self__.InvokeMethod("tensorsolve", pyargs, kwargs);
                 return ToCsharp<NDarray>(py);
@@ -722,7 +722,7 @@ namespace Cupy
                 {
                     a
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 if (ind != 2) kwargs["ind"] = ToPython(ind);
                 dynamic py = __self__.InvokeMethod("tensorinv", pyargs, kwargs);
                 return ToCsharp<NDarray>(py);

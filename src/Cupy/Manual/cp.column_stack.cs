@@ -32,7 +32,7 @@ namespace Cupy
                 pyargs = ToTuple(new object[] { tup[0] });
             else
                 pyargs = ToTuple(new object[] { tup });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             dynamic py = __self__.InvokeMethod("column_stack", pyargs, kwargs);
             return ToCsharp<NDarray>(py);
         }

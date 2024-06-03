@@ -47,7 +47,7 @@ namespace Cupy
             public static NDarray norm(NDarray x, int? ord = null, int? axis = null, bool? keepdims = null)
             {
                 var pyargs = ToTuple(new object[] { x });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 if (ord != null) kwargs["ord"] = ToPython(ord);
                 if (axis != null) kwargs["axis"] = ToPython(axis);
                 if (keepdims != null) kwargs["keepdims"] = ToPython(keepdims);
@@ -64,7 +64,7 @@ namespace Cupy
             public static NDarray norm(NDarray x, int? ord, int[] axis, bool? keepdims = null)
             {
                 var pyargs = ToTuple(new object[] { x });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 if (ord != null) kwargs["ord"] = ToPython(ord);
                 if (axis != null) kwargs["axis"] = ToPython(axis);
                 if (keepdims != null) kwargs["keepdims"] = ToPython(keepdims);
@@ -77,7 +77,7 @@ namespace Cupy
             //public static float norm(NDarray x, int? ord=null, int? axis = null, bool? keepdims = null)
             //{
             //    var pyargs = ToTuple(new object[] { x, });
-            //    var kwargs = new PyDict();
+            //    using var kwargs = new PyDict();
             //    if (ord != null) kwargs["ord"] = ToPython(ord);
             //    var linalg = self.GetAttr("linalg");
             //    dynamic py = linalg.InvokeMethod("norm", pyargs, kwargs);
@@ -88,7 +88,7 @@ namespace Cupy
             public static float norm(NDarray x, string ord)
             {
                 var pyargs = ToTuple(new object[] { x });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 if (ord != null) kwargs["ord"] = ToPython(ord);
                 var linalg = self.GetAttr("linalg");
                 dynamic py = linalg.InvokeMethod("norm", pyargs, kwargs);
@@ -101,7 +101,7 @@ namespace Cupy
                     throw new ArgumentException("ord must be either inf or neg_inf");
 
                 var pyargs = ToTuple(new object[] { x });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 if (ord != null) kwargs["ord"] = ord == Constants.inf ? dynamic_self.inf : -dynamic_self.inf;
                 var linalg = self.GetAttr("linalg");
                 dynamic py = linalg.InvokeMethod("norm", pyargs, kwargs);
@@ -178,7 +178,7 @@ namespace Cupy
                 {
                     a
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 if (mode != "reduced") kwargs["mode"] = ToPython(mode);
                 dynamic py = __self__.InvokeMethod("qr", pyargs, kwargs);
                 if (PythonObject.IsNDarray(py))

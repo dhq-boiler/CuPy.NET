@@ -116,7 +116,7 @@ namespace Cupy
                 {
                     low
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 if (high != null) kwargs["high"] = ToPython(high);
                 if (size != null) kwargs["size"] = ToPython(size);
                 if (dtype != null) kwargs["dtype"] = ToPython(dtype);
@@ -171,7 +171,7 @@ namespace Cupy
                 {
                     low
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 if (high != null) kwargs["high"] = ToPython(high);
                 if (size != null) kwargs["size"] = ToPython(size);
                 dynamic py = __self__.InvokeMethod("random_integers", pyargs, kwargs);
@@ -207,7 +207,7 @@ namespace Cupy
                 var pyargs = ToTuple(new object[]
                 {
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 if (size != null) kwargs["size"] = ToPython(size);
                 dynamic py = __self__.InvokeMethod("random_sample", pyargs, kwargs);
                 return ToCsharp<NDarray<float>>(py);
@@ -242,7 +242,7 @@ namespace Cupy
                 var pyargs = ToTuple(new object[]
                 {
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 if (size != null) kwargs["size"] = ToPython(size);
                 dynamic py = __self__.InvokeMethod("random", pyargs, kwargs);
                 return ToCsharp<NDarray<float>>(py);
@@ -277,7 +277,7 @@ namespace Cupy
                 var pyargs = ToTuple(new object[]
                 {
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 if (size != null) kwargs["size"] = ToPython(size);
                 dynamic py = __self__.InvokeMethod("ranf", pyargs, kwargs);
                 return ToCsharp<NDarray<float>>(py);
@@ -312,7 +312,7 @@ namespace Cupy
                 var pyargs = ToTuple(new object[]
                 {
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 if (size != null) kwargs["size"] = ToPython(size);
                 dynamic py = __self__.InvokeMethod("sample", pyargs, kwargs);
                 return ToCsharp<NDarray<float>>(py);
@@ -355,7 +355,7 @@ namespace Cupy
                 {
                     a
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 if (size != null) kwargs["size"] = ToPython(size);
                 if (replace != true) kwargs["replace"] = ToPython(replace);
                 if (p != null) kwargs["p"] = ToPython(p);
@@ -400,7 +400,7 @@ namespace Cupy
                 {
                     a
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 if (size != null) kwargs["size"] = ToPython(size);
                 if (replace != true) kwargs["replace"] = ToPython(replace);
                 if (p != null) kwargs["p"] = ToPython(p);
@@ -429,7 +429,7 @@ namespace Cupy
                 {
                     length
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 dynamic py = __self__.InvokeMethod("bytes", pyargs, kwargs);
                 return ToCsharp<string>(py);
             }
@@ -456,7 +456,7 @@ namespace Cupy
                 {
                     x
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 dynamic py = __self__.InvokeMethod("shuffle", pyargs, kwargs);
             }
         }
@@ -485,7 +485,7 @@ namespace Cupy
                 {
                     x
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 dynamic py = __self__.InvokeMethod("permutation", pyargs, kwargs);
                 return ToCsharp<NDarray>(py);
             }
@@ -515,7 +515,7 @@ namespace Cupy
                 {
                     x
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 dynamic py = __self__.InvokeMethod("permutation", pyargs, kwargs);
                 return ToCsharp<NDarray>(py);
             }
@@ -559,7 +559,7 @@ namespace Cupy
                     a,
                     b
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 if (size != null) kwargs["size"] = ToPython(size);
                 dynamic py = __self__.InvokeMethod("beta", pyargs, kwargs);
                 return ToCsharp<NDarray>(py);
@@ -620,7 +620,7 @@ namespace Cupy
                     n,
                     p
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 if (size != null) kwargs["size"] = ToPython(size);
                 dynamic py = __self__.InvokeMethod("binomial", pyargs, kwargs);
                 return ToCsharp<NDarray>(py);
@@ -681,7 +681,7 @@ namespace Cupy
                     n,
                     p
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 if (size != null) kwargs["size"] = ToPython(size);
                 dynamic py = __self__.InvokeMethod("binomial", pyargs, kwargs);
                 return ToCsharp<NDarray>(py);
@@ -729,7 +729,7 @@ namespace Cupy
                 {
                     df
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 if (size != null) kwargs["size"] = ToPython(size);
                 dynamic py = __self__.InvokeMethod("chisquare", pyargs, kwargs);
                 return ToCsharp<NDarray>(py);
@@ -777,7 +777,7 @@ namespace Cupy
                 {
                     alpha
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 if (size != null) kwargs["size"] = ToPython(size);
                 dynamic py = __self__.InvokeMethod("dirichlet", pyargs, kwargs);
                 return ToCsharp<NDarray>(py);
@@ -824,7 +824,7 @@ namespace Cupy
                 var pyargs = ToTuple(new object[]
                 {
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 if (scale != null) kwargs["scale"] = ToPython(scale);
                 if (size != null) kwargs["size"] = ToPython(size);
                 dynamic py = __self__.InvokeMethod("exponential", pyargs, kwargs);
@@ -883,7 +883,7 @@ namespace Cupy
                     dfnum,
                     dfden
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 if (size != null) kwargs["size"] = ToPython(size);
                 dynamic py = __self__.InvokeMethod("f", pyargs, kwargs);
                 return ToCsharp<NDarray>(py);
@@ -935,7 +935,7 @@ namespace Cupy
                 {
                     shape
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 if (scale != null) kwargs["scale"] = ToPython(scale);
                 if (size != null) kwargs["size"] = ToPython(size);
                 dynamic py = __self__.InvokeMethod("gamma", pyargs, kwargs);
@@ -981,7 +981,7 @@ namespace Cupy
                 {
                     p
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 if (size != null) kwargs["size"] = ToPython(size);
                 dynamic py = __self__.InvokeMethod("geometric", pyargs, kwargs);
                 return ToCsharp<NDarray>(py);
@@ -1050,7 +1050,7 @@ namespace Cupy
                 var pyargs = ToTuple(new object[]
                 {
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 if (loc != null) kwargs["loc"] = ToPython(loc);
                 if (scale != null) kwargs["scale"] = ToPython(scale);
                 if (size != null) kwargs["size"] = ToPython(size);
@@ -1123,7 +1123,7 @@ namespace Cupy
                     nbad,
                     nsample
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 if (size != null) kwargs["size"] = ToPython(size);
                 dynamic py = __self__.InvokeMethod("hypergeometric", pyargs, kwargs);
                 return ToCsharp<NDarray>(py);
@@ -1178,7 +1178,7 @@ namespace Cupy
                 var pyargs = ToTuple(new object[]
                 {
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 if (loc != null) kwargs["loc"] = ToPython(loc);
                 if (scale != null) kwargs["scale"] = ToPython(scale);
                 if (size != null) kwargs["size"] = ToPython(size);
@@ -1231,7 +1231,7 @@ namespace Cupy
                 var pyargs = ToTuple(new object[]
                 {
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 if (loc != null) kwargs["loc"] = ToPython(loc);
                 if (scale != null) kwargs["scale"] = ToPython(scale);
                 if (size != null) kwargs["size"] = ToPython(size);
@@ -1292,7 +1292,7 @@ namespace Cupy
                 var pyargs = ToTuple(new object[]
                 {
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 if (mean != null) kwargs["mean"] = ToPython(mean);
                 if (sigma != null) kwargs["sigma"] = ToPython(sigma);
                 if (size != null) kwargs["size"] = ToPython(size);
@@ -1342,7 +1342,7 @@ namespace Cupy
                 {
                     p
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 if (size != null) kwargs["size"] = ToPython(size);
                 dynamic py = __self__.InvokeMethod("logseries", pyargs, kwargs);
                 return ToCsharp<NDarray>(py);
@@ -1399,7 +1399,7 @@ namespace Cupy
                     n,
                     pvals
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 if (size != null) kwargs["size"] = ToPython(size);
                 dynamic py = __self__.InvokeMethod("multinomial", pyargs, kwargs);
                 return ToCsharp<NDarray>(py);
@@ -1481,7 +1481,7 @@ namespace Cupy
                     mean,
                     cov
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 if (size != null) kwargs["size"] = ToPython(size);
                 if (check_valid != null) kwargs["check_valid"] = ToPython(check_valid);
                 if (tol != null) kwargs["tol"] = ToPython(tol);
@@ -1539,7 +1539,7 @@ namespace Cupy
                     n,
                     p
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 if (size != null) kwargs["size"] = ToPython(size);
                 dynamic py = __self__.InvokeMethod("negative_binomial", pyargs, kwargs);
                 return ToCsharp<NDarray>(py);
@@ -1589,7 +1589,7 @@ namespace Cupy
                     df,
                     nonc
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 if (size != null) kwargs["size"] = ToPython(size);
                 dynamic py = __self__.InvokeMethod("noncentral_chisquare", pyargs, kwargs);
                 return ToCsharp<NDarray>(py);
@@ -1649,7 +1649,7 @@ namespace Cupy
                     dfden,
                     nonc
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 if (size != null) kwargs["size"] = ToPython(size);
                 dynamic py = __self__.InvokeMethod("noncentral_f", pyargs, kwargs);
                 return ToCsharp<NDarray>(py);
@@ -1724,7 +1724,7 @@ namespace Cupy
                 {
                     a
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 if (size != null) kwargs["size"] = ToPython(size);
                 dynamic py = __self__.InvokeMethod("pareto", pyargs, kwargs);
                 return ToCsharp<NDarray>(py);
@@ -1773,7 +1773,7 @@ namespace Cupy
                 var pyargs = ToTuple(new object[]
                 {
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 if (lam != null) kwargs["lam"] = ToPython(lam);
                 if (size != null) kwargs["size"] = ToPython(size);
                 dynamic py = __self__.InvokeMethod("poisson", pyargs, kwargs);
@@ -1822,7 +1822,7 @@ namespace Cupy
                 {
                     a
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 if (size != null) kwargs["size"] = ToPython(size);
                 dynamic py = __self__.InvokeMethod("power", pyargs, kwargs);
                 return ToCsharp<NDarray>(py);
@@ -1869,7 +1869,7 @@ namespace Cupy
                 var pyargs = ToTuple(new object[]
                 {
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 if (scale != null) kwargs["scale"] = ToPython(scale);
                 if (size != null) kwargs["size"] = ToPython(size);
                 dynamic py = __self__.InvokeMethod("rayleigh", pyargs, kwargs);
@@ -1914,7 +1914,7 @@ namespace Cupy
                 var pyargs = ToTuple(new object[]
                 {
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 if (size != null) kwargs["size"] = ToPython(size);
                 dynamic py = __self__.InvokeMethod("standard_cauchy", pyargs, kwargs);
                 return ToCsharp<NDarray>(py);
@@ -1946,7 +1946,7 @@ namespace Cupy
                 var pyargs = ToTuple(new object[]
                 {
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 if (size != null) kwargs["size"] = ToPython(size);
                 dynamic py = __self__.InvokeMethod("standard_exponential", pyargs, kwargs);
                 return ToCsharp<NDarray>(py);
@@ -1992,7 +1992,7 @@ namespace Cupy
                 {
                     shape
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 if (size != null) kwargs["size"] = ToPython(size);
                 dynamic py = __self__.InvokeMethod("standard_gamma", pyargs, kwargs);
                 return ToCsharp<NDarray>(py);
@@ -2022,7 +2022,7 @@ namespace Cupy
                 var pyargs = ToTuple(new object[]
                 {
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 if (size != null) kwargs["size"] = ToPython(size);
                 dynamic py = __self__.InvokeMethod("standard_normal", pyargs, kwargs);
                 return ToCsharp<NDarray>(py);
@@ -2076,7 +2076,7 @@ namespace Cupy
                 {
                     df
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 if (size != null) kwargs["size"] = ToPython(size);
                 dynamic py = __self__.InvokeMethod("standard_t", pyargs, kwargs);
                 return ToCsharp<NDarray>(py);
@@ -2137,7 +2137,7 @@ namespace Cupy
                     mode,
                     right
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 if (size != null) kwargs["size"] = ToPython(size);
                 dynamic py = __self__.InvokeMethod("triangular", pyargs, kwargs);
                 return ToCsharp<NDarray>(py);
@@ -2194,7 +2194,7 @@ namespace Cupy
                 var pyargs = ToTuple(new object[]
                 {
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 if (low != null) kwargs["low"] = ToPython(low);
                 if (high != null) kwargs["high"] = ToPython(high);
                 if (size != null) kwargs["size"] = ToPython(size);
@@ -2254,7 +2254,7 @@ namespace Cupy
                     mu,
                     kappa
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 if (size != null) kwargs["size"] = ToPython(size);
                 dynamic py = __self__.InvokeMethod("vonmises", pyargs, kwargs);
                 return ToCsharp<NDarray>(py);
@@ -2311,7 +2311,7 @@ namespace Cupy
                     mean,
                     scale
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 if (size != null) kwargs["size"] = ToPython(size);
                 dynamic py = __self__.InvokeMethod("wald", pyargs, kwargs);
                 return ToCsharp<NDarray>(py);
@@ -2366,7 +2366,7 @@ namespace Cupy
                 {
                     a
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 if (size != null) kwargs["size"] = ToPython(size);
                 dynamic py = __self__.InvokeMethod("weibull", pyargs, kwargs);
                 return ToCsharp<NDarray>(py);
@@ -2416,7 +2416,7 @@ namespace Cupy
                 {
                     a
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 if (size != null) kwargs["size"] = ToPython(size);
                 dynamic py = __self__.InvokeMethod("zipf", pyargs, kwargs);
                 return ToCsharp<NDarray>(py);
@@ -2475,7 +2475,7 @@ namespace Cupy
                 var pyargs = ToTuple(new object[]
                 {
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 if (seed != null) kwargs["seed"] = ToPython(seed);
                 dynamic py = __self__.InvokeMethod("RandomState", pyargs, kwargs);
             }
@@ -2533,7 +2533,7 @@ namespace Cupy
                 var pyargs = ToTuple(new object[]
                 {
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 if (seed != null) kwargs["seed"] = ToPython(seed);
                 dynamic py = __self__.InvokeMethod("RandomState", pyargs, kwargs);
             }
@@ -2560,7 +2560,7 @@ namespace Cupy
                 var pyargs = ToTuple(new object[]
                 {
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 if (seed != null) kwargs["seed"] = ToPython(seed);
                 dynamic py = __self__.InvokeMethod("seed", pyargs, kwargs);
             }
@@ -2587,7 +2587,7 @@ namespace Cupy
                 var pyargs = ToTuple(new object[]
                 {
                 });
-                var kwargs = new PyDict();
+                using var kwargs = new PyDict();
                 if (seed != null) kwargs["seed"] = ToPython(seed);
                 dynamic py = __self__.InvokeMethod("seed", pyargs, kwargs);
             }

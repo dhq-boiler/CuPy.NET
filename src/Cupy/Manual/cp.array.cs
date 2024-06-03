@@ -42,7 +42,7 @@ namespace Cupy
             {
                 @object
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (dtype != null) kwargs["dtype"] = ToPython(dtype);
             if (copy != null) kwargs["copy"] = ToPython(copy);
             if (order != null) kwargs["order"] = ToPython(order);
@@ -319,7 +319,7 @@ namespace Cupy
             //var args = new PyList(new PyObject[0]);
             //foreach (var s in strings)
             //    args.Append(new PyString(s));
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (itemsize != null) kwargs["itemsize"] = ToPython(itemsize);
             if (copy != null) kwargs["copy"] = ToPython(copy);
             if (unicode != null) kwargs["unicode"] = ToPython(unicode);
@@ -358,7 +358,7 @@ namespace Cupy
             var __self__ = self;
             var args = new PyTuple(
                 new PyObject[] { new PyList(arrays.Select(nd => nd.PyObject as PyObject).ToArray()) });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (dtype != null) kwargs["dtype"] = ToPython(dtype);
             if (copy != null) kwargs["copy"] = ToPython(copy);
             if (order != null) kwargs["order"] = ToPython(order);
@@ -376,7 +376,7 @@ namespace Cupy
             {
                 scalar
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (dtype != null) kwargs["dtype"] = ToPython(dtype);
             dynamic py = __self__.InvokeMethod("asarray", pyargs, kwargs);
             return ToCsharp<NDarray>(py);

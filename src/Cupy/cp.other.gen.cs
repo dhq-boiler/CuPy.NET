@@ -32,7 +32,7 @@ namespace Cupy
             {
                 p
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             dynamic py = __self__.InvokeMethod("roots", pyargs, kwargs);
             return ToCsharp<NDarray>(py);
         }

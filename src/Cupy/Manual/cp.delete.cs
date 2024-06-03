@@ -45,7 +45,7 @@ namespace Cupy
                 arr,
                 obj
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (axis != null) kwargs["axis"] = ToPython(axis);
             dynamic py = __self__.InvokeMethod("delete", pyargs, kwargs);
             return ToCsharp<NDarray>(py);
@@ -89,7 +89,7 @@ namespace Cupy
                 arr,
                 obj
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (axis != null) kwargs["axis"] = ToPython(axis);
             dynamic py = __self__.InvokeMethod("delete", pyargs, kwargs);
             return ToCsharp<NDarray>(py);

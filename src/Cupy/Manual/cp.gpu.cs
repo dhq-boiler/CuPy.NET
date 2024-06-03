@@ -16,7 +16,7 @@ namespace Cupy
                 out_params,
                 operation
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (name != "kernel") kwargs["name"] = ToPython(name);
             if (reduce_dims != true) kwargs["reduce_dims"] = ToPython(reduce_dims);
             if (preamble != "") kwargs["preamble"] = ToPython(preamble);
@@ -41,7 +41,7 @@ namespace Cupy
                 out_params,
                 operation
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (name != "kernel") kwargs["name"] = ToPython(name);
             if (reduce_dims != true) kwargs["reduce_dims"] = ToPython(reduce_dims);
             if (preamble != "") kwargs["preamble"] = ToPython(preamble);
@@ -66,7 +66,7 @@ namespace Cupy
                 out_params,
                 operation
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (name != "kernel") kwargs["name"] = ToPython(name);
             if (reduce_dims != true) kwargs["reduce_dims"] = ToPython(reduce_dims);
             if (preamble != "") kwargs["preamble"] = ToPython(preamble);
@@ -91,7 +91,7 @@ namespace Cupy
                 out_params,
                 operation
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (name != "kernel") kwargs["name"] = ToPython(name);
             if (reduce_dims != true) kwargs["reduce_dims"] = ToPython(reduce_dims);
             if (preamble != "") kwargs["preamble"] = ToPython(preamble);
@@ -116,7 +116,7 @@ namespace Cupy
                 out_params,
                 operation
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (name != "kernel") kwargs["name"] = ToPython(name);
             if (reduce_dims != true) kwargs["reduce_dims"] = ToPython(reduce_dims);
             if (preamble != "") kwargs["preamble"] = ToPython(preamble);
@@ -141,7 +141,7 @@ namespace Cupy
                 out_params,
                 operation
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (name != "kernel") kwargs["name"] = ToPython(name);
             if (reduce_dims != true) kwargs["reduce_dims"] = ToPython(reduce_dims);
             if (preamble != "") kwargs["preamble"] = ToPython(preamble);
@@ -166,7 +166,7 @@ namespace Cupy
                 out_params,
                 operation
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (name != "kernel") kwargs["name"] = ToPython(name);
             if (reduce_dims != true) kwargs["reduce_dims"] = ToPython(reduce_dims);
             if (preamble != "") kwargs["preamble"] = ToPython(preamble);
@@ -191,7 +191,7 @@ namespace Cupy
                 out_params,
                 operation
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (name != "kernel") kwargs["name"] = ToPython(name);
             if (reduce_dims != true) kwargs["reduce_dims"] = ToPython(reduce_dims);
             if (preamble != "") kwargs["preamble"] = ToPython(preamble);
@@ -216,7 +216,7 @@ namespace Cupy
                 out_params,
                 operation
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (name != "kernel") kwargs["name"] = ToPython(name);
             if (reduce_dims != true) kwargs["reduce_dims"] = ToPython(reduce_dims);
             if (preamble != "") kwargs["preamble"] = ToPython(preamble);
@@ -241,7 +241,7 @@ namespace Cupy
                 out_params,
                 operation
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (name != "kernel") kwargs["name"] = ToPython(name);
             if (reduce_dims != true) kwargs["reduce_dims"] = ToPython(reduce_dims);
             if (preamble != "") kwargs["preamble"] = ToPython(preamble);
@@ -266,7 +266,7 @@ namespace Cupy
                 out_params,
                 operation
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (name != "kernel") kwargs["name"] = ToPython(name);
             if (reduce_dims != true) kwargs["reduce_dims"] = ToPython(reduce_dims);
             if (preamble != "") kwargs["preamble"] = ToPython(preamble);
@@ -291,7 +291,7 @@ namespace Cupy
                 out_params,
                 operation
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (name != "kernel") kwargs["name"] = ToPython(name);
             if (reduce_dims != true) kwargs["reduce_dims"] = ToPython(reduce_dims);
             if (preamble != "") kwargs["preamble"] = ToPython(preamble);
@@ -316,7 +316,7 @@ namespace Cupy
                 out_params,
                 operation
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (name != "kernel") kwargs["name"] = ToPython(name);
             if (reduce_dims != true) kwargs["reduce_dims"] = ToPython(reduce_dims);
             if (preamble != "") kwargs["preamble"] = ToPython(preamble);
@@ -341,7 +341,7 @@ namespace Cupy
                 out_params,
                 operation
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (name != "kernel") kwargs["name"] = ToPython(name);
             if (reduce_dims != true) kwargs["reduce_dims"] = ToPython(reduce_dims);
             if (preamble != "") kwargs["preamble"] = ToPython(preamble);
@@ -366,7 +366,7 @@ namespace Cupy
                 out_params,
                 operation
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (name != "kernel") kwargs["name"] = ToPython(name);
             if (reduce_dims != true) kwargs["reduce_dims"] = ToPython(reduce_dims);
             if (preamble != "") kwargs["preamble"] = ToPython(preamble);
@@ -391,7 +391,7 @@ namespace Cupy
                 out_params,
                 operation
             });
-            var kwargs = new PyDict();
+            using var kwargs = new PyDict();
             if (name != "kernel") kwargs["name"] = ToPython(name);
             if (reduce_dims != true) kwargs["reduce_dims"] = ToPython(reduce_dims);
             if (preamble != "") kwargs["preamble"] = ToPython(preamble);
