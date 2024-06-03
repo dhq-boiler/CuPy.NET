@@ -46,7 +46,7 @@ namespace Cupy
             /// </returns>
             public static NDarray norm(NDarray x, int? ord = null, int? axis = null, bool? keepdims = null)
             {
-                var pyargs = ToTuple(new object[] { x });
+                using var pyargs = ToTuple(new object[] { x });
                 using var kwargs = new PyDict();
                 if (ord != null) kwargs["ord"] = ToPython(ord);
                 if (axis != null) kwargs["axis"] = ToPython(axis);
@@ -63,7 +63,7 @@ namespace Cupy
 
             public static NDarray norm(NDarray x, int? ord, int[] axis, bool? keepdims = null)
             {
-                var pyargs = ToTuple(new object[] { x });
+                using var pyargs = ToTuple(new object[] { x });
                 using var kwargs = new PyDict();
                 if (ord != null) kwargs["ord"] = ToPython(ord);
                 if (axis != null) kwargs["axis"] = ToPython(axis);
@@ -76,7 +76,7 @@ namespace Cupy
 
             //public static float norm(NDarray x, int? ord=null, int? axis = null, bool? keepdims = null)
             //{
-            //    var pyargs = ToTuple(new object[] { x, });
+            //    using var pyargs = ToTuple(new object[] { x, });
             //    using var kwargs = new PyDict();
             //    if (ord != null) kwargs["ord"] = ToPython(ord);
             //    var linalg = self.GetAttr("linalg");
@@ -87,7 +87,7 @@ namespace Cupy
 
             public static float norm(NDarray x, string ord)
             {
-                var pyargs = ToTuple(new object[] { x });
+                using var pyargs = ToTuple(new object[] { x });
                 using var kwargs = new PyDict();
                 if (ord != null) kwargs["ord"] = ToPython(ord);
                 var linalg = self.GetAttr("linalg");
@@ -100,7 +100,7 @@ namespace Cupy
                 if (ord != Constants.inf && ord != Constants.neg_inf)
                     throw new ArgumentException("ord must be either inf or neg_inf");
 
-                var pyargs = ToTuple(new object[] { x });
+                using var pyargs = ToTuple(new object[] { x });
                 using var kwargs = new PyDict();
                 if (ord != null) kwargs["ord"] = ord == Constants.inf ? dynamic_self.inf : -dynamic_self.inf;
                 var linalg = self.GetAttr("linalg");
@@ -174,7 +174,7 @@ namespace Cupy
                 //auto-generated code, do not change
                 var linalg = self.GetAttr("linalg");
                 var __self__ = linalg;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                     a
                 });

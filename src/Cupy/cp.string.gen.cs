@@ -34,7 +34,7 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         x1,
                         x2
@@ -65,7 +65,7 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         a,
                         i
@@ -98,7 +98,7 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         a,
                         values
@@ -133,7 +133,7 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         a
                     });
@@ -169,7 +169,7 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         a,
                         width
@@ -207,7 +207,7 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         a
                     });
@@ -245,7 +245,7 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         a
                     });
@@ -276,7 +276,7 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         sep,
                         seq
@@ -312,7 +312,7 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         a,
                         width
@@ -346,7 +346,7 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         a
                     });
@@ -387,7 +387,7 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         a
                     });
@@ -430,7 +430,7 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         a,
                         sep
@@ -464,7 +464,7 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         a,
                         @new,
@@ -502,7 +502,7 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         a,
                         width
@@ -547,7 +547,7 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         a,
                         sep
@@ -587,7 +587,7 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         a
                     });
@@ -627,7 +627,7 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         a
                     });
@@ -664,7 +664,7 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         a
                     });
@@ -702,7 +702,7 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         a
                     });
@@ -737,7 +737,7 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         a
                     });
@@ -776,7 +776,7 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         a
                     });
@@ -810,7 +810,7 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         a
                     });
@@ -844,7 +844,7 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         a
                     });
@@ -875,7 +875,7 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         a,
                         table,
@@ -909,7 +909,7 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         a
                     });
@@ -943,7 +943,7 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         a,
                         width
@@ -981,7 +981,7 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         x2,
                         x1
@@ -1019,7 +1019,7 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         x2,
                         x1
@@ -1057,7 +1057,7 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         x2,
                         x1
@@ -1095,7 +1095,7 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         x2,
                         x1
@@ -1133,7 +1133,7 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         x2,
                         x1
@@ -1171,7 +1171,7 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         x2,
                         x1
@@ -1212,7 +1212,7 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         a,
                         sub
@@ -1256,7 +1256,7 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         a,
                         sub
@@ -1288,7 +1288,7 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         a,
                         sub
@@ -1321,7 +1321,7 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         a
                     });
@@ -1357,7 +1357,7 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         a
                     });
@@ -1387,7 +1387,7 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         a
                     });
@@ -1418,7 +1418,7 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         a
                     });
@@ -1454,7 +1454,7 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         a
                     });
@@ -1485,7 +1485,7 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         a
                     });
@@ -1515,7 +1515,7 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         a
                     });
@@ -1546,7 +1546,7 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         a
                     });
@@ -1585,7 +1585,7 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         a,
                         sub
@@ -1617,7 +1617,7 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         a,
                         sub
@@ -1659,7 +1659,7 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         a,
                         prefix
@@ -1727,7 +1727,7 @@ namespace Cupy
                     var core = self.GetAttr("core");
                     var defchararray = core.GetAttr("defchararray");
                     var __self__ = defchararray;
-                    var pyargs = ToTuple(new object[]
+                    using var pyargs = ToTuple(new object[]
                     {
                         shape
                     });

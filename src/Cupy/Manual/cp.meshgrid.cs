@@ -59,7 +59,7 @@ namespace Cupy
         public static NDarray[] meshgrid(NDarray[] xi, string indexing = "xy", bool? sparse = null, bool? copy = null)
         {
             var __self__ = self;
-            var pyargs = ToTuple(xi);
+            using var pyargs = ToTuple(xi);
             using var kwargs = new PyDict();
             if (indexing != "xy") kwargs["indexing"] = ToPython(indexing);
             if (sparse != null) kwargs["sparse"] = ToPython(sparse);
@@ -100,7 +100,7 @@ namespace Cupy
         public static NDarray[] meshgrid(params NDarray[] xi)
         {
             var __self__ = self;
-            var pyargs = ToTuple(xi);
+            using var pyargs = ToTuple(xi);
             using var kwargs = new PyDict();
             dynamic py = __self__.InvokeMethod("meshgrid", pyargs, kwargs);
             return ToCsharp<NDarray[]>(py);

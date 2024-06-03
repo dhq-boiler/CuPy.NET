@@ -65,7 +65,7 @@ namespace Cupy
                 //auto-generated code, do not change
                 var fft = self.GetAttr("fft");
                 var __self__ = fft;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                     a
                 });
@@ -141,7 +141,7 @@ namespace Cupy
                 //auto-generated code, do not change
                 var fft = self.GetAttr("fft");
                 var __self__ = fft;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                     a
                 });
@@ -183,7 +183,7 @@ namespace Cupy
                 //auto-generated code, do not change
                 var fft = self.GetAttr("fft");
                 var __self__ = fft;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                     a
                 });
@@ -226,7 +226,7 @@ namespace Cupy
                 //auto-generated code, do not change
                 var fft = self.GetAttr("fft");
                 var __self__ = fft;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                     a
                 });
@@ -294,7 +294,7 @@ namespace Cupy
                 //auto-generated code, do not change
                 var fft = self.GetAttr("fft");
                 var __self__ = fft;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                     a
                 });
@@ -372,7 +372,7 @@ namespace Cupy
                 //auto-generated code, do not change
                 var fft = self.GetAttr("fft");
                 var __self__ = fft;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                     a
                 });
@@ -434,7 +434,7 @@ namespace Cupy
                 //auto-generated code, do not change
                 var fft = self.GetAttr("fft");
                 var __self__ = fft;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                     a
                 });
@@ -490,7 +490,7 @@ namespace Cupy
                 //auto-generated code, do not change
                 var fft = self.GetAttr("fft");
                 var __self__ = fft;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                     a
                 });
@@ -528,7 +528,7 @@ namespace Cupy
                 //auto-generated code, do not change
                 var fft = self.GetAttr("fft");
                 var __self__ = fft;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                     n
                 });
@@ -567,7 +567,7 @@ namespace Cupy
                 //auto-generated code, do not change
                 var fft = self.GetAttr("fft");
                 var __self__ = fft;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                     n
                 });
@@ -600,7 +600,7 @@ namespace Cupy
                 //auto-generated code, do not change
                 var fft = self.GetAttr("fft");
                 var __self__ = fft;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                     x
                 });
@@ -633,7 +633,7 @@ namespace Cupy
                 //auto-generated code, do not change
                 var fft = self.GetAttr("fft");
                 var __self__ = fft;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                     x
                 });

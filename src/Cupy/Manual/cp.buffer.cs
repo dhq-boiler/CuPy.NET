@@ -7,7 +7,7 @@ namespace Cupy
         public static NDarray frombuffer(byte[] buffer, Dtype dtype = null, int count = -1, int offset = 0)
         {
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 buffer.ToPython()
 

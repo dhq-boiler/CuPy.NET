@@ -42,7 +42,7 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 a,
                 b
@@ -80,7 +80,7 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 a,
                 b
@@ -113,7 +113,7 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 b,
                 a
@@ -150,7 +150,7 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 a,
                 b
@@ -190,7 +190,7 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 x2,
                 x1
@@ -231,7 +231,7 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 b,
                 a
@@ -260,7 +260,7 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 b,
                 a
@@ -324,7 +324,7 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 a
             });
@@ -372,7 +372,7 @@ namespace Cupy
                 //auto-generated code, do not change
                 var linalg = self.GetAttr("linalg");
                 var __self__ = linalg;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                     arrays
                 });
@@ -464,7 +464,7 @@ namespace Cupy
                 //auto-generated code, do not change
                 var linalg = self.GetAttr("linalg");
                 var __self__ = linalg;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                     a,
                     n
@@ -597,7 +597,7 @@ namespace Cupy
                 //auto-generated code, do not change
                 var linalg = self.GetAttr("linalg");
                 var __self__ = linalg;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                     M
                 });
@@ -641,7 +641,7 @@ namespace Cupy
                 //auto-generated code, do not change
                 var linalg = self.GetAttr("linalg");
                 var __self__ = linalg;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                     a
                 });
@@ -679,7 +679,7 @@ namespace Cupy
                 //auto-generated code, do not change
                 var linalg = self.GetAttr("linalg");
                 var __self__ = linalg;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                     a,
                     b
@@ -718,7 +718,7 @@ namespace Cupy
                 //auto-generated code, do not change
                 var linalg = self.GetAttr("linalg");
                 var __self__ = linalg;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                     a
                 });

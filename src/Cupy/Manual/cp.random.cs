@@ -24,7 +24,7 @@ namespace Cupy
             {
                 var random = self.GetAttr("random");
                 var __self__ = random;
-                var pyargs = ToTuple(shape);
+                using var pyargs = ToTuple(shape);
                 using var kwargs = new PyDict();
                 dynamic py = __self__.InvokeMethod("rand", pyargs, kwargs);
                 return ToCsharp<NDarray>(py);
@@ -56,7 +56,7 @@ namespace Cupy
             {
                 var random = self.GetAttr("random");
                 var __self__ = random;
-                var pyargs = ToTuple(shape);
+                using var pyargs = ToTuple(shape);
                 using var kwargs = new PyDict();
                 dynamic py = __self__.InvokeMethod("randn", pyargs, kwargs);
                 return ToCsharp<NDarray>(py);
@@ -108,7 +108,7 @@ namespace Cupy
             {
                 var random = self.GetAttr("random");
                 var __self__ = random;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                 });
                 using var kwargs = new PyDict();
@@ -123,7 +123,7 @@ namespace Cupy
             {
                 var random = self.GetAttr("random");
                 var __self__ = random;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                 });
                 using var kwargs = new PyDict();
@@ -148,7 +148,7 @@ namespace Cupy
             {
                 var random = self.GetAttr("random");
                 var __self__ = random;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                 });
                 using var kwargs = new PyDict();

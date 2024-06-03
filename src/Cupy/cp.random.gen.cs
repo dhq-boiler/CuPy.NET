@@ -112,7 +112,7 @@ namespace Cupy
                 //auto-generated code, do not change
                 var random = self.GetAttr("random");
                 var __self__ = random;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                     low
                 });
@@ -167,7 +167,7 @@ namespace Cupy
                 //auto-generated code, do not change
                 var random = self.GetAttr("random");
                 var __self__ = random;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                     low
                 });
@@ -204,7 +204,7 @@ namespace Cupy
                 //auto-generated code, do not change
                 var random = self.GetAttr("random");
                 var __self__ = random;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                 });
                 using var kwargs = new PyDict();
@@ -239,7 +239,7 @@ namespace Cupy
                 //auto-generated code, do not change
                 var random = self.GetAttr("random");
                 var __self__ = random;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                 });
                 using var kwargs = new PyDict();
@@ -274,7 +274,7 @@ namespace Cupy
                 //auto-generated code, do not change
                 var random = self.GetAttr("random");
                 var __self__ = random;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                 });
                 using var kwargs = new PyDict();
@@ -309,7 +309,7 @@ namespace Cupy
                 //auto-generated code, do not change
                 var random = self.GetAttr("random");
                 var __self__ = random;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                 });
                 using var kwargs = new PyDict();
@@ -351,7 +351,7 @@ namespace Cupy
                 //auto-generated code, do not change
                 var random = self.GetAttr("random");
                 var __self__ = random;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                     a
                 });
@@ -396,7 +396,7 @@ namespace Cupy
                 //auto-generated code, do not change
                 var random = self.GetAttr("random");
                 var __self__ = random;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                     a
                 });
@@ -425,7 +425,7 @@ namespace Cupy
                 //auto-generated code, do not change
                 var random = self.GetAttr("random");
                 var __self__ = random;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                     length
                 });
@@ -452,7 +452,7 @@ namespace Cupy
                 //auto-generated code, do not change
                 var random = self.GetAttr("random");
                 var __self__ = random;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                     x
                 });
@@ -481,7 +481,7 @@ namespace Cupy
                 //auto-generated code, do not change
                 var random = self.GetAttr("random");
                 var __self__ = random;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                     x
                 });
@@ -511,7 +511,7 @@ namespace Cupy
                 //auto-generated code, do not change
                 var random = self.GetAttr("random");
                 var __self__ = random;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                     x
                 });
@@ -554,7 +554,7 @@ namespace Cupy
                 //auto-generated code, do not change
                 var random = self.GetAttr("random");
                 var __self__ = random;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                     a,
                     b
@@ -615,7 +615,7 @@ namespace Cupy
                 //auto-generated code, do not change
                 var random = self.GetAttr("random");
                 var __self__ = random;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                     n,
                     p
@@ -676,7 +676,7 @@ namespace Cupy
                 //auto-generated code, do not change
                 var random = self.GetAttr("random");
                 var __self__ = random;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                     n,
                     p
@@ -725,7 +725,7 @@ namespace Cupy
                 //auto-generated code, do not change
                 var random = self.GetAttr("random");
                 var __self__ = random;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                     df
                 });
@@ -773,7 +773,7 @@ namespace Cupy
                 //auto-generated code, do not change
                 var random = self.GetAttr("random");
                 var __self__ = random;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                     alpha
                 });
@@ -821,7 +821,7 @@ namespace Cupy
                 //auto-generated code, do not change
                 var random = self.GetAttr("random");
                 var __self__ = random;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                 });
                 using var kwargs = new PyDict();
@@ -878,7 +878,7 @@ namespace Cupy
                 //auto-generated code, do not change
                 var random = self.GetAttr("random");
                 var __self__ = random;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                     dfnum,
                     dfden
@@ -931,7 +931,7 @@ namespace Cupy
                 //auto-generated code, do not change
                 var random = self.GetAttr("random");
                 var __self__ = random;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                     shape
                 });
@@ -977,7 +977,7 @@ namespace Cupy
                 //auto-generated code, do not change
                 var random = self.GetAttr("random");
                 var __self__ = random;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                     p
                 });
@@ -1047,7 +1047,7 @@ namespace Cupy
                 //auto-generated code, do not change
                 var random = self.GetAttr("random");
                 var __self__ = random;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                 });
                 using var kwargs = new PyDict();
@@ -1117,7 +1117,7 @@ namespace Cupy
                 //auto-generated code, do not change
                 var random = self.GetAttr("random");
                 var __self__ = random;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                     ngood,
                     nbad,
@@ -1175,7 +1175,7 @@ namespace Cupy
                 //auto-generated code, do not change
                 var random = self.GetAttr("random");
                 var __self__ = random;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                 });
                 using var kwargs = new PyDict();
@@ -1228,7 +1228,7 @@ namespace Cupy
                 //auto-generated code, do not change
                 var random = self.GetAttr("random");
                 var __self__ = random;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                 });
                 using var kwargs = new PyDict();
@@ -1289,7 +1289,7 @@ namespace Cupy
                 //auto-generated code, do not change
                 var random = self.GetAttr("random");
                 var __self__ = random;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                 });
                 using var kwargs = new PyDict();
@@ -1338,7 +1338,7 @@ namespace Cupy
                 //auto-generated code, do not change
                 var random = self.GetAttr("random");
                 var __self__ = random;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                     p
                 });
@@ -1394,7 +1394,7 @@ namespace Cupy
                 //auto-generated code, do not change
                 var random = self.GetAttr("random");
                 var __self__ = random;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                     n,
                     pvals
@@ -1476,7 +1476,7 @@ namespace Cupy
                 //auto-generated code, do not change
                 var random = self.GetAttr("random");
                 var __self__ = random;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                     mean,
                     cov
@@ -1534,7 +1534,7 @@ namespace Cupy
                 //auto-generated code, do not change
                 var random = self.GetAttr("random");
                 var __self__ = random;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                     n,
                     p
@@ -1584,7 +1584,7 @@ namespace Cupy
                 //auto-generated code, do not change
                 var random = self.GetAttr("random");
                 var __self__ = random;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                     df,
                     nonc
@@ -1643,7 +1643,7 @@ namespace Cupy
                 //auto-generated code, do not change
                 var random = self.GetAttr("random");
                 var __self__ = random;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                     dfnum,
                     dfden,
@@ -1720,7 +1720,7 @@ namespace Cupy
                 //auto-generated code, do not change
                 var random = self.GetAttr("random");
                 var __self__ = random;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                     a
                 });
@@ -1770,7 +1770,7 @@ namespace Cupy
                 //auto-generated code, do not change
                 var random = self.GetAttr("random");
                 var __self__ = random;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                 });
                 using var kwargs = new PyDict();
@@ -1818,7 +1818,7 @@ namespace Cupy
                 //auto-generated code, do not change
                 var random = self.GetAttr("random");
                 var __self__ = random;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                     a
                 });
@@ -1866,7 +1866,7 @@ namespace Cupy
                 //auto-generated code, do not change
                 var random = self.GetAttr("random");
                 var __self__ = random;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                 });
                 using var kwargs = new PyDict();
@@ -1911,7 +1911,7 @@ namespace Cupy
                 //auto-generated code, do not change
                 var random = self.GetAttr("random");
                 var __self__ = random;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                 });
                 using var kwargs = new PyDict();
@@ -1943,7 +1943,7 @@ namespace Cupy
                 //auto-generated code, do not change
                 var random = self.GetAttr("random");
                 var __self__ = random;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                 });
                 using var kwargs = new PyDict();
@@ -1988,7 +1988,7 @@ namespace Cupy
                 //auto-generated code, do not change
                 var random = self.GetAttr("random");
                 var __self__ = random;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                     shape
                 });
@@ -2019,7 +2019,7 @@ namespace Cupy
                 //auto-generated code, do not change
                 var random = self.GetAttr("random");
                 var __self__ = random;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                 });
                 using var kwargs = new PyDict();
@@ -2072,7 +2072,7 @@ namespace Cupy
                 //auto-generated code, do not change
                 var random = self.GetAttr("random");
                 var __self__ = random;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                     df
                 });
@@ -2131,7 +2131,7 @@ namespace Cupy
                 //auto-generated code, do not change
                 var random = self.GetAttr("random");
                 var __self__ = random;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                     left,
                     mode,
@@ -2191,7 +2191,7 @@ namespace Cupy
                 //auto-generated code, do not change
                 var random = self.GetAttr("random");
                 var __self__ = random;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                 });
                 using var kwargs = new PyDict();
@@ -2249,7 +2249,7 @@ namespace Cupy
                 //auto-generated code, do not change
                 var random = self.GetAttr("random");
                 var __self__ = random;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                     mu,
                     kappa
@@ -2306,7 +2306,7 @@ namespace Cupy
                 //auto-generated code, do not change
                 var random = self.GetAttr("random");
                 var __self__ = random;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                     mean,
                     scale
@@ -2362,7 +2362,7 @@ namespace Cupy
                 //auto-generated code, do not change
                 var random = self.GetAttr("random");
                 var __self__ = random;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                     a
                 });
@@ -2412,7 +2412,7 @@ namespace Cupy
                 //auto-generated code, do not change
                 var random = self.GetAttr("random");
                 var __self__ = random;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                     a
                 });
@@ -2472,7 +2472,7 @@ namespace Cupy
                 //auto-generated code, do not change
                 var random = self.GetAttr("random");
                 var __self__ = random;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                 });
                 using var kwargs = new PyDict();
@@ -2530,7 +2530,7 @@ namespace Cupy
                 //auto-generated code, do not change
                 var random = self.GetAttr("random");
                 var __self__ = random;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                 });
                 using var kwargs = new PyDict();
@@ -2557,7 +2557,7 @@ namespace Cupy
                 //auto-generated code, do not change
                 var random = self.GetAttr("random");
                 var __self__ = random;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                 });
                 using var kwargs = new PyDict();
@@ -2584,7 +2584,7 @@ namespace Cupy
                 //auto-generated code, do not change
                 var random = self.GetAttr("random");
                 var __self__ = random;
-                var pyargs = ToTuple(new object[]
+                using var pyargs = ToTuple(new object[]
                 {
                 });
                 using var kwargs = new PyDict();

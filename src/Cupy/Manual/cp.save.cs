@@ -46,7 +46,7 @@ namespace Cupy
         {
             //auto-generated code, do not change
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 file,
                 arr
@@ -100,7 +100,7 @@ namespace Cupy
         public static void savez(string file, NDarray[] args = null, Dictionary<string, NDarray> kwds = null)
         {
             var __self__ = self;
-            var pyargs = ToTuple(new object[] { file }.Concat(args ?? new NDarray[0]).ToArray());
+            using var pyargs = ToTuple(new object[] { file }.Concat(args ?? new NDarray[0]).ToArray());
             using var kwargs = new PyDict();
             if (kwds != null)
                 foreach (var pair in kwds)
@@ -150,7 +150,7 @@ namespace Cupy
         public static void savez_compressed(string file, NDarray[] args = null, Dictionary<string, NDarray> kwds = null)
         {
             var __self__ = self;
-            var pyargs = ToTuple(new object[] { file }.Concat(args ?? new NDarray[0]).ToArray());
+            using var pyargs = ToTuple(new object[] { file }.Concat(args ?? new NDarray[0]).ToArray());
             using var kwargs = new PyDict();
             if (kwds != null)
                 foreach (var pair in kwds)

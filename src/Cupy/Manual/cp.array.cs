@@ -38,7 +38,7 @@ namespace Cupy
             bool? subok = null, int? ndmin = null)
         {
             var __self__ = self;
-            var args = ToTuple(new object[]
+            using var args = ToTuple(new object[]
             {
                 @object
             });
@@ -372,7 +372,7 @@ namespace Cupy
         public static NDarray asarray(ValueType scalar, Dtype dtype = null)
         {
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 scalar
             });

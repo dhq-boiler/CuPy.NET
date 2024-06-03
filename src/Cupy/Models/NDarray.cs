@@ -531,7 +531,7 @@ namespace Cupy
         /// </param>
         public void itemset(params object[] args)
         {
-            var pyargs = ToTuple(args);
+            using var pyargs = ToTuple(args);
             using var kwargs = new PyDict();
             using dynamic py = self.InvokeMethod("itemset", pyargs, kwargs);
         }
@@ -575,7 +575,7 @@ namespace Cupy
         public byte[] tobytes(string order = null)
         {
             throw new NotImplementedException("TODO: this needs to be implemented with Marshal.Copy");
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
             });
             using var kwargs = new PyDict();
@@ -619,7 +619,7 @@ namespace Cupy
         {
             throw new NotImplementedException(
                 "Get python type 'ndarray' and 'matrix' and substitute them for the given .NET type");
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
             });
             using var kwargs = new PyDict();
@@ -649,7 +649,7 @@ namespace Cupy
         /// </param>
         public void resize(Shape new_shape, bool? refcheck = null)
         {
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 new_shape
             });

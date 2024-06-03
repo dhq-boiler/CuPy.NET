@@ -10,7 +10,7 @@ namespace Cupy
             bool return_tuple = false)
         {
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 in_params,
                 out_params,
@@ -35,7 +35,7 @@ namespace Cupy
             bool return_tuple = false)
         {
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 in_params,
                 out_params,
@@ -60,7 +60,7 @@ namespace Cupy
             bool return_tuple = false)
         {
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 in_params,
                 out_params,
@@ -85,7 +85,7 @@ namespace Cupy
             bool return_tuple = false)
         {
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 in_params,
                 out_params,
@@ -110,7 +110,7 @@ namespace Cupy
             bool return_tuple = false)
         {
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 in_params,
                 out_params,
@@ -135,7 +135,7 @@ namespace Cupy
             bool return_tuple = false)
         {
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 in_params,
                 out_params,
@@ -160,7 +160,7 @@ namespace Cupy
             bool return_tuple = false)
         {
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 in_params,
                 out_params,
@@ -185,7 +185,7 @@ namespace Cupy
             bool return_tuple = false)
         {
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 in_params,
                 out_params,
@@ -210,7 +210,7 @@ namespace Cupy
             bool return_tuple = false)
         {
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 in_params,
                 out_params,
@@ -235,7 +235,7 @@ namespace Cupy
             bool return_tuple = false)
         {
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 in_params,
                 out_params,
@@ -260,7 +260,7 @@ namespace Cupy
             bool return_tuple = false)
         {
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 in_params,
                 out_params,
@@ -285,7 +285,7 @@ namespace Cupy
             bool return_tuple = false)
         {
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 in_params,
                 out_params,
@@ -310,7 +310,7 @@ namespace Cupy
             bool return_tuple = false)
         {
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 in_params,
                 out_params,
@@ -335,7 +335,7 @@ namespace Cupy
             bool return_tuple = false)
         {
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 in_params,
                 out_params,
@@ -360,7 +360,7 @@ namespace Cupy
             bool return_tuple = false)
         {
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 in_params,
                 out_params,
@@ -385,7 +385,7 @@ namespace Cupy
             bool return_tuple = false)
         {
             var __self__ = self;
-            var pyargs = ToTuple(new object[]
+            using var pyargs = ToTuple(new object[]
             {
                 in_params,
                 out_params,
