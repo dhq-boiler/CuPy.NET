@@ -303,7 +303,8 @@ namespace Cupy.UnitTest
             var x = cp.arange(10, 1, -1);
             Assert.AreEqual("array([10,  9,  8,  7,  6,  5,  4,  3,  2])", x.repr);
             Assert.AreEqual("array([7, 7, 9, 2])", x[cp.array(3, 3, 1, 8)].repr);
-            x[cp.array(3, 3, 1, 8)] = cp.arange(4);
+            var ZeroToThree = cp.arange(4);
+            x[cp.array(3, 3, 1, 8)] = ZeroToThree;
             Assert.AreEqual("array([10,  2,  8,  1,  6,  5,  4,  3,  3])", x.repr);
         }
 
