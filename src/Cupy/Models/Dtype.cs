@@ -16,7 +16,9 @@ namespace Cupy
 
         ~Dtype()
         {
+            GC.SuppressFinalize(this);
             Dispose();
+            GC.ReRegisterForFinalize(this);
         }
     }
 

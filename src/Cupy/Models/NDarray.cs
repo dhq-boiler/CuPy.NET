@@ -66,7 +66,9 @@ namespace Cupy
 
         ~NDarray()
         {
+            GC.SuppressFinalize(this);
             Dispose();
+            GC.ReRegisterForFinalize(this);
         }
 
         /// <summary>

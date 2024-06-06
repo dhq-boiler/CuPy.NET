@@ -1,4 +1,5 @@
 ﻿using Python.Runtime;
+using System;
 
 namespace Cupy.Models
 {
@@ -10,7 +11,9 @@ namespace Cupy.Models
 
         ~Flags()
         {
+            GC.SuppressFinalize(this);
             Dispose();
+            GC.ReRegisterForFinalize(this);
         }
     }
 }
