@@ -7,5 +7,10 @@ namespace Cupy.Models
         public MemMapMode(PyObject pyobject) : base(pyobject)
         {
         }
+
+        ~MemMapMode()
+        {
+            Dispose();
+        }
     }
 }

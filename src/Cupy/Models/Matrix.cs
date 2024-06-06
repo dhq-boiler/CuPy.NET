@@ -7,5 +7,10 @@ namespace Cupy.Models
         public Matrix(PyObject pyobject) : base(pyobject)
         {
         }
+
+        ~Matrix()
+        {
+            Dispose();
+        }
     }
 }
