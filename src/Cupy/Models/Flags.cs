@@ -7,5 +7,10 @@ namespace Cupy.Models
         public Flags(PyObject pyobject) : base(pyobject)
         {
         }
+
+        ~Flags()
+        {
+            Dispose();
+        }
     }
 }

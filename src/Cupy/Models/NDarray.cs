@@ -64,6 +64,11 @@ namespace Cupy
             self = cp.dynamic_self.frombuffer(g, dtype.PyObject, -1);
         }
 
+        ~NDarray()
+        {
+            Dispose();
+        }
+
         /// <summary>
         ///     Information about the memory layout of the array.
         /// </summary>

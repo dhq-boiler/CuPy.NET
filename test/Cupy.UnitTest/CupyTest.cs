@@ -13,13 +13,8 @@ using System.Threading.Tasks;
 namespace Cupy.UnitTest
 {
     [TestFixture]
-    public class CupyTest
+    public class CupyTest : BaseTestCase
     {
-        [OneTimeTearDown]
-        public static void AssemblyCleanup()
-        {
-            PythonEngine.BeginAllowThreads();
-        }
 
         [Test]
         public void empty()

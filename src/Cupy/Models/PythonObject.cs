@@ -34,6 +34,7 @@ namespace Cupy
 
         public void Dispose()
         {
+            GC.SuppressFinalize(this);
             self?.Dispose();
         }
 

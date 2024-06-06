@@ -13,6 +13,11 @@ namespace Cupy
         public Dtype(Dtype t) : base((PyObject)t.PyObject)
         {
         }
+
+        ~Dtype()
+        {
+            Dispose();
+        }
     }
 
 
