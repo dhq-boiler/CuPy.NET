@@ -205,7 +205,8 @@ namespace Cupy
             var ndarray = empty(new Shape(@object.Length), type, order);
             if (@object.Length == 0)
                 return new NDarray<T>(ndarray);
-            long ptr = 0;
+            var ctypes = ndarray.PyObject.ctypes;
+            long ptr = ctypes.data;
             switch (@object)
             {
                 case char[] a:
@@ -247,10 +248,10 @@ namespace Cupy
                     ndarray.imag = ndimag;
                     break;
             }
-
+            ctypes.Dispose();
             if (dtype != null || subok != null || ndmin != null)
             {
-                var converted = array(ndarray, dtype, false, subok: subok, ndmin: ndmin);
+                var converted = cp.array(ndarray, dtype: dtype, copy: false, subok: subok, ndmin: ndmin);
                 ndarray.Dispose();
                 return new NDarray<T>(converted);
             }
