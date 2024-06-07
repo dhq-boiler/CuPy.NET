@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>CuPy.NET</id>
-	<version>2.5.2</version>
+	<version>2.5.3</version>
     <authors>dhq_boiler</authors>
     <owners>dhq_boiler</owners>
 	<projectUrl>https://github.com/dhq-boiler/CuPy.NET</projectUrl>
