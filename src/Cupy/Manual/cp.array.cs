@@ -205,8 +205,6 @@ namespace Cupy
             var ndarray = empty(new Shape(@object.Length), type, order);
             if (@object.Length == 0)
                 return new NDarray<T>(ndarray);
-            var ctypes = ndarray.PyObject.ctypes;
-            long ptr = ctypes.data;
             switch (@object)
             {
                 case char[] a:
