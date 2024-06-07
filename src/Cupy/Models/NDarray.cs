@@ -68,7 +68,6 @@ namespace Cupy
         {
             GC.SuppressFinalize(this);
             Dispose();
-            GC.ReRegisterForFinalize(this);
         }
 
         /// <summary>
