@@ -36,6 +36,7 @@ namespace Cupy
         {
             GC.SuppressFinalize(this);
             self?.Dispose();
+            self = null;
         }
 
         public override bool Equals(object obj)
