@@ -741,26 +741,26 @@ namespace Cupy
             return base.ToString();
         }
 
-        public override string ToString()
-        {
-            if (self.Handle == IntPtr.Zero)
-            {
-                return "<<none>>";
-            }
+        //public override string ToString()
+        //{
+        //    if (self.Handle == IntPtr.Zero)
+        //    {
+        //        return "<<none>>";
+        //    }
 
-            if (self.HasAttr("ndim"))
-            {
-                return Dig(ndim - 1, ndim, this);
-            }
-            else if (!base.ToString().Contains("[[") && !base.ToString().Contains("]]"))
-            {
-                return base.ToString();
-            }
-            else
-            {
-                return ToStringAsList();
-            }
-        }
+        //    if (self.HasAttr("ndim"))
+        //    {
+        //        return Dig(ndim - 1, ndim, this);
+        //    }
+        //    else if (!base.ToString().Contains("[[") && !base.ToString().Contains("]]"))
+        //    {
+        //        return base.ToString();
+        //    }
+        //    else
+        //    {
+        //        return ToStringAsList();
+        //    }
+        //}
 
         private string ToStringAsList()
         {
