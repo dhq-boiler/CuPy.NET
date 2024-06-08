@@ -56,7 +56,7 @@ namespace Cupy
 
             if (!Installer.IsModuleInstalled("numpy"))
             {
-                Installer.PipInstallModule("numpy", "1.22.0", true).GetAwaiter().GetResult();
+                Installer.PipInstallModule("numpy", "1.23.5", true).GetAwaiter().GetResult();
             }
             
             if (!Installer.IsModuleInstalled("cupy"))
