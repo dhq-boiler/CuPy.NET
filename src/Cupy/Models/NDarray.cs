@@ -73,7 +73,7 @@ namespace Cupy
             {
                 if (self.Handle == IntPtr.Zero)
                 {
-                    throw new InvalidOperationException();
+                    return default;
                 }
                 return new Flags(self.GetAttr("flags")); // TODO: implement Flags
             }
@@ -88,7 +88,7 @@ namespace Cupy
             {
                 if (self.Handle == IntPtr.Zero)
                 {
-                    throw new InvalidOperationException();
+                    return default;
                 }
                 return new Shape(self.GetAttr("shape").As<int[]>());
             }
@@ -103,7 +103,7 @@ namespace Cupy
             {
                 if (self.Handle == IntPtr.Zero)
                 {
-                    throw new InvalidOperationException();
+                    return default;
                 }
                 using var attr = self.GetAttr("strides");
                 return attr.As<int[]>();
@@ -119,7 +119,7 @@ namespace Cupy
             {
                 if (self.Handle == IntPtr.Zero)
                 {
-                    throw new InvalidOperationException();
+                    return default;
                 }
                 using var attr = self.GetAttr("ndim");
                 return attr.As<int>();
@@ -135,7 +135,7 @@ namespace Cupy
             {
                 if (self.Handle == IntPtr.Zero)
                 {
-                    throw new InvalidOperationException();
+                    return default;
                 }
                 return self.GetAttr("data");
             }
@@ -150,7 +150,7 @@ namespace Cupy
             {
                 if (self.Handle == IntPtr.Zero)
                 {
-                    throw new InvalidOperationException();
+                    return default;
                 }
                 using var attr = self.GetAttr("size");
                 return attr.As<int>();
@@ -166,7 +166,7 @@ namespace Cupy
             {
                 if (self.Handle == IntPtr.Zero)
                 {
-                    throw new InvalidOperationException();
+                    return default;
                 }
                 using var attr = self.GetAttr("itemsize");
                 return attr.As<int>();
@@ -182,7 +182,7 @@ namespace Cupy
             {
                 if (self.Handle == IntPtr.Zero)
                 {
-                    throw new InvalidOperationException();
+                    return default;
                 }
                 using var attr = self.GetAttr("nbytes");
                 return attr.As<int>();
@@ -198,7 +198,7 @@ namespace Cupy
             {
                 if (self.Handle == IntPtr.Zero)
                 {
-                    throw new InvalidOperationException();
+                    return default;
                 }
                 var base_obj = self.GetAttr("base");
                 if (base_obj.IsNone())
@@ -216,7 +216,7 @@ namespace Cupy
             {
                 if (self.Handle == IntPtr.Zero)
                 {
-                    throw new InvalidOperationException();
+                    return default;
                 }
                 return new Dtype(self.GetAttr("dtype"));
             }
@@ -231,7 +231,7 @@ namespace Cupy
             {
                 if (self.Handle == IntPtr.Zero)
                 {
-                    throw new InvalidOperationException();
+                    return default;
                 }
                 return new NDarray(self.GetAttr("T"));
             }
@@ -256,7 +256,7 @@ namespace Cupy
             {
                 if (self.Handle == IntPtr.Zero)
                 {
-                    throw new InvalidOperationException();
+                    return default;
                 }
                 return self.GetAttr("flat"); // todo: wrap and support usecases
             }
@@ -279,7 +279,7 @@ namespace Cupy
             {
                 if (self.Handle == IntPtr.Zero)
                 {
-                    throw new InvalidOperationException();
+                    return default;
                 }
                 using var ret = self.InvokeMethod("__len__");
                 return ret.As<int>();
@@ -295,7 +295,7 @@ namespace Cupy
             {
                 if (self.Handle == IntPtr.Zero)
                 {
-                    throw new InvalidOperationException();
+                    return default;
                 }
                 return ToString(1);
             }
@@ -310,7 +310,7 @@ namespace Cupy
             {
                 if (self.Handle == IntPtr.Zero)
                 {
-                    throw new InvalidOperationException();
+                    return default;
                 }
                 using var ret = self.InvokeMethod("__str__");
                 return ret.As<string>();
@@ -323,7 +323,7 @@ namespace Cupy
             {
                 if (self.Handle == IntPtr.Zero)
                 {
-                    throw new InvalidOperationException();
+                    return default;
                 }
                 var tuple = new PyTuple(Slice.ParseSlices(slicing_notation).Select(s =>
                 {
@@ -351,7 +351,7 @@ namespace Cupy
             {
                 if (self.Handle == IntPtr.Zero)
                 {
-                    throw new InvalidOperationException();
+                    return default;
                 }
                 if (coords.Length == 1)
                 {
@@ -380,7 +380,7 @@ namespace Cupy
             {
                 if (self.Handle == IntPtr.Zero)
                 {
-                    throw new InvalidOperationException();
+                    return default;
                 }
                 using var tuple = new PyTuple(indices.Select(a => (PyObject)a.PyObject).ToArray());
                 return new NDarray(PyObject[tuple]);
@@ -398,7 +398,7 @@ namespace Cupy
             {
                 if (self.Handle == IntPtr.Zero)
                 {
-                    throw new InvalidOperationException();
+                    return default;
                 }
                 var pyobjs = arrays_slices_or_indices.Select<object, PyObject>(x =>
                 {
@@ -436,7 +436,7 @@ namespace Cupy
             {
                 if (self.Handle == IntPtr.Zero)
                 {
-                    throw new InvalidOperationException();
+                    return default;
                 }
                 dynamic py = self.GetAttr("real");
                 return ToCsharp<NDarray>(py);
@@ -450,7 +450,7 @@ namespace Cupy
             {
                 if (self.Handle == IntPtr.Zero)
                 {
-                    throw new InvalidOperationException();
+                    return default;
                 }
                 dynamic py = self.GetAttr("imag");
                 return ToCsharp<NDarray>(py);
