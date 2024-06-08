@@ -9,7 +9,7 @@ namespace Cupy.UnitTest
     [TestFixture]
     public class BaseTestCase
     {
-        private const string PYTHON_DLL = @"C:\Users\boiler\AppData\Local\Programs\Python\Python38\python38.dll";
+        private const string PYTHON_DLL = @"C:\Users\boiler\AppData\Local\Programs\Python\Python311\python311.dll";
 
         [SetUp]
         public void OneTimeSetUp()
