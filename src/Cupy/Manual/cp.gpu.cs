@@ -1,5 +1,4 @@
 ﻿using Python.Runtime;
-using System.Linq;
 
 namespace Cupy
 {
@@ -23,10 +22,10 @@ namespace Cupy
             if (no_return != false) kwargs["no_return"] = ToPython(no_return);
             if (return_tuple != false) kwargs["return_tuple"] = ToPython(return_tuple);
 
-            dynamic elmKernel = __self__.GetAttr("ElementwiseKernel");
-            dynamic instance = elmKernel(in_params, out_params, operation, name: name, reduce_dims: reduce_dims,
+            using dynamic elmKernel = __self__.GetAttr("ElementwiseKernel");
+            using dynamic instance = elmKernel(in_params, out_params, operation, name: name, reduce_dims: reduce_dims,
                 preamble: preamble, no_return: no_return, return_tuple: return_tuple);
-            dynamic result = instance.__call__(t1.ToPython());
+            using dynamic result = instance.__call__(t1.ToPython());
             return result.As<R>();
         }
 
@@ -48,10 +47,10 @@ namespace Cupy
             if (no_return != false) kwargs["no_return"] = ToPython(no_return);
             if (return_tuple != false) kwargs["return_tuple"] = ToPython(return_tuple);
 
-            dynamic elmKernel = __self__.GetAttr("ElementwiseKernel");
-            dynamic instance = elmKernel(in_params, out_params, operation, name: name, reduce_dims: reduce_dims,
+            using dynamic elmKernel = __self__.GetAttr("ElementwiseKernel");
+            using dynamic instance = elmKernel(in_params, out_params, operation, name: name, reduce_dims: reduce_dims,
                 preamble: preamble, no_return: no_return, return_tuple: return_tuple);
-            dynamic result = instance.__call__(t1.ToPython(), t2.ToPython());
+            using dynamic result = instance.__call__(t1.ToPython(), t2.ToPython());
             return result.As<R>();
         }
 
@@ -73,10 +72,10 @@ namespace Cupy
             if (no_return != false) kwargs["no_return"] = ToPython(no_return);
             if (return_tuple != false) kwargs["return_tuple"] = ToPython(return_tuple);
 
-            dynamic elmKernel = __self__.GetAttr("ElementwiseKernel");
-            dynamic instance = elmKernel(in_params, out_params, operation, name: name, reduce_dims: reduce_dims,
+            using dynamic elmKernel = __self__.GetAttr("ElementwiseKernel");
+            using dynamic instance = elmKernel(in_params, out_params, operation, name: name, reduce_dims: reduce_dims,
                 preamble: preamble, no_return: no_return, return_tuple: return_tuple);
-            dynamic result = instance.__call__(t1.ToPython(), t2.ToPython(), t3.ToPython());
+            using dynamic result = instance.__call__(t1.ToPython(), t2.ToPython(), t3.ToPython());
             return result.As<R>();
         }
 
@@ -98,10 +97,10 @@ namespace Cupy
             if (no_return != false) kwargs["no_return"] = ToPython(no_return);
             if (return_tuple != false) kwargs["return_tuple"] = ToPython(return_tuple);
 
-            dynamic elmKernel = __self__.GetAttr("ElementwiseKernel");
-            dynamic instance = elmKernel(in_params, out_params, operation, name: name, reduce_dims: reduce_dims,
+            using dynamic elmKernel = __self__.GetAttr("ElementwiseKernel");
+            using dynamic instance = elmKernel(in_params, out_params, operation, name: name, reduce_dims: reduce_dims,
                 preamble: preamble, no_return: no_return, return_tuple: return_tuple);
-            dynamic result = instance.__call__(t1.ToPython(), t2.ToPython(), t3.ToPython(), t4.ToPython());
+            using dynamic result = instance.__call__(t1.ToPython(), t2.ToPython(), t3.ToPython(), t4.ToPython());
             return result.As<R>();
         }
 
@@ -123,10 +122,10 @@ namespace Cupy
             if (no_return != false) kwargs["no_return"] = ToPython(no_return);
             if (return_tuple != false) kwargs["return_tuple"] = ToPython(return_tuple);
 
-            dynamic elmKernel = __self__.GetAttr("ElementwiseKernel");
-            dynamic instance = elmKernel(in_params, out_params, operation, name: name, reduce_dims: reduce_dims,
+            using dynamic elmKernel = __self__.GetAttr("ElementwiseKernel");
+            using dynamic instance = elmKernel(in_params, out_params, operation, name: name, reduce_dims: reduce_dims,
                 preamble: preamble, no_return: no_return, return_tuple: return_tuple);
-            dynamic result = instance.__call__(t1.ToPython(), t2.ToPython(), t3.ToPython(), t4.ToPython(), t5.ToPython());
+            using dynamic result = instance.__call__(t1.ToPython(), t2.ToPython(), t3.ToPython(), t4.ToPython(), t5.ToPython());
             return result.As<R>();
         }
 
@@ -148,10 +147,10 @@ namespace Cupy
             if (no_return != false) kwargs["no_return"] = ToPython(no_return);
             if (return_tuple != false) kwargs["return_tuple"] = ToPython(return_tuple);
 
-            dynamic elmKernel = __self__.GetAttr("ElementwiseKernel");
-            dynamic instance = elmKernel(in_params, out_params, operation, name: name, reduce_dims: reduce_dims,
+            using dynamic elmKernel = __self__.GetAttr("ElementwiseKernel");
+            using dynamic instance = elmKernel(in_params, out_params, operation, name: name, reduce_dims: reduce_dims,
                 preamble: preamble, no_return: no_return, return_tuple: return_tuple);
-            dynamic result = instance.__call__(t1.ToPython(), t2.ToPython(), t3.ToPython(), t4.ToPython(), t5.ToPython(), t6.ToPython());
+            using dynamic result = instance.__call__(t1.ToPython(), t2.ToPython(), t3.ToPython(), t4.ToPython(), t5.ToPython(), t6.ToPython());
             return result.As<R>();
         }
 
@@ -173,10 +172,10 @@ namespace Cupy
             if (no_return != false) kwargs["no_return"] = ToPython(no_return);
             if (return_tuple != false) kwargs["return_tuple"] = ToPython(return_tuple);
 
-            dynamic elmKernel = __self__.GetAttr("ElementwiseKernel");
-            dynamic instance = elmKernel(in_params, out_params, operation, name: name, reduce_dims: reduce_dims,
+            using dynamic elmKernel = __self__.GetAttr("ElementwiseKernel");
+            using dynamic instance = elmKernel(in_params, out_params, operation, name: name, reduce_dims: reduce_dims,
                 preamble: preamble, no_return: no_return, return_tuple: return_tuple);
-            dynamic result = instance.__call__(t1.ToPython(), t2.ToPython(), t3.ToPython(), t4.ToPython(), t5.ToPython(), t6.ToPython(), t7.ToPython());
+            using dynamic result = instance.__call__(t1.ToPython(), t2.ToPython(), t3.ToPython(), t4.ToPython(), t5.ToPython(), t6.ToPython(), t7.ToPython());
             return result.As<R>();
         }
 
@@ -198,10 +197,10 @@ namespace Cupy
             if (no_return != false) kwargs["no_return"] = ToPython(no_return);
             if (return_tuple != false) kwargs["return_tuple"] = ToPython(return_tuple);
 
-            dynamic elmKernel = __self__.GetAttr("ElementwiseKernel");
-            dynamic instance = elmKernel(in_params, out_params, operation, name: name, reduce_dims: reduce_dims,
+            using dynamic elmKernel = __self__.GetAttr("ElementwiseKernel");
+            using dynamic instance = elmKernel(in_params, out_params, operation, name: name, reduce_dims: reduce_dims,
                 preamble: preamble, no_return: no_return, return_tuple: return_tuple);
-            dynamic result = instance.__call__(t1.ToPython(), t2.ToPython(), t3.ToPython(), t4.ToPython(), t5.ToPython(), t6.ToPython(), t7.ToPython(), t8.ToPython());
+            using dynamic result = instance.__call__(t1.ToPython(), t2.ToPython(), t3.ToPython(), t4.ToPython(), t5.ToPython(), t6.ToPython(), t7.ToPython(), t8.ToPython());
             return result.As<R>();
         }
 
@@ -223,10 +222,10 @@ namespace Cupy
             if (no_return != false) kwargs["no_return"] = ToPython(no_return);
             if (return_tuple != false) kwargs["return_tuple"] = ToPython(return_tuple);
 
-            dynamic elmKernel = __self__.GetAttr("ElementwiseKernel");
-            dynamic instance = elmKernel(in_params, out_params, operation, name: name, reduce_dims: reduce_dims,
+            using dynamic elmKernel = __self__.GetAttr("ElementwiseKernel");
+            using dynamic instance = elmKernel(in_params, out_params, operation, name: name, reduce_dims: reduce_dims,
                 preamble: preamble, no_return: no_return, return_tuple: return_tuple);
-            dynamic result = instance.__call__(t1.ToPython(), t2.ToPython(), t3.ToPython(), t4.ToPython(), t5.ToPython(), t6.ToPython(), t7.ToPython(), t8.ToPython(), t9.ToPython());
+            using dynamic result = instance.__call__(t1.ToPython(), t2.ToPython(), t3.ToPython(), t4.ToPython(), t5.ToPython(), t6.ToPython(), t7.ToPython(), t8.ToPython(), t9.ToPython());
             return result.As<R>();
         }
 
@@ -248,10 +247,10 @@ namespace Cupy
             if (no_return != false) kwargs["no_return"] = ToPython(no_return);
             if (return_tuple != false) kwargs["return_tuple"] = ToPython(return_tuple);
 
-            dynamic elmKernel = __self__.GetAttr("ElementwiseKernel");
-            dynamic instance = elmKernel(in_params, out_params, operation, name: name, reduce_dims: reduce_dims,
+            using dynamic elmKernel = __self__.GetAttr("ElementwiseKernel");
+            using dynamic instance = elmKernel(in_params, out_params, operation, name: name, reduce_dims: reduce_dims,
                 preamble: preamble, no_return: no_return, return_tuple: return_tuple);
-            dynamic result = instance.__call__(t1.ToPython(), t2.ToPython(), t3.ToPython(), t4.ToPython(), t5.ToPython(), t6.ToPython(), t7.ToPython(), t8.ToPython(), t9.ToPython(), t10.ToPython());
+            using dynamic result = instance.__call__(t1.ToPython(), t2.ToPython(), t3.ToPython(), t4.ToPython(), t5.ToPython(), t6.ToPython(), t7.ToPython(), t8.ToPython(), t9.ToPython(), t10.ToPython());
             return result.As<R>();
         }
 
@@ -273,10 +272,10 @@ namespace Cupy
             if (no_return != false) kwargs["no_return"] = ToPython(no_return);
             if (return_tuple != false) kwargs["return_tuple"] = ToPython(return_tuple);
 
-            dynamic elmKernel = __self__.GetAttr("ElementwiseKernel");
-            dynamic instance = elmKernel(in_params, out_params, operation, name: name, reduce_dims: reduce_dims,
+            using dynamic elmKernel = __self__.GetAttr("ElementwiseKernel");
+            using dynamic instance = elmKernel(in_params, out_params, operation, name: name, reduce_dims: reduce_dims,
                 preamble: preamble, no_return: no_return, return_tuple: return_tuple);
-            dynamic result = instance.__call__(t1.ToPython(), t2.ToPython(), t3.ToPython(), t4.ToPython(), t5.ToPython(), t6.ToPython(), t7.ToPython(), t8.ToPython(), t9.ToPython(), t10.ToPython(), t11.ToPython());
+            using dynamic result = instance.__call__(t1.ToPython(), t2.ToPython(), t3.ToPython(), t4.ToPython(), t5.ToPython(), t6.ToPython(), t7.ToPython(), t8.ToPython(), t9.ToPython(), t10.ToPython(), t11.ToPython());
             return result.As<R>();
         }
 
@@ -298,10 +297,10 @@ namespace Cupy
             if (no_return != false) kwargs["no_return"] = ToPython(no_return);
             if (return_tuple != false) kwargs["return_tuple"] = ToPython(return_tuple);
 
-            dynamic elmKernel = __self__.GetAttr("ElementwiseKernel");
-            dynamic instance = elmKernel(in_params, out_params, operation, name: name, reduce_dims: reduce_dims,
+            using dynamic elmKernel = __self__.GetAttr("ElementwiseKernel");
+            using dynamic instance = elmKernel(in_params, out_params, operation, name: name, reduce_dims: reduce_dims,
                 preamble: preamble, no_return: no_return, return_tuple: return_tuple);
-            dynamic result = instance.__call__(t1.ToPython(), t2.ToPython(), t3.ToPython(), t4.ToPython(), t5.ToPython(), t6.ToPython(), t7.ToPython(), t8.ToPython(), t9.ToPython(), t10.ToPython(), t11.ToPython(), t12.ToPython());
+            using dynamic result = instance.__call__(t1.ToPython(), t2.ToPython(), t3.ToPython(), t4.ToPython(), t5.ToPython(), t6.ToPython(), t7.ToPython(), t8.ToPython(), t9.ToPython(), t10.ToPython(), t11.ToPython(), t12.ToPython());
             return result.As<R>();
         }
 
@@ -323,10 +322,10 @@ namespace Cupy
             if (no_return != false) kwargs["no_return"] = ToPython(no_return);
             if (return_tuple != false) kwargs["return_tuple"] = ToPython(return_tuple);
 
-            dynamic elmKernel = __self__.GetAttr("ElementwiseKernel");
-            dynamic instance = elmKernel(in_params, out_params, operation, name: name, reduce_dims: reduce_dims,
+            using dynamic elmKernel = __self__.GetAttr("ElementwiseKernel");
+            using dynamic instance = elmKernel(in_params, out_params, operation, name: name, reduce_dims: reduce_dims,
                 preamble: preamble, no_return: no_return, return_tuple: return_tuple);
-            dynamic result = instance.__call__(t1.ToPython(), t2.ToPython(), t3.ToPython(), t4.ToPython(), t5.ToPython(), t6.ToPython(), t7.ToPython(), t8.ToPython(), t9.ToPython(), t10.ToPython(), t11.ToPython(), t12.ToPython(), t13.ToPython());
+            using dynamic result = instance.__call__(t1.ToPython(), t2.ToPython(), t3.ToPython(), t4.ToPython(), t5.ToPython(), t6.ToPython(), t7.ToPython(), t8.ToPython(), t9.ToPython(), t10.ToPython(), t11.ToPython(), t12.ToPython(), t13.ToPython());
             return result.As<R>();
         }
 
@@ -348,10 +347,10 @@ namespace Cupy
             if (no_return != false) kwargs["no_return"] = ToPython(no_return);
             if (return_tuple != false) kwargs["return_tuple"] = ToPython(return_tuple);
 
-            dynamic elmKernel = __self__.GetAttr("ElementwiseKernel");
-            dynamic instance = elmKernel(in_params, out_params, operation, name: name, reduce_dims: reduce_dims,
+            using dynamic elmKernel = __self__.GetAttr("ElementwiseKernel");
+            using dynamic instance = elmKernel(in_params, out_params, operation, name: name, reduce_dims: reduce_dims,
                 preamble: preamble, no_return: no_return, return_tuple: return_tuple);
-            dynamic result = instance.__call__(t1.ToPython(), t2.ToPython(), t3.ToPython(), t4.ToPython(), t5.ToPython(), t6.ToPython(), t7.ToPython(), t8.ToPython(), t9.ToPython(), t10.ToPython(), t11.ToPython(), t12.ToPython(), t13.ToPython(), t14.ToPython());
+            using dynamic result = instance.__call__(t1.ToPython(), t2.ToPython(), t3.ToPython(), t4.ToPython(), t5.ToPython(), t6.ToPython(), t7.ToPython(), t8.ToPython(), t9.ToPython(), t10.ToPython(), t11.ToPython(), t12.ToPython(), t13.ToPython(), t14.ToPython());
             return result.As<R>();
         }
 
@@ -373,10 +372,10 @@ namespace Cupy
             if (no_return != false) kwargs["no_return"] = ToPython(no_return);
             if (return_tuple != false) kwargs["return_tuple"] = ToPython(return_tuple);
 
-            dynamic elmKernel = __self__.GetAttr("ElementwiseKernel");
-            dynamic instance = elmKernel(in_params, out_params, operation, name: name, reduce_dims: reduce_dims,
+            using dynamic elmKernel = __self__.GetAttr("ElementwiseKernel");
+            using dynamic instance = elmKernel(in_params, out_params, operation, name: name, reduce_dims: reduce_dims,
                 preamble: preamble, no_return: no_return, return_tuple: return_tuple);
-            dynamic result = instance.__call__(t1.ToPython(), t2.ToPython(), t3.ToPython(), t4.ToPython(), t5.ToPython(), t6.ToPython(), t7.ToPython(), t8.ToPython(), t9.ToPython(), t10.ToPython(), t11.ToPython(), t12.ToPython(), t13.ToPython(), t14.ToPython(), t15.ToPython());
+            using dynamic result = instance.__call__(t1.ToPython(), t2.ToPython(), t3.ToPython(), t4.ToPython(), t5.ToPython(), t6.ToPython(), t7.ToPython(), t8.ToPython(), t9.ToPython(), t10.ToPython(), t11.ToPython(), t12.ToPython(), t13.ToPython(), t14.ToPython(), t15.ToPython());
             return result.As<R>();
         }
 
@@ -398,10 +397,10 @@ namespace Cupy
             if (no_return != false) kwargs["no_return"] = ToPython(no_return);
             if (return_tuple != false) kwargs["return_tuple"] = ToPython(return_tuple);
 
-            dynamic elmKernel = __self__.GetAttr("ElementwiseKernel");
-            dynamic instance = elmKernel(in_params, out_params, operation, name: name, reduce_dims: reduce_dims,
+            using dynamic elmKernel = __self__.GetAttr("ElementwiseKernel");
+            using dynamic instance = elmKernel(in_params, out_params, operation, name: name, reduce_dims: reduce_dims,
                 preamble: preamble, no_return: no_return, return_tuple: return_tuple);
-            dynamic result = instance.__call__(t1.ToPython(), t2.ToPython(), t3.ToPython(), t4.ToPython(), t5.ToPython(), t6.ToPython(), t7.ToPython(), t8.ToPython(), t9.ToPython(), t10.ToPython(), t11.ToPython(), t12.ToPython(), t13.ToPython(), t14.ToPython(), t15.ToPython(), t16.ToPython());
+            using dynamic result = instance.__call__(t1.ToPython(), t2.ToPython(), t3.ToPython(), t4.ToPython(), t5.ToPython(), t6.ToPython(), t7.ToPython(), t8.ToPython(), t9.ToPython(), t10.ToPython(), t11.ToPython(), t12.ToPython(), t13.ToPython(), t14.ToPython(), t15.ToPython(), t16.ToPython());
             return result.As<R>();
         }
     }
