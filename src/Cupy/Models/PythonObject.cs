@@ -35,7 +35,7 @@ namespace Cupy
         public void Dispose()
         {
             GC.SuppressFinalize(this);
-            //self?.Dispose(); //この行を実行するとAccessViolationExceptionが発生する
+            self?.Dispose();
             self = null;
         }
 
