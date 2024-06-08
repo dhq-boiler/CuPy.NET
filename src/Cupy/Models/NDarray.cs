@@ -63,13 +63,7 @@ namespace Cupy
             var g = (Cupy.ctypes.dynamic_self.c_uint8 * dataLength).from_address(dataPtr.ToInt64());
             self = cp.dynamic_self.frombuffer(g, dtype.PyObject, -1);
         }
-
-        ~NDarray()
-        {
-            GC.SuppressFinalize(this);
-            Dispose();
-        }
-
+        
         /// <summary>
         ///     Information about the memory layout of the array.
         /// </summary>
