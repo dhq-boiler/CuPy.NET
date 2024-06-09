@@ -101,7 +101,7 @@ namespace Cupy
                     {
                         var _po = GetPo(pyobj);
                         int _len = GetLen(_po);
-                        var __len = ToCsharp<Int32>(_po[0].len);
+                        var __len = ToCsharp<Int32>(GetLen(_po[0]));
                         var _rv = new Boolean[_len][];
                         for (var i = 0; i < _len; i++)
                         {
@@ -116,8 +116,8 @@ namespace Cupy
                     {
                         var _po = GetPo(pyobj);
                         int _len = GetLen(_po);
-                        var __len = ToCsharp<Int32>(_po[0].len);
-                        var ___len = ToCsharp<Int32>(_po[0][0].len);
+                        var __len = ToCsharp<Int32>(GetLen(_po[0]));
+                        var ___len = ToCsharp<Int32>(GetLen(_po[0][0]));
                         var _rv = new Boolean[_len][][];
 
                         for (var i = 0; i < _len; i++)
@@ -139,9 +139,9 @@ namespace Cupy
                     {
                         var _po = GetPo(pyobj);
                         int _len = GetLen(_po);
-                        var __len = ToCsharp<Int32>(_po[0].len);
-                        var ___len = ToCsharp<Int32>(_po[0][0].len);
-                        var ____len = ToCsharp<Int32>(_po[0][0][0].len);
+                        var __len = ToCsharp<Int32>(GetLen(_po[0]));
+                        var ___len = ToCsharp<Int32>(GetLen(_po[0][0]));
+                        var ____len = ToCsharp<Int32>(GetLen(_po[0][0][0]));
                         var _rv = new Boolean[_len][][][];
 
                         for (var i = 0; i < _len; i++)
@@ -177,7 +177,7 @@ namespace Cupy
                     {
                         var _po = GetPo(pyobj);
                         int _len = GetLen(_po);
-                        var __len = ToCsharp<Int32>(_po[0].len);
+                        var __len = ToCsharp<Int32>(GetLen(_po[0]));
                         var _rv = new Int16[_len][];
                         for (var i = 0; i < _len; i++)
                         {
@@ -191,40 +191,51 @@ namespace Cupy
                     {
                         var _po = GetPo(pyobj);
                         int _len = GetLen(_po);
-                        var __len = ToCsharp<Int32>(_po[0].len);
-                        var _rv = new Int16[_len][][];
+                        var __len = ToCsharp<Int32>(GetLen(_po[0]));
+                        var ___len = ToCsharp<Int32>(GetLen(_po[0][0]));
+                        var _rv = new float[_len][][];
+
                         for (var i = 0; i < _len; i++)
                         {
-                            _rv[i] = new Int16[__len][];
+                            _rv[i] = new float[__len][];
                             for (var j = 0; j < __len; j++)
                             {
-                                _rv[i][j] = new Int16[ToCsharp<Int32>(_po[i][j].len)];
-                                for (var k = 0; k < _rv[i][j].Length; k++)
+                                _rv[i][j] = new float[___len];
+                                for (var k = 0; k < ___len; k++)
+                                {
                                     _rv[i][j][k] = (Int16)ToCsharp<Int16>(_po[i][j][k]);
+                                }
                             }
                         }
+
                         return (object)_rv;
                     }
                 case "Int16[][][][]":
                     {
                         var _po = GetPo(pyobj);
                         int _len = GetLen(_po);
-                        var __len = ToCsharp<Int32>(_po[0].len);
-                        var _rv = new Int16[_len][][][];
+                        var __len = ToCsharp<Int32>(GetLen(_po[0]));
+                        var ___len = ToCsharp<Int32>(GetLen(_po[0][0]));
+                        var ____len = ToCsharp<Int32>(GetLen(_po[0][0][0]));
+                        var _rv = new float[_len][][][];
+
                         for (var i = 0; i < _len; i++)
                         {
-                            _rv[i] = new Int16[__len][][];
+                            _rv[i] = new float[__len][][];
                             for (var j = 0; j < __len; j++)
                             {
-                                _rv[i][j] = new Int16[ToCsharp<Int32>(_po[i][j].len)][];
-                                for (var k = 0; k < _rv[i][j].Length; k++)
+                                _rv[i][j] = new float[___len][];
+                                for (var k = 0; k < ___len; k++)
                                 {
-                                    _rv[i][j][k] = new Int16[ToCsharp<Int32>(_po[i][j][k].len)];
-                                    for (var l = 0; l < _rv[i][j][k].Length; l++)
+                                    _rv[i][j][k] = new float[____len];
+                                    for (var l = 0; l < ____len; l++)
+                                    {
                                         _rv[i][j][k][l] = (Int16)ToCsharp<Int16>(_po[i][j][k][l]);
+                                    }
                                 }
                             }
                         }
+
                         return (object)_rv;
                     }
                 case "Int32":
@@ -232,7 +243,7 @@ namespace Cupy
                     {
                         var _po = GetPo(pyobj);
                         int _len = GetLen(_po);
-                        var _rv = new int[_len];
+                        var _rv = new Int32[_len];
                         for (var i = 0; i < _len; i++)
                             _rv[i] = (Int32)ToCsharp<Int32>(_po[i]);
                         return (object)_rv;
@@ -241,8 +252,8 @@ namespace Cupy
                     {
                         var _po = GetPo(pyobj);
                         int _len = GetLen(_po);
-                        var __len = ToCsharp<Int32>(_po[0].len);
-                        var _rv = new int[_len][];
+                        var __len = ToCsharp<Int32>(GetLen(_po[0]));
+                        var _rv = new Int32[_len][];
                         for (var i = 0; i < _len; i++)
                         {
                             _rv[i] = new Int32[__len];
@@ -255,79 +266,68 @@ namespace Cupy
                     {
                         var _po = GetPo(pyobj);
                         int _len = GetLen(_po);
-                        var __len = ToCsharp<Int32>(_po[0].len);
-                        var _rv = new int[_len][][];
+                        var __len = ToCsharp<Int32>(GetLen(_po[0]));
+                        var ___len = ToCsharp<Int32>(GetLen(_po[0][0]));
+                        var _rv = new float[_len][][];
+
                         for (var i = 0; i < _len; i++)
                         {
-                            _rv[i] = new int[__len][];
+                            _rv[i] = new float[__len][];
                             for (var j = 0; j < __len; j++)
                             {
-                                _rv[i][j] = new int[ToCsharp<Int32>(_po[i][j].len)];
-                                for (var k = 0; k < _rv[i][j].Length; k++)
+                                _rv[i][j] = new float[___len];
+                                for (var k = 0; k < ___len; k++)
+                                {
                                     _rv[i][j][k] = (Int32)ToCsharp<Int32>(_po[i][j][k]);
+                                }
                             }
                         }
+
                         return (object)_rv;
                     }
                 case "Int32[][][][]":
                     {
                         var _po = GetPo(pyobj);
                         int _len = GetLen(_po);
-                        var __len = ToCsharp<Int32>(_po[0].len);
-                        var _rv = new int[_len][][][];
+                        var __len = ToCsharp<Int32>(GetLen(_po[0]));
+                        var ___len = ToCsharp<Int32>(GetLen(_po[0][0]));
+                        var ____len = ToCsharp<Int32>(GetLen(_po[0][0][0]));
+                        var _rv = new float[_len][][][];
+
                         for (var i = 0; i < _len; i++)
                         {
-                            _rv[i] = new int[__len][][];
+                            _rv[i] = new float[__len][][];
                             for (var j = 0; j < __len; j++)
                             {
-                                _rv[i][j] = new int[ToCsharp<Int32>(_po[i][j].len)][];
-                                for (var k = 0; k < _rv[i][j].Length; k++)
+                                _rv[i][j] = new float[___len][];
+                                for (var k = 0; k < ___len; k++)
                                 {
-                                    _rv[i][j][k] = new int[ToCsharp<Int32>(_po[i][j][k].len)];
-                                    for (var l = 0; l < _rv[i][j][k].Length; l++)
+                                    _rv[i][j][k] = new float[____len];
+                                    for (var l = 0; l < ____len; l++)
+                                    {
                                         _rv[i][j][k][l] = (Int32)ToCsharp<Int32>(_po[i][j][k][l]);
+                                    }
                                 }
                             }
                         }
-                        return (object)_rv;
-                    }
-                case "Int32[,]":
-                    {
-                        var _po = GetPo(pyobj);
-                        var _len = ToCsharp<int>(pyobj.len);
-                        var _rv = CreateInitialMultidimensionalArray<int>(_len, pyobj[0].len);
-                        for (var i = 0; i < _len; i++)
-                        {
-                            if (_len == 1)
-                            {
-                                _rv[i, 0] = (int)ToCsharp<int>(_po);
-                            }
-                            else
-                            {
-                                var elements = (int[])ToCsharp<int[]>(_po[i]);
-                                for (int j = 0; j < elements.Length; j++)
-                                {
-                                    _rv[i, j] = elements[j];
-                                }
-                            }
-                        }
+
                         return (object)_rv;
                     }
                 case "Int64":
                 case "Int64[]":
                     {
-                    var _po = GetPo(pyobj);
-                    int _len = GetLen(_po);
-                    var _rv = new Int64[_len];
-                    for (var i = 0; i < _len; i++)
-                        _rv[i] = (Int64)ToCsharp<Int64>(_po[i]);
-                    return (object)_rv;
+                        var _po = GetPo(pyobj);
+                        int _len = GetLen(_po);
+                        var _rv = new Int64[_len];
+                        for (var i = 0; i < _len; i++)
+                            _rv[i] = (Int64)ToCsharp<Int64>(_po[i]);
+                        return (object)_rv;
                     }
                 case "Int64[][]":
                     {
                         var _po = GetPo(pyobj);
                         int _len = GetLen(_po);
-                        var __len = ToCsharp<Int32>(_po[0].len);
+                        var __len = ToCsharp<Int32>(GetLen(_po[0]));
                         var _rv = new Int64[_len][];
                         for (var i = 0; i < _len; i++)
                         {
@@ -341,57 +341,68 @@ namespace Cupy
                     {
                         var _po = GetPo(pyobj);
                         int _len = GetLen(_po);
-                        var __len = ToCsharp<Int32>(_po[0].len);
-                        var _rv = new Int64[_len][][];
+                        var __len = ToCsharp<Int32>(GetLen(_po[0]));
+                        var ___len = ToCsharp<Int32>(GetLen(_po[0][0]));
+                        var _rv = new float[_len][][];
+
                         for (var i = 0; i < _len; i++)
                         {
-                            _rv[i] = new Int64[__len][];
+                            _rv[i] = new float[__len][];
                             for (var j = 0; j < __len; j++)
                             {
-                                _rv[i][j] = new Int64[ToCsharp<Int32>(_po[i][j].len)];
-                                for (var k = 0; k < _rv[i][j].Length; k++)
+                                _rv[i][j] = new float[___len];
+                                for (var k = 0; k < ___len; k++)
+                                {
                                     _rv[i][j][k] = (Int64)ToCsharp<Int64>(_po[i][j][k]);
+                                }
                             }
                         }
+
                         return (object)_rv;
                     }
                 case "Int64[][][][]":
                     {
                         var _po = GetPo(pyobj);
                         int _len = GetLen(_po);
-                        var __len = ToCsharp<Int32>(_po[0].len);
-                        var _rv = new Int64[_len][][][];
+                        var __len = ToCsharp<Int32>(GetLen(_po[0]));
+                        var ___len = ToCsharp<Int32>(GetLen(_po[0][0]));
+                        var ____len = ToCsharp<Int32>(GetLen(_po[0][0][0]));
+                        var _rv = new float[_len][][][];
+
                         for (var i = 0; i < _len; i++)
                         {
-                            _rv[i] = new Int64[__len][][];
+                            _rv[i] = new float[__len][][];
                             for (var j = 0; j < __len; j++)
                             {
-                                _rv[i][j] = new Int64[ToCsharp<Int32>(_po[i][j].len)][];
-                                for (var k = 0; k < _rv[i][j].Length; k++)
+                                _rv[i][j] = new float[___len][];
+                                for (var k = 0; k < ___len; k++)
                                 {
-                                    _rv[i][j][k] = new Int64[ToCsharp<Int32>(_po[i][j][k].len)];
-                                    for (var l = 0; l < _rv[i][j][k].Length; l++)
+                                    _rv[i][j][k] = new float[____len];
+                                    for (var l = 0; l < ____len; l++)
+                                    {
                                         _rv[i][j][k][l] = (Int64)ToCsharp<Int64>(_po[i][j][k][l]);
+                                    }
                                 }
                             }
                         }
+
                         return (object)_rv;
                     }
                 case "UInt16":
                 case "UInt16[]":
                     {
-                    var _po = GetPo(pyobj);
-                    int _len = GetLen(_po);
-                    var _rv = new UInt16[_len];
-                    for (var i = 0; i < _len; i++)
-                        _rv[i] = (UInt16)ToCsharp<UInt16>(_po[i]);
-                    return (object)_rv;
+                        var _po = GetPo(pyobj);
+                        int _len = GetLen(_po);
+                        var _rv = new UInt16[_len];
+                        for (var i = 0; i < _len; i++)
+                            _rv[i] = (UInt16)ToCsharp<UInt16>(_po[i]);
+                        return (object)_rv;
                     }
                 case "UInt16[][]":
                     {
                         var _po = GetPo(pyobj);
                         int _len = GetLen(_po);
-                        var __len = ToCsharp<Int32>(_po[0].len);
+                        var __len = ToCsharp<Int32>(GetLen(_po[0]));
                         var _rv = new UInt16[_len][];
                         for (var i = 0; i < _len; i++)
                         {
@@ -405,57 +416,68 @@ namespace Cupy
                     {
                         var _po = GetPo(pyobj);
                         int _len = GetLen(_po);
-                        var __len = ToCsharp<Int32>(_po[0].len);
-                        var _rv = new UInt16[_len][][];
+                        var __len = ToCsharp<Int32>(GetLen(_po[0]));
+                        var ___len = ToCsharp<Int32>(GetLen(_po[0][0]));
+                        var _rv = new float[_len][][];
+
                         for (var i = 0; i < _len; i++)
                         {
-                            _rv[i] = new UInt16[__len][];
+                            _rv[i] = new float[__len][];
                             for (var j = 0; j < __len; j++)
                             {
-                                _rv[i][j] = new UInt16[ToCsharp<Int32>(_po[i][j].len)];
-                                for (var k = 0; k < _rv[i][j].Length; k++)
+                                _rv[i][j] = new float[___len];
+                                for (var k = 0; k < ___len; k++)
+                                {
                                     _rv[i][j][k] = (UInt16)ToCsharp<UInt16>(_po[i][j][k]);
+                                }
                             }
                         }
+
                         return (object)_rv;
                     }
                 case "UInt16[][][][]":
                     {
                         var _po = GetPo(pyobj);
                         int _len = GetLen(_po);
-                        var __len = ToCsharp<Int32>(_po[0].len);
-                        var _rv = new UInt16[_len][][][];
+                        var __len = ToCsharp<Int32>(GetLen(_po[0]));
+                        var ___len = ToCsharp<Int32>(GetLen(_po[0][0]));
+                        var ____len = ToCsharp<Int32>(GetLen(_po[0][0][0]));
+                        var _rv = new float[_len][][][];
+
                         for (var i = 0; i < _len; i++)
                         {
-                            _rv[i] = new UInt16[__len][][];
+                            _rv[i] = new float[__len][][];
                             for (var j = 0; j < __len; j++)
                             {
-                                _rv[i][j] = new UInt16[ToCsharp<Int32>(_po[i][j].len)][];
-                                for (var k = 0; k < _rv[i][j].Length; k++)
+                                _rv[i][j] = new float[___len][];
+                                for (var k = 0; k < ___len; k++)
                                 {
-                                    _rv[i][j][k] = new UInt16[ToCsharp<Int32>(_po[i][j][k].len)];
-                                    for (var l = 0; l < _rv[i][j][k].Length; l++)
+                                    _rv[i][j][k] = new float[____len];
+                                    for (var l = 0; l < ____len; l++)
+                                    {
                                         _rv[i][j][k][l] = (UInt16)ToCsharp<UInt16>(_po[i][j][k][l]);
+                                    }
                                 }
                             }
                         }
+
                         return (object)_rv;
                     }
                 case "UInt32":
                 case "UInt32[]":
                     {
-                    var _po = GetPo(pyobj);
-                    int _len = GetLen(_po);
-                    var _rv = new UInt32[_len];
-                    for (var i = 0; i < _len; i++)
-                        _rv[i] = (UInt32)ToCsharp<UInt32>(_po[i]);
-                    return (object)_rv;
+                        var _po = GetPo(pyobj);
+                        int _len = GetLen(_po);
+                        var _rv = new UInt32[_len];
+                        for (var i = 0; i < _len; i++)
+                            _rv[i] = (UInt32)ToCsharp<UInt32>(_po[i]);
+                        return (object)_rv;
                     }
                 case "UInt32[][]":
                     {
                         var _po = GetPo(pyobj);
                         int _len = GetLen(_po);
-                        var __len = ToCsharp<Int32>(_po[0].len);
+                        var __len = ToCsharp<Int32>(GetLen(_po[0]));
                         var _rv = new UInt32[_len][];
                         for (var i = 0; i < _len; i++)
                         {
@@ -469,40 +491,51 @@ namespace Cupy
                     {
                         var _po = GetPo(pyobj);
                         int _len = GetLen(_po);
-                        var __len = ToCsharp<Int32>(_po[0].len);
-                        var _rv = new UInt32[_len][][];
+                        var __len = ToCsharp<Int32>(GetLen(_po[0]));
+                        var ___len = ToCsharp<Int32>(GetLen(_po[0][0]));
+                        var _rv = new float[_len][][];
+
                         for (var i = 0; i < _len; i++)
                         {
-                            _rv[i] = new UInt32[__len][];
+                            _rv[i] = new float[__len][];
                             for (var j = 0; j < __len; j++)
                             {
-                                _rv[i][j] = new UInt32[ToCsharp<Int32>(_po[i][j].len)];
-                                for (var k = 0; k < _rv[i][j].Length; k++)
+                                _rv[i][j] = new float[___len];
+                                for (var k = 0; k < ___len; k++)
+                                {
                                     _rv[i][j][k] = (UInt32)ToCsharp<UInt32>(_po[i][j][k]);
+                                }
                             }
                         }
+
                         return (object)_rv;
                     }
                 case "UInt32[][][][]":
                     {
                         var _po = GetPo(pyobj);
                         int _len = GetLen(_po);
-                        var __len = ToCsharp<Int32>(_po[0].len);
-                        var _rv = new UInt32[_len][][][];
+                        var __len = ToCsharp<Int32>(GetLen(_po[0]));
+                        var ___len = ToCsharp<Int32>(GetLen(_po[0][0]));
+                        var ____len = ToCsharp<Int32>(GetLen(_po[0][0][0]));
+                        var _rv = new float[_len][][][];
+
                         for (var i = 0; i < _len; i++)
                         {
-                            _rv[i] = new UInt32[__len][][];
+                            _rv[i] = new float[__len][][];
                             for (var j = 0; j < __len; j++)
                             {
-                                _rv[i][j] = new UInt32[ToCsharp<Int32>(_po[i][j].len)][];
-                                for (var k = 0; k < _rv[i][j].Length; k++)
+                                _rv[i][j] = new float[___len][];
+                                for (var k = 0; k < ___len; k++)
                                 {
-                                    _rv[i][j][k] = new UInt32[ToCsharp<Int32>(_po[i][j][k].len)];
-                                    for (var l = 0; l < _rv[i][j][k].Length; l++)
+                                    _rv[i][j][k] = new float[____len];
+                                    for (var l = 0; l < ____len; l++)
+                                    {
                                         _rv[i][j][k][l] = (UInt32)ToCsharp<UInt32>(_po[i][j][k][l]);
+                                    }
                                 }
                             }
                         }
+
                         return (object)_rv;
                     }
                 case "UInt64":
@@ -519,7 +552,7 @@ namespace Cupy
                     {
                         var _po = GetPo(pyobj);
                         int _len = GetLen(_po);
-                        var __len = ToCsharp<Int32>(_po[0].len);
+                        var __len = ToCsharp<Int32>(GetLen(_po[0]));
                         var _rv = new UInt64[_len][];
                         for (var i = 0; i < _len; i++)
                         {
@@ -533,40 +566,51 @@ namespace Cupy
                     {
                         var _po = GetPo(pyobj);
                         int _len = GetLen(_po);
-                        var __len = ToCsharp<Int32>(_po[0].len);
-                        var _rv = new UInt64[_len][][];
+                        var __len = ToCsharp<Int32>(GetLen(_po[0]));
+                        var ___len = ToCsharp<Int32>(GetLen(_po[0][0]));
+                        var _rv = new float[_len][][];
+
                         for (var i = 0; i < _len; i++)
                         {
-                            _rv[i] = new UInt64[__len][];
+                            _rv[i] = new float[__len][];
                             for (var j = 0; j < __len; j++)
                             {
-                                _rv[i][j] = new UInt64[ToCsharp<Int32>(_po[i][j].len)];
-                                for (var k = 0; k < _rv[i][j].Length; k++)
+                                _rv[i][j] = new float[___len];
+                                for (var k = 0; k < ___len; k++)
+                                {
                                     _rv[i][j][k] = (UInt64)ToCsharp<UInt64>(_po[i][j][k]);
+                                }
                             }
                         }
+
                         return (object)_rv;
                     }
                 case "UInt64[][][][]":
                     {
                         var _po = GetPo(pyobj);
                         int _len = GetLen(_po);
-                        var __len = ToCsharp<Int32>(_po[0].len);
-                        var _rv = new UInt64[_len][][][];
+                        var __len = ToCsharp<Int32>(GetLen(_po[0]));
+                        var ___len = ToCsharp<Int32>(GetLen(_po[0][0]));
+                        var ____len = ToCsharp<Int32>(GetLen(_po[0][0][0]));
+                        var _rv = new float[_len][][][];
+
                         for (var i = 0; i < _len; i++)
                         {
-                            _rv[i] = new UInt64[__len][][];
+                            _rv[i] = new float[__len][][];
                             for (var j = 0; j < __len; j++)
                             {
-                                _rv[i][j] = new UInt64[ToCsharp<Int32>(_po[i][j].len)][];
-                                for (var k = 0; k < _rv[i][j].Length; k++)
+                                _rv[i][j] = new float[___len][];
+                                for (var k = 0; k < ___len; k++)
                                 {
-                                    _rv[i][j][k] = new UInt64[ToCsharp<Int32>(_po[i][j][k].len)];
-                                    for (var l = 0; l < _rv[i][j][k].Length; l++)
+                                    _rv[i][j][k] = new float[____len];
+                                    for (var l = 0; l < ____len; l++)
+                                    {
                                         _rv[i][j][k][l] = (UInt64)ToCsharp<UInt64>(_po[i][j][k][l]);
+                                    }
                                 }
                             }
                         }
+
                         return (object)_rv;
                     }
                 case "Single":
@@ -583,7 +627,7 @@ namespace Cupy
                     {
                         var _po = GetPo(pyobj);
                         int _len = GetLen(_po);
-                        var __len = ToCsharp<Int32>(_po[0].len);
+                        var __len = ToCsharp<Int32>(GetLen(_po[0]));
                         var _rv = new float[_len][];
                         for (var i = 0; i < _len; i++)
                         {
@@ -597,8 +641,8 @@ namespace Cupy
                     {
                         var _po = GetPo(pyobj);
                         int _len = GetLen(_po);
-                        var __len = ToCsharp<Int32>(_po[0].len);
-                        var ___len = ToCsharp<Int32>(_po[0][0].len);
+                        var __len = ToCsharp<Int32>(GetLen(_po[0]));
+                        var ___len = ToCsharp<Int32>(GetLen(_po[0][0]));
                         var _rv = new float[_len][][];
 
                         for (var i = 0; i < _len; i++)
@@ -620,9 +664,9 @@ namespace Cupy
                     {
                         var _po = GetPo(pyobj);
                         int _len = GetLen(_po);
-                        var __len = ToCsharp<Int32>(_po[0].len);
-                        var ___len = ToCsharp<Int32>(_po[0][0].len);
-                        var ____len = ToCsharp<Int32>(_po[0][0][0].len);
+                        var __len = ToCsharp<Int32>(GetLen(_po[0]));
+                        var ___len = ToCsharp<Int32>(GetLen(_po[0][0]));
+                        var ____len = ToCsharp<Int32>(GetLen(_po[0][0][0]));
                         var _rv = new float[_len][][][];
 
                         for (var i = 0; i < _len; i++)
@@ -647,8 +691,8 @@ namespace Cupy
                 case "Single[,]":
                     {
                         var _po = GetPo(pyobj);
-                        var _len = ToCsharp<int>(pyobj.len);
-                        var _rv = CreateInitialMultidimensionalArray<float>(_len, pyobj[0].len);
+                        var _len = ToCsharp<int>(GetLen(pyobj)));
+                        var _rv = CreateInitialMultidimensionalArray<float>(_len, GetLen(pyobj[0]));
                         for (var i = 0; i < _len; i++)
                         {
                             if (_len == 1)
@@ -680,7 +724,7 @@ namespace Cupy
                     {
                         var _po = GetPo(pyobj);
                         int _len = GetLen(_po);
-                        var __len = ToCsharp<Int32>(_po[0].len);
+                        var __len = ToCsharp<Int32>(GetLen(_po[0]));
                         var _rv = new double[_len][];
                         for (var i = 0; i < _len; i++)
                         {
@@ -694,8 +738,8 @@ namespace Cupy
                     {
                         var _po = GetPo(pyobj);
                         int _len = GetLen(_po);
-                        var __len = ToCsharp<Int32>(_po[0].len);
-                        var ___len = ToCsharp<Int32>(_po[0][0].len);
+                        var __len = ToCsharp<Int32>(GetLen(_po[0]));
+                        var ___len = ToCsharp<Int32>(GetLen(_po[0][0]));
                         var _rv = new double[_len][][];
                         for (var i = 0; i < _len; i++)
                         {
@@ -715,9 +759,9 @@ namespace Cupy
                     {
                         var _po = GetPo(pyobj);
                         int _len = GetLen(_po);
-                        var __len = ToCsharp<Int32>(_po[0].len);
-                        var ___len = ToCsharp<Int32>(_po[0][0].len);
-                        var ____len = ToCsharp<Int32>(_po[0][0][0].len);
+                        var __len = ToCsharp<Int32>(GetLen(_po[0]));
+                        var ___len = ToCsharp<Int32>(GetLen(_po[0][0]));
+                        var ____len = ToCsharp<Int32>(GetLen(_po[0][0][0]));
                         var _rv = new double[_len][][][];
                         for (var i = 0; i < _len; i++)
                         {
@@ -751,7 +795,7 @@ namespace Cupy
                     {
                         var _po = GetPo(pyobj);
                         int _len = GetLen(_po);
-                        var __len = ToCsharp<Int32>(_po[0].len);
+                        var __len = ToCsharp<Int32>(GetLen(_po[0]));
                         var _rv = new Complex[_len][];
                         for (var i = 0; i < _len; i++)
                         {
@@ -765,8 +809,8 @@ namespace Cupy
                     {
                         var _po = GetPo(pyobj);
                         int _len = GetLen(_po);
-                        var __len = ToCsharp<Int32>(_po[0].len);
-                        var ___len = ToCsharp<Int32>(_po[0][0].len);
+                        var __len = ToCsharp<Int32>(GetLen(_po[0]));
+                        var ___len = ToCsharp<Int32>(GetLen(_po[0][0]));
                         var _rv = new Complex[_len][][];
 
                         for (var i = 0; i < _len; i++)
@@ -788,9 +832,9 @@ namespace Cupy
                     {
                         var _po = GetPo(pyobj);
                         int _len = GetLen(_po);
-                        var __len = ToCsharp<Int32>(_po[0].len);
-                        var ___len = ToCsharp<Int32>(_po[0][0].len);
-                        var ____len = ToCsharp<Int32>(_po[0][0][0].len);
+                        var __len = ToCsharp<Int32>(GetLen(_po[0]));
+                        var ___len = ToCsharp<Int32>(GetLen(_po[0][0]));
+                        var ____len = ToCsharp<Int32>(GetLen(_po[0][0][0]));
                         var _rv = new Complex[_len][][][];
 
                         for (var i = 0; i < _len; i++)
@@ -977,7 +1021,7 @@ namespace Cupy
                     {
                         var _po = GetPo(pyobj);
                         int _len = GetLen(_po);
-                        var __len = ToCsharp<Int32>(_po[0].len);
+                        var __len = ToCsharp<Int32>(GetLen(_po[0]));
                         var _rv = new int[_len][];
                         for (var i = 0; i < _len; i++)
                         {
@@ -991,7 +1035,7 @@ namespace Cupy
                     {
                         var _po = GetPo(pyobj);
                         var _len = ToCsharp<int>(pyobj.len);
-                        var _rv = CreateInitialMultidimensionalArray<int>(_len, pyobj[0].len);
+                        var _rv = CreateInitialMultidimensionalArray<int>(_len, GetLen(pyobj[0]));
                         for (var i = 0; i < _len; i++)
                         {
                             if (_len == 1)
@@ -1013,7 +1057,7 @@ namespace Cupy
                     {
                         var _po = GetPo(pyobj);
                         var _len = ToCsharp<int>(pyobj.len);
-                        var _rv = CreateInitialMultidimensionalArray<float>(_len, pyobj[0].len);
+                        var _rv = CreateInitialMultidimensionalArray<float>(_len, GetLen(pyobj[0]));
                         for (var i = 0; i < _len; i++)
                         {
                             if (_len == 1)
