@@ -691,7 +691,7 @@ namespace Cupy
                 case "Single[,]":
                     {
                         var _po = GetPo(pyobj);
-                        var _len = ToCsharp<int>(GetLen(pyobj)));
+                        var _len = ToCsharp<int>(GetLen(pyobj));
                         var _rv = CreateInitialMultidimensionalArray<float>(_len, GetLen(pyobj[0]));
                         for (var i = 0; i < _len; i++)
                         {
