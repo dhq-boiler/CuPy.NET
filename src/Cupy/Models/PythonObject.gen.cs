@@ -7,7 +7,6 @@ using System.Globalization;
 using System.Linq;
 using System.Numerics;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using Cupy.Models;
 using Python.Runtime;
 #if PYTHON_INCLUDED
@@ -86,20 +85,16 @@ namespace Cupy
                     var po = pyobj as PyObject;
                     var len = po.Length();
                     var rv = new NDarray[len];
-                    Parallel.For(0, (int)len, i =>
-                    {
+                    for (var i = 0; i < len; i++)
                         rv[i] = (NDarray)ToCsharp<NDarray>(po[i]);
-                    });
                     return (object)rv;
                 case "Boolean[]":
                     {
                         var _po = GetPo(pyobj);
                         int _len = GetLen(_po);
                         var _rv = new Boolean[_len];
-                        Parallel.For(0, _len, i =>
-                        {
+                        for (var i = 0; i < _len; i++)
                             _rv[i] = (bool)ToCsharp<Boolean>(_po[i]);
-                        });
                         return (object)_rv;
                     }
                 case "Boolean[][]":
@@ -108,12 +103,13 @@ namespace Cupy
                         int _len = GetLen(_po);
                         var __len = ToCsharp<Int32>(GetLen(_po[0]));
                         var _rv = new Boolean[_len][];
-                        Parallel.For(0, _len, i =>
+                        for (var i = 0; i < _len; i++)
                         {
                             _rv[i] = new Boolean[__len];
                             for (var j = 0; j < __len; j++)
                                 _rv[i][j] = (Boolean)ToCsharp<Boolean>(_po[i][j]);
-                        });
+                        }
+
                         return (object)_rv;
                     }
                 case "Boolean[][][]":
@@ -124,8 +120,7 @@ namespace Cupy
                         var ___len = ToCsharp<Int32>(GetLen(_po[0][0]));
                         var _rv = new Boolean[_len][][];
 
-                        //for (var i = 0; i < _len; i++)
-                        Parallel.For(0, _len, i =>
+                        for (var i = 0; i < _len; i++)
                         {
                             _rv[i] = new Boolean[__len][];
                             for (var j = 0; j < __len; j++)
@@ -136,7 +131,8 @@ namespace Cupy
                                     _rv[i][j][k] = (Boolean)ToCsharp<Boolean>(_po[i][j][k]);
                                 }
                             }
-                        });
+                        }
+
                         return (object)_rv;
                     }
                 case "Boolean[][][][]":
@@ -147,7 +143,8 @@ namespace Cupy
                         var ___len = ToCsharp<Int32>(GetLen(_po[0][0]));
                         var ____len = ToCsharp<Int32>(GetLen(_po[0][0][0]));
                         var _rv = new Boolean[_len][][][];
-                        Parallel.For(0, _len, i =>
+
+                        for (var i = 0; i < _len; i++)
                         {
                             _rv[i] = new Boolean[__len][][];
                             for (var j = 0; j < __len; j++)
@@ -162,7 +159,8 @@ namespace Cupy
                                     }
                                 }
                             }
-                        });
+                        }
+
                         return (object)_rv;
                     }
                 case "Int16":
@@ -171,10 +169,8 @@ namespace Cupy
                         var _po = GetPo(pyobj);
                         int _len = GetLen(_po);
                         var _rv = new Int16[_len];
-                        Parallel.For(0, _len, i =>
-                        {
+                        for (var i = 0; i < _len; i++)
                             _rv[i] = (Int16)ToCsharp<Int16>(_po[i]);
-                        });
                         return (object)_rv;
                     }
                 case "Int16[][]":
@@ -183,12 +179,12 @@ namespace Cupy
                         int _len = GetLen(_po);
                         var __len = ToCsharp<Int32>(GetLen(_po[0]));
                         var _rv = new Int16[_len][];
-                        Parallel.For(0, _len, i =>
+                        for (var i = 0; i < _len; i++)
                         {
                             _rv[i] = new Int16[__len];
                             for (var j = 0; j < __len; j++)
                                 _rv[i][j] = (Int16)ToCsharp<Int16>(_po[i][j]);
-                        });
+                        }
                         return (object)_rv;
                     }
                 case "Int16[][][]":
@@ -199,7 +195,7 @@ namespace Cupy
                         var ___len = ToCsharp<Int32>(GetLen(_po[0][0]));
                         var _rv = new float[_len][][];
 
-                        Parallel.For(0, _len, i =>
+                        for (var i = 0; i < _len; i++)
                         {
                             _rv[i] = new float[__len][];
                             for (var j = 0; j < __len; j++)
@@ -210,7 +206,7 @@ namespace Cupy
                                     _rv[i][j][k] = (Int16)ToCsharp<Int16>(_po[i][j][k]);
                                 }
                             }
-                        });
+                        }
 
                         return (object)_rv;
                     }
@@ -223,7 +219,7 @@ namespace Cupy
                         var ____len = ToCsharp<Int32>(GetLen(_po[0][0][0]));
                         var _rv = new float[_len][][][];
 
-                        Parallel.For(0, _len, i =>
+                        for (var i = 0; i < _len; i++)
                         {
                             _rv[i] = new float[__len][][];
                             for (var j = 0; j < __len; j++)
@@ -238,7 +234,7 @@ namespace Cupy
                                     }
                                 }
                             }
-                        });
+                        }
 
                         return (object)_rv;
                     }
@@ -248,10 +244,8 @@ namespace Cupy
                         var _po = GetPo(pyobj);
                         int _len = GetLen(_po);
                         var _rv = new Int32[_len];
-                        Parallel.For(0, _len, i =>
-                        {
+                        for (var i = 0; i < _len; i++)
                             _rv[i] = (Int32)ToCsharp<Int32>(_po[i]);
-                        });
                         return (object)_rv;
                     }
                 case "Int32[][]":
@@ -260,12 +254,12 @@ namespace Cupy
                         int _len = GetLen(_po);
                         var __len = ToCsharp<Int32>(GetLen(_po[0]));
                         var _rv = new Int32[_len][];
-                        Parallel.For(0, _len, i =>
+                        for (var i = 0; i < _len; i++)
                         {
                             _rv[i] = new Int32[__len];
                             for (var j = 0; j < __len; j++)
                                 _rv[i][j] = (Int32)ToCsharp<Int32>(_po[i][j]);
-                        });
+                        }
                         return (object)_rv;
                     }
                 case "Int32[][][]":
@@ -276,7 +270,7 @@ namespace Cupy
                         var ___len = ToCsharp<Int32>(GetLen(_po[0][0]));
                         var _rv = new float[_len][][];
 
-                        Parallel.For(0, _len, i =>
+                        for (var i = 0; i < _len; i++)
                         {
                             _rv[i] = new float[__len][];
                             for (var j = 0; j < __len; j++)
@@ -287,7 +281,7 @@ namespace Cupy
                                     _rv[i][j][k] = (Int32)ToCsharp<Int32>(_po[i][j][k]);
                                 }
                             }
-                        });
+                        }
 
                         return (object)_rv;
                     }
@@ -300,7 +294,7 @@ namespace Cupy
                         var ____len = ToCsharp<Int32>(GetLen(_po[0][0][0]));
                         var _rv = new float[_len][][][];
 
-                        Parallel.For(0, _len, i =>
+                        for (var i = 0; i < _len; i++)
                         {
                             _rv[i] = new float[__len][][];
                             for (var j = 0; j < __len; j++)
@@ -315,7 +309,7 @@ namespace Cupy
                                     }
                                 }
                             }
-                        });
+                        }
 
                         return (object)_rv;
                     }
@@ -335,12 +329,12 @@ namespace Cupy
                         int _len = GetLen(_po);
                         var __len = ToCsharp<Int32>(GetLen(_po[0]));
                         var _rv = new Int64[_len][];
-                        Parallel.For(0, _len, i =>
+                        for (var i = 0; i < _len; i++)
                         {
                             _rv[i] = new Int64[__len];
                             for (var j = 0; j < __len; j++)
                                 _rv[i][j] = (Int64)ToCsharp<Int64>(_po[i][j]);
-                        });
+                        }
                         return (object)_rv;
                     }
                 case "Int64[][][]":
@@ -351,7 +345,7 @@ namespace Cupy
                         var ___len = ToCsharp<Int32>(GetLen(_po[0][0]));
                         var _rv = new float[_len][][];
 
-                        Parallel.For(0, _len, i =>
+                        for (var i = 0; i < _len; i++)
                         {
                             _rv[i] = new float[__len][];
                             for (var j = 0; j < __len; j++)
@@ -362,7 +356,7 @@ namespace Cupy
                                     _rv[i][j][k] = (Int64)ToCsharp<Int64>(_po[i][j][k]);
                                 }
                             }
-                        });
+                        }
 
                         return (object)_rv;
                     }
@@ -375,7 +369,7 @@ namespace Cupy
                         var ____len = ToCsharp<Int32>(GetLen(_po[0][0][0]));
                         var _rv = new float[_len][][][];
 
-                        Parallel.For(0, _len, i =>
+                        for (var i = 0; i < _len; i++)
                         {
                             _rv[i] = new float[__len][][];
                             for (var j = 0; j < __len; j++)
@@ -390,7 +384,7 @@ namespace Cupy
                                     }
                                 }
                             }
-                        });
+                        }
 
                         return (object)_rv;
                     }
@@ -410,12 +404,12 @@ namespace Cupy
                         int _len = GetLen(_po);
                         var __len = ToCsharp<Int32>(GetLen(_po[0]));
                         var _rv = new UInt16[_len][];
-                        Parallel.For(0, _len, i =>
+                        for (var i = 0; i < _len; i++)
                         {
                             _rv[i] = new UInt16[__len];
                             for (var j = 0; j < __len; j++)
                                 _rv[i][j] = (UInt16)ToCsharp<UInt16>(_po[i][j]);
-                        });
+                        }
                         return (object)_rv;
                     }
                 case "UInt16[][][]":
@@ -426,7 +420,7 @@ namespace Cupy
                         var ___len = ToCsharp<Int32>(GetLen(_po[0][0]));
                         var _rv = new float[_len][][];
 
-                        Parallel.For(0, _len, i =>
+                        for (var i = 0; i < _len; i++)
                         {
                             _rv[i] = new float[__len][];
                             for (var j = 0; j < __len; j++)
@@ -437,7 +431,7 @@ namespace Cupy
                                     _rv[i][j][k] = (UInt16)ToCsharp<UInt16>(_po[i][j][k]);
                                 }
                             }
-                        });
+                        }
 
                         return (object)_rv;
                     }
@@ -450,7 +444,7 @@ namespace Cupy
                         var ____len = ToCsharp<Int32>(GetLen(_po[0][0][0]));
                         var _rv = new float[_len][][][];
 
-                        Parallel.For(0, _len, i =>
+                        for (var i = 0; i < _len; i++)
                         {
                             _rv[i] = new float[__len][][];
                             for (var j = 0; j < __len; j++)
@@ -465,7 +459,7 @@ namespace Cupy
                                     }
                                 }
                             }
-                        });
+                        }
 
                         return (object)_rv;
                     }
@@ -475,10 +469,8 @@ namespace Cupy
                         var _po = GetPo(pyobj);
                         int _len = GetLen(_po);
                         var _rv = new UInt32[_len];
-                        Parallel.For(0, _len, i =>
-                        {
+                        for (var i = 0; i < _len; i++)
                             _rv[i] = (UInt32)ToCsharp<UInt32>(_po[i]);
-                        });
                         return (object)_rv;
                     }
                 case "UInt32[][]":
@@ -487,12 +479,12 @@ namespace Cupy
                         int _len = GetLen(_po);
                         var __len = ToCsharp<Int32>(GetLen(_po[0]));
                         var _rv = new UInt32[_len][];
-                        Parallel.For(0, _len, i =>
+                        for (var i = 0; i < _len; i++)
                         {
                             _rv[i] = new UInt32[__len];
                             for (var j = 0; j < __len; j++)
                                 _rv[i][j] = (UInt32)ToCsharp<UInt32>(_po[i][j]);
-                        });
+                        }
                         return (object)_rv;
                     }
                 case "UInt32[][][]":
@@ -503,7 +495,7 @@ namespace Cupy
                         var ___len = ToCsharp<Int32>(GetLen(_po[0][0]));
                         var _rv = new float[_len][][];
 
-                        Parallel.For(0, _len, i =>
+                        for (var i = 0; i < _len; i++)
                         {
                             _rv[i] = new float[__len][];
                             for (var j = 0; j < __len; j++)
@@ -514,7 +506,7 @@ namespace Cupy
                                     _rv[i][j][k] = (UInt32)ToCsharp<UInt32>(_po[i][j][k]);
                                 }
                             }
-                        });
+                        }
 
                         return (object)_rv;
                     }
@@ -527,7 +519,7 @@ namespace Cupy
                         var ____len = ToCsharp<Int32>(GetLen(_po[0][0][0]));
                         var _rv = new float[_len][][][];
 
-                        Parallel.For(0, _len, i =>
+                        for (var i = 0; i < _len; i++)
                         {
                             _rv[i] = new float[__len][][];
                             for (var j = 0; j < __len; j++)
@@ -542,7 +534,7 @@ namespace Cupy
                                     }
                                 }
                             }
-                        });
+                        }
 
                         return (object)_rv;
                     }
@@ -552,10 +544,8 @@ namespace Cupy
                     var _po = GetPo(pyobj);
                     int _len = GetLen(_po);
                     var _rv = new UInt64[_len];
-                    Parallel.For(0, _len, i =>
-                    {
+                    for (var i = 0; i < _len; i++)
                         _rv[i] = (UInt64)ToCsharp<UInt64>(_po[i]);
-                    });
                     return (object)_rv;
                     }
                 case "UInt64[][]":
@@ -564,12 +554,12 @@ namespace Cupy
                         int _len = GetLen(_po);
                         var __len = ToCsharp<Int32>(GetLen(_po[0]));
                         var _rv = new UInt64[_len][];
-                        Parallel.For(0, _len, i =>
+                        for (var i = 0; i < _len; i++)
                         {
                             _rv[i] = new UInt64[__len];
                             for (var j = 0; j < __len; j++)
                                 _rv[i][j] = (UInt64)ToCsharp<UInt64>(_po[i][j]);
-                        });
+                        }
                         return (object)_rv;
                     }
                 case "UInt64[][][]":
@@ -580,7 +570,7 @@ namespace Cupy
                         var ___len = ToCsharp<Int32>(GetLen(_po[0][0]));
                         var _rv = new float[_len][][];
 
-                        Parallel.For(0, _len, i =>
+                        for (var i = 0; i < _len; i++)
                         {
                             _rv[i] = new float[__len][];
                             for (var j = 0; j < __len; j++)
@@ -591,7 +581,7 @@ namespace Cupy
                                     _rv[i][j][k] = (UInt64)ToCsharp<UInt64>(_po[i][j][k]);
                                 }
                             }
-                        });
+                        }
 
                         return (object)_rv;
                     }
@@ -604,7 +594,7 @@ namespace Cupy
                         var ____len = ToCsharp<Int32>(GetLen(_po[0][0][0]));
                         var _rv = new float[_len][][][];
 
-                        Parallel.For(0, _len, i =>
+                        for (var i = 0; i < _len; i++)
                         {
                             _rv[i] = new float[__len][][];
                             for (var j = 0; j < __len; j++)
@@ -619,7 +609,7 @@ namespace Cupy
                                     }
                                 }
                             }
-                        });
+                        }
 
                         return (object)_rv;
                     }
@@ -629,10 +619,8 @@ namespace Cupy
                     var _po = GetPo(pyobj);
                     int _len = GetLen(_po);
                     var _rv = new float[_len];
-                    Parallel.For(0, _len, i =>
-                    {
+                    for (var i = 0; i < _len; i++)
                         _rv[i] = (Single)ToCsharp<float>(_po[i]);
-                    });
                     return (object)_rv;
                     }
                 case "Single[][]":
@@ -641,12 +629,12 @@ namespace Cupy
                         int _len = GetLen(_po);
                         var __len = ToCsharp<Int32>(GetLen(_po[0]));
                         var _rv = new float[_len][];
-                        Parallel.For(0, _len, i =>
+                        for (var i = 0; i < _len; i++)
                         {
                             _rv[i] = new float[__len];
                             for (var j = 0; j < __len; j++)
                                 _rv[i][j] = (Single)ToCsharp<float>(_po[i][j]);
-                        });
+                        }
                         return (object)_rv;
                     }
                 case "Single[][][]":
@@ -657,7 +645,7 @@ namespace Cupy
                         var ___len = ToCsharp<Int32>(GetLen(_po[0][0]));
                         var _rv = new float[_len][][];
 
-                        Parallel.For(0, _len, i =>
+                        for (var i = 0; i < _len; i++)
                         {
                             _rv[i] = new float[__len][];
                             for (var j = 0; j < __len; j++)
@@ -668,7 +656,7 @@ namespace Cupy
                                     _rv[i][j][k] = (Single)ToCsharp<float>(_po[i][j][k]);
                                 }
                             }
-                        });
+                        }
 
                         return (object)_rv;
                     }
@@ -681,7 +669,7 @@ namespace Cupy
                         var ____len = ToCsharp<Int32>(GetLen(_po[0][0][0]));
                         var _rv = new float[_len][][][];
 
-                        Parallel.For(0, _len, i =>
+                        for (var i = 0; i < _len; i++)
                         {
                             _rv[i] = new float[__len][][];
                             for (var j = 0; j < __len; j++)
@@ -696,7 +684,7 @@ namespace Cupy
                                     }
                                 }
                             }
-                        });
+                        }
 
                         return (object)_rv;
                     }
@@ -728,10 +716,8 @@ namespace Cupy
                     var _po = GetPo(pyobj);
                     int _len = GetLen(_po);
                     var _rv = new double[_len];
-                    Parallel.For(0, _len, i =>
-                    {
-                        _rv[i] = (Double)ToCsharp<double>(_po[i]); 
-                    });
+                    for (var i = 0; i < _len; i++)
+                        _rv[i] = (Double)ToCsharp<double>(_po[i]);
                     return (object)_rv;
                     }
                 case "Double[][]":
@@ -740,12 +726,12 @@ namespace Cupy
                         int _len = GetLen(_po);
                         var __len = ToCsharp<Int32>(GetLen(_po[0]));
                         var _rv = new double[_len][];
-                        Parallel.For(0, _len, i =>
+                        for (var i = 0; i < _len; i++)
                         {
                             _rv[i] = new double[__len];
                             for (var j = 0; j < __len; j++)
                                 _rv[i][j] = (Double)ToCsharp<Double>(_po[i][j]);
-                        });
+                        }
                         return (object)_rv;
                     }
                 case "Double[][][]":
@@ -755,7 +741,7 @@ namespace Cupy
                         var __len = ToCsharp<Int32>(GetLen(_po[0]));
                         var ___len = ToCsharp<Int32>(GetLen(_po[0][0]));
                         var _rv = new double[_len][][];
-                        Parallel.For(0, _len, i =>
+                        for (var i = 0; i < _len; i++)
                         {
                             _rv[i] = new double[__len][];
                             for (var j = 0; j < __len; j++)
@@ -766,7 +752,7 @@ namespace Cupy
                                     _rv[i][j][k] = (Double)ToCsharp<Double>(_po[i][j][k]);
                                 }
                             }
-                        });
+                        }
                         return (object)_rv;
                     }
                 case "Double[][][][]":
@@ -777,7 +763,7 @@ namespace Cupy
                         var ___len = ToCsharp<Int32>(GetLen(_po[0][0]));
                         var ____len = ToCsharp<Int32>(GetLen(_po[0][0][0]));
                         var _rv = new double[_len][][][];
-                        Parallel.For(0, _len, i =>
+                        for (var i = 0; i < _len; i++)
                         {
                             _rv[i] = new double[__len][][];
                             for (var j = 0; j < __len; j++)
@@ -792,7 +778,7 @@ namespace Cupy
                                     }
                                 }
                             }
-                        });
+                        }
                         return (object)_rv;
                     }
                 case "Complex":
@@ -801,10 +787,8 @@ namespace Cupy
                         var _po = GetPo(pyobj);
                         int _len = GetLen(_po);
                         var _rv = new Complex[_len];
-                        Parallel.For(0, _len, i =>
-                        {
+                        for (var i = 0; i < _len; i++)
                             _rv[i] = (Complex)ToCsharp<Complex>(_po[i]);
-                        });
                         return (object)_rv;
                     }
                 case "Complex[][]":
@@ -813,12 +797,12 @@ namespace Cupy
                         int _len = GetLen(_po);
                         var __len = ToCsharp<Int32>(GetLen(_po[0]));
                         var _rv = new Complex[_len][];
-                        Parallel.For(0, _len, i =>
+                        for (var i = 0; i < _len; i++)
                         {
                             _rv[i] = new Complex[__len];
                             for (var j = 0; j < __len; j++)
                                 _rv[i][j] = (Complex)ToCsharp<Complex>(_po[i][j]);
-                        });
+                        }
                         return (object)_rv;
                     }
                 case "Complex[][][]":
@@ -829,7 +813,7 @@ namespace Cupy
                         var ___len = ToCsharp<Int32>(GetLen(_po[0][0]));
                         var _rv = new Complex[_len][][];
 
-                        Parallel.For(0, _len, i =>
+                        for (var i = 0; i < _len; i++)
                         {
                             _rv[i] = new Complex[__len][];
                             for (var j = 0; j < __len; j++)
@@ -840,7 +824,7 @@ namespace Cupy
                                     _rv[i][j][k] = (Complex)ToCsharp<Complex>(_po[i][j][k]);
                                 }
                             }
-                        });
+                        }
 
                         return (object)_rv;
                     }
@@ -853,7 +837,7 @@ namespace Cupy
                         var ____len = ToCsharp<Int32>(GetLen(_po[0][0][0]));
                         var _rv = new Complex[_len][][][];
 
-                        Parallel.For(0, _len, i =>
+                        for (var i = 0; i < _len; i++)
                         {
                             _rv[i] = new Complex[__len][][];
                             for (var j = 0; j < __len; j++)
@@ -868,7 +852,7 @@ namespace Cupy
                                     }
                                 }
                             }
-                        });
+                        }
 
                         return (object)_rv;
                     }
