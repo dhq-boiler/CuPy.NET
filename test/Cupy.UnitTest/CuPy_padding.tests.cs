@@ -16,13 +16,13 @@ namespace Cupy.UnitTest
             // array([4, 4, 1, 2, 3, 4, 5, 6, 6, 6])
             // 
 
-#if TODO
-            var given = a = [1, 2, 3, 4, 5];
-             given = cp.pad(a, (2,3), 'constant', constant_values = (4, 6));
+//#if TODO
+            var a = cp.array([1, 2, 3, 4, 5]);
+            var given = cp.pad(a, (2, 3), "constant", constant_values: new[] { 4, 6 });
             var expected =
                 "array([4, 4, 1, 2, 3, 4, 5, 6, 6, 6])";
             Assert.AreEqual(expected, given.repr);
-#endif
+//#endif
             // >>> cp.pad(a, (2, 3), 'edge')
             // array([1, 1, 1, 2, 3, 4, 5, 5, 5, 5])
             // 
