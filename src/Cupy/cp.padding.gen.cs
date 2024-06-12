@@ -88,9 +88,9 @@ namespace Cupy
             var __self__ = self;
             using var pyargs = ToTuple(new object[]
             {
-                array,
-                pad_width,
-                mode
+                array.ToPython(),
+                pad_width.ToPython(),
+                mode.ToPython()
             });
             using var kwargs = new PyDict();
             if (stat_length != null) kwargs["stat_length"] = ToPython(stat_length);
