@@ -25,7 +25,9 @@ namespace Cupy.UnitTest
         [TearDown]
         public void OneTimeTearDown()
         {
+            AppContext.SetSwitch("System.Runtime.Serialization.EnableUnsafeBinaryFormatterSerialization", true);
             PythonEngine.Shutdown();
+            AppContext.SetSwitch("System.Runtime.Serialization.EnableUnsafeBinaryFormatterSerialization", false);
         }
     }
 }
