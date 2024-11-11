@@ -1065,5 +1065,45 @@ namespace Cupy.UnitTest
             var a = cp.frombuffer(bytes, cp.@byte);
             Assert.AreEqual("array([1, 2, 3, 4, 5, 6, 7, 8], dtype=int8)", a.repr);
         }
+
+        [Test]
+        public void Convert_int16_array_Test()
+        {
+            var a = cp.array(new[] { 1, 2, 3 }, dtype: cp.int16);
+            var b = a.GetData<short[]>();
+            Assert.That(b, Is.EqualTo(new short[] { 1, 2, 3 }));
+        }
+
+        [Test]
+        public void Covert_int32_array_Test()
+        {
+            var a = cp.array(new[] { 1, 2, 3 }, dtype: cp.int32);
+            var b = a.GetData<int[]>();
+            Assert.That(b, Is.EqualTo(new[] { 1, 2, 3 }));
+        }
+
+        [Test]
+        public void Convert_int64_array_Test()
+        {
+            var a = cp.array(new[] { 1, 2, 3 }, dtype: cp.int64);
+            var b = a.GetData<long[]>();
+            Assert.That(b, Is.EqualTo(new[] { 1L, 2L, 3L }));
+        }
+
+        [Test]
+        public void Convert_float_array_Test()
+        {
+            var a = cp.array(new[] { 1.0, 2.0, 3.0 }, dtype: cp.float32);
+            var b = a.GetData<float[]>();
+            Assert.That(b, Is.EqualTo(new[] { 1.0f, 2.0f, 3.0f }));
+        }
+
+        [Test]
+        public void Convert_double_array_Test()
+        {
+            var a = cp.array(new[] { 1.0, 2.0, 3.0 }, dtype: cp.float64);
+            var b = a.GetData<double[]>();
+            Assert.That(b, Is.EqualTo(new[] { 1.0, 2.0, 3.0 }));
+        }
     }
 }
