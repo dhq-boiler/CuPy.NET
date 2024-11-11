@@ -42,7 +42,7 @@ namespace Cupy
         public static NDarray empty(Shape shape, Dtype dtype = null, string order = null)
         {
             //auto-generated code, do not change
-            var __self__ = self;
+            using dynamic __self__ = Py.Import("cupy");
             using var pyargs = ToTuple(new object[]
             {
                 shape
