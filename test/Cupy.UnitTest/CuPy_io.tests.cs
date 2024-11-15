@@ -25,7 +25,7 @@ namespace Cupy.UnitTest
             var expected =
                 "array([[1, 2, 3],\n" +
                 "       [4, 5, 6]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // Store compressed data to disk, and load it again:
 
@@ -50,11 +50,11 @@ namespace Cupy.UnitTest
              expected =
                 "array([[1, 2, 3],\n" +
                 "       [4, 5, 6]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = data['b'];
              expected =
                 "array([1, 2])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = data.close();
 #endif
             // Mem-map the stored array, and then access the second row
@@ -70,7 +70,7 @@ namespace Cupy.UnitTest
              given = X[1, :];
              expected =
                 "memmap([4, 5, 6])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -104,7 +104,7 @@ namespace Cupy.UnitTest
              given = cp.load(outfile);
             var expected =
                 "array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -142,11 +142,11 @@ namespace Cupy.UnitTest
              given = npzfile.files;
             var expected =
                 "['arr_1', 'arr_0']";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = npzfile['arr_0'];
              expected =
                 "array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // Using savez with **kwds, the arrays are saved with the keyword names.
 
@@ -168,11 +168,11 @@ namespace Cupy.UnitTest
              given = npzfile.files;
              expected =
                 "['y', 'x']";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = npzfile['x'];
              expected =
                 "array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -198,11 +198,11 @@ namespace Cupy.UnitTest
              given = print(cp.array_equal(test_array, loaded{'a'}));
             var expected =
                 "True";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = print(cp.array_equal(test_vector, loaded{'b'}));
              expected =
                 "True";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -251,12 +251,12 @@ namespace Cupy.UnitTest
              given = data = cp.genfromtxt(s, dtype = {('myint','i8'),('myfloat','f8'),;
             var expected =
                 "... ('mystring','S5')], delimiter=",")";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = data;
              expected =
                 "array((1, 1.3, 'abcde'),\n" +
                 "      dtype=[('myint', '<i8'), ('myfloat', '<f8'), ('mystring', '|S5')])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // Using dtype = None
 
@@ -273,12 +273,12 @@ namespace Cupy.UnitTest
              given = data = cp.genfromtxt(s, dtype = None,;
              expected =
                 "... names = ['myint','myfloat','mystring'], delimiter=",")";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = data;
              expected =
                 "array((1, 1.3, 'abcde'),\n" +
                 "      dtype=[('myint', '<i8'), ('myfloat', '<f8'), ('mystring', '|S5')])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // Specifying dtype and names
 
@@ -295,12 +295,12 @@ namespace Cupy.UnitTest
              given = data = cp.genfromtxt(s, dtype = "i8,f8,S5",;
              expected =
                 "... names=['myint','myfloat','mystring'], delimiter=",")";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = data;
              expected =
                 "array((1, 1.3, 'abcde'),\n" +
                 "      dtype=[('myint', '<i8'), ('myfloat', '<f8'), ('mystring', '|S5')])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // An example with fixed-width columns
 
@@ -317,12 +317,12 @@ namespace Cupy.UnitTest
              given = data = cp.genfromtxt(s, dtype = None, names = {'intvar','fltvar','strvar'},;
              expected =
                 "...     delimiter=[1,3,5])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = data;
              expected =
                 "array((1, 1.3, 'abcde'),\n" +
                 "      dtype=[('intvar', '<i8'), ('fltvar', '<f8'), ('strvar', '|S5')])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -355,16 +355,16 @@ namespace Cupy.UnitTest
              given = output = cp.fromregex('test.dat', regexp,;
             var expected =
                 "...                       [('num', cp.int64), ('key', 'S3')])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = output;
              expected =
                 "array([(1312L, 'foo'), (1534L, 'bar'), (444L, 'qux')],\n" +
                 "      dtype=[('num', '<i8'), ('key', '|S3')])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = output['num'];
              expected =
                 "array([1312, 1534,  444], dtype=int64)";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -387,16 +387,16 @@ namespace Cupy.UnitTest
              given = a.tolist();
             var expected =
                 "[1, 2]";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = a = cp.array({{1, 2}, {3, 4}});
              given = list(a);
              expected =
                 "[array([1, 2]), array([3, 4])]";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = a.tolist();
              expected =
                 "[[1, 2], [3, 4]]";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -416,7 +416,7 @@ namespace Cupy.UnitTest
             var expected =
                 "...                       suppress_small=True))\n" +
                 "[ 0., 1., 2., 3.]";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // >>> x  = cp.arange(3.)
             // >>> cp.array2string(x, formatter={'float_kind':lambda x: "%.2f" % x})
@@ -428,7 +428,7 @@ namespace Cupy.UnitTest
              given = cp.array2string(x, formatter = {'float_kind':lambda x: "%.2f" % x});
              expected =
                 "'[0.00 1.00 2.00]'";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // >>> x  = cp.arange(3)
             // >>> cp.array2string(x, formatter={'int':lambda x: hex(x)})
@@ -440,7 +440,7 @@ namespace Cupy.UnitTest
              given = cp.array2string(x, formatter = {'int':lambda x: hex(x)});
              expected =
                 "'[0x0L 0x1L 0x2L]'";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -460,15 +460,15 @@ namespace Cupy.UnitTest
             var given = cp.array_repr(cp.array({1,2}));
             var expected =
                 "'array([1, 2])'";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.array_repr(cp.ma.array({0.}));
              expected =
                 "'MaskedArray([ 0.])'";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.array_repr(cp.array({}, cp.int32));
              expected =
                 "'array([], dtype=int32)'";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // >>> x = cp.array([1e-6, 4e-7, 2, 3])
             // >>> cp.array_repr(x, precision=6, suppress_small=True)
@@ -480,7 +480,7 @@ namespace Cupy.UnitTest
              given = cp.array_repr(x, precision = 6, suppress_small = True);
              expected =
                 "'array([ 0.000001,  0.      ,  2.      ,  3.      ])'";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -496,7 +496,7 @@ namespace Cupy.UnitTest
             var given = cp.array_str(cp.arange(3));
             var expected =
                 "'[0 1 2]'";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -518,19 +518,19 @@ namespace Cupy.UnitTest
             var given = cp.format_float_positional(cp.float32(cp.pi));
             var expected =
                 "'3.1415927'";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.format_float_positional(cp.float16(cp.pi));
              expected =
                 "'3.14'";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.format_float_positional(cp.float16(0.3));
              expected =
                 "'0.3'";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.format_float_positional(cp.float16(0.3), unique = False, precision = 10);
              expected =
                 "'0.3000488281'";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -551,16 +551,16 @@ namespace Cupy.UnitTest
             var given = cp.format_float_scientific(cp.float32(cp.pi));
             var expected =
                 "'3.1415927e+00'";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = s = cp.float32(1.23e24);
              given = cp.format_float_scientific(s, unique = False, precision = 15);
              expected =
                 "'1.230000071797338e+24'";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.format_float_scientific(s, exp_digits = 4);
              expected =
                 "'1.23e+0024'";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -605,7 +605,7 @@ namespace Cupy.UnitTest
                 "memmap([[ 0.,  0.,  0.,  0.],\n" +
                 "        [ 0.,  0.,  0.,  0.],\n" +
                 "        [ 0.,  0.,  0.,  0.]], dtype=float32)";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // Write data to memmap array:
 
@@ -623,7 +623,7 @@ namespace Cupy.UnitTest
                 "memmap([[  0.,   1.,   2.,   3.],\n" +
                 "        [  4.,   5.,   6.,   7.],\n" +
                 "        [  8.,   9.,  10.,  11.]], dtype=float32)";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // >>> fp.filename == path.abspath(filename)
             // True
@@ -633,7 +633,7 @@ namespace Cupy.UnitTest
              given = fp.filename == path.abspath(filename);
              expected =
                 "True";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // Deletion flushes memory changes to disk before removing the object:
 
@@ -659,7 +659,7 @@ namespace Cupy.UnitTest
                 "memmap([[  0.,   1.,   2.,   3.],\n" +
                 "        [  4.,   5.,   6.,   7.],\n" +
                 "        [  8.,   9.,  10.,  11.]], dtype=float32)";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // Read-only memmap:
 
@@ -673,7 +673,7 @@ namespace Cupy.UnitTest
              given = fpr.flags.writeable;
              expected =
                 "False";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // Copy-on-write memmap:
 
@@ -687,7 +687,7 @@ namespace Cupy.UnitTest
              given = fpc.flags.writeable;
              expected =
                 "True";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // It’s possible to assign to copy-on-write array, but values are only
             // written into the memory copy of the array, and not written to disk:
@@ -709,14 +709,14 @@ namespace Cupy.UnitTest
                 "memmap([[  0.,   1.,   2.,   3.],\n" +
                 "        [  4.,   5.,   6.,   7.],\n" +
                 "        [  8.,   9.,  10.,  11.]], dtype=float32)";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = fpc[0,:] = 0;
              given = fpc;
              expected =
                 "memmap([[  0.,   0.,   0.,   0.],\n" +
                 "        [  4.,   5.,   6.,   7.],\n" +
                 "        [  8.,   9.,  10.,  11.]], dtype=float32)";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // File on disk is unchanged:
 
@@ -732,7 +732,7 @@ namespace Cupy.UnitTest
                 "memmap([[  0.,   1.,   2.,   3.],\n" +
                 "        [  4.,   5.,   6.,   7.],\n" +
                 "        [  8.,   9.,  10.,  11.]], dtype=float32)";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // Offset into a memmap:
 
@@ -746,7 +746,7 @@ namespace Cupy.UnitTest
              given = fpo;
              expected =
                 "memmap([  4.,   5.,   6.,   7.,   8.,   9.,  10.,  11.], dtype=float32)";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // Methods
         }
@@ -767,7 +767,7 @@ namespace Cupy.UnitTest
              given = print(cp.array({1.123456789}));
             var expected =
                 "[ 1.1235]";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // Long arrays can be summarised:
 
@@ -781,7 +781,7 @@ namespace Cupy.UnitTest
              given = print(cp.arange(10));
              expected =
                 "[0 1 2 ..., 7 8 9]";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // Small results can be suppressed:
 
@@ -800,12 +800,12 @@ namespace Cupy.UnitTest
              given = x**2 - (x + eps)**2;
              expected =
                 "array([ -4.9304e-32,  -4.4409e-16,   0.0000e+00,   0.0000e+00])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.set_printoptions(suppress = True);
              given = x**2 - (x + eps)**2;
              expected =
                 "array([-0., -0.,  0.,  0.])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // A custom formatter can be used to display array elements as desired:
 
@@ -824,12 +824,12 @@ namespace Cupy.UnitTest
              given = x;
              expected =
                 "array([int: 0, int: -1, int: -2])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.set_printoptions()  # formatter gets reset;
              given = x;
              expected =
                 "array([0, 1, 2])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // To put back the default options, you can use:
 
@@ -843,7 +843,7 @@ namespace Cupy.UnitTest
              expected =
                 "... linewidth=75, nanstr='nan', precision=8,\n" +
                 "... suppress=False, threshold=1000, formatter=None)";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -867,17 +867,17 @@ namespace Cupy.UnitTest
             var expected =
                 "...     return 'HA! - What are you going to do now?'\n" +
                 "...";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.set_string_function(pprint);
              given = a = cp.arange(10);
              given = a;
              expected =
                 "HA! - What are you going to do now?";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = print(a);
              expected =
                 "[0 1 2 3 4 5 6 7 8 9]";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // We can reset the function to the default:
 
@@ -891,7 +891,7 @@ namespace Cupy.UnitTest
              given = a;
              expected =
                 "array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // repr affects either pretty printing or normal string representation.
             // Note that __repr__ is still affected by setting __str__
@@ -912,11 +912,11 @@ namespace Cupy.UnitTest
              given = x.__str__();
              expected =
                 "'random'";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = x.__repr__();
              expected =
                 "'array([     0,      1,      2,      3])'";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -936,15 +936,15 @@ namespace Cupy.UnitTest
             var given = cp.base_repr(5);
             var expected =
                 "'101'";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.base_repr(6, 5);
              expected =
                 "'11'";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.base_repr(7, base = 5, padding = 3);
              expected =
                 "'00012'";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // >>> cp.base_repr(10, base=16)
             // 'A'
@@ -956,11 +956,11 @@ namespace Cupy.UnitTest
              given = cp.base_repr(10, base = 16);
              expected =
                 "'A'";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.base_repr(32, base = 16);
              expected =
                 "'20'";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -989,16 +989,16 @@ namespace Cupy.UnitTest
             var expected =
                 "'/home/guido/www.google.com/site/index.html'\n" +
                 "";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = ds = DataSource(None)  # use with temporary file;
              given = ds.open('/home/guido/foobar.txt');
              expected =
                 "<open file '/home/guido.foobar.txt', mode 'r' at 0x91d4430>";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = ds.abspath('/home/guido/foobar.txt');
              expected =
                 "'/tmp/tmpy4pgsP/home/guido/foobar.txt'";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // Methods
         }

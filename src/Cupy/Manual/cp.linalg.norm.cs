@@ -48,10 +48,13 @@ namespace Cupy
             {
                 using var pyargs = ToTuple(new object[] { x });
                 using var kwargs = new PyDict();
-                if (ord != null) kwargs["ord"] = ToPython(ord);
-                if (axis != null) kwargs["axis"] = ToPython(axis);
-                if (keepdims != null) kwargs["keepdims"] = ToPython(keepdims);
-                var linalg = self.GetAttr("linalg");
+                using var ordPy = ord != null ? ToPython(ord) : null;
+                using var axisPy = axis != null ? ToPython(axis) : null;
+                using var keepdimsPy = keepdims != null ? ToPython(keepdims) : null;
+                using var linalg = self.GetAttr("linalg");
+                if (ordPy != null) kwargs["ord"] = ordPy;
+                if (axisPy != null) kwargs["axis"] = axisPy;
+                if (keepdimsPy != null) kwargs["keepdims"] = keepdimsPy;
                 dynamic py = linalg.InvokeMethod("norm", pyargs, kwargs);
                 return ToCsharp<NDarray>(py);
             }
@@ -65,9 +68,12 @@ namespace Cupy
             {
                 using var pyargs = ToTuple(new object[] { x });
                 using var kwargs = new PyDict();
-                if (ord != null) kwargs["ord"] = ToPython(ord);
-                if (axis != null) kwargs["axis"] = ToPython(axis);
-                if (keepdims != null) kwargs["keepdims"] = ToPython(keepdims);
+                using var ordPy = ord != null ? ToPython(ord) : null;
+                using var axisPy = axis != null ? ToPython(axis) : null;
+                using var keepdimsPy = keepdims != null ? ToPython(keepdims) : null;
+                if (ordPy != null) kwargs["ord"] = ordPy;
+                if (axisPy != null) kwargs["axis"] = axisPy;
+                if (keepdimsPy != null) kwargs["keepdims"] = keepdimsPy;
                 var linalg = self.GetAttr("linalg");
                 dynamic py = linalg.InvokeMethod("norm", pyargs, kwargs);
                 return ToCsharp<NDarray>(py);
@@ -89,21 +95,25 @@ namespace Cupy
             {
                 using var pyargs = ToTuple(new object[] { x });
                 using var kwargs = new PyDict();
-                if (ord != null) kwargs["ord"] = ToPython(ord);
-                var linalg = self.GetAttr("linalg");
+                using var ordPy = ord != null ? ToPython(ord) : null;
+                using var linalg = self.GetAttr("linalg");
+                if (ordPy != null) kwargs["ord"] = ordPy;
                 dynamic py = linalg.InvokeMethod("norm", pyargs, kwargs);
                 return ToCsharp<float>(py);
             }
 
-            public static float norm(NDarray x, Constants ord)
+            public static float norm(NDarray x, Constants? ord)
             {
                 if (ord != Constants.inf && ord != Constants.neg_inf)
                     throw new ArgumentException("ord must be either inf or neg_inf");
-
                 using var pyargs = ToTuple(new object[] { x });
                 using var kwargs = new PyDict();
-                if (ord != null) kwargs["ord"] = ord == Constants.inf ? dynamic_self.inf : -dynamic_self.inf;
-                var linalg = self.GetAttr("linalg");
+                using var linalg = self.GetAttr("linalg");
+                if (ord != null)
+                {
+                    var infValue = ord == Constants.inf ? dynamic_self.inf : -dynamic_self.inf;
+                    kwargs["ord"] = infValue;
+                }
                 dynamic py = linalg.InvokeMethod("norm", pyargs, kwargs);
                 return ToCsharp<float>(py);
             }
@@ -171,27 +181,23 @@ namespace Cupy
             /// </returns>
             public static (NDarray, NDarray, NDarray) qr(NDarray a, string mode = "reduced")
             {
-                //auto-generated code, do not change
-                var linalg = self.GetAttr("linalg");
-                var __self__ = linalg;
-                using var pyargs = ToTuple(new object[]
-                {
-                    a
-                });
+                using var linalg = self.GetAttr("linalg");
+                using var pyargs = ToTuple(new object[] { a });
                 using var kwargs = new PyDict();
-                if (mode != "reduced") kwargs["mode"] = ToPython(mode);
-                dynamic py = __self__.InvokeMethod("qr", pyargs, kwargs);
+                using var modePy = mode != "reduced" ? ToPython(mode) : null;
+                if (modePy != null) kwargs["mode"] = modePy;
+                dynamic py = linalg.InvokeMethod("qr", pyargs, kwargs);
                 if (PythonObject.IsNDarray(py))
                     return (ToCsharp<NDarray>(py), null, null);
                 if (PythonObject.IsTuple(py))
                 {
-                    if (ToCsharp<int>(py.__len__()) == 2)
+                    using var pyLen = py.__len__();
+                    if (ToCsharp<int>(pyLen) == 2)
                         return (ToCsharp<NDarray>(py[0]), ToCsharp<NDarray>(py[1]), null);
                     return (ToCsharp<NDarray>(py[0]), ToCsharp<NDarray>(py[1]), ToCsharp<NDarray>(py[2]));
                 }
-
-                throw new NotSupportedException("Unexpected return type: " +
-                                                ToCsharp<string>(py.__class__.__name__));
+                using var className = py.__class__.__name__;
+                throw new NotSupportedException("Unexpected return type: " + ToCsharp<string>(className));
             }
         }
     }

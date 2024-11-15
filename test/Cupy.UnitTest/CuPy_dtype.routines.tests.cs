@@ -25,15 +25,15 @@ namespace Cupy.UnitTest
             var given = cp.can_cast(cp.int32, cp.int64);
             var expected =
                 "True";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.can_cast(cp.float64, complex);
              expected =
                 "True";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.can_cast(complex, float);
              expected =
                 "False";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // >>> cp.can_cast('i8', 'f8')
             // True
@@ -47,15 +47,15 @@ namespace Cupy.UnitTest
              given = cp.can_cast('i8', 'f8');
              expected =
                 "True";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.can_cast('i8', 'f4');
              expected =
                 "False";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.can_cast('i4', 'S4');
              expected =
                 "False";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // Casting scalars
 
@@ -71,15 +71,15 @@ namespace Cupy.UnitTest
              given = cp.can_cast(100, 'i1');
              expected =
                 "True";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.can_cast(150, 'i1');
              expected =
                 "False";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.can_cast(150, 'u1');
              expected =
                 "True";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // >>> cp.can_cast(3.5e100, cp.float32)
             // False
@@ -91,11 +91,11 @@ namespace Cupy.UnitTest
              given = cp.can_cast(3.5e100, cp.float32);
              expected =
                 "False";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.can_cast(1000.0, cp.float32);
              expected =
                 "True";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // Array scalar checks the value, array does not
 
@@ -109,11 +109,11 @@ namespace Cupy.UnitTest
              given = cp.can_cast(cp.array(1000.0), cp.float32);
              expected =
                 "True";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.can_cast(cp.array({1000.0}), cp.float32);
              expected =
                 "False";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // Using the casting rules
 
@@ -127,11 +127,11 @@ namespace Cupy.UnitTest
              given = cp.can_cast('i8', 'i8', 'no');
              expected =
                 "True";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.can_cast('<i8', '>i8', 'no');
              expected =
                 "False";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // >>> cp.can_cast('<i8', '>i8', 'equiv')
             // True
@@ -143,11 +143,11 @@ namespace Cupy.UnitTest
              given = cp.can_cast('<i8', '>i8', 'equiv');
              expected =
                 "True";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.can_cast('<i4', '>i8', 'equiv');
              expected =
                 "False";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // >>> cp.can_cast('<i4', '>i8', 'safe')
             // True
@@ -159,11 +159,11 @@ namespace Cupy.UnitTest
              given = cp.can_cast('<i4', '>i8', 'safe');
              expected =
                 "True";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.can_cast('<i8', '>i4', 'safe');
              expected =
                 "False";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // >>> cp.can_cast('<i8', '>i4', 'same_kind')
             // True
@@ -175,11 +175,11 @@ namespace Cupy.UnitTest
              given = cp.can_cast('<i8', '>i4', 'same_kind');
              expected =
                 "True";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.can_cast('<i8', '>u4', 'same_kind');
              expected =
                 "False";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // >>> cp.can_cast('<i8', '>u4', 'unsafe')
             // True
@@ -189,7 +189,7 @@ namespace Cupy.UnitTest
              given = cp.can_cast('<i8', '>u4', 'unsafe');
              expected =
                 "True";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -205,7 +205,7 @@ namespace Cupy.UnitTest
             var given = cp.promote_types('f4', 'f8');
             var expected =
                 "dtype('float64')";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // >>> cp.promote_types('i8', 'f4')
             // dtype('float64')
@@ -215,7 +215,7 @@ namespace Cupy.UnitTest
              given = cp.promote_types('i8', 'f4');
              expected =
                 "dtype('float64')";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // >>> cp.promote_types('>i8', '<c8')
             // dtype('complex128')
@@ -225,7 +225,7 @@ namespace Cupy.UnitTest
              given = cp.promote_types('>i8', '<c8');
              expected =
                 "dtype('complex128')";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // >>> cp.promote_types('i4', 'S8')
             // dtype('S11')
@@ -235,7 +235,7 @@ namespace Cupy.UnitTest
              given = cp.promote_types('i4', 'S8');
              expected =
                 "dtype('S11')";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // An example of a non-associative case:
 
@@ -251,11 +251,11 @@ namespace Cupy.UnitTest
              given = p('S', p('i1', 'u1'));
              expected =
                 "dtype('S6')";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = p(p('S', 'i1'), 'u1');
              expected =
                 "dtype('S4')";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -271,7 +271,7 @@ namespace Cupy.UnitTest
             var given = cp.min_scalar_type(10);
             var expected =
                 "dtype('uint8')";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // >>> cp.min_scalar_type(-260)
             // dtype('int16')
@@ -281,7 +281,7 @@ namespace Cupy.UnitTest
              given = cp.min_scalar_type(-260);
              expected =
                 "dtype('int16')";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // >>> cp.min_scalar_type(3.1)
             // dtype('float16')
@@ -291,7 +291,7 @@ namespace Cupy.UnitTest
              given = cp.min_scalar_type(3.1);
              expected =
                 "dtype('float16')";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // >>> cp.min_scalar_type(1e50)
             // dtype('float64')
@@ -301,7 +301,7 @@ namespace Cupy.UnitTest
              given = cp.min_scalar_type(1e50);
              expected =
                 "dtype('float64')";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // >>> cp.min_scalar_type(cp.arange(4,dtype='f8'))
             // dtype('float64')
@@ -311,7 +311,7 @@ namespace Cupy.UnitTest
              given = cp.min_scalar_type(cp.arange(4,dtype = 'f8'));
              expected =
                 "dtype('float64')";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -327,7 +327,7 @@ namespace Cupy.UnitTest
             var given = cp.result_type(3, cp.arange(7, dtype = 'i1'));
             var expected =
                 "dtype('int8')";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // >>> cp.result_type('i4', 'c8')
             // dtype('complex128')
@@ -337,7 +337,7 @@ namespace Cupy.UnitTest
              given = cp.result_type('i4', 'c8');
              expected =
                 "dtype('complex128')";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // >>> cp.result_type(3.0, -2)
             // dtype('float64')
@@ -347,7 +347,7 @@ namespace Cupy.UnitTest
              given = cp.result_type(3.0, -2);
              expected =
                 "dtype('float64')";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -367,15 +367,15 @@ namespace Cupy.UnitTest
             var given = cp.common_type(cp.arange(2, dtype = cp.float32));
             var expected =
                 "<type 'Cupy.float32'>";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.common_type(cp.arange(2, dtype = cp.float32), cp.arange(2));
              expected =
                 "<type 'Cupy.float64'>";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.common_type(cp.arange(4), cp.array({45, 6.j}), cp.array({45.0}));
              expected =
                 "<type 'Cupy.complex128'>";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -395,15 +395,15 @@ namespace Cupy.UnitTest
             var given = cp.obj2sctype(cp.int32);
             var expected =
                 "<type 'Cupy.int32'>";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.obj2sctype(cp.array({1., 2.}));
              expected =
                 "<type 'Cupy.float64'>";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.obj2sctype(cp.array({1.j}));
              expected =
                 "<type 'Cupy.complex128'>";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // >>> cp.obj2sctype(dict)
             // <type 'Cupy.object_'>
@@ -415,11 +415,11 @@ namespace Cupy.UnitTest
              given = cp.obj2sctype(dict);
              expected =
                 "<type 'Cupy.object_'>";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.obj2sctype('string');
              expected =
                 "<type 'Cupy.string_'>";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // >>> cp.obj2sctype(1, default=list)
             // <type 'list'>
@@ -429,7 +429,7 @@ namespace Cupy.UnitTest
              given = cp.obj2sctype(1, default = list);
              expected =
                 "<type 'list'>";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -447,7 +447,7 @@ namespace Cupy.UnitTest
             var given = cp.dtype(cp.int16);
             var expected =
                 "dtype('int16')";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // Structured type, one field name ‘f1’, containing int16:
 
@@ -459,7 +459,7 @@ namespace Cupy.UnitTest
              given = cp.dtype({('f1', cp.int16)});
              expected =
                 "dtype([('f1', '<i2')])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // Structured type, one field named ‘f1’, in itself containing a structured
             // type with one field:
@@ -472,7 +472,7 @@ namespace Cupy.UnitTest
              given = cp.dtype({('f1', {('f1', cp.int16)})});
              expected =
                 "dtype([('f1', [('f1', '<i2')])])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // Structured type, two fields: the first field contains an unsigned int, the
             // second an int32:
@@ -485,7 +485,7 @@ namespace Cupy.UnitTest
              given = cp.dtype({('f1', cp.uint), ('f2', cp.int32)});
              expected =
                 "dtype([('f1', '<u4'), ('f2', '<i4')])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // Using array-protocol type strings:
 
@@ -497,7 +497,7 @@ namespace Cupy.UnitTest
              given = cp.dtype({('a','f8'),('b','S10')});
              expected =
                 "dtype([('a', '<f8'), ('b', '|S10')])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // Using comma-separated field formats.  The shape is (2,3):
 
@@ -509,7 +509,7 @@ namespace Cupy.UnitTest
              given = cp.dtype("i4, (2,3)f8");
              expected =
                 "dtype([('f0', '<i4'), ('f1', '<f8', (2, 3))])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // Using tuples.  int is a fixed type, 3 the field’s shape.  void
             // is a flexible type, here of size 10:
@@ -522,7 +522,7 @@ namespace Cupy.UnitTest
              given = cp.dtype({('hello',(int,3)),('world',cp.void,10)});
              expected =
                 "dtype([('hello', '<i4', 3), ('world', '|V10')])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // Subdivide int16 into 2 int8’s, called x and y.  0 and 1 are
             // the offsets in bytes:
@@ -535,7 +535,7 @@ namespace Cupy.UnitTest
              given = cp.dtype((cp.int16, {'x':(cp.int8,0), 'y':(cp.int8,1)}));
              expected =
                 "dtype(('<i2', [('x', '|i1'), ('y', '|i1')]))";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // Using dictionaries.  Two fields named ‘gender’ and ‘age’:
 
@@ -547,7 +547,7 @@ namespace Cupy.UnitTest
              given = cp.dtype({'names':{'gender','age'}, 'formats':{'S1',cp.uint8}});
              expected =
                 "dtype([('gender', '|S1'), ('age', '|u1')])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // Offsets in bytes, here 0 and 25:
 
@@ -559,7 +559,7 @@ namespace Cupy.UnitTest
              given = cp.dtype({'surname':('S25',0),'age':(cp.uint8,25)});
              expected =
                 "dtype([('surname', '|S25'), ('age', '|u1')])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // >>> dt = cp.dtype('i2')
             // >>> dt.byteorder
@@ -590,17 +590,17 @@ namespace Cupy.UnitTest
              given = dt.byteorder;
              expected =
                 "'='";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = # endian is not relevant for 8 bit numbers;
              given = cp.dtype('i1').byteorder;
              expected =
                 "'|'";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = # or ASCII strings;
              given = cp.dtype('S2').byteorder;
              expected =
                 "'|'";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = # Even if specific code is given, and it is native;
              given = # '=' is the byteorder;
              given = import sys;
@@ -611,13 +611,13 @@ namespace Cupy.UnitTest
              given = dt.byteorder;
              expected =
                 "'='";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = # Swapped code shows up as itself;
              given = dt = cp.dtype(swapped_code + 'i2');
              given = dt.byteorder == swapped_code;
              expected =
                 "True";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // Methods
         }
@@ -638,7 +638,7 @@ namespace Cupy.UnitTest
                 "...                  ['T1', 'T2', 'T3']).dtype\n" +
                 "dtype([(('T1', 'col1'), '<f8'), (('T2', 'col2'), '<i4'),\n" +
                 "       (('T3', 'col3'), '|S5')])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // names and/or titles can be empty lists. If titles is an empty list,
             // titles will simply not appear. If names is empty, default field names
@@ -656,11 +656,11 @@ namespace Cupy.UnitTest
              expected =
                 "...                  []).dtype\n" +
                 "dtype([('col1', '<f8'), ('col2', '<i4'), ('col3', '|S5')])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.format_parser({'f8', 'i4', 'a5'}, {}, {}).dtype;
              expected =
                 "dtype([('f0', '<f8'), ('f1', '<i4'), ('f2', '|S5')])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -687,20 +687,20 @@ namespace Cupy.UnitTest
              given = ii16.min;
             var expected =
                 "-32768";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = ii16.max;
              expected =
                 "32767";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = ii32 = cp.iinfo(cp.int32);
              given = ii32.min;
              expected =
                 "-2147483648";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = ii32.max;
              expected =
                 "2147483647";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // With instances:
 
@@ -716,11 +716,11 @@ namespace Cupy.UnitTest
              given = ii32.min;
              expected =
                 "-2147483648";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = ii32.max;
              expected =
                 "2147483647";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -740,15 +740,15 @@ namespace Cupy.UnitTest
             var given = cp.issctype(cp.int32);
             var expected =
                 "True";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.issctype(list);
              expected =
                 "False";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.issctype(1.1);
              expected =
                 "False";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // Strings are also a scalar type:
 
@@ -760,7 +760,7 @@ namespace Cupy.UnitTest
              given = cp.issctype(cp.dtype('str'));
              expected =
                 "True";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -778,11 +778,11 @@ namespace Cupy.UnitTest
             var given = cp.issubdtype('S1', cp.string_);
             var expected =
                 "True";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.issubdtype(cp.float64, cp.float32);
              expected =
                 "False";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -802,15 +802,15 @@ namespace Cupy.UnitTest
             var given = cp.issubsctype('S8', str);
             var expected =
                 "True";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.issubsctype(cp.array({1}), int);
              expected =
                 "True";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.issubsctype(cp.array({1}), float);
              expected =
                 "False";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -828,11 +828,11 @@ namespace Cupy.UnitTest
             var given = cp.issubclass_(cp.int32, int);
             var expected =
                 "True";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.issubclass_(cp.int32, float);
              expected =
                 "False";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -850,11 +850,11 @@ namespace Cupy.UnitTest
             var given = cp.find_common_type({}, {cp.int64, cp.float32, complex});
             var expected =
                 "dtype('complex128')";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.find_common_type({cp.int64, cp.float32}, {});
              expected =
                 "dtype('float64')";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // The standard casting rules ensure that a scalar cannot up-cast an
             // array unless the scalar is of a fundamentally different kind of data
@@ -869,7 +869,7 @@ namespace Cupy.UnitTest
              given = cp.find_common_type({cp.float32}, {cp.int64, cp.float64});
              expected =
                 "dtype('float32')";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // Complex is of a different type, so it up-casts the float in the
             // array_types argument:
@@ -882,7 +882,7 @@ namespace Cupy.UnitTest
              given = cp.find_common_type({cp.float32}, {complex});
              expected =
                 "dtype('complex128')";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // Type specifier strings are convertible to dtypes and can therefore
             // be used instead of dtypes:
@@ -895,7 +895,7 @@ namespace Cupy.UnitTest
              given = cp.find_common_type({'f4', 'f4', 'i4'}, {'c8'});
              expected =
                 "dtype('complex128')";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -936,7 +936,7 @@ namespace Cupy.UnitTest
             var given = typechars = ['S1', '?', 'B', 'D', 'G', 'F', 'I', 'H', 'L', 'O', 'Q',;
             var expected =
                 "...              'S', 'U', 'V', 'b', 'd', 'g', 'f', 'i', 'h', 'l', 'q']";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = for typechar in typechars:;
              expected =
                 "...     print(typechar, ' : ', cp.typename(typechar))\n" +
@@ -963,7 +963,7 @@ namespace Cupy.UnitTest
                 "h  :  short\n" +
                 "l  :  long integer\n" +
                 "q  :  long long integer";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -989,7 +989,7 @@ namespace Cupy.UnitTest
                 "D\n" +
                 "S\n" +
                 "O";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // >>> x = cp.array([1., 2-1.j])
             // >>> cp.sctype2char(x)
@@ -1003,11 +1003,11 @@ namespace Cupy.UnitTest
              given = cp.sctype2char(x);
              expected =
                 "'D'";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.sctype2char(list);
              expected =
                 "'O'";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -1026,12 +1026,12 @@ namespace Cupy.UnitTest
             var given = cp.mintypecode({'d', 'f', 'S'});
             var expected =
                 "'d'";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = x = cp.array({1.1, 2-3.j});
              given = cp.mintypecode(x);
              expected =
                 "'D'";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // >>> cp.mintypecode('abceh', default='G')
             // 'G'
@@ -1041,7 +1041,7 @@ namespace Cupy.UnitTest
              given = cp.mintypecode('abceh', default = 'G');
              expected =
                 "'G'";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
     }

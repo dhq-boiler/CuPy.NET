@@ -150,22 +150,36 @@ namespace Cupy
         ///     The calculation based on the Einstein summation convention.
         /// </returns>
         public static NDarray einsum(string subscripts, NDarray[] operands, NDarray @out = null, Dtype dtype = null,
-            string order = null, string casting = "safe", object optimize = null)
+                                     string order = null, string casting = "safe", object optimize = null)
         {
-            //auto-generated code, do not change
-            var __self__ = self;
-            using var pyargs = ToTuple(new object[]
+            var pyOut = @out != null ? ToPython(@out) : null;
+            var pyDtype = dtype != null ? ToPython(dtype) : null;
+            var pyOrder = order != null ? ToPython(order) : null;
+            var pyCasting = casting != "safe" ? ToPython(casting) : null;
+            var pyOptimize = optimize != null ? ToPython(optimize) : null;
+            try
             {
-                subscripts
-            }.Concat(operands.OfType<object>()).ToArray());
-            using var kwargs = new PyDict();
-            if (@out != null) kwargs["out"] = ToPython(@out);
-            if (dtype != null) kwargs["dtype"] = ToPython(dtype);
-            if (order != null) kwargs["order"] = ToPython(order);
-            if (casting != "safe") kwargs["casting"] = ToPython(casting);
-            if (optimize != null) kwargs["optimize"] = ToPython(optimize);
-            dynamic py = __self__.InvokeMethod("einsum", pyargs, kwargs);
-            return ToCsharp<NDarray>(py);
+                using var pyargs = ToTuple(new object[]
+                {
+                    subscripts
+                }.Concat(operands.OfType<object>()).ToArray());
+                using var kwargs = new PyDict();
+                if (@out != null) kwargs["out"] = pyOut;
+                if (dtype != null) kwargs["dtype"] = pyDtype;
+                if (order != null) kwargs["order"] = pyOrder;
+                if (casting != "safe") kwargs["casting"] = pyCasting;
+                if (optimize != null) kwargs["optimize"] = pyOptimize;
+                dynamic py = self.InvokeMethod("einsum", pyargs, kwargs);
+                return ToCsharp<NDarray>(py);
+            }
+            finally
+            {
+                if (pyOut != null) pyOut.Dispose();
+                if (pyDtype != null) pyDtype.Dispose();
+                if (pyOrder != null) pyOrder.Dispose();
+                if (pyCasting != null) pyCasting.Dispose();
+                if (pyOptimize != null) pyOptimize.Dispose();
+            }
         }
 
         /// <summary>
@@ -310,14 +324,12 @@ namespace Cupy
         /// </returns>
         public static NDarray einsum(string subscripts, params NDarray[] operands)
         {
-            //auto-generated code, do not change
-            var __self__ = self;
             using var pyargs = ToTuple(new object[]
             {
                 subscripts
             }.Concat(operands.OfType<object>()).ToArray());
             using var kwargs = new PyDict();
-            dynamic py = __self__.InvokeMethod("einsum", pyargs, kwargs);
+            dynamic py = self.InvokeMethod("einsum", pyargs, kwargs);
             return ToCsharp<NDarray>(py);
         }
     }

@@ -23,7 +23,7 @@ namespace Cupy.UnitTest
             var expected =
                 "array(['2002-10-27T04:30', '2002-10-27T05:30', '2002-10-27T06:30',\n" +
                 "       '2002-10-27T07:30'], dtype='datetime64[m]')";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // Setting the timezone to UTC shows the same information, but with a Z suffix
 
@@ -37,7 +37,7 @@ namespace Cupy.UnitTest
              expected =
                 "array(['2002-10-27T04:30Z', '2002-10-27T05:30Z', '2002-10-27T06:30Z',\n" +
                 "       '2002-10-27T07:30Z'], dtype='<U35')";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // Note that we picked datetimes that cross a DST boundary. Passing in a
             // pytz timezone object will print the appropriate offset
@@ -52,7 +52,7 @@ namespace Cupy.UnitTest
              expected =
                 "array(['2002-10-27T00:30-0400', '2002-10-27T01:30-0400',\n" +
                 "       '2002-10-27T01:30-0500', '2002-10-27T02:30-0500'], dtype='<U39')";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // Passing in a unit will change the precision
 
@@ -69,12 +69,12 @@ namespace Cupy.UnitTest
              expected =
                 "array(['2002-10-27T04', '2002-10-27T05', '2002-10-27T06', '2002-10-27T07'],\n" +
                 "      dtype='<U32')";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.datetime_as_string(d, unit = 's');
              expected =
                 "array(['2002-10-27T04:30:00', '2002-10-27T05:30:00', '2002-10-27T06:30:00',\n" +
                 "       '2002-10-27T07:30:00'], dtype='<U38')";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // ‘casting’ can be used to specify whether precision can be changed
 
@@ -88,7 +88,7 @@ namespace Cupy.UnitTest
              expected =
                 "TypeError: Cannot create a datetime string as units 'h' from a Cupy\n" +
                 "datetime with units 'm' according to the rule 'safe'";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -108,11 +108,11 @@ namespace Cupy.UnitTest
              given = cp.datetime_data(dt_25s);
             var expected =
                 "('s', 25)";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.array(10, dt_25s).astype('timedelta64{s}');
              expected =
                 "array(250, dtype='timedelta64[s]')";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // The result can be used to construct a datetime that uses the same units
             // as a timedelta
@@ -125,7 +125,7 @@ namespace Cupy.UnitTest
              given = cp.datetime64('2010', cp.datetime_data(dt_25s));
              expected =
                 "Cupy.datetime64('2010-01-01T00:00:00', '25s')";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -149,17 +149,17 @@ namespace Cupy.UnitTest
             var expected =
                 "... bdd = cp.busdaycalendar(\n" +
                 "...             holidays=['2011-07-01', '2011-07-04', '2011-07-17'])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = # Default is Monday to Friday weekdays;
              expected =
                 "... bdd.weekmask\n" +
                 "array([ True,  True,  True,  True,  True, False, False], dtype='bool')";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = # Any holidays already on the weekend are removed;
              expected =
                 "... bdd.holidays\n" +
                 "array(['2011-07-01', '2011-07-04'], dtype='datetime64[D]')";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -179,7 +179,7 @@ namespace Cupy.UnitTest
                 "... cp.is_busday(['2011-07-01', '2011-07-02', '2011-07-18'],\n" +
                 "...                 holidays=['2011-07-01', '2011-07-04', '2011-07-17'])\n" +
                 "array([False, False,  True], dtype='bool')";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -206,22 +206,22 @@ namespace Cupy.UnitTest
             var expected =
                 "... cp.busday_offset('2011-10', 0, roll='forward')\n" +
                 "Cupy.datetime64('2011-10-03','D')";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = # Last business day in February 2012 (not accounting for holidays);
              expected =
                 "... cp.busday_offset('2012-03', -1, roll='forward')\n" +
                 "Cupy.datetime64('2012-02-29','D')";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = # Third Wednesday in January 2011;
              expected =
                 "... cp.busday_offset('2011-01', 2, roll='forward', weekmask='Wed')\n" +
                 "Cupy.datetime64('2011-01-19','D')";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = # 2012 Mother's Day in Canada and the U.S.;
              expected =
                 "... cp.busday_offset('2012-05', 1, roll='forward', weekmask='Sun')\n" +
                 "Cupy.datetime64('2012-05-13','D')";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // >>> # First business day on or after a date
             // ... cp.busday_offset('2011-03-20', 0, roll='forward')
@@ -240,20 +240,20 @@ namespace Cupy.UnitTest
              expected =
                 "... cp.busday_offset('2011-03-20', 0, roll='forward')\n" +
                 "Cupy.datetime64('2011-03-21','D')";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.busday_offset('2011-03-22', 0, roll = 'forward');
              expected =
                 "Cupy.datetime64('2011-03-22','D')";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = # First business day after a date;
              expected =
                 "... cp.busday_offset('2011-03-20', 1, roll='backward')\n" +
                 "Cupy.datetime64('2011-03-21','D')";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.busday_offset('2011-03-22', 1, roll = 'backward');
              expected =
                 "Cupy.datetime64('2011-03-23','D')";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -277,17 +277,17 @@ namespace Cupy.UnitTest
             var expected =
                 "... cp.busday_count('2011-01', '2011-02')\n" +
                 "21";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = # Number of weekdays in 2011;
              expected =
                 "...  cp.busday_count('2011', '2012')\n" +
                 "260";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = # Number of Saturdays in 2011;
              expected =
                 "... cp.busday_count('2011', '2012', weekmask='Sat')\n" +
                 "53";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
     }

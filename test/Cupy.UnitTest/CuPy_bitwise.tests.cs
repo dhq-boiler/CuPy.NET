@@ -23,7 +23,7 @@ namespace Cupy.UnitTest
             var given = cp.bitwise_and(13, 17);
             var expected =
                 "1";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // >>> cp.bitwise_and(14, 13)
             // 12
@@ -37,15 +37,15 @@ namespace Cupy.UnitTest
              given = cp.bitwise_and(14, 13);
              expected =
                 "12";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.binary_repr(12);
              expected =
                 "'1100'";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.bitwise_and({14,3}, 13);
              expected =
                 "array([12,  1])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // >>> cp.bitwise_and([11,7], [4,25])
             // array([0, 1])
@@ -59,15 +59,15 @@ namespace Cupy.UnitTest
              given = cp.bitwise_and({11,7}, {4,25});
              expected =
                 "array([0, 1])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.bitwise_and(cp.array({2,5,255}), cp.array({3,14,16}));
              expected =
                 "array([ 2,  4, 16])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.bitwise_and({True, True}, {False, True});
              expected =
                 "array([False,  True])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -89,11 +89,11 @@ namespace Cupy.UnitTest
             var given = cp.bitwise_or(13, 16);
             var expected =
                 "29";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.binary_repr(29);
              expected =
                 "'11101'";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // >>> cp.bitwise_or(32, 2)
             // 34
@@ -107,15 +107,15 @@ namespace Cupy.UnitTest
              given = cp.bitwise_or(32, 2);
              expected =
                 "34";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.bitwise_or({33, 4}, 1);
              expected =
                 "array([33,  5])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.bitwise_or({33, 4}, {1, 2});
              expected =
                 "array([33,  6])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // >>> cp.bitwise_or(cp.array([2, 5, 255]), cp.array([4, 4, 4]))
             // array([  6,   5, 255])
@@ -132,20 +132,20 @@ namespace Cupy.UnitTest
              given = cp.bitwise_or(cp.array({2, 5, 255}), cp.array({4, 4, 4}));
              expected =
                 "array([  6,   5, 255])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.array({2, 5, 255}) | cp.array({4, 4, 4});
              expected =
                 "array([  6,   5, 255])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.bitwise_or(cp.array({2, 5, 255, 2147483647L}, dtype = cp.int32),;
              expected =
                 "...               cp.array([4, 4, 4, 2147483647L], dtype=cp.int32))\n" +
                 "array([         6,          5,        255, 2147483647])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.bitwise_or({True, True}, {False, True});
              expected =
                 "array([ True,  True])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -167,11 +167,11 @@ namespace Cupy.UnitTest
             var given = cp.bitwise_xor(13, 17);
             var expected =
                 "28";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.binary_repr(28);
              expected =
                 "'11100'";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // >>> cp.bitwise_xor(31, 5)
             // 26
@@ -183,11 +183,11 @@ namespace Cupy.UnitTest
              given = cp.bitwise_xor(31, 5);
              expected =
                 "26";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.bitwise_xor({31,3}, 5);
              expected =
                 "array([26,  6])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // >>> cp.bitwise_xor([31,3], [5,6])
             // array([26,  5])
@@ -199,11 +199,11 @@ namespace Cupy.UnitTest
              given = cp.bitwise_xor({31,3}, {5,6});
              expected =
                 "array([26,  5])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.bitwise_xor({True, True}, {False, True});
              expected =
                 "array([ True, False])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -226,15 +226,15 @@ namespace Cupy.UnitTest
             var given = cp.invert(cp.array({13}, dtype = uint8));
             var expected =
                 "array([242], dtype=uint8)";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.binary_repr(x, width = 8);
              expected =
                 "'00001101'";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.binary_repr(242, width = 8);
              expected =
                 "'11110010'";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // The result depends on the bit-width:
 
@@ -250,15 +250,15 @@ namespace Cupy.UnitTest
              given = cp.invert(cp.array({13}, dtype = uint16));
              expected =
                 "array([65522], dtype=uint16)";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.binary_repr(x, width = 16);
              expected =
                 "'0000000000001101'";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.binary_repr(65522, width = 16);
              expected =
                 "'1111111111110010'";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // When using signed integer types the result is the two’s complement of
             // the result for the unsigned type:
@@ -273,11 +273,11 @@ namespace Cupy.UnitTest
              given = cp.invert(cp.array({13}, dtype = int8));
              expected =
                 "array([-14], dtype=int8)";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.binary_repr(-14, width = 8);
              expected =
                 "'11110010'";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // Booleans are accepted as well:
 
@@ -289,7 +289,7 @@ namespace Cupy.UnitTest
              given = cp.invert(array({True, False}));
              expected =
                 "array([False,  True])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -309,15 +309,15 @@ namespace Cupy.UnitTest
             var given = cp.binary_repr(5);
             var expected =
                 "'101'";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.left_shift(5, 2);
              expected =
                 "20";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.binary_repr(20);
              expected =
                 "'10100'";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // >>> cp.left_shift(5, [1,2,3])
             // array([10, 20, 40])
@@ -327,7 +327,7 @@ namespace Cupy.UnitTest
              given = cp.left_shift(5, {1,2,3});
              expected =
                 "array([10, 20, 40])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -347,15 +347,15 @@ namespace Cupy.UnitTest
             var given = cp.binary_repr(10);
             var expected =
                 "'1010'";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.right_shift(10, 1);
              expected =
                 "5";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.binary_repr(5);
              expected =
                 "'101'";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // >>> cp.right_shift(10, [1,2,3])
             // array([5, 2, 1])
@@ -365,7 +365,7 @@ namespace Cupy.UnitTest
              given = cp.right_shift(10, {1,2,3});
              expected =
                 "array([5, 2, 1])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -397,7 +397,7 @@ namespace Cupy.UnitTest
             var given = b;
             var expected =
                 "array([[[160],\n        [ 64]],\n\n       [[192],\n        [ 32]]], dtype=uint8)";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
             // Note that in binary 160 = 1010 0000, 64 = 0100 0000, 192 = 1100 0000,
             // and 32 = 0010 0000.            
         }
@@ -425,14 +425,14 @@ namespace Cupy.UnitTest
                 "array([[ 2],\n" +
                 "       [ 7],\n" +
                 "       [23]], dtype=uint8)";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
             var b = a.unpackbits(1);
             given = b;
             expected =
                 "array([[0, 0, 0, 0, 0, 0, 1, 0],\n" +
                 "       [0, 0, 0, 0, 0, 1, 1, 1],\n" +
                 "       [0, 0, 0, 1, 0, 1, 1, 1]], dtype=uint8)";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
         }
 #endif
 
@@ -450,15 +450,15 @@ namespace Cupy.UnitTest
             var given = cp.binary_repr(3);
             var expected =
                 "11";
-            Assert.AreEqual(expected, given);
+            Assert.That(expected, Is.EqualTo(given));
             given = cp.binary_repr(-3);
             expected =
                 "-11";
-            Assert.AreEqual(expected, given);
+            Assert.That(expected, Is.EqualTo(given));
             given = cp.binary_repr(3, 4);
             expected =
                 "0011";
-            Assert.AreEqual(expected, given);
+            Assert.That(expected, Is.EqualTo(given));
 
             // The two’s complement is returned when the input number is negative and
             // width is specified:
@@ -472,11 +472,11 @@ namespace Cupy.UnitTest
             given = cp.binary_repr(-3, 3);
             expected =
                 "101";
-            Assert.AreEqual(expected, given);
+            Assert.That(expected, Is.EqualTo(given));
             given = cp.binary_repr(-3, 5);
             expected =
                 "11101";
-            Assert.AreEqual(expected, given);
+            Assert.That(expected, Is.EqualTo(given));
         }
     }
 }

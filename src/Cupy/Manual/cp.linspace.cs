@@ -51,22 +51,23 @@ namespace Cupy
         ///     [start, stop] or the half-open interval [start, stop)
         /// </returns>
         public static NDarray linspace(NDarray start, NDarray stop, out float step, int num = 50, bool endpoint = true,
-            Dtype dtype = null, int? axis = 0)
+                                       Dtype dtype = null, int? axis = 0)
         {
-            //auto-generated code, do not change
-            var __self__ = self;
-            using var pyargs = ToTuple(new object[]
-            {
-                start,
-                stop
-            });
+            using var pyargs = ToTuple(new object[] { start, stop });
             using var kwargs = new PyDict();
-            if (num != null) kwargs["num"] = ToPython(num);
-            if (endpoint != null) kwargs["endpoint"] = ToPython(endpoint);
-            kwargs["retstep"] = ToPython(true); // we want the step to be returned!
-            if (dtype != null) kwargs["dtype"] = ToPython(dtype);
-            if (axis != 0) kwargs["axis"] = ToPython(axis);
-            dynamic py = __self__.InvokeMethod("linspace", pyargs, kwargs);
+            using var numPy = ToPython(num);
+            using var endpointPy = ToPython(endpoint);
+            using var retstepPy = ToPython(true);
+            using var dtypePy = dtype != null ? ToPython(dtype) : null;
+            using var axisPy = axis != 0 ? ToPython(axis) : null;
+
+            kwargs["num"] = numPy;
+            kwargs["endpoint"] = endpointPy;
+            kwargs["retstep"] = retstepPy;
+            if (dtypePy != null) kwargs["dtype"] = dtypePy;
+            if (axisPy != null) kwargs["axis"] = axisPy;
+
+            dynamic py = self.InvokeMethod("linspace", pyargs, kwargs);
             var t = py as PyObject;
             step = ToCsharp<float>(t[1]);
             return ToCsharp<NDarray>(t[0]);
@@ -119,22 +120,23 @@ namespace Cupy
         ///     [start, stop] or the half-open interval [start, stop)
         /// </returns>
         public static NDarray linspace(double start, double stop, out float step, int num = 50, bool endpoint = true,
-            Dtype dtype = null, int? axis = 0)
+                                       Dtype dtype = null, int? axis = 0)
         {
-            //auto-generated code, do not change
-            var __self__ = self;
-            using var pyargs = ToTuple(new object[]
-            {
-                start,
-                stop
-            });
+            using var pyargs = ToTuple(new object[] { start, stop });
             using var kwargs = new PyDict();
-            if (num != 50) kwargs["num"] = ToPython(num);
-            if (endpoint != true) kwargs["endpoint"] = ToPython(endpoint);
-            kwargs["retstep"] = ToPython(true); // we want the step to be returned!
-            if (dtype != null) kwargs["dtype"] = ToPython(dtype);
-            if (axis != 0) kwargs["axis"] = ToPython(axis);
-            dynamic py = __self__.InvokeMethod("linspace", pyargs, kwargs);
+            using var numPy = num != 50 ? ToPython(num) : null;
+            using var endpointPy = endpoint != true ? ToPython(endpoint) : null;
+            using var retstepPy = ToPython(true);
+            using var dtypePy = dtype != null ? ToPython(dtype) : null;
+            using var axisPy = axis != 0 ? ToPython(axis) : null;
+
+            if (numPy != null) kwargs["num"] = numPy;
+            if (endpointPy != null) kwargs["endpoint"] = endpointPy;
+            kwargs["retstep"] = retstepPy;
+            if (dtypePy != null) kwargs["dtype"] = dtypePy;
+            if (axisPy != null) kwargs["axis"] = axisPy;
+
+            dynamic py = self.InvokeMethod("linspace", pyargs, kwargs);
             var t = py as PyObject;
             step = ToCsharp<float>(t[1]);
             return ToCsharp<NDarray>(t[0]);

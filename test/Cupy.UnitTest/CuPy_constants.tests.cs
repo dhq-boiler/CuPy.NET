@@ -16,9 +16,9 @@ namespace Cupy.UnitTest
             //array([Inf])
             Console.WriteLine(cp.inf);
             var x = cp.array(1) / 0.0;
-            Assert.AreEqual(cp.array(cp.inf), x);
-            Assert.AreNotEqual(cp.array(0f), x);
-            Assert.AreEqual(float.PositiveInfinity, cp.inf);
+            Assert.That(cp.array(cp.inf), Is.EqualTo(x));
+            Assert.That(cp.array(0f), Is.Not.EqualTo(x));
+            Assert.That(float.PositiveInfinity, Is.EqualTo(cp.inf));
         }
 
         [Test]
@@ -28,8 +28,8 @@ namespace Cupy.UnitTest
             //-inf
             //>>> cp.log(0)
             //-inf
-            Assert.AreEqual(-cp.inf, cp.NINF);
-            Assert.AreEqual(-cp.inf, (float)((NDarray)0).log());
+            Assert.That(-cp.inf, Is.EqualTo(cp.NINF));
+            Assert.That(-cp.inf, Is.EqualTo((float)((NDarray)0).log()));
         }
 
         [Test]
@@ -46,11 +46,11 @@ namespace Cupy.UnitTest
             //array([False])
             //>>> cp.isinf([cp.NZERO])
             //array([False])
-            Assert.AreEqual(-0.0f, cp.NZERO);
-            Assert.AreEqual(0.0f, cp.PZERO);
-            Assert.IsTrue((bool)((NDarray)cp.NZERO).isfinite());
-            Assert.IsFalse((bool)((NDarray)cp.NZERO).isnan());
-            Assert.IsFalse((bool)((NDarray)cp.NZERO).isinf());
+            Assert.That(-0.0f, Is.EqualTo(cp.NZERO));
+            Assert.That(0.0f, Is.EqualTo(cp.PZERO));
+            Assert.That((bool)((NDarray)cp.NZERO).isfinite());
+            Assert.That((bool)((NDarray)cp.NZERO).isnan(), Is.False);
+            Assert.That((bool)((NDarray)cp.NZERO).isinf(), Is.False);
         }
 
         [Test]
@@ -62,9 +62,9 @@ namespace Cupy.UnitTest
             //nan
             //>>> cp.log([-1, 1, 2])
             //array([NaN,  0.        ,  0.69314718])
-            Assert.AreEqual(float.NaN, cp.nan);
-            Assert.AreEqual(cp.nan, (float)((NDarray)(-1)).log());
-            Assert.AreEqual("array([       nan, 0.        , 0.69314718], dtype=float64)", cp.log(new[] { -1, 1, 2 }).repr);
+            Assert.That(float.NaN, Is.EqualTo(cp.nan));
+            Assert.That(cp.nan, Is.EqualTo((float)((NDarray)(-1)).log()));
+            Assert.That("array([       nan, 0.        , 0.69314718], dtype=float64)", Is.EqualTo(cp.log(new[] { -1, 1, 2 }).repr));
         }
 
         [Test]

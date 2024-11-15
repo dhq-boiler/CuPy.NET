@@ -37,20 +37,23 @@ namespace Cupy
         public static NDarray array(NDarray @object, Dtype dtype = null, bool? copy = null, string order = null,
             bool? subok = null, int? ndmin = null)
         {
-            var __self__ = self;
-            using var args = ToTuple(new object[]
-            {
-                @object
-            });
+            using var args = ToTuple(new object[] { @object });
             using var kwargs = new PyDict();
-            if (dtype != null) kwargs["dtype"] = ToPython(dtype);
-            if (copy != null) kwargs["copy"] = ToPython(copy);
-            if (order != null) kwargs["order"] = ToPython(order);
-            if (subok != null) kwargs["subok"] = ToPython(subok);
-            if (ndmin != null) kwargs["ndmin"] = ToPython(ndmin);
-            dynamic py = self.InvokeMethod("array", args, kwargs);
-            args.Dispose();
-            return ToCsharp<NDarray>(py);
+            using (PyObject dtypePy = dtype != null ? ToPython(dtype) : null)
+            using (PyObject copyPy = copy != null ? ToPython(copy) : null)
+            using (PyObject orderPy = order != null ? ToPython(order) : null)
+            using (PyObject subokPy = subok != null ? ToPython(subok) : null)
+            using (PyObject ndminPy = ndmin != null ? ToPython(ndmin) : null)
+            {
+                if (dtypePy != null) kwargs["dtype"] = dtypePy;
+                if (copyPy != null) kwargs["copy"] = copyPy;
+                if (orderPy != null) kwargs["order"] = orderPy;
+                if (subokPy != null) kwargs["subok"] = subokPy;
+                if (ndminPy != null) kwargs["ndmin"] = ndminPy;
+
+                var py = self.InvokeMethod("array", args, kwargs);
+                return ToCsharp<NDarray>(py);
+            }
         }
 
         private static unsafe byte[] ObjectToByteArray(byte obj)
@@ -197,64 +200,74 @@ namespace Cupy
             }
         }
 
-        public static NDarray<T> array<T>(T[] @object, Dtype dtype = null, bool? copy = null, string order = null,
-            bool? subok = null, int? ndmin = null) where T : struct
+        public static NDarray<T> array<T>(T[] @object, Dtype dtype = null, bool? copy = null, string order = null, bool? subok = null, int? ndmin = null) where T : struct
         {
-            var __self__ = self;
             var type = @object.GetDtype();
-            var ndarray = empty(new Shape(@object.Length), type, order);
-            if (@object.Length == 0)
+            NDarray ndarray = null;
+            NDarray ndreal = null;
+            NDarray ndimag = null;
+            NDarray converted = null;
+
+            try
+            {
+                ndarray = empty(new Shape(@object.Length), type, order);
+                if (@object.Length == 0)
+                    return new NDarray<T>(ndarray);
+
+                switch (@object)
+                {
+                    case char[] a:
+                        Copy(a, ndarray);
+                        break;
+                    case byte[] a:
+                        Copy(a, ndarray);
+                        break;
+                    case short[] a:
+                        Copy(a, ndarray);
+                        break;
+                    case int[] a:
+                        Copy(a, ndarray);
+                        break;
+                    case long[] a:
+                        Copy(a, ndarray);
+                        break;
+                    case float[] a:
+                        Copy(a, ndarray);
+                        break;
+                    case double[] a:
+                        Copy(a, ndarray);
+                        break;
+                    case bool[] a:
+                        Copy(a, ndarray);
+                        break;
+                    case Complex[] a:
+                        var real = new double[@object.Length];
+                        var imag = new double[@object.Length];
+                        for (var i = 0; i < @object.Length; i++)
+                        {
+                            real[i] = a[i].Real;
+                            imag[i] = a[i].Imaginary;
+                        }
+                        ndreal = array(real);
+                        ndimag = array(imag);
+                        ndarray.real = ndreal;
+                        ndarray.imag = ndimag;
+                        break;
+                }
+
+                if (dtype != null || subok != null || ndmin != null)
+                {
+                    converted = cp.array(ndarray, dtype: dtype, copy: false, subok: subok, ndmin: ndmin);
+                    return new NDarray<T>(converted);
+                }
+
                 return new NDarray<T>(ndarray);
-            switch (@object)
-            {
-                case char[] a:
-                    Copy(a, ndarray);
-                    break;
-                case byte[] a:
-                    Copy(a, ndarray);
-                    break;
-                case short[] a:
-                    Copy(a, ndarray);
-                    break;
-                case int[] a:
-                    Copy(a, ndarray);
-                    break;
-                case long[] a:
-                    Copy(a, ndarray);
-                    break;
-                case float[] a:
-                    Copy(a, ndarray);
-                    break;
-                case double[] a:
-                    Copy(a, ndarray);
-                    break;
-                case bool[] a:
-                    Copy(a, ndarray);
-                    break;
-                case Complex[] a:
-                    var real = new double[@object.Length];
-                    var imag = new double[@object.Length];
-                    for (var i = 0; i < @object.Length; i++)
-                    {
-                        real[i] = a[i].Real;
-                        imag[i] = a[i].Imaginary;
-                    }
-
-                    var ndreal = array(real);
-                    var ndimag = array(imag);
-                    ndarray.real = ndreal;
-                    ndarray.imag = ndimag;
-                    break;
             }
-            ctypes.Dispose();
-            if (dtype != null || subok != null || ndmin != null)
+            finally
             {
-                var converted = cp.array(ndarray, dtype: dtype, copy: false, subok: subok, ndmin: ndmin);
-                ndarray.Dispose();
-                return new NDarray<T>(converted);
+                ndreal?.Dispose();
+                ndimag?.Dispose();
             }
-
-            return new NDarray<T>(ndarray);
         }
 
         public static NDarray<T> array<T>(T[,] @object, Dtype dtype = null, bool? copy = null, string order = null,
@@ -263,7 +276,7 @@ namespace Cupy
             var __self__ = self;
             var d1_array = @object.Cast<T>().ToArray();
             var shape = new Shape(@object.GetLength(0), @object.GetLength(1));
-            var ndarray = array(d1_array, dtype, copy, order, subok, ndmin);
+            using var ndarray = array(d1_array, dtype, copy, order, subok, ndmin);
             return new NDarray<T>(ndarray.reshape(shape));
         }
 
@@ -273,7 +286,7 @@ namespace Cupy
             var __self__ = self;
             var d1_array = data.Cast<T>().ToArray();
             var shape = new Shape(data.GetLength(0), data.GetLength(1), data.GetLength(2));
-            var ndarray = array(d1_array, dtype, copy, order, subok, ndmin);
+            using var ndarray = array(d1_array, dtype, copy, order, subok, ndmin);
             return new NDarray<T>(ndarray.reshape(shape));
         }
 
@@ -283,7 +296,7 @@ namespace Cupy
             var __self__ = self;
             var d1_array = data.Cast<T>().ToArray();
             var shape = new Shape(data.GetLength(0), data.GetLength(1), data.GetLength(2), data.GetLength(3));
-            var ndarray = array(d1_array, dtype, copy, order, subok, ndmin);
+            using var ndarray = array(d1_array, dtype, copy, order, subok, ndmin);
             return new NDarray<T>(ndarray.reshape(shape));
         }
 
@@ -294,7 +307,7 @@ namespace Cupy
             var d1_array = data.Cast<T>().ToArray();
             var shape = new Shape(data.GetLength(0), data.GetLength(1), data.GetLength(2), data.GetLength(3),
                 data.GetLength(4));
-            var ndarray = array(d1_array, dtype, copy, order, subok, ndmin);
+            using var ndarray = array(d1_array, dtype, copy, order, subok, ndmin);
             return new NDarray<T>(ndarray.reshape(shape));
         }
 
@@ -305,25 +318,27 @@ namespace Cupy
             var d1_array = data.Cast<T>().ToArray();
             var shape = new Shape(data.GetLength(0), data.GetLength(1), data.GetLength(2), data.GetLength(3),
                 data.GetLength(4), data.GetLength(5));
-            var ndarray = array(d1_array, dtype, copy, order, subok, ndmin);
+            using var ndarray = array(d1_array, dtype, copy, order, subok, ndmin);
             return new NDarray<T>(ndarray.reshape(shape));
         }
 
         public static NDarray array(string[] strings, int? itemsize = null, bool? copy = null, bool? unicode = null,
             string order = null)
         {
-            var __self__ = self;
-            var args = new PyTuple(new PyObject[]
-                { new PyList(strings.Select(s => new PyString(s) as PyObject).ToArray()) });
-            //var args = new PyList(new PyObject[0]);
-            //foreach (var s in strings)
-            //    args.Append(new PyString(s));
+            using var pyStrings = new PyList(strings.Select(s => new PyString(s) as PyObject).ToArray());
+            using var args = new PyTuple(new PyObject[] { pyStrings });
             using var kwargs = new PyDict();
-            if (itemsize != null) kwargs["itemsize"] = ToPython(itemsize);
-            if (copy != null) kwargs["copy"] = ToPython(copy);
-            if (unicode != null) kwargs["unicode"] = ToPython(unicode);
-            if (order != null) kwargs["order"] = ToPython(order);
-            dynamic py = self.InvokeMethod("array", args, kwargs);
+            using var itemsizePy = itemsize != null ? ToPython(itemsize) : null;
+            using var copyPy = copy != null ? ToPython(copy) : null;
+            using var unicodePy = unicode != null ? ToPython(unicode) : null;
+            using var orderPy = order != null ? ToPython(order) : null;
+
+            if (itemsizePy != null) kwargs["itemsize"] = itemsizePy;
+            if (copyPy != null) kwargs["copy"] = copyPy;
+            if (unicodePy != null) kwargs["unicode"] = unicodePy;
+            if (orderPy != null) kwargs["order"] = orderPy;
+
+            var py = self.InvokeMethod("array", args, kwargs);
             return ToCsharp<NDarray>(py);
         }
 
@@ -351,33 +366,35 @@ namespace Cupy
             return array((IEnumerable<NDarray>)arrays, dtype, copy, order, subok, ndmin);
         }
 
-        public static NDarray array(IEnumerable<NDarray> arrays, Dtype dtype = null, bool? copy = null,
-            string order = null, bool? subok = null, int? ndmin = null)
+        public static NDarray array(IEnumerable<NDarray> arrays, Dtype dtype = null, bool? copy = null, string order = null, bool? subok = null, int? ndmin = null)
         {
-            var __self__ = self;
-            var args = new PyTuple(
-                new PyObject[] { new PyList(arrays.Select(nd => nd.PyObject as PyObject).ToArray()) });
+            using var pyList = new PyList(arrays.Select(nd => nd.PyObject as PyObject).ToArray());
+            using var args = new PyTuple(new PyObject[] { pyList });
             using var kwargs = new PyDict();
-            if (dtype != null) kwargs["dtype"] = ToPython(dtype);
-            if (copy != null) kwargs["copy"] = ToPython(copy);
-            if (order != null) kwargs["order"] = ToPython(order);
-            if (subok != true) kwargs["subok"] = ToPython(subok);
-            if (ndmin != null) kwargs["ndmin"] = ToPython(ndmin);
-            dynamic py = self.InvokeMethod("array", args, kwargs);
-            //dynamic py = dynamic_self.array(arrays, dtype, copy, order, subok, ndmin);
+            using var dtypePy = dtype != null ? ToPython(dtype) : null;
+            using var copyPy = copy != null ? ToPython(copy) : null;
+            using var orderPy = order != null ? ToPython(order) : null;
+            using var subokPy = subok != true ? ToPython(subok) : null;
+            using var ndminPy = ndmin != null ? ToPython(ndmin) : null;
+
+            if (dtypePy != null) kwargs["dtype"] = dtypePy;
+            if (copyPy != null) kwargs["copy"] = copyPy;
+            if (orderPy != null) kwargs["order"] = orderPy;
+            if (subokPy != null) kwargs["subok"] = subokPy;
+            if (ndminPy != null) kwargs["ndmin"] = ndminPy;
+
+            var py = self.InvokeMethod("array", args, kwargs);
             return ToCsharp<NDarray>(py);
         }
 
         public static NDarray asarray(ValueType scalar, Dtype dtype = null)
         {
-            var __self__ = self;
-            using var pyargs = ToTuple(new object[]
-            {
-                scalar
-            });
+            using var pyargs = ToTuple(new object[] { scalar });
             using var kwargs = new PyDict();
-            if (dtype != null) kwargs["dtype"] = ToPython(dtype);
-            dynamic py = __self__.InvokeMethod("asarray", pyargs, kwargs);
+            using var dtypePy = dtype != null ? ToPython(dtype) : null;
+
+            if (dtypePy != null) kwargs["dtype"] = dtypePy;
+            var py = self.InvokeMethod("asarray", pyargs, kwargs);
             return ToCsharp<NDarray>(py);
         }
 

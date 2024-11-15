@@ -40,30 +40,30 @@ namespace Cupy.UnitTest
             var expected =
                 "array([[ 1.+0.j,  0.-2.j],\n" +
                 "       [ 0.+2.j,  5.+0.j]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = L = cp.linalg.cholesky(A);
              given = L;
              expected =
                 "array([[ 1.+0.j,  0.+0.j],\n" +
                 "       [ 0.+2.j,  1.+0.j]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.dot(L, L.T.conj()) # verify that L * L.H = A;
              expected =
                 "array([[ 1.+0.j,  0.-2.j],\n" +
                 "       [ 0.+2.j,  5.+0.j]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = A = [[1,-2j],[2j,5]] # what happens if A is only array_like?;
              given = cp.linalg.cholesky(A) # an ndarray object is returned;
              expected =
                 "array([[ 1.+0.j,  0.+0.j],\n" +
                 "       [ 0.+2.j,  1.+0.j]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = # But a matrix object is returned if A is a matrix object;
              given = LA.cholesky(cp.matrix(A));
              expected =
                 "matrix([[ 1.+0.j,  0.+0.j],\n" +
                 "        [ 0.+2.j,  1.+0.j]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -82,7 +82,7 @@ namespace Cupy.UnitTest
             var given = LA.det(a);
             var expected =
                 "-2.0";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(given.repr, Is.EqualTo(expected));
 
             // Computing determinants for a stack of matrices:
 
@@ -97,11 +97,11 @@ namespace Cupy.UnitTest
             var shape = a.shape;
             expected =
                 "(3, 2, 2)";
-            Assert.AreEqual(expected, shape.ToString());
+            Assert.That(expected, Is.EqualTo(shape.ToString()));
             given = LA.det(a);
             expected =
                 "array([-2., -3., -8.], dtype=float64)";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(given.repr, Is.EqualTo(expected));
         }
 
 #if NOT_IMPLEMENTED
@@ -119,12 +119,12 @@ namespace Cupy.UnitTest
             // 
 
             var (w, v) = LA.eig(cp.diag(new double[] { 1, 2, 3 }));
-            Assert.AreEqual("array([1., 2., 3.])", w.repr);
+            Assert.That("array([1., 2., 3.])", w.repr);
             var expected =
                 "array([[1., 0., 0.],\n" +
                 "       [0., 1., 0.],\n" +
                 "       [0., 0., 1.]])";
-            Assert.AreEqual(expected, v.repr);
+            Assert.That(expected, v.repr);
             // Real matrix possessing complex e-values and e-vectors; note that the
             // e-values are complex conjugates of each other.
 
@@ -142,7 +142,7 @@ namespace Cupy.UnitTest
                 "array([ 1. + 1.j,  1. - 1.j])\n" +
                 "array([[ 0.70710678+0.j        ,  0.70710678+0.j        ],\n" +
                 "       [ 0.00000000-0.70710678j,  0.00000000+0.70710678j]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // Complex-valued matrix with real e-values (but complex-valued e-vectors);
             // note that a.conj().T = a, i.e., a is Hermitian.
@@ -163,7 +163,7 @@ namespace Cupy.UnitTest
                 "array([  2.00000000e+00+0.j,   5.98651912e-36+0.j]) # i.e., {2, 0}\n" +
                 "array([[ 0.00000000+0.70710678j,  0.70710678+0.j        ],\n" +
                 "       [ 0.70710678+0.j        ,  0.00000000+0.70710678j]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // Be careful about round-off error!
 
@@ -185,7 +185,7 @@ namespace Cupy.UnitTest
                 "array([ 1.,  1.])\n" +
                 "array([[ 1.,  0.],\n" +
                 "       [ 0.,  1.]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 #endif
@@ -212,14 +212,14 @@ namespace Cupy.UnitTest
             var expected =
                 "array([[ 1.+0.j,  0.-2.j],\n" +
                 "       [ 0.+2.j,  5.+0.j]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = w, v = LA.eigh(a);
              given = w; v;
              expected =
                 "array([ 0.17157288,  5.82842712])\n" +
                 "array([[-0.92387953+0.j        , -0.38268343+0.j        ],\n" +
                 "       [ 0.00000000+0.38268343j,  0.00000000-0.92387953j]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // >>> cp.dot(a, v[:, 0]) - w[0] * v[:, 0] # verify 1st e-val/vec pair
             // array([2.77555756e-17 + 0.j, 0. + 1.38777878e-16j])
@@ -231,11 +231,11 @@ namespace Cupy.UnitTest
              given = cp.dot(a, v{:, 0}) - w{0} * v{:, 0} # verify 1st e-val/vec pair;
              expected =
                 "array([2.77555756e-17 + 0.j, 0. + 1.38777878e-16j])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.dot(a, v{:, 1}) - w{1} * v{:, 1} # verify 2nd e-val/vec pair;
              expected =
                 "array([ 0.+0.j,  0.+0.j])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // >>> A = cp.matrix(a) # what happens if input is a matrix object
             // >>> A
@@ -254,14 +254,14 @@ namespace Cupy.UnitTest
              expected =
                 "matrix([[ 1.+0.j,  0.-2.j],\n" +
                 "        [ 0.+2.j,  5.+0.j]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = w, v = LA.eigh(A);
              given = w; v;
              expected =
                 "array([ 0.17157288,  5.82842712])\n" +
                 "matrix([[-0.92387953+0.j        , -0.38268343+0.j        ],\n" +
                 "        [ 0.00000000+0.38268343j,  0.00000000-0.92387953j]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // >>> # demonstrate the treatment of the imaginary part of the diagonal
             // >>> a = cp.array([[5+2j, 9-2j], [0+2j, 2-1j]])
@@ -292,28 +292,28 @@ namespace Cupy.UnitTest
              expected =
                 "array([[ 5.+2.j,  9.-2.j],\n" +
                 "       [ 0.+2.j,  2.-1.j]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = # with UPLO = 'L' this is numerically equivalent to using LA.eig() with:;
              given = b = cp.array({{5.+0.j, 0.-2.j}, {0.+2.j, 2.-0.j}});
              given = b;
              expected =
                 "array([[ 5.+0.j,  0.-2.j],\n" +
                 "       [ 0.+2.j,  2.+0.j]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = wa, va = LA.eigh(a);
              given = wb, vb = LA.eig(b);
              given = wa; wb;
              expected =
                 "array([ 1.,  6.])\n" +
                 "array([ 6.+0.j,  1.+0.j])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = va; vb;
              expected =
                 "array([[-0.44721360-0.j        , -0.89442719+0.j        ],\n" +
                 "       [ 0.00000000+0.89442719j,  0.00000000-0.4472136j ]])\n" +
                 "array([[ 0.89442719+0.j       ,  0.00000000-0.4472136j],\n" +
                 "       [ 0.00000000-0.4472136j,  0.89442719+0.j       ]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -342,7 +342,7 @@ namespace Cupy.UnitTest
              given = LA.norm(Q{0, :}), LA.norm(Q{1, :}), cp.dot(Q{0, :},Q{1, :});
             var expected =
                 "(1.0, 1.0, 0.0)";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // Now multiply a diagonal matrix by Q on one side and by Q.T on the other:
 
@@ -360,13 +360,13 @@ namespace Cupy.UnitTest
              given = LA.eigvals(D);
              expected =
                 "array([-1.,  1.])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = A = cp.dot(Q, D);
              given = A = cp.dot(A, Q.T);
              given = LA.eigvals(A);
              expected =
                 "array([ 1., -1.])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -386,7 +386,7 @@ namespace Cupy.UnitTest
              given = LA.eigvalsh(a);
             var expected =
                 "array([ 0.17157288,  5.82842712])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // >>> # demonstrate the treatment of the imaginary part of the diagonal
             // >>> a = cp.array([[5+2j, 9-2j], [0+2j, 2-1j]])
@@ -413,7 +413,7 @@ namespace Cupy.UnitTest
              expected =
                 "array([[ 5.+2.j,  9.-2.j],\n" +
                 "       [ 0.+2.j,  2.-1.j]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = # with UPLO = 'L' this is numerically equivalent to using LA.eigvals();
              given = # with:;
              given = b = cp.array({{5.+0.j, 0.-2.j}, {0.+2.j, 2.-0.j}});
@@ -421,14 +421,14 @@ namespace Cupy.UnitTest
              expected =
                 "array([[ 5.+0.j,  0.-2.j],\n" +
                 "       [ 0.+2.j,  2.+0.j]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = wa = LA.eigvalsh(a);
              given = wb = LA.eigvals(b);
              given = wa; wb;
              expected =
                 "array([ 1.,  6.])\n" +
                 "array([ 6.+0.j,  1.+0.j])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -452,11 +452,11 @@ namespace Cupy.UnitTest
              given = cp.allclose(cp.dot(a, ainv), cp.eye(2));
             var expected =
                 "True";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.allclose(cp.dot(ainv, a), cp.eye(2));
              expected =
                 "True";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // If a is a matrix object, then the return value is a matrix as well:
 
@@ -472,7 +472,7 @@ namespace Cupy.UnitTest
              expected =
                 "matrix([[-2. ,  1. ],\n" +
                 "        [ 1.5, -0.5]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // Inverses of several matrices can be computed at once:
 
@@ -492,7 +492,7 @@ namespace Cupy.UnitTest
                 "        [ 1.5, -0.5]],\n" +
                 "       [[-5. ,  2. ],\n" +
                 "        [ 3. , -1. ]]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -532,7 +532,7 @@ namespace Cupy.UnitTest
                 "       [ 1.,  1.],\n" +
                 "       [ 2.,  1.],\n" +
                 "       [ 3.,  1.]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // >>> m, c = cp.linalg.lstsq(A, y, rcond=None)[0]
             // >>> print(m, c)
@@ -544,7 +544,7 @@ namespace Cupy.UnitTest
              given = print(m, c);
              expected =
                 "1.0 -0.95";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // Plot the data along with the fitted line:
 
@@ -582,14 +582,14 @@ namespace Cupy.UnitTest
             var given = a;
             var expected =
                 "array([-4, -3, -2, -1,  0,  1,  2,  3,  4])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(given.repr, Is.EqualTo(expected));
             var b = a.reshape(3, 3);
             given = b;
             expected =
                 "array([[-4, -3, -2],\n" +
                 "       [-1,  0,  1],\n" +
                 "       [ 2,  3,  4]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(given.repr, Is.EqualTo(expected));
 
             // >>> LA.norm(a)
             // 7.745966692414834
@@ -666,15 +666,15 @@ namespace Cupy.UnitTest
             given = LA.norm(c, axis: 0);
             expected =
                 "array([1.41421356, 2.23606798, 5.        ], dtype=float64)";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(given.repr, Is.EqualTo(expected));
             given = LA.norm(c, axis: 1);
             expected =
                 "array([3.74165739, 4.24264069], dtype=float64)";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(given.repr, Is.EqualTo(expected));
             given = LA.norm(c, 1, 1);
             expected =
                 "array([6., 6.], dtype=float64)";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(given.repr, Is.EqualTo(expected));
 
 
             // Using the axis argument to compute matrix norms:
@@ -689,11 +689,11 @@ namespace Cupy.UnitTest
             given = LA.norm(m, new[] { 1, 2 });
             expected =
                 "array([ 3.74165739, 11.22497216], dtype=float64)";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(given.repr, Is.EqualTo(expected));
             var given1 = new[] { LA.norm(m["0, :, :"]), LA.norm(m["1, :, :"]) };
             expected =
                 "(3.7416573867739413, 11.224972160321824)";
-            Assert.AreEqual(expected, given1.repr());
+            Assert.That(expected, Is.EqualTo(given1.repr()));
         }
 
         [Test]
@@ -716,11 +716,11 @@ namespace Cupy.UnitTest
              given = cp.allclose(a, cp.dot(a, cp.dot(B, a)));
             var expected =
                 "True";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.allclose(B, cp.dot(B, cp.dot(a, B)));
              expected =
                 "True";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -744,7 +744,7 @@ namespace Cupy.UnitTest
              given = x;
             var expected =
                 "array([ 2.,  3.])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // Check that the solution is correct:
 
@@ -756,7 +756,7 @@ namespace Cupy.UnitTest
              given = cp.allclose(cp.dot(a, x), b);
              expected =
                 "True";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -790,17 +790,17 @@ namespace Cupy.UnitTest
              given = u.shape, s.shape, vh.shape;
             var expected =
                 "((9, 9), (6,), (6, 6))";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.allclose(a, cp.dot(u{:, :6} * s, vh));
              expected =
                 "True";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = smat = cp.zeros((9, 6), dtype = complex);
              given = smat{:6, :6} = cp.diag(s);
              given = cp.allclose(a, cp.dot(u, cp.dot(smat, vh)));
              expected =
                 "True";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // Reconstruction based on reduced SVD, 2D case:
 
@@ -819,16 +819,16 @@ namespace Cupy.UnitTest
              given = u.shape, s.shape, vh.shape;
              expected =
                 "((9, 6), (6,), (6, 6))";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.allclose(a, cp.dot(u * s, vh));
              expected =
                 "True";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = smat = cp.diag(s);
              given = cp.allclose(a, cp.dot(u, cp.dot(smat, vh)));
              expected =
                 "True";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // Reconstruction based on full SVD, 4D case:
 
@@ -846,15 +846,15 @@ namespace Cupy.UnitTest
              given = u.shape, s.shape, vh.shape;
              expected =
                 "((2, 7, 8, 8), (2, 7, 3), (2, 7, 3, 3))";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.allclose(b, cp.matmul(u{..., :3} * s{..., None, :}, vh));
              expected =
                 "True";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.allclose(b, cp.matmul(u{..., :3}, s{..., None} * vh));
              expected =
                 "True";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // Reconstruction based on reduced SVD, 4D case:
 
@@ -872,15 +872,15 @@ namespace Cupy.UnitTest
              given = u.shape, s.shape, vh.shape;
              expected =
                 "((2, 7, 8, 3), (2, 7, 3), (2, 7, 3, 3))";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.allclose(b, cp.matmul(u * s{..., None, :}, vh));
              expected =
                 "True";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.allclose(b, cp.matmul(u, s{..., None} * vh));
              expected =
                 "True";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -910,7 +910,7 @@ namespace Cupy.UnitTest
                 "         0.00000000e+00 +1.66837030e-15j,\n" +
                 "         1.14383329e-17 +1.22460635e-16j,\n" +
                 "         -1.64863782e-15 +1.77635684e-15j])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // In this example, real input has an FFT which is Hermitian, i.e., symmetric
             // in the real part and anti-symmetric in the imaginary part, as described in
@@ -933,7 +933,7 @@ namespace Cupy.UnitTest
              given = plt.plot(freq, sp.real, freq, sp.imag);
              expected =
                 "[<matplotlib.lines.Line2D object at 0x...>, <matplotlib.lines.Line2D object at 0x...>]";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = plt.show();
 #endif
         }
@@ -970,7 +970,7 @@ namespace Cupy.UnitTest
                 "            0.0 +0.j        ,   0.0 +0.j        ],\n" +
                 "       [-12.5-17.20477401j,   0.0 +0.j        ,   0.0 +0.j        ,\n" +
                 "          0.0 +0.j        ,   0.0 +0.j        ]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -1009,14 +1009,14 @@ namespace Cupy.UnitTest
                 "       [[ 18.+0.j,   0.+0.j,   0.+0.j],\n" +
                 "        [  0.+0.j,   0.+0.j,   0.+0.j],\n" +
                 "        [  0.+0.j,   0.+0.j,   0.+0.j]]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.fft.fftn(a, (2, 2), axes = (0, 1));
              expected =
                 "array([[[ 2.+0.j,  2.+0.j,  2.+0.j],\n" +
                 "        [ 0.+0.j,  0.+0.j,  0.+0.j]],\n" +
                 "       [[-2.+0.j, -2.+0.j, -2.+0.j],\n" +
                 "        [ 0.+0.j,  0.+0.j,  0.+0.j]]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // >>> import matplotlib.pyplot as plt
             // >>> [X, Y] = cp.meshgrid(2 * cp.pi * cp.arange(200) / 12,
@@ -1033,13 +1033,13 @@ namespace Cupy.UnitTest
              given = {X, Y} = cp.meshgrid(2 * cp.pi * cp.arange(200) / 12,;
              expected =
                 "...                      2 * cp.pi * cp.arange(200) / 34)";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = S = cp.sin(X) + cp.cos(Y) + cp.random.uniform(0, 1, X.shape);
              given = FS = cp.fft.fftn(S);
              given = plt.imshow(cp.log(cp.abs(cp.fft.fftshift(FS))**2));
              expected =
                 "<matplotlib.image.AxesImage object at 0x...>";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = plt.show();
 #endif
         }
@@ -1056,7 +1056,7 @@ namespace Cupy.UnitTest
             var given = cp.fft.ifft({0, 4, 0, 0});
             var expected =
                 "array([ 1.+0.j,  0.+1.j, -1.+0.j,  0.-1.j])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // Create and plot a band-limited signal with random phases:
 
@@ -1081,11 +1081,11 @@ namespace Cupy.UnitTest
              given = plt.plot(t, s.real, 'b-', t, s.imag, 'r--');
              expected =
                 "...";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = plt.legend(('real', 'imaginary'));
              expected =
                 "...";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = plt.show();
 #endif
         }
@@ -1109,7 +1109,7 @@ namespace Cupy.UnitTest
                 "       [0.+0.j, 0.+0.j, 0.+0.j, 1.+0.j],\n" +
                 "       [0.+0.j, 0.+0.j, 1.+0.j, 0.+0.j],\n" +
                 "       [0.+0.j, 1.+0.j, 0.+0.j, 0.+0.j]], dtype=complex128)";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(given.repr, Is.EqualTo(expected));
         }
 
 
@@ -1132,7 +1132,7 @@ namespace Cupy.UnitTest
                 "       [ 0.+0.j,  1.+0.j,  0.+0.j,  0.+0.j],\n" +
                 "       [ 0.+0.j,  0.+0.j,  1.+0.j,  0.+0.j],\n" +
                 "       [ 0.+0.j,  0.+0.j,  0.+0.j,  1.+0.j]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // Create and plot an image with band-limited frequency content:
 
@@ -1153,7 +1153,7 @@ namespace Cupy.UnitTest
              given = plt.imshow(im);
              expected =
                 "<matplotlib.image.AxesImage object at 0x...>";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = plt.show();
 #endif
         }
@@ -1172,11 +1172,11 @@ namespace Cupy.UnitTest
             var given = cp.i0({0.});
             var expected =
                 "array(1.0)";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.i0({0., 1. + 2j});
              expected =
                 "array([ 1.00000000+0.j        ,  0.18785373+0.64616944j])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
     }

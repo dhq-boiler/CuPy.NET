@@ -82,17 +82,23 @@ namespace Cupy
         /// </returns>
         public static NDarray delete(NDarray arr, int[] obj, int? axis = null)
         {
-            //auto-generated code, do not change
-            var __self__ = self;
-            using var pyargs = ToTuple(new object[]
+            var pyAxis = axis != null ? ToPython(axis) : null;
+            try
             {
-                arr,
-                obj
-            });
-            using var kwargs = new PyDict();
-            if (axis != null) kwargs["axis"] = ToPython(axis);
-            dynamic py = __self__.InvokeMethod("delete", pyargs, kwargs);
-            return ToCsharp<NDarray>(py);
+                using var pyargs = ToTuple(new object[]
+                {
+                   arr,
+                   obj
+                });
+                using var kwargs = new PyDict();
+                if (axis != null) kwargs["axis"] = pyAxis;
+                dynamic py = self.InvokeMethod("delete", pyargs, kwargs);
+                return ToCsharp<NDarray>(py);
+            }
+            finally
+            {
+                if (pyAxis != null) pyAxis.Dispose();
+            }
         }
     }
 }

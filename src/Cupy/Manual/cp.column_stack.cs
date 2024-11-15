@@ -25,15 +25,11 @@ namespace Cupy
         /// </returns>
         public static NDarray column_stack(params NDarray[] tup)
         {
-            //auto-generated code, do not change
-            var __self__ = self;
-            PyTuple pyargs;
-            if (tup.Length == 1)
-                pyargs = ToTuple(new object[] { tup[0] });
-            else
-                pyargs = ToTuple(new object[] { tup });
+            using var pyargs = tup.Length == 1
+                ? ToTuple(new object[] { tup[0] })
+                : ToTuple(new object[] { tup });
             using var kwargs = new PyDict();
-            dynamic py = __self__.InvokeMethod("column_stack", pyargs, kwargs);
+            var py = self.InvokeMethod("column_stack", pyargs, kwargs);
             return ToCsharp<NDarray>(py);
         }
     }

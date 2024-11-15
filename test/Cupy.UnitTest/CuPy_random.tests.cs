@@ -23,10 +23,10 @@ namespace Cupy.UnitTest
             var given = cp.random.rand(1, 2);
             var expected = "array([[0.43845084, 0.4603647 ]], dtype=float64)";
 
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(given.repr, Is.EqualTo(expected));
             cp.random.seed(0);
             var x = cp.random.rand();
-            Assert.AreEqual(0.438450843f, x);
+            Assert.That(0.438450843f, Is.EqualTo(x));
         }
 
 
@@ -39,7 +39,7 @@ namespace Cupy.UnitTest
 
             cp.random.seed(0);
             var given = cp.random.randn();
-            Assert.AreEqual(1.07102156f, given);
+            Assert.That(1.07102156f, Is.EqualTo(given));
             // Two-by-four array of samples from N(3, 6.25):
 
             // >>> 2.5 * cp.random.randn(2, 4) + 3
@@ -50,7 +50,7 @@ namespace Cupy.UnitTest
             cp.random.seed(0);
             var a = 2.5 * cp.random.randn(1, 2) + 3;
             var expected = "array([[5.67755401, 4.77117169]], dtype=float64)";
-            Assert.AreEqual(expected, a.repr);
+            Assert.That(expected, Is.EqualTo(a.repr));
         }
 
 
@@ -64,11 +64,11 @@ namespace Cupy.UnitTest
             // 
 
             var given = cp.random.randint(2, size: new[] { 10 });
-            Assert.IsTrue((int)given.sum() <= 10);
+            Assert.That((int)given.sum() <= 10);
             given = cp.random.randint(1, size: new[] { 10 });
             var expected =
                 "array([0, 0, 0, 0, 0, 0, 0, 0, 0, 0])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(given.repr, Is.EqualTo(expected));
             // Generate a 2 x 4 array of ints between 0 and 4, inclusive:
 
             // >>> cp.random.randint(5, size=(2, 4))
@@ -77,8 +77,8 @@ namespace Cupy.UnitTest
             // 
 
             given = cp.random.randint(5, size: new[] { 2, 4 });
-            Assert.IsTrue((int)given.max() <= 4);
-            Assert.IsTrue((int)given.min() >= 0);
+            Assert.That((int)given.max() <= 4);
+            Assert.That((int)given.min() >= 0);
         }
 
 
@@ -99,17 +99,17 @@ namespace Cupy.UnitTest
             var given = cp.random.random_integers(5);
             var expected =
                 "4";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = type(cp.random.random_integers(5));
              expected =
                 "<type 'int'>";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.random.random_integers(5, size = (3,2));
              expected =
                 "array([[5, 4],\n" +
                 "       [3, 3],\n" +
                 "       [4, 5]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // Choose five random numbers from the set of five evenly-spaced
             // numbers between 0 and 2.5, inclusive (i.e., from the set
@@ -123,7 +123,7 @@ namespace Cupy.UnitTest
              given = 2.5 * (cp.random.random_integers(5, size = (5,)) - 1) / 4.;
              expected =
                 "array([ 0.625,  1.25 ,  0.625,  0.625,  2.5  ])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // Roll two six sided dice 1000 times and sum the results:
 
@@ -167,15 +167,15 @@ namespace Cupy.UnitTest
             var given = cp.random.random_sample();
             var expected =
                 "0.47108547995356098";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = type(cp.random.random_sample());
              expected =
                 "<type 'float'>";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.random.random_sample((5,));
              expected =
                 "array([ 0.30220482,  0.86820401,  0.1654503 ,  0.11659149,  0.54323428])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // Three-by-two array of random numbers from [-5, 0):
 
@@ -191,7 +191,7 @@ namespace Cupy.UnitTest
                 "array([[-3.99149989, -0.52338984],\n" +
                 "       [-2.99091858, -0.79479508],\n" +
                 "       [-1.23204345, -1.75224494]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -211,15 +211,15 @@ namespace Cupy.UnitTest
             var given = cp.random.random_sample();
             var expected =
                 "0.47108547995356098";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = type(cp.random.random_sample());
              expected =
                 "<type 'float'>";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.random.random_sample((5,));
              expected =
                 "array([ 0.30220482,  0.86820401,  0.1654503 ,  0.11659149,  0.54323428])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // Three-by-two array of random numbers from [-5, 0):
 
@@ -235,7 +235,7 @@ namespace Cupy.UnitTest
                 "array([[-3.99149989, -0.52338984],\n" +
                 "       [-2.99091858, -0.79479508],\n" +
                 "       [-1.23204345, -1.75224494]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -255,15 +255,15 @@ namespace Cupy.UnitTest
             var given = cp.random.random_sample();
             var expected =
                 "0.47108547995356098";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = type(cp.random.random_sample());
              expected =
                 "<type 'float'>";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.random.random_sample((5,));
              expected =
                 "array([ 0.30220482,  0.86820401,  0.1654503 ,  0.11659149,  0.54323428])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // Three-by-two array of random numbers from [-5, 0):
 
@@ -279,7 +279,7 @@ namespace Cupy.UnitTest
                 "array([[-3.99149989, -0.52338984],\n" +
                 "       [-2.99091858, -0.79479508],\n" +
                 "       [-1.23204345, -1.75224494]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -299,15 +299,15 @@ namespace Cupy.UnitTest
             var given = cp.random.random_sample();
             var expected =
                 "0.47108547995356098";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = type(cp.random.random_sample());
              expected =
                 "<type 'float'>";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.random.random_sample((5,));
              expected =
                 "array([ 0.30220482,  0.86820401,  0.1654503 ,  0.11659149,  0.54323428])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // Three-by-two array of random numbers from [-5, 0):
 
@@ -323,7 +323,7 @@ namespace Cupy.UnitTest
                 "array([[-3.99149989, -0.52338984],\n" +
                 "       [-2.99091858, -0.79479508],\n" +
                 "       [-1.23204345, -1.75224494]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -342,7 +342,7 @@ namespace Cupy.UnitTest
             var given = cp.random.choice(5, 3);
             var expected =
                 "array([0, 3, 4])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = #This is equivalent to cp.random.randint(0,5,3);
 #endif
             // Generate a non-uniform random sample from cp.arange(5) of size 3:
@@ -355,7 +355,7 @@ namespace Cupy.UnitTest
              given = cp.random.choice(5, 3, p = {0.1, 0, 0.3, 0.6, 0});
              expected =
                 "array([3, 3, 0])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // Generate a uniform random sample from cp.arange(5) of size 3 without
             // replacement:
@@ -369,7 +369,7 @@ namespace Cupy.UnitTest
              given = cp.random.choice(5, 3, replace = False);
              expected =
                 "array([3,1,0])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = #This is equivalent to cp.random.permutation(cp.arange(5)){:3};
 #endif
             // Generate a non-uniform random sample from cp.arange(5) of size
@@ -383,7 +383,7 @@ namespace Cupy.UnitTest
              given = cp.random.choice(5, 3, replace = False, p = {0.1, 0, 0.3, 0.6, 0});
              expected =
                 "array([2, 3, 0])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // Any of the above can be repeated with an arbitrary array-like
             // instead of just integers. For instance:
@@ -400,7 +400,7 @@ namespace Cupy.UnitTest
              expected =
                 "array(['pooh', 'pooh', 'pooh', 'Christopher', 'piglet'],\n" +
                 "      dtype='|S11')";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -416,7 +416,7 @@ namespace Cupy.UnitTest
             var given = cp.random.bytes(10);
             var expected =
                 "' eh\x85\x022SZ\xbf\xa4' #random";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -436,7 +436,7 @@ namespace Cupy.UnitTest
              given = arr;
             var expected =
                 "[1 7 5 2 9 4 3 6 0 8]";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // Multi-dimensional arrays are only shuffled along the first axis:
 
@@ -456,7 +456,7 @@ namespace Cupy.UnitTest
                 "array([[3, 4, 5],\n" +
                 "       [6, 7, 8],\n" +
                 "       [0, 1, 2]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -472,7 +472,7 @@ namespace Cupy.UnitTest
             var given = cp.random.permutation(10);
             var expected =
                 "array([1, 7, 4, 3, 0, 9, 2, 5, 8, 6])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // >>> cp.random.permutation([1, 4, 9, 12, 15])
             // array([15,  1,  9,  4, 12])
@@ -482,7 +482,7 @@ namespace Cupy.UnitTest
              given = cp.random.permutation({1, 4, 9, 12, 15});
              expected =
                 "array([15,  1,  9,  4, 12])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // >>> arr = cp.arange(9).reshape((3, 3))
             // >>> cp.random.permutation(arr)
@@ -498,7 +498,7 @@ namespace Cupy.UnitTest
                 "array([[6, 7, 8],\n" +
                 "       [0, 1, 2],\n" +
                 "       [3, 4, 5]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -547,7 +547,7 @@ namespace Cupy.UnitTest
             var given = cp.random.chisquare(2,4);
             var expected =
                 "array([ 1.89920014,  9.00867716,  3.13710533,  5.62318272])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -619,7 +619,7 @@ namespace Cupy.UnitTest
              given = sort(s)[-10];
             var expected =
                 "7.61988120985";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // So there is about a 1% chance that the F statistic will exceed 7.62,
             // the measured value is 36, so the null hypothesis is rejected at the 1%
@@ -659,7 +659,7 @@ namespace Cupy.UnitTest
              given = y = bins**(shape-1)*(cp.exp(-bins/scale) /;
             var expected =
                 "...                      (sps.gamma(shape)*scale**shape))";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = plt.plot(bins, y, linewidth = 2, color = 'r');
              given = plt.show();
 #endif
@@ -688,7 +688,7 @@ namespace Cupy.UnitTest
              given = (z == 1).sum() / 10000.;
             var expected =
                 "0.34889999999999999 #random";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -724,7 +724,7 @@ namespace Cupy.UnitTest
             var expected =
                 "...          * cp.exp( -cp.exp( -(bins - mu) /beta) ),\n" +
                 "...          linewidth=2, color='r')";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = plt.show();
 #endif
             // Show how an extreme value distribution can arise from a Gaussian process
@@ -756,7 +756,7 @@ namespace Cupy.UnitTest
                 "...    a = cp.random.normal(mu, beta, 1000)\n" +
                 "...    means.append(a.mean())\n" +
                 "...    maxima.append(a.max())";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = count, bins, ignored = plt.hist(maxima, 30, density = True);
              given = beta = cp.std(maxima) * cp.sqrt(6) / cp.pi;
              given = mu = cp.mean(maxima) - 0.57721*beta;
@@ -764,12 +764,12 @@ namespace Cupy.UnitTest
              expected =
                 "...          * cp.exp(-cp.exp(-(bins - mu)/beta)),\n" +
                 "...          linewidth=2, color='r')";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = plt.plot(bins, 1/(beta * cp.sqrt(2 * cp.pi));
              expected =
                 "...          * cp.exp(-(bins - mu)**2 / (2 * beta**2)),\n" +
                 "...          linewidth=2, color='g')";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = plt.show();
 #endif
         }
@@ -854,7 +854,7 @@ namespace Cupy.UnitTest
              given = g = (1/(scale * cp.sqrt(2 * cp.pi)) *;
             var expected =
                 "...      cp.exp(-(x - loc)**2 / (2 * scale**2)))";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = plt.plot(x,g);
 #endif
         }
@@ -890,11 +890,11 @@ namespace Cupy.UnitTest
              given = def logist(x, loc, scale):;
             var expected =
                 "...     return exp((loc-x)/scale)/(scale*(1+exp((loc-x)/scale))**2)";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = plt.plot(bins, logist(bins, loc, scale)*count.max()/\;
              expected =
                 "... logist(bins, loc, scale).max())";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = plt.show();
 #endif
         }
@@ -934,7 +934,7 @@ namespace Cupy.UnitTest
              given = pdf = (cp.exp(-(cp.log(x) - mu)**2 / (2 * sigma**2));
             var expected =
                 "...        / (x * sigma * cp.sqrt(2 * cp.pi)))";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // >>> plt.plot(x, pdf, linewidth=2, color='r')
             // >>> plt.axis('tight')
@@ -966,7 +966,7 @@ namespace Cupy.UnitTest
              expected =
                 "...    a = 10. + cp.random.random(100)\n" +
                 "...    b.append(cp.product(a))";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // >>> b = cp.array(b) / cp.min(b) # scale values to be positive
             // >>> count, bins, ignored = plt.hist(b, 100, density=True, align='mid')
@@ -990,7 +990,7 @@ namespace Cupy.UnitTest
              given = pdf = (cp.exp(-(cp.log(x) - mu)**2 / (2 * sigma**2));
              expected =
                 "...        / (x * sigma * cp.sqrt(2 * cp.pi)))";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // >>> plt.plot(x, pdf, color='r', linewidth=2)
             // >>> plt.show()
@@ -1033,11 +1033,11 @@ namespace Cupy.UnitTest
              given = def logseries(k, p):;
             var expected =
                 "...     return -p**k/(k*log(1-p))";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = plt.plot(bins, logseries(bins, a)*count.max()/;
              expected =
                 "             logseries(bins, a).max(), 'r')";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = plt.show();
 #endif
         }
@@ -1056,7 +1056,7 @@ namespace Cupy.UnitTest
             var given = cp.random.multinomial(20, {1/6.}*6, size = 1);
             var expected =
                 "array([[4, 1, 7, 5, 2, 1]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // It landed 4 times on 1, once on 2, etc.
 
@@ -1072,7 +1072,7 @@ namespace Cupy.UnitTest
              expected =
                 "array([[3, 4, 3, 3, 4, 3],\n" +
                 "       [2, 4, 3, 4, 0, 7]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // For the first run, we threw 3 times 1, 4 times 2, etc.  For the second,
             // we threw 2 times 1, 4 times 2, etc.
@@ -1087,7 +1087,7 @@ namespace Cupy.UnitTest
              given = cp.random.multinomial(100, {1/7.}*5 + {2/7.});
              expected =
                 "array([11, 16, 14, 17, 16, 26])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // The probability inputs should be normalized. As an implementation
             // detail, the value of the last entry is ignored and assumed to take
@@ -1103,7 +1103,7 @@ namespace Cupy.UnitTest
              given = cp.random.multinomial(100, {1.0 / 3, 2.0 / 3})  # RIGHT;
              expected =
                 "array([38, 62])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // not like:
 
@@ -1115,7 +1115,7 @@ namespace Cupy.UnitTest
              given = cp.random.multinomial(100, {1.0, 2.0})  # WRONG;
              expected =
                 "array([100,   0])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -1137,7 +1137,7 @@ namespace Cupy.UnitTest
              given = x.shape;
             var expected =
                 "(3, 3, 2)";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // The following is probably true, given that 0.6 is roughly twice the
             // standard deviation:
@@ -1150,7 +1150,7 @@ namespace Cupy.UnitTest
              given = list((x[0,0,:] - mean) < 0.6);
              expected =
                 "[True, True]";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -1178,7 +1178,7 @@ namespace Cupy.UnitTest
             var expected =
                 "...    probability = sum(s<i) / 100000.\n" +
                 "...    print i, "wells drilled, probability of one success = ", probability";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -1199,7 +1199,7 @@ namespace Cupy.UnitTest
              given = values = plt.hist(cp.random.noncentral_chisquare(3, 20, 100000),;
             var expected =
                 "...                   bins=200, density=True)";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = plt.show();
 #endif
             // Draw values from a noncentral chisquare with very small noncentrality,
@@ -1219,11 +1219,11 @@ namespace Cupy.UnitTest
              given = values = plt.hist(cp.random.noncentral_chisquare(3, .0000001, 100000),;
              expected =
                 "...                   bins=cp.arange(0., 25, .1), density=True)";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = values2 = plt.hist(cp.random.chisquare(3, 100000),;
              expected =
                 "...                    bins=cp.arange(0., 25, .1), density=True)";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = plt.plot(values[1][0:-1], values[0]-values2[0], 'ob');
              given = plt.show();
 #endif
@@ -1241,7 +1241,7 @@ namespace Cupy.UnitTest
              given = values = plt.hist(cp.random.noncentral_chisquare(3, 20, 100000),;
              expected =
                 "...                   bins=200, density=True)";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = plt.show();
 #endif
         }
@@ -1301,12 +1301,12 @@ namespace Cupy.UnitTest
             // >>> abs(mu - cp.mean(s)) < 0.01
             // True
             // 
-            Assert.IsTrue(Math.Abs(mu - s.mean()) < 0.01);
+            Assert.That(Math.Abs(mu - s.mean()) < 0.01);
 
             // >>> abs(sigma - cp.std(s, ddof=1)) < 0.01
             // True
             // 
-            Assert.IsTrue(Math.Abs(sigma - s.std(ddof: 1)) < 0.01);
+            Assert.That(Math.Abs(sigma - s.std(ddof: 1)) < 0.01);
 
             // Two-by-four array of samples from N(3, 6.25):
 
@@ -1314,7 +1314,7 @@ namespace Cupy.UnitTest
             // array([[-4.49401501, 4.00950034, -1.81814867, 7.29718677],   # random
             //    [ 0.39924804,  4.68456316,  4.99394529,  4.84057254]])  # random
 
-            Assert.AreEqual(new Shape(2, 4), cp.random.normal(3, 2.5f, new[] { 2, 4 }).shape);
+            Assert.That(new Shape(2, 4), Is.EqualTo(cp.random.normal(3, 2.5f, new[] { 2, 4 }).shape));
         }
 
 
@@ -1424,7 +1424,7 @@ namespace Cupy.UnitTest
              given = 100.*sum(s>3)/1000000.;
             var expected =
                 "0.087300000000000003";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -1497,7 +1497,7 @@ namespace Cupy.UnitTest
              given = y = bins**(shape-1) * ((cp.exp(-bins/scale))/ \;
             var expected =
                 "...                       (sps.gamma(shape) * scale**shape))";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = plt.plot(bins, y, linewidth = 2, color = 'r');
              given = plt.show();
 #endif
@@ -1524,16 +1524,16 @@ namespace Cupy.UnitTest
             var expected =
                 "array([ 0.6888893 ,  0.78096262, -0.89086505, ...,  0.49876311, #random\n" +
                 "       -0.38672696, -0.4685006 ])                               #random";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = s.shape;
              expected =
                 "(8000,)";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = s = cp.random.standard_normal(size = (3, 4, 2));
              given = s.shape;
              expected =
                 "(3, 4, 2)";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -1552,7 +1552,7 @@ namespace Cupy.UnitTest
             var given = intake = cp.array({5260., 5470, 5640, 6180, 6390, 6515, 6805, 7515, \;
             var expected =
                 "...                    7515, 8230, 8770])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // Does their energy intake deviate systematically from the recommended
             // value of 7725 kJ?
@@ -1572,11 +1572,11 @@ namespace Cupy.UnitTest
              given = cp.mean(intake);
              expected =
                 "6753.636363636364";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = intake.std(ddof = 1);
              expected =
                 "1142.1232221373727";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // Calculate the t statistic, setting the ddof parameter to the unbiased
             // value so the divisor in the standard deviation will be degrees of
@@ -1603,7 +1603,7 @@ namespace Cupy.UnitTest
              given = cp.sum(s<t) / float(len(s));
              expected =
                 "0.0090699999999999999  #random";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // So the p-value is about 0.009, which says the null hypothesis has a
             // probability of about 99% of being true.
@@ -1626,7 +1626,7 @@ namespace Cupy.UnitTest
              given = h = plt.hist(cp.random.triangular(-3, 0, 8, 100000), bins = 200,;
             var expected =
                 "...              density=True)";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = plt.show();
 #endif
         }
@@ -1655,11 +1655,11 @@ namespace Cupy.UnitTest
              given = cp.all(s >= -1);
             var expected =
                 "True";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.all(s < 0);
              expected =
                 "True";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // Display the histogram of the samples, along with the
             // probability density function:
@@ -1762,7 +1762,7 @@ namespace Cupy.UnitTest
              given = def weib(x,n,a):;
             var expected =
                 "...     return (a / n) * (x / n)**(a - 1) * cp.exp(-(x / n)**a)";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // >>> count, bins, ignored = plt.hist(cp.random.weibull(5.,1000))
             // >>> x = cp.arange(1,100.)/50.
