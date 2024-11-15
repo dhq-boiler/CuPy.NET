@@ -21,11 +21,11 @@ namespace Cupy.UnitTest
             var given = cp.fft.fft({0, 1, 0, 0});
             var expected =
                 "array([ 1.+0.j,  0.-1.j, -1.+0.j,  0.+1.j])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.fft.rfft({0, 1, 0, 0});
              expected =
                 "array([ 1.+0.j,  0.-1.j, -1.+0.j])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // Notice how the final element of the fft output is the complex conjugate
             // of the second element, for real input. For rfft, this symmetry is
@@ -46,11 +46,11 @@ namespace Cupy.UnitTest
             var given = cp.fft.ifft({1, -1j, -1, 1j});
             var expected =
                 "array([ 0.+0.j,  1.+0.j,  0.+0.j,  0.+0.j])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.fft.irfft({1, -1j, -1});
              expected =
                 "array([ 0.,  1.,  0.,  0.])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // Notice how the last term in the input to the ordinary ifft is the
             // complex conjugate of the second term, and the output has zero imaginary
@@ -78,7 +78,7 @@ namespace Cupy.UnitTest
                 "        [ 0.+0.j,  0.+0.j]],\n" +
                 "       [[ 0.+0.j,  0.+0.j],\n" +
                 "        [ 0.+0.j,  0.+0.j]]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // >>> cp.fft.rfftn(a, axes=(2, 0))
             // array([[[ 4.+0.j,  0.+0.j],
@@ -94,7 +94,7 @@ namespace Cupy.UnitTest
                 "        [ 4.+0.j,  0.+0.j]],\n" +
                 "       [[ 0.+0.j,  0.+0.j],\n" +
                 "        [ 0.+0.j,  0.+0.j]]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -124,7 +124,7 @@ namespace Cupy.UnitTest
                 "        [ 1.,  1.]],\n" +
                 "       [[ 1.,  1.],\n" +
                 "        [ 1.,  1.]]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -146,15 +146,15 @@ namespace Cupy.UnitTest
              given = cp.fft.fft(signal);
             var expected =
                 "array([ 15.+0.j,  -4.+0.j,   0.+0.j,  -1.-0.j,   0.+0.j,  -4.+0.j])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.fft.hfft(signal{:4}) # Input first half of signal;
              expected =
                 "array([ 15.,  -4.,   0.,  -1.,   0.,  -4.])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.fft.hfft(signal, 6)  # Input entire signal and truncate;
              expected =
                 "array([ 15.,  -4.,   0.,  -1.,   0.,  -4.])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // >>> signal = cp.array([[1, 1.j], [-1.j, 2]])
             // >>> cp.conj(signal.T) - signal   # check Hermitian symmetry
@@ -172,13 +172,13 @@ namespace Cupy.UnitTest
              expected =
                 "array([[ 0.-0.j,  0.+0.j],\n" +
                 "       [ 0.+0.j,  0.-0.j]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = freq_spectrum = cp.fft.hfft(signal);
              given = freq_spectrum;
              expected =
                 "array([[ 1.,  1.],\n" +
                 "       [ 2., -2.]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -198,11 +198,11 @@ namespace Cupy.UnitTest
              given = cp.fft.ifft(spectrum);
             var expected =
                 "array([ 1.+0.j,  2.-0.j,  3.+0.j,  4.+0.j,  3.+0.j,  2.-0.j])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.fft.ihfft(spectrum);
              expected =
                 "array([ 1.-0.j,  2.-0.j,  3.-0.j,  4.-0.j])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -228,7 +228,7 @@ namespace Cupy.UnitTest
              given = freq;
             var expected =
                 "array([ 0.  ,  1.25,  2.5 ,  3.75, -5.  , -3.75, -2.5 , -1.25])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -257,12 +257,12 @@ namespace Cupy.UnitTest
              given = freq;
             var expected =
                 "array([  0.,  10.,  20.,  30.,  40., -50., -40., -30., -20., -10.])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = freq = cp.fft.rfftfreq(n, d = 1./sample_rate);
              given = freq;
              expected =
                 "array([  0.,  10.,  20.,  30.,  40.,  50.])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -282,11 +282,11 @@ namespace Cupy.UnitTest
              given = freqs;
             var expected =
                 "array([ 0.,  1.,  2.,  3.,  4., -5., -4., -3., -2., -1.])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.fft.fftshift(freqs);
              expected =
                 "array([-5., -4., -3., -2., -1.,  0.,  1.,  2.,  3.,  4.])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // Shift the zero-frequency component only along the second axis:
 
@@ -308,13 +308,13 @@ namespace Cupy.UnitTest
                 "array([[ 0.,  1.,  2.],\n" +
                 "       [ 3.,  4., -4.],\n" +
                 "       [-3., -2., -1.]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.fft.fftshift(freqs, axes = (1,));
              expected =
                 "array([[ 2.,  0.,  1.],\n" +
                 "       [-4.,  3.,  4.],\n" +
                 "       [-1., -3., -2.]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -340,13 +340,13 @@ namespace Cupy.UnitTest
                 "array([[ 0.,  1.,  2.],\n" +
                 "       [ 3.,  4., -4.],\n" +
                 "       [-3., -2., -1.]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.fft.ifftshift(cp.fft.fftshift(freqs));
              expected =
                 "array([[ 0.,  1.,  2.],\n" +
                 "       [ 3.,  4., -4.],\n" +
                 "       [-3., -2., -1.]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
     }

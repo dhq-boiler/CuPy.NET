@@ -24,7 +24,7 @@ namespace Cupy.UnitTest
              given = cp.roots(coeff);
             var expected =
                 "array([-0.3125+0.46351241j, -0.3125-0.46351241j])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
     }

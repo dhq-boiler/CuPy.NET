@@ -61,14 +61,15 @@ namespace Cupy
         /// </returns>
         public static NDarray gradient(NDarray f, int? edge_order = null, Axis axis = null)
         {
-            //auto-generated code, do not change
-            var __self__ = self;
-
-            var pyargs = new PyObject[] { f.PyObject };
+            using var pyargs = ToTuple(new PyObject[] { f.PyObject });
             using var kwargs = new PyDict();
-            if (edge_order != null) kwargs["edge_order"] = ToPython(edge_order);
-            if (axis != null) kwargs["axis"] = ToPython(axis);
-            dynamic py = __self__.InvokeMethod("gradient", pyargs, kwargs);
+            using var edgeOrderPy = edge_order != null ? ToPython(edge_order) : null;
+            using var axisPy = axis != null ? ToPython(axis) : null;
+
+            if (edgeOrderPy != null) kwargs["edge_order"] = edgeOrderPy;
+            if (axisPy != null) kwargs["axis"] = axisPy;
+
+            dynamic py = self.InvokeMethod("gradient", pyargs, kwargs);
             return ToCsharp<NDarray>(py);
         }
 
@@ -123,14 +124,15 @@ namespace Cupy
         /// </returns>
         public static NDarray gradient(NDarray f, List<double> varargs, int? edge_order = null, Axis axis = null)
         {
-            //auto-generated code, do not change
-            var __self__ = self;
-
-            var pyargs = new PyObject[] { f.PyObject }.Concat(varargs.Select(x => new PyFloat(x))).ToArray();
+            using var pyargs = ToTuple(new PyObject[] { f.PyObject }.Concat(varargs.Select(x => new PyFloat(x))).ToArray());
             using var kwargs = new PyDict();
-            if (edge_order != null) kwargs["edge_order"] = ToPython(edge_order);
-            if (axis != null) kwargs["axis"] = ToPython(axis);
-            dynamic py = __self__.InvokeMethod("gradient", pyargs, kwargs);
+            using var edgeOrderPy = edge_order != null ? ToPython(edge_order) : null;
+            using var axisPy = axis != null ? ToPython(axis) : null;
+
+            if (edgeOrderPy != null) kwargs["edge_order"] = edgeOrderPy;
+            if (axisPy != null) kwargs["axis"] = axisPy;
+
+            dynamic py = self.InvokeMethod("gradient", pyargs, kwargs);
             return ToCsharp<NDarray>(py);
         }
     }

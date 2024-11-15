@@ -23,7 +23,7 @@ namespace Cupy.UnitTest
             var given = cp.fv(0.05/12, 10*12, -100, -100);
             var expected =
                 "15692.928894335748";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // By convention, the negative sign represents cash flow out (i.e. money not
             // available today).  Thus, saving $100 a month at 5% annual interest leads
@@ -42,7 +42,7 @@ namespace Cupy.UnitTest
              given = cp.fv(a, 10*12, -100, -100);
              expected =
                 "array([ 15692.92889434,  16569.87435405,  17509.44688102])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -63,7 +63,7 @@ namespace Cupy.UnitTest
             var given = cp.pv(0.05/12, 10*12, -100, 15692.93);
             var expected =
                 "-100.00067131625819";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // By convention, the negative sign represents cash flow out
             // (i.e., money not available today).  Thus, to end up with
@@ -83,7 +83,7 @@ namespace Cupy.UnitTest
              given = cp.pv(a, 10*12, -100, 15692.93);
              expected =
                 "array([ -100.00067132,  -649.26771385, -1273.78633713])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // So, to end up with the same $15692.93 under the same $100 per month
             // “savings plan,” for annual interest rates of 4% and 3%, one would
@@ -102,7 +102,7 @@ namespace Cupy.UnitTest
             var given = cp.npv(0.281,{-100, 39, 59, 55, 20});
             var expected =
                 "-0.0084785916384548798";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // (Compare with the Example given for Cupy.lib.financial.irr)
         }
@@ -122,7 +122,7 @@ namespace Cupy.UnitTest
             var given = cp.pmt(0.075/12, 12*15, 200000);
             var expected =
                 "-1854.0247200054619";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // In order to pay-off (i.e., have a future-value of 0) the $200,000 obtained
             // today, a monthly payment of $1,854.02 would be required.  Note that this
@@ -168,7 +168,7 @@ namespace Cupy.UnitTest
              given = cp.allclose(ipmt + ppmt, pmt);
             var expected =
                 "True";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // >>> fmt = '{0:2d} {1:8.2f} {2:8.2f} {3:8.2f}'
             // >>> for payment in per:
@@ -208,7 +208,7 @@ namespace Cupy.UnitTest
                 "10  -213.32    -4.42   431.05\n" +
                 "11  -214.79    -2.96   216.26\n" +
                 "12  -216.26    -1.49    -0.00";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // >>> interestpd = cp.sum(ipmt)
             // >>> cp.round(interestpd, 2)
@@ -220,7 +220,7 @@ namespace Cupy.UnitTest
              given = cp.round(interestpd, 2);
              expected =
                 "-112.98";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -244,23 +244,23 @@ namespace Cupy.UnitTest
             var given = round(irr([-100, 39, 59, 55, 20]), 5);
             var expected =
                 "0.28095";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = round(irr([-100, 0, 0, 74]), 5);
              expected =
                 "-0.0955";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = round(irr([-100, 100, 0, -7]), 5);
              expected =
                 "-0.0833";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = round(irr([-100, 100, 0, 7]), 5);
              expected =
                 "0.06206";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = round(irr([-5, 10.5, 1, -8, 1]), 5);
              expected =
                 "0.0886";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // (Compare with the Example given for Cupy.lib.financial.npv)
         }
@@ -280,7 +280,7 @@ namespace Cupy.UnitTest
             var given = print(round(cp.nper(0.07/12, -150, 8000), 5));
             var expected =
                 "64.07335";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // So, over 64 months would be required to pay off the loan.
 
@@ -305,7 +305,7 @@ namespace Cupy.UnitTest
                 "        [ 108.07548412,  127.99022654]],\n" +
                 "       [[  66.12443902,   76.87897353],\n" +
                 "        [ 114.70165583,  137.90124779]]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
     }

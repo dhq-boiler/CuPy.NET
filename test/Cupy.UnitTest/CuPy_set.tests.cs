@@ -32,20 +32,20 @@ namespace Cupy.UnitTest
              given = mask;
             var expected =
                 "array([ True, False,  True, False,  True])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = test[mask];
              expected =
                 "array([0, 2, 0])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = mask = cp.in1d(test, states, invert = True);
              given = mask;
              expected =
                 "array([False,  True, False,  True, False])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = test[mask];
              expected =
                 "array([1, 5])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -61,7 +61,7 @@ namespace Cupy.UnitTest
             var given = cp.intersect1d({1, 3, 4, 3}, {3, 1, 2, 1});
             var expected =
                 "array([1, 3])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // To intersect more than two arrays, use functools.reduce:
 
@@ -75,7 +75,7 @@ namespace Cupy.UnitTest
              given = reduce(cp.intersect1d, ({1, 3, 4, 3}, {3, 1, 2, 1}, {6, 3, 4, 2}));
              expected =
                 "array([3])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // To return the indices of the values common to the input arrays
             // along with the intersected values:
@@ -111,18 +111,18 @@ namespace Cupy.UnitTest
             var expected =
                 "array([[0, 2],\n" +
                 "       [4, 6]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = test_elements = [1, 2, 4, 8];
              given = mask = cp.isin(element, test_elements);
              given = mask;
              expected =
                 "array([[ False,  True],\n" +
                 "       [ True,  False]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = element[mask];
              expected =
                 "array([2, 4])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // The indices of the matched values can be obtained with nonzero:
 
@@ -134,7 +134,7 @@ namespace Cupy.UnitTest
              given = cp.nonzero(mask);
              expected =
                 "(array([0, 1]), array([1, 0]))";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // The test can also be inverted:
 
@@ -152,11 +152,11 @@ namespace Cupy.UnitTest
              expected =
                 "array([[ True, False],\n" +
                 "       [ False, True]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = element[mask];
              expected =
                 "array([0, 6])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // Because of how array handles sets, the following does not
             // work as expected:
@@ -173,7 +173,7 @@ namespace Cupy.UnitTest
              expected =
                 "array([[ False, False],\n" +
                 "       [ False, False]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // Casting the set to a list gives the expected result:
 
@@ -187,7 +187,7 @@ namespace Cupy.UnitTest
              expected =
                 "array([[ False,  True],\n" +
                 "       [ True,  False]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -207,7 +207,7 @@ namespace Cupy.UnitTest
              given = cp.setdiff1d(a, b);
             var expected =
                 "array([1, 2])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -227,7 +227,7 @@ namespace Cupy.UnitTest
              given = cp.setxor1d(a,b);
             var expected =
                 "array([1, 4, 5, 7])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -243,7 +243,7 @@ namespace Cupy.UnitTest
             var given = cp.union1d({-1, 0, 1}, {-2, 0, 2});
             var expected =
                 "array([-2, -1,  0,  1,  2])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // To find the union of more than two arrays, use functools.reduce:
 
@@ -257,7 +257,7 @@ namespace Cupy.UnitTest
              given = reduce(cp.union1d, ({1, 3, 4, 3}, {3, 1, 2, 1}, {6, 3, 4, 2}));
              expected =
                 "array([1, 2, 3, 4, 6])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
     }

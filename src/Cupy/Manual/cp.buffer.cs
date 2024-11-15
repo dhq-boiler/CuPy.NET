@@ -6,17 +6,18 @@ namespace Cupy
     {
         public static NDarray frombuffer(byte[] buffer, Dtype dtype = null, int count = -1, int offset = 0)
         {
-            var __self__ = self;
-            using var pyargs = ToTuple(new object[]
-            {
-                buffer.ToPython()
-
-            });
+            using var bufferPy = buffer.ToPython();
+            using var pyargs = ToTuple(new object[] { bufferPy });
             using var kwargs = new PyDict();
-            if (dtype != null) kwargs["dtype"] = ToPython(dtype);
-            kwargs["count"] = ToPython(count);
-            kwargs["offset"] = ToPython(offset);
-            dynamic py = __self__.InvokeMethod("frombuffer", pyargs, kwargs);
+            using var dtypePy = dtype != null ? ToPython(dtype) : null;
+            using var countPy = ToPython(count);
+            using var offsetPy = ToPython(offset);
+
+            if (dtypePy != null) kwargs["dtype"] = dtypePy;
+            kwargs["count"] = countPy;
+            kwargs["offset"] = offsetPy;
+
+            var py = self.InvokeMethod("frombuffer", pyargs, kwargs);
             return ToCsharp<NDarray>(py);
         }
     }

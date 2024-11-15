@@ -21,11 +21,11 @@ namespace Cupy.UnitTest
             var given = cp.r_{cp.array({1,2,3}), 0, 0, cp.array({4,5,6})};
             var expected =
                 "array([1, 2, 3, 0, 0, 4, 5, 6])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.r_{-1:1:6j, {0}*3, 5, 6};
              expected =
                 "array([-1. , -0.6, -0.2,  0.2,  0.6,  1. ,  0. ,  0. ,  0. ,  5. ,  6. ])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // String integers specify the axis to concatenate along or the minimum
             // number of dimensions to force entries into.
@@ -45,12 +45,12 @@ namespace Cupy.UnitTest
              expected =
                 "array([[0, 1, 2, 0, 1, 2],\n" +
                 "       [3, 4, 5, 3, 4, 5]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.r_{'0,2', {1,2,3}, {4,5,6}} # concatenate along first axis, dim>=2;
              expected =
                 "array([[1, 2, 3],\n" +
                 "       [4, 5, 6]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // >>> cp.r_['0,2,0', [1,2,3], [4,5,6]]
             // array([[1],
@@ -74,13 +74,13 @@ namespace Cupy.UnitTest
                 "       [4],\n" +
                 "       [5],\n" +
                 "       [6]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.r_{'1,2,0', {1,2,3}, {4,5,6}};
              expected =
                 "array([[1, 4],\n" +
                 "       [2, 5],\n" +
                 "       [3, 6]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // Using ‘r’ or ‘c’ as a first string argument creates a matrix.
 
@@ -92,7 +92,7 @@ namespace Cupy.UnitTest
              given = cp.r_{'r',{1,2,3}, {4,5,6}};
              expected =
                 "matrix([[1, 2, 3, 4, 5, 6]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -110,11 +110,11 @@ namespace Cupy.UnitTest
             var given = cp.s_{2::2};
             var expected =
                 "slice(2, None, 2)";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.index_exp{2::2};
              expected =
                 "(slice(2, None, 2),)";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // >>> cp.array([0, 1, 2, 3, 4])[cp.s_[2::2]]
             // array([2, 4])
@@ -124,7 +124,7 @@ namespace Cupy.UnitTest
              given = cp.array({0, 1, 2, 3, 4}){cp.s_{2::2}};
              expected =
                 "array([2, 4])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -148,11 +148,11 @@ namespace Cupy.UnitTest
                 "array([[3, 0, 0],\n" +
                 "       [0, 4, 0],\n" +
                 "       [5, 6, 0]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(given.repr, Is.EqualTo(expected));
             var given1 = x.nonzero();
             expected =
                 "(array([0, 1, 2, 2], dtype=int64), array([0, 1, 0, 1], dtype=int64))";
-            Assert.AreEqual(expected, given1.repr());
+            Assert.That(expected, Is.EqualTo(given1.repr()));
 
             // >>> x[cp.nonzero(x)]
             // array([3, 4, 5, 6])
@@ -167,14 +167,14 @@ namespace Cupy.UnitTest
             given = x[x.nonzero()];
             expected =
                 "array([3, 4, 5, 6])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(given.repr, Is.EqualTo(expected));
             given = x.nonzero().transpose();
             expected =
                 "array([[0, 0],\n" +
                 "       [1, 1],\n" +
                 "       [2, 0],\n" +
                 "       [2, 1]], dtype=int64)";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(given.repr, Is.EqualTo(expected));
 
             // A common use for nonzero is to find the indices of an array, where
             // a condition is True.  Given an array a, the condition a > 3 is a
@@ -195,11 +195,11 @@ namespace Cupy.UnitTest
                 "array([[False, False, False],\n" +
                 "       [ True,  True,  True],\n" +
                 "       [ True,  True,  True]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(given.repr, Is.EqualTo(expected));
             given1 = (a > 3).nonzero();
             expected =
                 "(array([1, 1, 1, 2, 2, 2], dtype=int64), array([0, 1, 2, 0, 1, 2], dtype=int64))";
-            Assert.AreEqual(expected, given1.repr());
+            Assert.That(expected, Is.EqualTo(given1.repr()));
 
             // Using this result to index a is equivalent to using the mask directly:
 
@@ -211,11 +211,11 @@ namespace Cupy.UnitTest
             given = a[(a > 3).nonzero()];
             expected =
                 "array([4, 5, 6, 7, 8, 9])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(given.repr, Is.EqualTo(expected));
             given = a[a > 3]; // prefer this spelling
             expected =
                 "array([4, 5, 6, 7, 8, 9])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(given.repr, Is.EqualTo(expected));
 
 
             // nonzero can also be called as a method of the array.
@@ -226,7 +226,7 @@ namespace Cupy.UnitTest
             given1 = (a > 3).nonzero();
             expected =
                 "(array([1, 1, 1, 2, 2, 2], dtype=int64), array([0, 1, 2, 0, 1, 2], dtype=int64))";
-            Assert.AreEqual(expected, given1.repr());
+            Assert.That(expected, Is.EqualTo(given1.repr()));
         }
 
 
@@ -244,11 +244,11 @@ namespace Cupy.UnitTest
             var given = a;
             var expected =
                 "array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(given.repr, Is.EqualTo(expected));
             given = (a < 5).where(a, 10 * a);
             expected =
                 "array([ 0,  1,  2,  3,  4, 50, 60, 70, 80, 90])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(given.repr, Is.EqualTo(expected));
 
             // This can be used on multidimensional arrays too:
 
@@ -264,7 +264,7 @@ namespace Cupy.UnitTest
             expected =
                 "array([[1, 8],\n" +
                 "       [3, 4]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(given.repr, Is.EqualTo(expected));
 
             // The shapes of x, y, and the condition are broadcast together:
 
@@ -283,7 +283,7 @@ namespace Cupy.UnitTest
                 "array([[10,  0,  0,  0],\n" +
                 "       [10, 11,  1,  1],\n" +
                 "       [10, 11, 12,  2]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
 
             // >>> a = cp.array([[0, 1, 2],
@@ -302,7 +302,7 @@ namespace Cupy.UnitTest
                 "array([[ 0,  1,  2],\n" +
                 "       [ 0,  2, -1],\n" +
                 "       [ 0,  3, -1]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(given.repr, Is.EqualTo(expected));
         }
 
 
@@ -325,17 +325,17 @@ namespace Cupy.UnitTest
              given = grid.shape;
             var expected =
                 "(2, 2, 3)";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = grid[0]        # row indices;
              expected =
                 "array([[0, 0, 0],\n" +
                 "       [1, 1, 1]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = grid[1]        # column indices;
              expected =
                 "array([[0, 1, 2],\n" +
                 "       [0, 1, 2]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // The indices can be used as an index into an array.
 
@@ -353,7 +353,7 @@ namespace Cupy.UnitTest
              expected =
                 "array([[0, 1, 2],\n" +
                 "       [4, 5, 6]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // Note that it would be more straightforward in the above example to
             // extract the required elements directly with x[:2, :3].
@@ -384,22 +384,22 @@ namespace Cupy.UnitTest
             var expected =
                 "array([[0, 1, 2, 3, 4],\n" +
                 "       [5, 6, 7, 8, 9]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = ixgrid = cp.ix_({0, 1}, {2, 4});
              given = ixgrid;
              expected =
                 "(array([[0],\n" +
                 "       [1]]), array([[2, 4]]))";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = ixgrid[0].shape, ixgrid[1].shape;
              expected =
                 "((2, 1), (1, 2))";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = a[ixgrid];
              expected =
                 "array([[2, 4],\n" +
                 "       [7, 9]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // >>> ixgrid = cp.ix_([True, True], [2, 4])
             // >>> a[ixgrid]
@@ -417,13 +417,13 @@ namespace Cupy.UnitTest
              expected =
                 "array([[2, 4],\n" +
                 "       [7, 9]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = ixgrid = cp.ix_({True, True}, {False, False, True, False, True});
              given = a[ixgrid];
              expected =
                 "array([[2, 4],\n" +
                 "       [7, 9]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -447,19 +447,19 @@ namespace Cupy.UnitTest
              given = cp.ravel_multi_index(arr, (7,6));
             var expected =
                 "array([22, 41, 37])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.ravel_multi_index(arr, (7,6), order = 'F');
              expected =
                 "array([31, 41, 13])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.ravel_multi_index(arr, (4,6), mode = 'clip');
              expected =
                 "array([22, 23, 19])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.ravel_multi_index(arr, (4,4), mode = ('clip','wrap'));
              expected =
                 "array([12, 13, 13])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // >>> cp.ravel_multi_index((3,1,4,1), (6,7,8,9))
             // 1621
@@ -469,7 +469,7 @@ namespace Cupy.UnitTest
              given = cp.ravel_multi_index((3,1,4,1), (6,7,8,9));
              expected =
                 "1621";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -487,11 +487,11 @@ namespace Cupy.UnitTest
             var given = cp.unravel_index({22, 41, 37}, (7,6));
             var expected =
                 "(array([3, 6, 6]), array([4, 5, 1]))";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.unravel_index({31, 41, 13}, (7,6), order = 'F');
              expected =
                 "(array([3, 6, 6]), array([4, 5, 1]))";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // >>> cp.unravel_index(1621, (6,7,8,9))
             // (3, 1, 4, 1)
@@ -501,7 +501,7 @@ namespace Cupy.UnitTest
              given = cp.unravel_index(1621, (6,7,8,9));
              expected =
                 "(3, 1, 4, 1)";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -533,7 +533,7 @@ namespace Cupy.UnitTest
              given = di;
             var expected =
                 "(array([0, 1, 2, 3]), array([0, 1, 2, 3]))";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = a = cp.arange(16).reshape(4, 4);
              given = a;
              expected =
@@ -541,7 +541,7 @@ namespace Cupy.UnitTest
                 "       [ 4,  5,  6,  7],\n" +
                 "       [ 8,  9, 10, 11],\n" +
                 "       [12, 13, 14, 15]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = a[di] = 100;
              given = a;
              expected =
@@ -549,7 +549,7 @@ namespace Cupy.UnitTest
                 "       [  4, 100,   6,   7],\n" +
                 "       [  8,   9, 100,  11],\n" +
                 "       [ 12,  13,  14, 100]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // Now, we create indices to manipulate a 3-D array:
 
@@ -563,7 +563,7 @@ namespace Cupy.UnitTest
              given = d3;
              expected =
                 "(array([0, 1]), array([0, 1]), array([0, 1]))";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // And use it to set the diagonal of an array of zeros to 1:
 
@@ -585,7 +585,7 @@ namespace Cupy.UnitTest
                 "        [0, 0]],\n" +
                 "       [[0, 0],\n" +
                 "        [0, 1]]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -620,11 +620,11 @@ namespace Cupy.UnitTest
                 "array([[0, 1, 2],\n" +
                 "       [3, 4, 5],\n" +
                 "       [6, 7, 8]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = a[iu];
              expected =
                 "array([0, 1, 2, 4, 5, 8])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // An offset can be passed also to the masking function.  This gets us the
             // indices starting on the first diagonal right of the main one:
@@ -645,7 +645,7 @@ namespace Cupy.UnitTest
              given = a[iu1];
              expected =
                 "array([1, 2, 5])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -683,7 +683,7 @@ namespace Cupy.UnitTest
                 "       [ 4,  5,  6,  7],\n" +
                 "       [ 8,  9, 10, 11],\n" +
                 "       [12, 13, 14, 15]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // Both for indexing:
 
@@ -695,7 +695,7 @@ namespace Cupy.UnitTest
              given = a[il1];
              expected =
                 "array([ 0,  4,  5,  8,  9, 10, 12, 13, 14, 15])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // And for assigning values:
 
@@ -715,7 +715,7 @@ namespace Cupy.UnitTest
                 "       [-1, -1,  6,  7],\n" +
                 "       [-1, -1, -1, 11],\n" +
                 "       [-1, -1, -1, -1]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // These cover almost the whole array (two diagonals right of the main one):
 
@@ -735,7 +735,7 @@ namespace Cupy.UnitTest
                 "       [-10, -10, -10, -10],\n" +
                 "       [-10, -10, -10, -10],\n" +
                 "       [-10, -10, -10, -10]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -773,7 +773,7 @@ namespace Cupy.UnitTest
                 "       [ 4,  5,  6,  7],\n" +
                 "       [ 8,  9, 10, 11],\n" +
                 "       [12, 13, 14, 15]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // Both for indexing:
 
@@ -785,7 +785,7 @@ namespace Cupy.UnitTest
              given = a[iu1];
              expected =
                 "array([ 0,  1,  2,  3,  5,  6,  7, 10, 11, 15])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // And for assigning values:
 
@@ -805,7 +805,7 @@ namespace Cupy.UnitTest
                 "       [ 4, -1, -1, -1],\n" +
                 "       [ 8,  9, -1, -1],\n" +
                 "       [12, 13, 14, -1]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // These cover only a small part of the whole array (two diagonals right
             // of the main one):
@@ -826,7 +826,7 @@ namespace Cupy.UnitTest
                 "       [  4,  -1,  -1, -10],\n" +
                 "       [  8,   9,  -1,  -1],\n" +
                 "       [ 12,  13,  14,  -1]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -846,7 +846,7 @@ namespace Cupy.UnitTest
             given = cp.take([a], [indices]);
             var expected =
                 "array([4, 3, 6])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(given.repr, Is.EqualTo(expected));
 
             // In this example if a is an ndarray, “fancy” indexing can be used.
 
@@ -859,7 +859,7 @@ namespace Cupy.UnitTest
             given = a[indices];
             expected =
                 "array([4, 3, 6])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(given.repr, Is.EqualTo(expected));
 
             // If indices is not one dimensional, the output also has these dimensions.
 
@@ -872,7 +872,7 @@ namespace Cupy.UnitTest
             expected =
                 "array([[4, 3],\n" +
                 "       [5, 7]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(given.repr, Is.EqualTo(expected));
         }
 
 
@@ -901,18 +901,18 @@ namespace Cupy.UnitTest
             var expected =
                 "array([[10, 20, 30],\n" +
                 "       [40, 50, 60]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(given.repr, Is.EqualTo(expected));
             var ai = a.argsort(1);
             given = ai;
             expected =
                 "array([[0, 2, 1],\n" +
                 "       [1, 2, 0]], dtype=int64)";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(given.repr, Is.EqualTo(expected));
             given = a.take_along_axis(ai, 1);
             expected =
                 "array([[10, 20, 30],\n" +
                 "       [40, 50, 60]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(given.repr, Is.EqualTo(expected));
 
             // The same works for max and min, if you expand the dimensions:
 
@@ -932,18 +932,18 @@ namespace Cupy.UnitTest
             expected =
                 "array([[30],\n" +
                 "       [60]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(given.repr, Is.EqualTo(expected));
             given = ai = a.argmax(1).expand_dims(1);
             given = ai;
             expected =
                 "array([[1],\n" +
                 "       [0]], dtype=int64)";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(given.repr, Is.EqualTo(expected));
             given = a.take_along_axis(ai, 1);
             expected =
                 "array([[30],\n" +
                 "       [60]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(given.repr, Is.EqualTo(expected));
 
             // If we want to get the max and min at the same time, we can stack the
             // indices first
@@ -965,12 +965,12 @@ namespace Cupy.UnitTest
             expected =
                 "array([[0, 1],\n" +
                 "       [1, 0]], dtype=int64)";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(given.repr, Is.EqualTo(expected));
             given = a.take_along_axis(ai, 1);
             expected =
                 "array([[10, 30],\n" +
                 "       [40, 60]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(given.repr, Is.EqualTo(expected));
         }
 
 
@@ -998,7 +998,7 @@ namespace Cupy.UnitTest
             var given = choices = [[0, 1, 2, 3], [10, 11, 12, 13],;
             var expected =
                 "...   [20, 21, 22, 23], [30, 31, 32, 33]]";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.choose({2, 3, 1, 0}, choices;
              expected =
                 "... # the first element of the result will be the first element of the\n" +
@@ -1007,16 +1007,16 @@ namespace Cupy.UnitTest
                 "... # 31, etc.\n" +
                 "... )\n" +
                 "array([20, 31, 12,  3])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.choose({2, 4, 1, 0}, choices, mode = 'clip') # 4 goes to 3 (4-1);
              expected =
                 "array([20, 31, 12,  3])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = # because there are 4 choice arrays;
              given = cp.choose({2, 4, 1, 0}, choices, mode = 'wrap') # 4 goes to (4 mod 4);
              expected =
                 "array([20,  1, 12,  3])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = # i.e., 0;
 #endif
             // A couple examples illustrating how choose broadcasts:
@@ -1037,7 +1037,7 @@ namespace Cupy.UnitTest
                 "array([[ 10, -10,  10],\n" +
                 "       [-10,  10, -10],\n" +
                 "       [ 10, -10,  10]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // >>> # With thanks to Anne Archibald
             // >>> a = cp.array([0, 1]).reshape((2,1,1))
@@ -1065,7 +1065,7 @@ namespace Cupy.UnitTest
                 "       [[-1, -2, -3, -4, -5],\n" +
                 "        [-1, -2, -3, -4, -5],\n" +
                 "        [-1, -2, -3, -4, -5]]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -1096,22 +1096,22 @@ namespace Cupy.UnitTest
                 "array([[1, 2],\n" +
                 "       [3, 4],\n" +
                 "       [5, 6]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.compress({0, 1}, a, axis = 0);
              expected =
                 "array([[3, 4]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.compress({False, True, True}, a, axis = 0);
              expected =
                 "array([[3, 4],\n" +
                 "       [5, 6]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.compress({False, True}, a, axis = 1);
              expected =
                 "array([[2],\n" +
                 "       [4],\n" +
                 "       [6]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // Working on the flattened array does not return slices along an axis but
             // selects elements.
@@ -1124,7 +1124,7 @@ namespace Cupy.UnitTest
              given = cp.compress({False, True}, a);
              expected =
                 "array([2])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -1148,15 +1148,15 @@ namespace Cupy.UnitTest
             var expected =
                 "array([[0, 1],\n" +
                 "       [2, 3]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = a.diagonal();
              expected =
                 "array([0, 3])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = a.diagonal(1);
              expected =
                 "array([1])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // A 3-D example:
 
@@ -1179,14 +1179,14 @@ namespace Cupy.UnitTest
                 "        [2, 3]],\n" +
                 "       [[4, 5],\n" +
                 "        [6, 7]]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = a.diagonal(0, # Main diagonals of two arrays created by skipping;
              expected =
                 "...            0, # across the outer(left)-most axis last and\n" +
                 "...            1) # the "middle" (row) axis first.\n" +
                 "array([[0, 6],\n" +
                 "       [1, 7]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // The sub-arrays whose main diagonals we just obtained; note that each
             // corresponds to fixing the right-most (column) axis, and that the
@@ -1205,12 +1205,12 @@ namespace Cupy.UnitTest
              expected =
                 "array([[0, 2],\n" +
                 "       [4, 6]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = a[:,:,1] # main diagonal is [1 7];
              expected =
                 "array([[1, 3],\n" +
                 "       [5, 7]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -1232,7 +1232,7 @@ namespace Cupy.UnitTest
              given = cp.select(condlist, choicelist);
             var expected =
                 "array([ 0,  1,  2,  0,  0,  0, 36, 49, 64, 81])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -1254,7 +1254,7 @@ namespace Cupy.UnitTest
             var expected =
                 "array([[ 0,  1,  2],\n" +
                 "       [44, 55, 44]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -1274,7 +1274,7 @@ namespace Cupy.UnitTest
              given = a;
             var expected =
                 "array([-44,   1, -55,   3,   4])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // >>> a = cp.arange(5)
             // >>> cp.put(a, 22, -5, mode='clip')
@@ -1288,7 +1288,7 @@ namespace Cupy.UnitTest
              given = a;
              expected =
                 "array([ 0,  1,  2,  3, -5])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -1322,13 +1322,13 @@ namespace Cupy.UnitTest
             var expected =
                 "array([[1],\n" +
                 "       [0]], dtype=int64)";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.put_along_axis(a, ai, 99, axis = 1);
              given = a;
              expected =
                 "array([[10, 99, 20],\n" +
                 "       [99, 40, 50]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -1350,7 +1350,7 @@ namespace Cupy.UnitTest
             var expected =
                 "array([[ 0,  1,  2],\n" +
                 "       [ 9, 16, 25]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // If values is smaller than a it is repeated:
 
@@ -1366,7 +1366,7 @@ namespace Cupy.UnitTest
              given = x;
              expected =
                 "array([  0,   1, -33, -44, -33])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -1390,7 +1390,7 @@ namespace Cupy.UnitTest
                 "array([[5, 0, 0],\n" +
                 "       [0, 5, 0],\n" +
                 "       [0, 0, 5]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // The same function can operate on a 4-D array:
 
@@ -1424,19 +1424,19 @@ namespace Cupy.UnitTest
                 "array([[4, 0, 0],\n" +
                 "       [0, 0, 0],\n" +
                 "       [0, 0, 0]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = a[1, 1];
              expected =
                 "array([[0, 0, 0],\n" +
                 "       [0, 4, 0],\n" +
                 "       [0, 0, 0]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = a[2, 2];
              expected =
                 "array([[0, 0, 0],\n" +
                 "       [0, 0, 0],\n" +
                 "       [0, 0, 4]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // The wrap option affects only tall matrices:
 
@@ -1462,7 +1462,7 @@ namespace Cupy.UnitTest
                 "       [0, 0, 4],\n" +
                 "       [0, 0, 0],\n" +
                 "       [0, 0, 0]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // >>> # tall matrices wrap
             // >>> a = cp.zeros((5, 3),int)
@@ -1486,7 +1486,7 @@ namespace Cupy.UnitTest
                 "       [0, 0, 4],\n" +
                 "       [0, 0, 0],\n" +
                 "       [4, 0, 0]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // >>> # wide matrices
             // >>> a = cp.zeros((3, 5),int)
@@ -1506,7 +1506,7 @@ namespace Cupy.UnitTest
                 "array([[4, 0, 0, 0, 0],\n" +
                 "       [0, 4, 0, 0, 0],\n" +
                 "       [0, 0, 4, 0, 0]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -1537,7 +1537,7 @@ namespace Cupy.UnitTest
                 "        for (a, b, c) in it:\n" +
                 "            addop(a, b, out=c)\n" +
                 "    return it.operands[2]";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // Here is the same function, but following the C-style pattern:
 
@@ -1567,7 +1567,7 @@ namespace Cupy.UnitTest
                 "            it.iternext()\n" +
                 "\n" +
                 "        return it.operands[2]";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // Here is an example outer product function:
 
@@ -1606,14 +1606,14 @@ namespace Cupy.UnitTest
                 "            mulop(a, b, out=c)\n" +
                 "        return it.operands[2]\n" +
                 "";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
             var given = a = cp.arange(2)+1;
              given = b = cp.arange(3)+1;
              given = outer_it(a,b);
              expected =
                 "array([[1, 2, 3],\n" +
                 "       [2, 4, 6]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // Here is an example function which operates like a “lambda” ufunc:
 
@@ -1655,13 +1655,13 @@ namespace Cupy.UnitTest
                 "        it.iternext()\n" +
                 "        return it.operands[0]\n" +
                 "";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = a = cp.arange(5);
              given = b = cp.ones(5);
              given = luf(lambda i,j:i*i + j/2, a, b);
              expected =
                 "array([  0.5,   1.5,   4.5,   9.5,  16.5])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // If operand flags “writeonly” or “readwrite” are used the operands may
             // be views into the original data with the WRITEBACKIFCOPY flag. In this case
@@ -1692,11 +1692,11 @@ namespace Cupy.UnitTest
                 "...    x = i.operands[0]\n" +
                 "...    x[:] = [-1, -2, -3]\n" +
                 "...    # a still unchanged here";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = a, x;
              expected =
                 "array([-1, -2, -3]), array([-1, -2, -3])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // It is important to note that once the iterator is exited, dangling
             // references (like x in the example) may or may not share data with
@@ -1732,7 +1732,7 @@ namespace Cupy.UnitTest
                 "(0, 1) 2\n" +
                 "(1, 0) 3\n" +
                 "(1, 1) 4";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // Methods
         }
@@ -1761,7 +1761,7 @@ namespace Cupy.UnitTest
                 "(1, 1, 0)\n" +
                 "(2, 0, 0)\n" +
                 "(2, 1, 0)";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // Methods
         }
@@ -1790,7 +1790,7 @@ namespace Cupy.UnitTest
                 "...      print(i.multi_index)\n" +
                 "...      for y in j:\n" +
                 "...          print('', j.multi_index, y)";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -1819,7 +1819,7 @@ namespace Cupy.UnitTest
              given = type(fl);
             var expected =
                 "<type 'Cupy.flatiter'>";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = for item in fl:;
              expected =
                 "...     print(item)\n" +
@@ -1830,7 +1830,7 @@ namespace Cupy.UnitTest
                 "3\n" +
                 "4\n" +
                 "5";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // >>> fl[2:4]
             // array([2, 3])
@@ -1840,7 +1840,7 @@ namespace Cupy.UnitTest
              given = fl[2:4];
              expected =
                 "array([2, 3])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // >>> x = cp.arange(5)
             // >>> fl = x.flat
@@ -1854,7 +1854,7 @@ namespace Cupy.UnitTest
              given = fl.base is x;
              expected =
                 "True";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // Methods
         }
@@ -1875,7 +1875,7 @@ namespace Cupy.UnitTest
              given = a_itor.shape;
             var expected =
                 "(3, 4, 5, 6)";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // Now we can iterate over a_itor, and it will return arrays of size
             // two. Since buf_size was smaller than any dimension, the first
@@ -1895,7 +1895,7 @@ namespace Cupy.UnitTest
                 "...         print(subarr, subarr.shape)\n" +
                 "...\n" +
                 "[[[[0 1]]]] (1, 1, 1, 2)";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
     }

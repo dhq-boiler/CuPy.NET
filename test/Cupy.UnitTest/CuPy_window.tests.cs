@@ -23,7 +23,7 @@ namespace Cupy.UnitTest
                 "array([ 0.        ,  0.18181818,  0.36363636,  0.54545455,  0.72727273,\n" +
                 "        0.90909091,  0.90909091,  0.72727273,  0.54545455,  0.36363636,\n" +
                 "        0.18181818,  0.        ])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // Plot the window and its frequency response (requires SciPy and matplotlib):
 
@@ -46,19 +46,19 @@ namespace Cupy.UnitTest
              given = plt.plot(window);
              expected =
                 "[<matplotlib.lines.Line2D object at 0x...>]";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = plt.title("Bartlett window");
              expected =
                 "<matplotlib.text.Text object at 0x...>";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = plt.ylabel("Amplitude");
              expected =
                 "<matplotlib.text.Text object at 0x...>";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = plt.xlabel("Sample");
              expected =
                 "<matplotlib.text.Text object at 0x...>";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = plt.show();
 #endif
             // >>> plt.figure()
@@ -85,7 +85,7 @@ namespace Cupy.UnitTest
              given = plt.figure();
              expected =
                 "<matplotlib.figure.Figure object at 0x...>";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = A = fft(window, 2048) / 25.5;
              given = mag = cp.abs(fftshift(A));
              given = freq = cp.linspace(-0.5, 0.5, len(A));
@@ -94,23 +94,23 @@ namespace Cupy.UnitTest
              given = plt.plot(freq, response);
              expected =
                 "[<matplotlib.lines.Line2D object at 0x...>]";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = plt.title("Frequency response of Bartlett window");
              expected =
                 "<matplotlib.text.Text object at 0x...>";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = plt.ylabel("Magnitude [dB]");
              expected =
                 "<matplotlib.text.Text object at 0x...>";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = plt.xlabel("Normalized frequency [cycles per sample]");
              expected =
                 "<matplotlib.text.Text object at 0x...>";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = plt.axis('tight');
              expected =
                 "(-0.5, 0.5, -100.0, ...)";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = plt.show();
 #endif
         }
@@ -135,7 +135,7 @@ namespace Cupy.UnitTest
                 "         4.14397981e-01,   7.36045180e-01,   9.67046769e-01,\n" +
                 "         9.67046769e-01,   7.36045180e-01,   4.14397981e-01,\n" +
                 "         1.59903635e-01,   3.26064346e-02,  -1.38777878e-17])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // Plot the window and the frequency response:
 
@@ -158,19 +158,19 @@ namespace Cupy.UnitTest
              given = plt.plot(window);
              expected =
                 "[<matplotlib.lines.Line2D object at 0x...>]";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = plt.title("Blackman window");
              expected =
                 "<matplotlib.text.Text object at 0x...>";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = plt.ylabel("Amplitude");
              expected =
                 "<matplotlib.text.Text object at 0x...>";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = plt.xlabel("Sample");
              expected =
                 "<matplotlib.text.Text object at 0x...>";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = plt.show();
 #endif
             // >>> plt.figure()
@@ -197,7 +197,7 @@ namespace Cupy.UnitTest
              given = plt.figure();
              expected =
                 "<matplotlib.figure.Figure object at 0x...>";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = A = fft(window, 2048) / 25.5;
              given = mag = cp.abs(fftshift(A));
              given = freq = cp.linspace(-0.5, 0.5, len(A));
@@ -206,23 +206,23 @@ namespace Cupy.UnitTest
              given = plt.plot(freq, response);
              expected =
                 "[<matplotlib.lines.Line2D object at 0x...>]";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = plt.title("Frequency response of Blackman window");
              expected =
                 "<matplotlib.text.Text object at 0x...>";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = plt.ylabel("Magnitude [dB]");
              expected =
                 "<matplotlib.text.Text object at 0x...>";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = plt.xlabel("Normalized frequency [cycles per sample]");
              expected =
                 "<matplotlib.text.Text object at 0x...>";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = plt.axis('tight');
              expected =
                 "(-0.5, 0.5, -100.0, ...)";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = plt.show();
 #endif
         }
@@ -243,7 +243,7 @@ namespace Cupy.UnitTest
                 "array([ 0.08      ,  0.15302337,  0.34890909,  0.60546483,  0.84123594,\n" +
                 "        0.98136677,  0.98136677,  0.84123594,  0.60546483,  0.34890909,\n" +
                 "        0.15302337,  0.08      ])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // Plot the window and the frequency response:
 
@@ -268,19 +268,19 @@ namespace Cupy.UnitTest
              given = plt.plot(window);
              expected =
                 "[<matplotlib.lines.Line2D object at 0x...>]";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = plt.title("Hamming window");
              expected =
                 "<matplotlib.text.Text object at 0x...>";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = plt.ylabel("Amplitude");
              expected =
                 "<matplotlib.text.Text object at 0x...>";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = plt.xlabel("Sample");
              expected =
                 "<matplotlib.text.Text object at 0x...>";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = plt.show();
 #endif
             // >>> plt.figure()
@@ -307,7 +307,7 @@ namespace Cupy.UnitTest
              given = plt.figure();
              expected =
                 "<matplotlib.figure.Figure object at 0x...>";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = A = fft(window, 2048) / 25.5;
              given = mag = cp.abs(fftshift(A));
              given = freq = cp.linspace(-0.5, 0.5, len(A));
@@ -316,23 +316,23 @@ namespace Cupy.UnitTest
              given = plt.plot(freq, response);
              expected =
                 "[<matplotlib.lines.Line2D object at 0x...>]";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = plt.title("Frequency response of Hamming window");
              expected =
                 "<matplotlib.text.Text object at 0x...>";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = plt.ylabel("Magnitude [dB]");
              expected =
                 "<matplotlib.text.Text object at 0x...>";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = plt.xlabel("Normalized frequency [cycles per sample]");
              expected =
                 "<matplotlib.text.Text object at 0x...>";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = plt.axis('tight');
              expected =
                 "(-0.5, 0.5, -100.0, ...)";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = plt.show();
 #endif
         }
@@ -353,7 +353,7 @@ namespace Cupy.UnitTest
                 "array([ 0.        ,  0.07937323,  0.29229249,  0.57115742,  0.82743037,\n" +
                 "        0.97974649,  0.97974649,  0.82743037,  0.57115742,  0.29229249,\n" +
                 "        0.07937323,  0.        ])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // Plot the window and its frequency response:
 
@@ -378,19 +378,19 @@ namespace Cupy.UnitTest
              given = plt.plot(window);
              expected =
                 "[<matplotlib.lines.Line2D object at 0x...>]";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = plt.title("Hann window");
              expected =
                 "<matplotlib.text.Text object at 0x...>";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = plt.ylabel("Amplitude");
              expected =
                 "<matplotlib.text.Text object at 0x...>";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = plt.xlabel("Sample");
              expected =
                 "<matplotlib.text.Text object at 0x...>";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = plt.show();
 #endif
             // >>> plt.figure()
@@ -417,7 +417,7 @@ namespace Cupy.UnitTest
              given = plt.figure();
              expected =
                 "<matplotlib.figure.Figure object at 0x...>";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = A = fft(window, 2048) / 25.5;
              given = mag = cp.abs(fftshift(A));
              given = freq = cp.linspace(-0.5, 0.5, len(A));
@@ -426,23 +426,23 @@ namespace Cupy.UnitTest
              given = plt.plot(freq, response);
              expected =
                 "[<matplotlib.lines.Line2D object at 0x...>]";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = plt.title("Frequency response of the Hann window");
              expected =
                 "<matplotlib.text.Text object at 0x...>";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = plt.ylabel("Magnitude [dB]");
              expected =
                 "<matplotlib.text.Text object at 0x...>";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = plt.xlabel("Normalized frequency [cycles per sample]");
              expected =
                 "<matplotlib.text.Text object at 0x...>";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = plt.axis('tight');
              expected =
                 "(-0.5, 0.5, -100.0, ...)";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = plt.show();
 #endif
         }
@@ -467,7 +467,7 @@ namespace Cupy.UnitTest
                 "         2.29737120e-01,   5.99885316e-01,   9.45674898e-01,\n" +
                 "         9.45674898e-01,   5.99885316e-01,   2.29737120e-01,\n" +
                 "         4.65200189e-02,   3.46009194e-03,   7.72686684e-06])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // Plot the window and the frequency response:
 
@@ -490,19 +490,19 @@ namespace Cupy.UnitTest
              given = plt.plot(window);
              expected =
                 "[<matplotlib.lines.Line2D object at 0x...>]";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = plt.title("Kaiser window");
              expected =
                 "<matplotlib.text.Text object at 0x...>";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = plt.ylabel("Amplitude");
              expected =
                 "<matplotlib.text.Text object at 0x...>";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = plt.xlabel("Sample");
              expected =
                 "<matplotlib.text.Text object at 0x...>";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = plt.show();
 #endif
             // >>> plt.figure()
@@ -529,7 +529,7 @@ namespace Cupy.UnitTest
              given = plt.figure();
              expected =
                 "<matplotlib.figure.Figure object at 0x...>";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = A = fft(window, 2048) / 25.5;
              given = mag = cp.abs(fftshift(A));
              given = freq = cp.linspace(-0.5, 0.5, len(A));
@@ -538,23 +538,23 @@ namespace Cupy.UnitTest
              given = plt.plot(freq, response);
              expected =
                 "[<matplotlib.lines.Line2D object at 0x...>]";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = plt.title("Frequency response of Kaiser window");
              expected =
                 "<matplotlib.text.Text object at 0x...>";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = plt.ylabel("Magnitude [dB]");
              expected =
                 "<matplotlib.text.Text object at 0x...>";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = plt.xlabel("Normalized frequency [cycles per sample]");
              expected =
                 "<matplotlib.text.Text object at 0x...>";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = plt.axis('tight');
              expected =
                 "(-0.5, 0.5, -100.0, ...)";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = plt.show();
 #endif
         }

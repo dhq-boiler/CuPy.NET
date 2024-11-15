@@ -24,12 +24,12 @@ namespace Cupy.UnitTest
             var expected =
                 "array(['a1b2', '1b2a', 'b2a1', '2a1b'],\n" +
                 "    dtype='|S4')";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.char.capitalize(c);
              expected =
                 "array(['A1b2', '1b2a', 'B2a1', '2a1b'],\n" +
                 "    dtype='|S4')";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -53,13 +53,13 @@ namespace Cupy.UnitTest
             var expected =
                 "array(['aAaAaA', '  aA  ', 'abBABba'],\n" +
                 "    dtype='|S7')";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.char.encode(c, encoding = 'cp037');
              expected =
                 "array(['\x81\xc1\x81\xc1\x81\xc1', '@@\x81\xc1@@',\n" +
                 "    '\x81\x82\xc2\xc1\xc2\x82\x81'],\n" +
                 "    dtype='|S7')";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -80,12 +80,12 @@ namespace Cupy.UnitTest
             var expected =
                 "array(['A1B C', '1BCA', 'BCA1'],\n" +
                 "      dtype='|S5')";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.char.lower(c);
              expected =
                 "array(['a1b c', '1bca', 'bca1'],\n" +
                 "      dtype='|S5')";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -105,7 +105,7 @@ namespace Cupy.UnitTest
             var expected =
                 "array(['aAaAaA', '  aA  ', 'abBABba'],\n" +
                 "    dtype='|S7')";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // The ‘a’ variable is unstripped from c[1] because whitespace leading.
 
@@ -119,7 +119,7 @@ namespace Cupy.UnitTest
              expected =
                 "array(['AaAaA', '  aA  ', 'bBABba'],\n" +
                 "    dtype='|S7')";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // >>> cp.char.lstrip(c, 'A') # leaves c unchanged
             // array(['aAaAaA', '  aA  ', 'abBABba'],
@@ -137,17 +137,17 @@ namespace Cupy.UnitTest
              expected =
                 "array(['aAaAaA', '  aA  ', 'abBABba'],\n" +
                 "    dtype='|S7')";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = (cp.char.lstrip(c, ' ') == cp.char.lstrip(c, '')).all();
              expected =
                 "... # XXX: is this a regression? this line now returns False\n" +
                 "... # cp.char.lstrip(c,'') does not modify c at all.\n" +
                 "True";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = (cp.char.lstrip(c, ' ') == cp.char.lstrip(c, None)).all();
              expected =
                 "True";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -171,17 +171,17 @@ namespace Cupy.UnitTest
             var expected =
                 "array(['aAaAaA', 'abBABba'],\n" +
                 "    dtype='|S7')";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.char.rstrip(c, 'a');
              expected =
                 "array(['aAaAaA', 'abBABb'],\n" +
                 "    dtype='|S7')";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.char.rstrip(c, 'A');
              expected =
                 "array(['aAaAa', 'abBABba'],\n" +
                 "    dtype='|S7')";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -210,22 +210,22 @@ namespace Cupy.UnitTest
             var expected =
                 "array(['aAaAaA', '  aA  ', 'abBABba'],\n" +
                 "    dtype='|S7')";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.char.strip(c);
              expected =
                 "array(['aAaAaA', 'aA', 'abBABba'],\n" +
                 "    dtype='|S7')";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.char.strip(c, 'a') # 'a' unstripped from c{1} because whitespace leads;
              expected =
                 "array(['AaAaA', '  aA  ', 'bBABb'],\n" +
                 "    dtype='|S7')";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.char.strip(c, 'A') # 'A' unstripped from c{1} because (unprinted) ws trails;
              expected =
                 "array(['aAaAa', '  aA  ', 'abBABba'],\n" +
                 "    dtype='|S7')";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -246,12 +246,12 @@ namespace Cupy.UnitTest
             var expected =
                 "array(['a1B c', '1b Ca', 'b Ca1', 'cA1b'],\n" +
                 "    dtype='|S5')";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.char.swapcase(c);
              expected =
                 "array(['A1b C', '1B cA', 'B cA1', 'Ca1B'],\n" +
                 "    dtype='|S5')";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -272,12 +272,12 @@ namespace Cupy.UnitTest
             var expected =
                 "array(['a1b c', '1b ca', 'b ca1', 'ca1b'],\n" +
                 "    dtype='|S5')";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.char.title(c);
              expected =
                 "array(['A1B C', '1B Ca', 'B Ca1', 'Ca1B'],\n" +
                 "    dtype='|S5')";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -298,12 +298,12 @@ namespace Cupy.UnitTest
             var expected =
                 "array(['a1b c', '1bca', 'bca1'],\n" +
                 "    dtype='|S5')";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.char.upper(c);
              expected =
                 "array(['A1B C', '1BCA', 'BCA1'],\n" +
                 "    dtype='|S5')";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
 
@@ -331,23 +331,23 @@ namespace Cupy.UnitTest
             var expected =
                 "array(['aAaAaA', '  aA  ', 'abBABba'],\n" +
                 "    dtype='|S7')";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.char.count(c, 'A');
              expected =
                 "array([3, 1, 1])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.char.count(c, 'aA');
              expected =
                 "array([3, 1, 0])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.char.count(c, 'A', start = 1, end = 4);
              expected =
                 "array([2, 1, 1])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.char.count(c, 'A', start = 1, end = 3);
              expected =
                 "array([1, 0, 0])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
     }

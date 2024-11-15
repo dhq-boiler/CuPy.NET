@@ -23,10 +23,9 @@ namespace Cupy
             public static NDarray rand(params int[] shape)
             {
                 var random = self.GetAttr("random");
-                var __self__ = random;
                 using var pyargs = ToTuple(shape);
                 using var kwargs = new PyDict();
-                dynamic py = __self__.InvokeMethod("rand", pyargs, kwargs);
+                dynamic py = random.InvokeMethod("rand", pyargs, kwargs);
                 return ToCsharp<NDarray>(py);
             }
 
@@ -107,30 +106,30 @@ namespace Cupy
             public static NDarray normal(NDarray<float> loc, NDarray<float> scale = null, int[] size = null)
             {
                 var random = self.GetAttr("random");
-                var __self__ = random;
-                using var pyargs = ToTuple(new object[]
-                {
-                });
+                using var pyargs = ToTuple(new object[] { });
                 using var kwargs = new PyDict();
-                if (loc != null) kwargs["loc"] = ToPython(loc);
-                if (scale != null) kwargs["scale"] = ToPython(scale);
-                if (size != null) kwargs["size"] = ToPython(size);
-                dynamic py = __self__.InvokeMethod("normal", pyargs, kwargs);
+                using var locPy = loc != null ? ToPython(loc) : null;
+                using var scalePy = scale != null ? ToPython(scale) : null;
+                using var sizePy = size != null ? ToPython(size) : null;
+                if (locPy != null) kwargs["loc"] = locPy;
+                if (scalePy != null) kwargs["scale"] = scalePy;
+                if (sizePy != null) kwargs["size"] = sizePy;
+                var py = random.InvokeMethod("normal", pyargs, kwargs);
                 return ToCsharp<NDarray>(py);
             }
 
             public static NDarray normal(float? loc = null, float? scale = null, int[] size = null)
             {
                 var random = self.GetAttr("random");
-                var __self__ = random;
-                using var pyargs = ToTuple(new object[]
-                {
-                });
+                using var pyargs = ToTuple(new object[] { });
                 using var kwargs = new PyDict();
-                if (loc != null) kwargs["loc"] = ToPython(loc);
-                if (scale != null) kwargs["scale"] = ToPython(scale);
-                if (size != null) kwargs["size"] = ToPython(size);
-                dynamic py = __self__.InvokeMethod("normal", pyargs, kwargs);
+                using var locPy = loc != null ? ToPython(loc) : null;
+                using var scalePy = scale != null ? ToPython(scale) : null;
+                using var sizePy = size != null ? ToPython(size) : null;
+                if (locPy != null) kwargs["loc"] = locPy;
+                if (scalePy != null) kwargs["scale"] = scalePy;
+                if (sizePy != null) kwargs["size"] = sizePy;
+                var py = random.InvokeMethod("normal", pyargs, kwargs);
                 return ToCsharp<NDarray>(py);
             }
 
@@ -147,15 +146,15 @@ namespace Cupy
             public static NDarray normal(float loc, float scale, int size)
             {
                 var random = self.GetAttr("random");
-                var __self__ = random;
-                using var pyargs = ToTuple(new object[]
-                {
-                });
+                using var pyargs = ToTuple(new object[] { });
                 using var kwargs = new PyDict();
-                kwargs["loc"] = ToPython(loc);
-                kwargs["scale"] = ToPython(scale);
-                kwargs["size"] = ToPython(size);
-                dynamic py = __self__.InvokeMethod("normal", pyargs, kwargs);
+                using var locPy = ToPython(loc);
+                using var scalePy = ToPython(scale);
+                using var sizePy = ToPython(size);
+                kwargs["loc"] = locPy;
+                kwargs["scale"] = scalePy;
+                kwargs["size"] = sizePy;
+                var py = random.InvokeMethod("normal", pyargs, kwargs);
                 return ToCsharp<NDarray>(py);
             }
         }

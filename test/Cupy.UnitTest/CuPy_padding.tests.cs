@@ -21,7 +21,7 @@ namespace Cupy.UnitTest
             var given = cp.pad(a, (2, 3), "constant", constant_values: new[] { 4, 6 });
             var expected =
                 "array([4, 4, 1, 2, 3, 4, 5, 6, 6, 6])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(given.repr, Is.EqualTo(expected));
 //#endif
             // >>> cp.pad(a, (2, 3), 'edge')
             // array([1, 1, 1, 2, 3, 4, 5, 5, 5, 5])
@@ -31,7 +31,7 @@ namespace Cupy.UnitTest
              given = cp.pad(a, (2, 3), 'edge');
              expected =
                 "array([1, 1, 1, 2, 3, 4, 5, 5, 5, 5])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // >>> cp.pad(a, (2, 3), 'linear_ramp', end_values=(5, -4))
             // array([ 5,  3,  1,  2,  3,  4,  5,  2, -1, -4])
@@ -41,7 +41,7 @@ namespace Cupy.UnitTest
              given = cp.pad(a, (2, 3), 'linear_ramp', end_values = (5, -4));
              expected =
                 "array([ 5,  3,  1,  2,  3,  4,  5,  2, -1, -4])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // >>> cp.pad(a, (2,), 'maximum')
             // array([5, 5, 1, 2, 3, 4, 5, 5, 5])
@@ -51,7 +51,7 @@ namespace Cupy.UnitTest
              given = cp.pad(a, (2,), 'maximum');
              expected =
                 "array([5, 5, 1, 2, 3, 4, 5, 5, 5])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // >>> cp.pad(a, (2,), 'mean')
             // array([3, 3, 1, 2, 3, 4, 5, 3, 3])
@@ -61,7 +61,7 @@ namespace Cupy.UnitTest
              given = cp.pad(a, (2,), 'mean');
              expected =
                 "array([3, 3, 1, 2, 3, 4, 5, 3, 3])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // >>> cp.pad(a, (2,), 'median')
             // array([3, 3, 1, 2, 3, 4, 5, 3, 3])
@@ -71,7 +71,7 @@ namespace Cupy.UnitTest
              given = cp.pad(a, (2,), 'median');
              expected =
                 "array([3, 3, 1, 2, 3, 4, 5, 3, 3])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // >>> a = [[1, 2], [3, 4]]
             // >>> cp.pad(a, ((3, 2), (2, 3)), 'minimum')
@@ -95,7 +95,7 @@ namespace Cupy.UnitTest
                 "       [3, 3, 3, 4, 3, 3, 3],\n" +
                 "       [1, 1, 1, 2, 1, 1, 1],\n" +
                 "       [1, 1, 1, 2, 1, 1, 1]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // >>> a = [1, 2, 3, 4, 5]
             // >>> cp.pad(a, (2, 3), 'reflect')
@@ -107,7 +107,7 @@ namespace Cupy.UnitTest
              given = cp.pad(a, (2, 3), 'reflect');
              expected =
                 "array([3, 2, 1, 2, 3, 4, 5, 4, 3, 2])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // >>> cp.pad(a, (2, 3), 'reflect', reflect_type='odd')
             // array([-1,  0,  1,  2,  3,  4,  5,  6,  7,  8])
@@ -117,7 +117,7 @@ namespace Cupy.UnitTest
              given = cp.pad(a, (2, 3), 'reflect', reflect_type = 'odd');
              expected =
                 "array([-1,  0,  1,  2,  3,  4,  5,  6,  7,  8])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // >>> cp.pad(a, (2, 3), 'symmetric')
             // array([2, 1, 1, 2, 3, 4, 5, 5, 4, 3])
@@ -127,7 +127,7 @@ namespace Cupy.UnitTest
              given = cp.pad(a, (2, 3), 'symmetric');
              expected =
                 "array([2, 1, 1, 2, 3, 4, 5, 5, 4, 3])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // >>> cp.pad(a, (2, 3), 'symmetric', reflect_type='odd')
             // array([0, 1, 1, 2, 3, 4, 5, 5, 6, 7])
@@ -137,7 +137,7 @@ namespace Cupy.UnitTest
              given = cp.pad(a, (2, 3), 'symmetric', reflect_type = 'odd');
              expected =
                 "array([0, 1, 1, 2, 3, 4, 5, 5, 6, 7])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // >>> cp.pad(a, (2, 3), 'wrap')
             // array([4, 5, 1, 2, 3, 4, 5, 1, 2, 3])
@@ -147,7 +147,7 @@ namespace Cupy.UnitTest
              given = cp.pad(a, (2, 3), 'wrap');
              expected =
                 "array([4, 5, 1, 2, 3, 4, 5, 1, 2, 3])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
             // >>> def pad_with(vector, pad_width, iaxis, kwargs):
             // ...     pad_value = kwargs.get('padder', 10)
@@ -179,7 +179,7 @@ namespace Cupy.UnitTest
                 "...     vector[:pad_width[0]] = pad_value\n" +
                 "...     vector[-pad_width[1]:] = pad_value\n" +
                 "...     return vector";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = a = cp.arange(6);
              given = a = a.reshape((2, 3));
              given = cp.pad(a, 2, pad_with);
@@ -190,7 +190,7 @@ namespace Cupy.UnitTest
                 "       [10, 10,  3,  4,  5, 10, 10],\n" +
                 "       [10, 10, 10, 10, 10, 10, 10],\n" +
                 "       [10, 10, 10, 10, 10, 10, 10]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
              given = cp.pad(a, 2, pad_with, padder = 100);
              expected =
                 "array([[100, 100, 100, 100, 100, 100, 100],\n" +
@@ -199,7 +199,7 @@ namespace Cupy.UnitTest
                 "       [100, 100,   3,   4,   5, 100, 100],\n" +
                 "       [100, 100, 100, 100, 100, 100, 100],\n" +
                 "       [100, 100, 100, 100, 100, 100, 100]])";
-            Assert.AreEqual(expected, given.repr);
+            Assert.That(expected, given.repr);
 #endif
         }
     }
