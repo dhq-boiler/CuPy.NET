@@ -829,18 +829,17 @@ namespace Cupy
         /// <returns>
         ///     The concatenated array.
         /// </returns>
-        public static NDarray concatenate(NDarray[] arys, int? axis = 0, NDarray @out = null)
+        public static NDarray concatenate(NDarray[] arys, int? axis = 0, NDarray @out = null, Dtype dtype = null, string casting = "same_kind")
         {
-            //auto-generated code, do not change
-            var __self__ = self;
-            using var pyargs = ToTuple(new object[]
-            {
-                arys
-            });
+            using var pylist = new PyList();
+            arys.ToList().ForEach(x => pylist.Append(x.PyObject));
+            using var pyargs = ToTuple(new object[] { pylist });
             using var kwargs = new PyDict();
-            if (axis != 0) kwargs["axis"] = ToPython(axis);
+            kwargs["axis"] = ToPython(axis.HasValue ? axis.Value : null);
             if (@out != null) kwargs["out"] = ToPython(@out);
-            dynamic py = __self__.InvokeMethod("concatenate", pyargs, kwargs);
+            if (dtype is not null) kwargs["dtype"] = ToPython(dtype);
+            if (!string.IsNullOrEmpty(casting)) kwargs["casting"] = ToPython(casting);
+            dynamic py = self.InvokeMethod("concatenate", pyargs, kwargs);
             return ToCsharp<NDarray>(py);
         }
 
