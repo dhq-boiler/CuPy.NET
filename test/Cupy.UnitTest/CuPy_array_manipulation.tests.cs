@@ -971,7 +971,7 @@ namespace Cupy.UnitTest
                 "array([[1, 2, 5],\n" +
                 "       [3, 4, 6]])";
             Assert.That(given.repr, Is.EqualTo(expected));
-            given = cp.concatenate((a, b), null);
+            given = cp.concatenate((a, b), axis: null);
             expected =
                 "array([1, 2, 3, 4, 5, 6])";
             Assert.That(given.repr, Is.EqualTo(expected));
