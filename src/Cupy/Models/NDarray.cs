@@ -707,6 +707,10 @@ namespace Cupy
             if (obj == null)
                 return false;
             var array = obj as NDarray;
+            if (cp.isscalar(this) && cp.isscalar(array))
+                return ToString() == array.ToString();
+            if (cp.isscalar(this) ^ cp.isscalar(array))
+                return false;
             if (!ReferenceEquals(array, null))
                 return this.array_equal(array);
             return base.Equals(obj);
