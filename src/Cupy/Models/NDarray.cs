@@ -90,7 +90,9 @@ namespace Cupy
                 {
                     return default;
                 }
-                return new Shape(self.GetAttr("shape").As<int[]>());
+
+                using var _shape = self.GetAttr("shape");
+                return new Shape(_shape.As<int[]>());
             }
         }
 
