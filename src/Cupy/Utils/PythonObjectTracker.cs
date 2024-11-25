@@ -35,10 +35,14 @@ namespace Cupy.Utils
             "<class 'cupy.cuda.function.Function'>"
         };
 
+        public static bool IsEnabled { get; set; } = false;
+
         public static string DebugDetectingShape { get; set; } = string.Empty;
 
         public static void TrackPythonObject(dynamic obj, string location = null)
         {
+            if (!IsEnabled) return;
+
             if (obj == null) return;
 
             using (Py.GIL())
@@ -188,6 +192,8 @@ namespace Cupy.Utils
 
         public static string GenerateReport()
         {
+            if (!IsEnabled) return string.Empty;
+
             var sb = new StringBuilder();
             sb.AppendLine("=== Python Objects Tracking Report ===\n");
 
