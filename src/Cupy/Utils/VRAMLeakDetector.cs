@@ -78,6 +78,8 @@ namespace Cupy.Utils
                     }
                 }
             }
+
+            GpuMemoryMonitor.Instance.LogMemoryUsage(nameof(TrackAllocation), ndarray_only: true);
         }
 
         public static void TrackAllocation(Dtype dtype, string location = null)
