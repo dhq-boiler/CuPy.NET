@@ -48,7 +48,7 @@ namespace Cupy
         {
         }
 
-        public NDarray(NDarray t) : base((PyObject)t.PyObject)
+        public NDarray(NDarray t) : this((PyObject)t.PyObject)
         {
         }
 
