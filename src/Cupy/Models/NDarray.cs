@@ -1,4 +1,5 @@
 ﻿using Cupy.Models;
+using Cupy.Utils;
 using Python.Runtime;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,7 @@ namespace Cupy
 
         public NDarray(PyObject pyobj) : base(pyobj)
         {
+            VRAMLeakDetector.TrackAllocation(this);
         }
 
         public NDarray(byte obj) : this(new PyInt(obj))
