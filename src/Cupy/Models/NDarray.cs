@@ -1788,5 +1788,35 @@ namespace Cupy
                 return str;
             }
         }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                // VRAMLeakDetectorからの登録解除
+                VRAMLeakDetector.UnTrackAllocation(this);
+
+                // 多次元配列のクリーンアップ
+                if (self != null && self.HasAttr("ndim"))
+                {
+                    var dimensions = ndim;
+                    if (dimensions > 1)
+                    {
+                        // 再帰的に内部配列を解放
+                        for (int i = 0; i < len; i++)
+                        {
+                            this[i]?.Dispose();
+                        }
+                    }
+                }
+            }
+
+            base.Dispose(disposing);
+        }
+
+        ~NDarray()
+        {
+            Dispose(false);
+        }
     }
 }

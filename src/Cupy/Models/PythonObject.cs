@@ -32,11 +32,29 @@ namespace Cupy
         //public PyObject ctypes => self.GetAttr("ctypes"); // TODO: wrap ctypes
         public PyObject ctypes => Cupy.ctypes.self;//.GetAttr("ctypes");
 
+        ~PythonObject()
+        {
+            Dispose(false);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                // マネージドリソースの解放
+                if (self != null)
+                {
+                    self.Dispose();
+                    self = null;
+                }
+            }
+            // アンマネージドリソースの解放（必要な場合）
+        }
+
         public void Dispose()
         {
+            Dispose(true);
             GC.SuppressFinalize(this);
-            self?.Dispose();
-            self = null;
         }
 
         public override bool Equals(object obj)
