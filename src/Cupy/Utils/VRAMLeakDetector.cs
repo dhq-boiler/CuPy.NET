@@ -82,6 +82,11 @@ namespace Cupy.Utils
             GpuMemoryMonitor.Instance.LogMemoryUsage(nameof(TrackAllocation), ndarray_only: true);
         }
 
+        public static void UnTrackAllocation(NDarray array)
+        {
+            PythonObjectTracker.UnTrackPythonObject(array.PyObject);
+        }
+
         public static void TrackAllocation(Dtype dtype, string location = null)
         {
             if (!IsEnabled) return;
@@ -110,6 +115,11 @@ namespace Cupy.Utils
             );
         }
 
+        public static void UnTrackAllocation(Dtype dtype)
+        {
+            PythonObjectTracker.UnTrackPythonObject(dtype.PyObject);
+        }
+
         public static void TrackAllocation(Flags flags, string location = null)
         {
             if (!IsEnabled) return;
@@ -136,6 +146,11 @@ namespace Cupy.Utils
             );
         }
 
+        public static void UnTrackAllocation(Flags flags)
+        {
+            PythonObjectTracker.UnTrackPythonObject(flags.PyObject);
+        }
+
         public static void TrackAllocation(Matrix matrix, string location = null)
         {
             if (!IsEnabled) return;
@@ -160,6 +175,11 @@ namespace Cupy.Utils
                 new List<ObjectMemoryInfo> { memInfo },
                 (_, list) => { list.Add(memInfo); return list; }
             );
+        }
+
+        public static void UnTrackAllocation(Matrix matrix)
+        {
+            PythonObjectTracker.UnTrackPythonObject(matrix.PyObject);
         }
 
         private static long GetUnmanagedMemorySize(PyObject pyobj)
