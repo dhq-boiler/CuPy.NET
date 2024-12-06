@@ -1797,7 +1797,8 @@ namespace Cupy
                 VRAMLeakDetector.UnTrackAllocation(this);
 
                 // 多次元配列のクリーンアップ
-                if (self != null && self.HasAttr("ndim"))
+                if (self is not null && self.Handle != IntPtr.Zero
+                                     && self.HasAttr("ndim"))
                 {
                     var dimensions = ndim;
                     if (dimensions > 1)
