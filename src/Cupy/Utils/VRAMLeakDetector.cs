@@ -212,6 +212,22 @@ namespace Cupy.Utils
             {
                 return -1;
             }
+            if (array.PyObject.__class__.ToString().Contains("int"))
+            {
+                return 36;
+            }
+            if (array.PyObject.__class__.ToString().Contains("float"))
+            {
+                return 24;
+            }
+            if (array.PyObject.__class__.ToString().Contains("complex"))
+            {
+                return 32;
+            }
+            if (array.PyObject.__class__.ToString().Contains("bool"))
+            {
+                return 28;
+            }
             try
             {
                 using (Py.GIL())
