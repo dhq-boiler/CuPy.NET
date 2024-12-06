@@ -283,7 +283,22 @@ namespace Cupy.Utils
             {
                 return "[NpzFile]";
             }
-
+            if (array.PyObject.__class__.ToString().Contains("int"))
+            {
+                return "[int]";
+            }
+            if (array.PyObject.__class__.ToString().Contains("float"))
+            {
+                return "[float]";
+            }
+            if (array.PyObject.__class__.ToString().Contains("complex"))
+            {
+                return "[complex]";
+            }
+            if (array.PyObject.__class__.ToString().Contains("bool"))
+            {
+                return "[bool]";
+            }
             try
             {
                 using (Py.GIL())
