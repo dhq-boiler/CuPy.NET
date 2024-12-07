@@ -109,7 +109,7 @@ namespace Cupy.Utils
         {
             if (!IsEnabled) return;
 
-            if (obj == null) return;
+            if (obj == null || obj.Handle == IntPtr.Zero) return;
 
             using (Py.GIL())
             {
