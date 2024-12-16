@@ -90,7 +90,7 @@ namespace Cupy
                 a
             });
             using var kwargs = new PyDict();
-            dynamic py = __self__.InvokeMethod("all", pyargs, kwargs);
+            using dynamic py = __self__.InvokeMethod("all", pyargs, kwargs);
             return ToCsharp<bool>(py);
         }
 
@@ -176,7 +176,7 @@ namespace Cupy
                 a
             });
             using var kwargs = new PyDict();
-            dynamic py = __self__.InvokeMethod("any", pyargs, kwargs);
+            using dynamic py = __self__.InvokeMethod("any", pyargs, kwargs);
             return ToCsharp<bool>(py);
         }
 
@@ -488,7 +488,7 @@ namespace Cupy
                 x
             });
             using var kwargs = new PyDict();
-            dynamic py = __self__.InvokeMethod("iscomplexobj", pyargs, kwargs);
+            using dynamic py = __self__.InvokeMethod("iscomplexobj", pyargs, kwargs);
             return ToCsharp<bool>(py);
         }
 
@@ -512,7 +512,7 @@ namespace Cupy
                 a
             });
             using var kwargs = new PyDict();
-            dynamic py = __self__.InvokeMethod("isfortran", pyargs, kwargs);
+            using dynamic py = __self__.InvokeMethod("isfortran", pyargs, kwargs);
             return ToCsharp<bool>(py);
         }
 
@@ -562,7 +562,7 @@ namespace Cupy
                 x
             });
             using var kwargs = new PyDict();
-            dynamic py = __self__.InvokeMethod("isrealobj", pyargs, kwargs);
+            using dynamic py = __self__.InvokeMethod("isrealobj", pyargs, kwargs);
             return ToCsharp<bool>(py);
         }
 
@@ -591,7 +591,7 @@ namespace Cupy
                 num
             });
             using var kwargs = new PyDict();
-            dynamic py = __self__.InvokeMethod("isscalar", pyargs, kwargs);
+            using dynamic py = __self__.InvokeMethod("isscalar", pyargs, kwargs);
             return ToCsharp<bool>(py);
         }
 
@@ -827,7 +827,7 @@ namespace Cupy
             if (rtol != 1e-05f) kwargs["rtol"] = ToPython(rtol);
             if (atol != 1e-08f) kwargs["atol"] = ToPython(atol);
             if (equal_nan) kwargs["equal_nan"] = ToPython(equal_nan);
-            dynamic py = __self__.InvokeMethod("allclose", pyargs, kwargs);
+            using dynamic py = __self__.InvokeMethod("allclose", pyargs, kwargs);
             return ToCsharp<bool>(py);
         }
 
@@ -918,7 +918,7 @@ namespace Cupy
                 a1
             });
             using var kwargs = new PyDict();
-            dynamic py = __self__.InvokeMethod("array_equal", pyargs, kwargs);
+            using dynamic py = __self__.InvokeMethod("array_equal", pyargs, kwargs);
             return ToCsharp<bool>(py);
         }
 
@@ -946,7 +946,7 @@ namespace Cupy
                 a1
             });
             using var kwargs = new PyDict();
-            dynamic py = __self__.InvokeMethod("array_equiv", pyargs, kwargs);
+            using dynamic py = __self__.InvokeMethod("array_equiv", pyargs, kwargs);
             return ToCsharp<bool>(py);
         }
 
