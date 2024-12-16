@@ -148,8 +148,11 @@ namespace Cupy
                         rv[i] = ToCsharp<NDarray>(po[i]);
                     return (T)(object)rv;
                 case "Matrix": return (T)(object)new Matrix(pyobj);
+                case "bool": return pyobj.As<bool>();
                 default:
-                    var pyClass = $"{pyobj.__class__}";
+                {
+                    using var __class__ = pyobj.__class__;
+                    var pyClass = $"{__class__}";
                     if (pyClass == "<class 'str'>") return (T)(object)pyobj.ToString();
                     if (pyClass.StartsWith("<class 'Cupy")) return (pyobj.item() as PyObject).As<T>();
                     if (pyClass.StartsWith("<class 'cupy")) return (pyobj.item() as PyObject).As<T>();
@@ -160,9 +163,10 @@ namespace Cupy
                     catch (Exception e)
                     {
                         throw new NotImplementedException(
-                            $"conversion from {pyobj.__class__} to {typeof(T).Name} not implemented", e);
+                            $"conversion from {__class__} to {typeof(T).Name} not implemented", e);
                         return default;
                     }
+                }
             }
         }
 
